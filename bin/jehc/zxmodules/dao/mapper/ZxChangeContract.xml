@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZxChangeContract">
+	<!--初始化分页-->
+	<select id="getZxChangeContractListByCondition" resultType="jehc.zxmodules.model.ZxChangeContract" parameterType="map">
+		SELECT
+			zcc.id,
+			zcc.create_time,
+			zcc.sign_time,
+			zcc.old_begin_time,
+			zcc.old_end_time,
+			zcc.new_begin_time,
+			zcc.new_end_time,
+			zcc.xt_user_id,
+			zcc.remark,
+			t2.xt_userinfo_realName
+		FROM 
+			zx_change_contract zcc LEFT JOIN xt_userinfo t2 ON zcc.xt_user_id = t2.xt_userinfo_id
+		WHERE 1=1
+		<if test="xt_userinfo_realName != null">
+		AND instr(t2.xt_userinfo_realName,#{xt_userinfo_realName})
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getZxChangeContractById" resultType="jehc.zxmodules.model.ZxChangeContract" parameterType="string">
+		SELECT
+			zcc.id,
+			zcc.create_time,
+			zcc.sign_time,
+			zcc.old_begin_time,
+			zcc.old_end_time,
+			zcc.new_begin_time,
+			zcc.new_end_time,
+			zcc.xt_user_id,
+			zcc.remark,
+			t2.xt_userinfo_realName
+		FROM 
+			zx_change_contract zcc LEFT JOIN xt_userinfo t2 ON zcc.xt_user_id = t2.xt_userinfo_id
+		WHERE zcc.id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addZxChangeContract" parameterType="jehc.zxmodules.model.ZxChangeContract">
+		INSERT INTO
+			zx_change_contract
+			(
+			id,
+			create_time,
+			sign_time,
+			old_begin_time,
+			old_end_time,
+			new_begin_time,
+			new_end_time,
+			xt_user_id,
+			remark
+			)
+			VALUES
+			(
+			#{id},
+			#{create_time},
+			#{sign_time},
+			#{old_begin_time},
+			#{old_end_time},
+			#{new_begin_time},
+			#{new_end_time},
+			#{xt_user_id},
+			#{remark}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZxChangeContract" parameterType="jehc.zxmodules.model.ZxChangeContract">
+		UPDATE
+			zx_change_contract
+		SET
+			create_time = #{create_time},
+			sign_time = #{sign_time},
+			old_begin_time = #{old_begin_time},
+			old_end_time = #{old_end_time},
+			new_begin_time = #{new_begin_time},
+			new_end_time = #{new_end_time},
+			xt_user_id = #{xt_user_id},
+			remark = #{remark}
+		WHERE id=#{id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZxChangeContractBySelective" parameterType="jehc.zxmodules.model.ZxChangeContract">
+		UPDATE
+			zx_change_contract
+		<set>
+			<if test="create_time != null">
+				create_time = #{create_time},
+			</if>
+			<if test="sign_time != null">
+				sign_time = #{sign_time},
+			</if>
+			<if test="old_begin_time != null">
+				old_begin_time = #{old_begin_time},
+			</if>
+			<if test="old_end_time != null">
+				old_end_time = #{old_end_time},
+			</if>
+			<if test="new_begin_time != null">
+				new_begin_time = #{new_begin_time},
+			</if>
+			<if test="new_end_time != null">
+				new_end_time = #{new_end_time},
+			</if>
+			<if test="xt_user_id != null">
+				xt_user_id = #{xt_user_id},
+			</if>
+			<if test="remark != null">
+				remark = #{remark},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZxChangeContract" parameterType="map">
+		DELETE FROM zx_change_contract WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZxChangeContract" parameterType="list">
+		INSERT INTO
+			zx_change_contract
+			(
+			id,
+			create_time,
+			sign_time,
+			old_begin_time,
+			old_end_time,
+			new_begin_time,
+			new_end_time,
+			xt_user_id,
+			remark
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.create_time},
+			#{item.sign_time},
+			#{item.old_begin_time},
+			#{item.old_end_time},
+			#{item.new_begin_time},
+			#{item.new_end_time},
+			#{item.xt_user_id},
+			#{remark}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZxChangeContract" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_change_contract
+			SET
+				create_time = #{item.create_time},
+				sign_time = #{item.sign_time},
+				old_begin_time = #{item.old_begin_time},
+				old_end_time = #{item.old_end_time},
+				new_begin_time = #{item.new_begin_time},
+				new_end_time = #{item.new_end_time},
+				xt_user_id = #{item.xt_user_id},
+				remark = #{remark}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZxChangeContractBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_change_contract
+			<set>
+				<if test="item.create_time != null">
+					create_time = #{item.create_time},
+				</if>
+				<if test="item.sign_time != null">
+					sign_time = #{item.sign_time},
+				</if>
+				<if test="item.old_begin_time != null">
+					old_begin_time = #{item.old_begin_time},
+				</if>
+				<if test="item.old_end_time != null">
+					old_end_time = #{item.old_end_time},
+				</if>
+				<if test="item.new_begin_time != null">
+					new_begin_time = #{item.new_begin_time},
+				</if>
+				<if test="item.new_end_time != null">
+					new_end_time = #{item.new_end_time},
+				</if>
+				<if test="item.xt_user_id != null">
+					xt_user_id = #{item.xt_user_id},
+				</if>
+				<if test="item.remark != null">
+					remark = #{item.remark},
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+</mapper>

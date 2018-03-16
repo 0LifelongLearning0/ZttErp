@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZxOfficeApply">
+	<!--初始化分页-->
+	<select id="getZxOfficeApplyListByCondition" resultType="jehc.zxmodules.model.ZxOfficeApplyShow" parameterType="map">
+		SELECT
+			a.`id` as id,
+			a.`user_id` as user_id,
+			DATE_FORMAT(a.`approve_time`,'%Y-%m-%d %H:%i:%s') AS `approve_time`,
+			a.`office_id` as office_id,
+      b.`name` as office_name,
+      b.classify_id as classify_id,
+      b.num as office_num,
+      b.standard as standard,  
+      b.unit as office_unit,
+      a.create_time as create_time,
+			a.`amount` as amount,
+			a.`reason` as reason,
+			a.`status` as status
+		FROM 
+			zx_office_apply a,zx_office b
+		WHERE a.office_id=b.office_id and 1=1
+		<if test="null != name">
+			AND instr(name,#{name})
+		</if>
+		<if test="null != num">
+			AND instr(num,#{num})
+		</if>
+		<if test="null != status">
+			AND a.status = #{status}
+		</if>
+		<if test="null != classify_id and '' != classify_id">
+			AND classify_id = #{classify_id}
+		</if>
+		<if test="null == orderby">
+		   ORDER BY create_time ASC
+		</if>
+		<if test="null != orderby and orderby == 0">
+		   ORDER BY create_time ASC
+		</if>
+		<if test="null != orderby and orderby == 1">
+		   ORDER BY num ASC 
+		</if>
+		<if test="null != orderby and orderby == 2">
+		   ORDER BY num DESC 
+		</if>
+		<if test="null != orderby and orderby == 3">
+		   ORDER BY classify_id ASC 
+		</if>
+		<if test="null != orderby and orderby == 4">
+		   ORDER BY classify_id DESC 
+		</if>
+	</select>
+	
+	
+	<!--发放分页-->
+	<select id="getZxOfficeOutListByCondition" resultType="jehc.zxmodules.model.ZxOfficeApplyShow" parameterType="map">
+		select c.id as id,
+   c.user_id as user_id,
+   c.office_id  as office_id,
+   c.office_name as office_name,
+   c.classify_id as classify_id,
+   c.office_num as office_num,
+   c.standard as standard,
+   c.office_unit as office_unit,
+   c.amount as amount,
+   c.reason as reason,
+   c.status as status,
+   d.amount as inventoryamount
+ from (SELECT
+			a.`id` as id,
+			a.`user_id` as user_id,
+			DATE_FORMAT(a.`create_time`,'%Y-%m-%d %H:%i:%s') AS `create_time`,
+			DATE_FORMAT(a.`approve_time`,'%Y-%m-%d %H:%i:%s') AS `approve_time`,
+			a.`office_id` as office_id,
+      b.`name` as office_name,
+      b.classify_id as classify_id,
+      b.num as office_num,
+      b.standard as standard,  
+      b.unit as office_unit,
+			a.`amount` as amount,
+			a.`reason` as reason,
+			a.`status` as status
+		FROM 
+			zx_office_apply a,zx_office b
+		WHERE a.office_id=b.office_id 
+    and a.status='3' and 1=1) c LEFT JOIN zx_office_inventory d 
+    on c.office_id=d.office_id
+		<if test="null != name">
+			AND instr(office_name,#{name})
+		</if>
+		<if test="null != classify_id and '' != classify_id">
+			AND classify_id = #{classify_id}
+		</if>
+		<if test="null == orderby">
+		   ORDER BY classify_id ASC
+		</if>
+		<if test="null != orderby and orderby == 0">
+		   ORDER BY classify_id ASC
+		</if>
+		<if test="null != orderby and orderby == 3">
+		   ORDER BY classify_id ASC 
+		</if>
+		<if test="null != orderby and orderby == 4">
+		   ORDER BY classify_id DESC 
+		</if>
+		<if test="null != orderby and orderby == 5">
+		   ORDER BY office_name ASC 
+		</if>
+		<if test="null != orderby and orderby == 6">
+		   ORDER BY office_name DESC 
+		</if>
+	</select>
+	
+	
+	
+	
+
+	<!--根据id查找方法用品-->
+	<select id="getZxOfficeApplyById" resultType="jehc.zxmodules.model.ZxOfficeApplyShow" parameterType="string">
+		SELECT
+			a.`id` as id,
+			a.`user_id` as user_id,
+			DATE_FORMAT(a.`create_time`,'%Y-%m-%d %H:%i:%s') AS `create_time`,
+			DATE_FORMAT(a.`approve_time`,'%Y-%m-%d %H:%i:%s') AS `approve_time`,
+			a.`office_id` as office_id,
+      b.`name` as office_name,
+      b.classify_id as classify_id,
+      b.num as office_num,
+      b.standard as standard,  
+      b.unit as office_unit,
+			a.`amount` as amount,
+			a.`reason` as reason,
+			a.`status` as status
+		FROM 
+			zx_office_apply a,zx_office b
+		WHERE a.office_id=b.office_id and 1=1 and id=#{id}
+	</select>
+
+
+<!--根据id查找部门和名字-->
+	<select id="getUserAndDepartment" resultType="jehc.zxmodules.model.ZxUserAndDepartment" parameterType="string">
+	select xt_userinfo.xt_userinfo_realName user_name,xt_departinfo.xt_departinfo_name department  from
+ xt_userinfo,xt_departinfo
+where xt_userinfo.xt_departinfo_id=xt_departinfo.xt_departinfo_id
+
+and xt_userinfo.xt_userinfo_id=#{id}
+	</select>
+	
+	
+	<!--添加-->
+	<insert id="addZxOfficeApply" parameterType="jehc.zxmodules.model.ZxOfficeApply">
+		INSERT INTO
+			zx_office_apply
+			(
+			`id`,
+			`user_id`,
+			`create_time`,
+			`approve_time`,
+			`office_id`,
+			`amount`,
+			`reason`,
+			`status`
+			)
+			VALUES
+			(
+			#{id},
+			#{user_id},
+			#{create_time},
+			#{approve_time},
+			#{office_id},
+			#{amount},
+			#{reason},
+			#{status}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZxOfficeApply" parameterType="jehc.zxmodules.model.ZxOfficeApply">
+		UPDATE
+			zx_office_apply
+		SET
+			`user_id` = #{user_id},
+			`office_id` = #{office_id},
+			`amount` = #{amount},
+			`reason` = #{reason}
+		WHERE id=#{id}
+	</update>
+	
+	<!--修改申领表状态-->
+	<update id="updateZxOfficeOut" parameterType="jehc.zxmodules.model.ZxOfficeApply">
+		UPDATE
+			zx_office_apply
+		SET
+			`status` = '4'
+		WHERE id=#{id}
+	</update>
+
+<!--修改-->
+	<update id="updateZxOfficeStatus" parameterType="jehc.zxmodules.model.ZxOfficeApply">
+		UPDATE
+			zx_loan_bill
+		SET
+			`status` = #{status}
+		WHERE id=#{id}
+	</update>
+<!--修改子页-->
+	<update id="updateZxOfficeApplyProof" parameterType="string">
+		UPDATE
+			zx_office_apply
+		SET
+			`status` ='1'
+		 WHERE id=#{id}
+	</update>
+	
+	<!--修改（根据动态条件）-->
+	<update id="updateZxOfficeApplyBySelective" parameterType="jehc.zxmodules.model.ZxOfficeApply">
+		UPDATE
+			zx_office_apply
+		<set>
+			<if test="user_id != null">
+				`user_id` = #{user_id},
+			</if>
+			<if test="create_time != null">
+				`create_time` = #{create_time},
+			</if>
+			<if test="approve_time != null">
+				`approve_time` = #{approve_time},
+			</if>
+			<if test="office_id != null">
+				`office_id` = #{office_id},
+			</if>
+			<if test="amount != null">
+				`amount` = #{amount},
+			</if>
+			<if test="reason != null">
+				`reason` = #{reason},
+			</if>
+			<if test="status != null">
+				`status` = #{status},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZxOfficeApply" parameterType="map">
+		DELETE FROM zx_office_apply WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZxOfficeApply" parameterType="list">
+		INSERT INTO
+			zx_office_apply
+			(
+			`id`,
+			`user_id`,
+			`create_time`,
+			`approve_time`,
+			`office_id`,
+			`amount`,
+			`reason`,
+			`status`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.user_id},
+			#{item.create_time},
+			#{item.approve_time},
+			#{item.office_id},
+			#{item.amount},
+			#{item.reason},
+			#{item.status}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZxOfficeApply" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_office_apply
+			SET
+				`user_id` = #{item.user_id},
+				`create_time` = #{item.create_time},
+				`approve_time` = #{item.approve_time},
+				`office_id` = #{item.office_id},
+				`amount` = #{item.amount},
+				`reason` = #{item.reason},
+				`status` = #{item.status}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZxOfficeApplyBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_office_apply
+			<set>
+				<if test="item.user_id != null">
+					`user_id` = #{item.user_id},
+				</if>
+				<if test="item.create_time != null">
+					`create_time` = #{item.create_time},
+				</if>
+				<if test="item.approve_time != null">
+					`approve_time` = #{item.approve_time},
+				</if>
+				<if test="item.office_id != null">
+					`office_id` = #{item.office_id},
+				</if>
+				<if test="item.amount != null">
+					`amount` = #{item.amount},
+				</if>
+				<if test="item.reason != null">
+					`reason` = #{item.reason},
+				</if>
+				<if test="item.status != null">
+					`status` = #{item.status},
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+</mapper>

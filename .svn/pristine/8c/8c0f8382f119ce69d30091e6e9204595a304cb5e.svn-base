@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZxPeriodTransaction">
+	<!--初始化分页-->
+	<select id="getZxPeriodTransactionListByCondition" resultType="jehc.zxmodules.model.ZxPeriodTransaction" parameterType="map">
+		SELECT
+			`id`,
+			`user_id`,
+			`begin_date`,
+			`end_date`,
+			DATE_FORMAT(`begin_time`,'%H:%i:%s') AS `begin_time`,
+			DATE_FORMAT(`end_time`,'%H:%i:%s') AS `end_time`,
+			`transaction_type`,
+			`repetition_type`,
+			`transaction_content`,
+			`transaction_remind`,
+			`repetition_week`,
+			`repetition_day`,
+			`remark`,
+			`remind_day`,
+			`remind_hour`,
+			`remind_minute`
+		FROM 
+			zx_period_transaction
+		WHERE 1=1
+		<if test="null != transaction_type">
+			AND transaction_type = #{transaction_type}
+		</if>
+		<if test="null != transaction_remind">
+			AND transaction_remind = #{transaction_remind}
+		</if>
+		<if test="null != repetition_type">
+			AND repetition_type = #{repetition_type}
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getZxPeriodTransactionById" resultType="jehc.zxmodules.model.ZxPeriodTransaction" parameterType="string">
+		SELECT
+			`id`,
+			`user_id`,
+			`begin_date`,
+			`end_date`,
+			DATE_FORMAT(`begin_time`,'%H:%i:%s') AS `begin_time`,
+			DATE_FORMAT(`end_time`,'%H:%i:%s') AS `end_time`,
+			`transaction_type`,
+			`repetition_type`,
+			`transaction_content`,
+			`transaction_remind`,
+			`repetition_week`,
+			`repetition_day`,
+			`remark`,
+			`remind_day`,
+			`remind_hour`,
+			`remind_minute`
+		FROM 
+			zx_period_transaction
+		WHERE id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addZxPeriodTransaction" parameterType="jehc.zxmodules.model.ZxPeriodTransaction">
+		INSERT INTO
+			zx_period_transaction
+			(
+			`id`,
+			`user_id`,
+			`begin_date`,
+			`end_date`,
+			`begin_time`,
+			`end_time`,
+			`transaction_type`,
+			`repetition_type`,
+			`transaction_content`,
+			`transaction_remind`,
+			`repetition_week`,
+			`repetition_day`,
+			`remark`,
+			`remind_day`,
+			`remind_hour`,
+			`remind_minute`
+			)
+			VALUES
+			(
+			#{id},
+			#{user_id},
+			#{begin_date},
+			#{end_date},
+			#{begin_time},
+			#{end_time},
+			#{transaction_type},
+			#{repetition_type},
+			#{transaction_content},
+			#{transaction_remind},
+			#{repetition_week},
+			#{repetition_day},
+			#{remark},
+			#{remind_day},
+			#{remind_hour},
+			#{remind_minute}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZxPeriodTransaction" parameterType="jehc.zxmodules.model.ZxPeriodTransaction">
+		UPDATE
+			zx_period_transaction
+		SET
+			`user_id` = #{user_id},
+			`begin_date` = #{begin_date},
+			`end_date` = #{end_date},
+			`begin_time` = #{begin_time},
+			`end_time` = #{end_time},
+			`transaction_type` = #{transaction_type},
+			`repetition_type` = #{repetition_type},
+			`transaction_content` = #{transaction_content},
+			`transaction_remind` = #{transaction_remind},
+			`repetition_week` = #{repetition_week},
+			`repetition_day` = #{repetition_day},
+			`remark` = #{remark},
+			`remind_day` = #{remind_day},
+			`remind_hour` = #{remind_hour},
+			`remind_minute` = #{remind_minute}
+		WHERE id=#{id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZxPeriodTransactionBySelective" parameterType="jehc.zxmodules.model.ZxPeriodTransaction">
+		UPDATE
+			zx_period_transaction
+		<set>
+			<if test="user_id != null">
+				`user_id` = #{user_id},
+			</if>
+			<if test="begin_date != null">
+				`begin_date` = #{begin_date},
+			</if>
+			<if test="end_date != null">
+				`end_date` = #{end_date},
+			</if>
+			<if test="begin_time != null">
+				`begin_time` = #{begin_time},
+			</if>
+			<if test="end_time != null">
+				`end_time` = #{end_time},
+			</if>
+			<if test="transaction_type != null">
+				`transaction_type` = #{transaction_type},
+			</if>
+			<if test="repetition_type != null">
+				`repetition_type` = #{repetition_type},
+			</if>
+			<if test="transaction_content != null">
+				`transaction_content` = #{transaction_content},
+			</if>
+			<if test="transaction_remind != null">
+				`transaction_remind` = #{transaction_remind},
+			</if>
+			<if test="repetition_week != null">
+				`repetition_week` = #{repetition_week},
+			</if>
+			<if test="repetition_day != null">
+				`repetition_day` = #{repetition_day},
+			</if>
+			<if test="remark != null">
+				`remark` = #{remark},
+			</if>
+			<if test="remind_day != null">
+				`remind_day` = #{remind_day},
+			</if>
+			<if test="remind_hour != null">
+				`remind_hour` = #{remind_hour},
+			</if>
+			<if test="remind_minute != null">
+				`remind_minute` = #{remind_minute},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZxPeriodTransaction" parameterType="map">
+		DELETE FROM zx_period_transaction WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZxPeriodTransaction" parameterType="list">
+		INSERT INTO
+			zx_period_transaction
+			(
+			`id`,
+			`user_id`,
+			`begin_date`,
+			`end_date`,
+			`begin_time`,
+			`end_time`,
+			`transaction_type`,
+			`repetition_type`,
+			`transaction_content`,
+			`transaction_remind`,
+			`repetition_week`,
+			`repetition_day`,
+			`remark`,
+			`remind_day`,
+			`remind_hour`,
+			`remind_minute`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.user_id},
+			#{item.begin_date},
+			#{item.end_date},
+			#{item.begin_time},
+			#{item.end_time},
+			#{item.transaction_type},
+			#{item.repetition_type},
+			#{item.transaction_content},
+			#{item.transaction_remind},
+			#{item.repetition_week},
+			#{item.repetition_day},
+			#{item.remark},
+			#{item.remind_day},
+			#{item.remind_hour},
+			#{item.remind_minute}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZxPeriodTransaction" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_period_transaction
+			SET
+				`user_id` = #{item.user_id},
+				`begin_date` = #{item.begin_date},
+				`end_date` = #{item.end_date},
+				`begin_time` = #{item.begin_time},
+				`end_time` = #{item.end_time},
+				`transaction_type` = #{item.transaction_type},
+				`repetition_type` = #{item.repetition_type},
+				`transaction_content` = #{item.transaction_content},
+				`transaction_remind` = #{item.transaction_remind},
+				`repetition_week` = #{item.repetition_week},
+				`repetition_day` = #{item.repetition_day},
+				`remark` = #{item.remark},
+				`remind_day` = #{item.remind_day},
+				`remind_hour` = #{item.remind_hour},
+				`remind_minute` = #{item.remind_minute}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZxPeriodTransactionBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_period_transaction
+			<set>
+				<if test="item.user_id != null">
+					`user_id` = #{item.user_id},
+				</if>
+				<if test="item.begin_date != null">
+					`begin_date` = #{item.begin_date},
+				</if>
+				<if test="item.end_date != null">
+					`end_date` = #{item.end_date},
+				</if>
+				<if test="item.begin_time != null">
+					`begin_time` = #{item.begin_time},
+				</if>
+				<if test="item.end_time != null">
+					`end_time` = #{item.end_time},
+				</if>
+				<if test="item.transaction_type != null">
+					`transaction_type` = #{item.transaction_type},
+				</if>
+				<if test="item.repetition_type != null">
+					`repetition_type` = #{item.repetition_type},
+				</if>
+				<if test="item.transaction_content != null">
+					`transaction_content` = #{item.transaction_content},
+				</if>
+				<if test="item.transaction_remind != null">
+					`transaction_remind` = #{item.transaction_remind},
+				</if>
+				<if test="item.repetition_week != null">
+					`repetition_week` = #{item.repetition_week},
+				</if>
+				<if test="item.repetition_day != null">
+					`repetition_day` = #{item.repetition_day},
+				</if>
+				<if test="item.remark != null">
+					`remark` = #{item.remark},
+				</if>
+				<if test="item.remind_day != null">
+					`remind_day` = #{item.remind_day},
+				</if>
+				<if test="item.remind_hour != null">
+					`remind_hour` = #{item.remind_hour},
+				</if>
+				<if test="item.remind_minute != null">
+					`remind_minute` = #{item.remind_minute},
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+</mapper>

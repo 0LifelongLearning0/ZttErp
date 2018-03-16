@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZxMeetingAttach">
+	<!--初始化分页-->
+	<select id="getZxMeetingAttachListByCondition" resultType="jehc.zxmodules.model.ZxMeetingAttach" parameterType="map">
+		SELECT
+			t1.`id`,
+			t1.`meeting_id`,
+			t1.`type`,
+			t1.`xt_attachment_id`,
+			t2.`xt_attachmentTitle` AS `filename`
+		FROM 
+			zx_meeting_attach t1 
+			JOIN xt_attachment t2 
+		WHERE 
+			t1.xt_attachment_id = t2.xt_attachment_id 
+		<if test="null != meeting_id">
+			AND t1.meeting_id = #{meeting_id} 
+		</if>
+		<if test="null != xt_attachment_id">
+			AND t1.xt_attachment_id = #{xt_attachment_id} 
+		</if>
+		<if test="null != type">
+			AND t1.type = #{type} 
+		</if>
+		<if test="null != xt_attachmentIsDelete">
+			AND t2.xt_attachmentIsDelete = #{xt_attachmentIsDelete} 
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getZxMeetingAttachById" resultType="jehc.zxmodules.model.ZxMeetingAttach" parameterType="string">
+		SELECT
+			`id`,
+			`meeting_id`,
+			`type`,
+			`xt_attachment_id`
+		FROM 
+			zx_meeting_attach
+		WHERE id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addZxMeetingAttach" parameterType="jehc.zxmodules.model.ZxMeetingAttach">
+		INSERT INTO
+			zx_meeting_attach
+			(
+			`id`,
+			`meeting_id`,
+			`type`,
+			`xt_attachment_id`
+			)
+			VALUES
+			(
+			#{id},
+			#{meeting_id},
+			#{type},
+			#{xt_attachment_id}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZxMeetingAttach" parameterType="jehc.zxmodules.model.ZxMeetingAttach">
+		UPDATE
+			zx_meeting_attach
+		SET
+			`meeting_id` = #{meeting_id},
+			`type` = #{type},
+			`xt_attachment_id` = #{xt_attachment_id}
+		WHERE id=#{id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZxMeetingAttachBySelective" parameterType="jehc.zxmodules.model.ZxMeetingAttach">
+		UPDATE
+			zx_meeting_attach
+		<set>
+			<if test="meeting_id != null">
+				`meeting_id` = #{meeting_id},
+			</if>
+			<if test="type != null">
+				`type` = #{type},
+			</if>
+			<if test="xt_attachment_id != null">
+				`xt_attachment_id` = #{xt_attachment_id},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZxMeetingAttach" parameterType="map">
+		DELETE FROM zx_meeting_attach WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZxMeetingAttach" parameterType="list">
+		INSERT INTO
+			zx_meeting_attach
+			(
+			`id`,
+			`meeting_id`,
+			`type`,
+			`xt_attachment_id`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.meeting_id},
+			#{item.type},
+			#{item.xt_attachment_id}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZxMeetingAttach" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_meeting_attach
+			SET
+				`meeting_id` = #{item.meeting_id},
+				`type` = #{item.type},
+				`xt_attachment_id` = #{item.xt_attachment_id}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZxMeetingAttachBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_meeting_attach
+			<set>
+				<if test="item.meeting_id != null">
+					`meeting_id` = #{item.meeting_id},
+				</if>
+				<if test="item.type != null">
+					`type` = #{item.type},
+				</if>
+				<if test="item.xt_attachment_id != null">
+					`xt_attachment_id` = #{item.xt_attachment_id},
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+</mapper>

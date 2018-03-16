@@ -1,0 +1,192 @@
+package jehc.zxmodules.service.impl;
+import java.util.List;
+import java.util.Map;
+import jehc.xtmodules.xtcore.base.BaseService;
+import jehc.xtmodules.xtcore.util.ExceptionUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import jehc.zxmodules.service.ZxGoodsApplyDetailService;
+import jehc.zxmodules.dao.ZxGoodsApplyDetailDao;
+import jehc.zxmodules.model.ZxGoodsApplyDetail;
+
+/**
+* 用品申领详细表 
+* 2018-01-08 13:18:13  季建吉
+*/
+@Service("zxGoodsApplyDetailService")
+public class ZxGoodsApplyDetailServiceImpl extends BaseService implements ZxGoodsApplyDetailService{
+	@Autowired
+	private ZxGoodsApplyDetailDao zxGoodsApplyDetailDao;
+	/**
+	* 分页
+	* @param condition 
+	* @return
+	*/
+	public List<ZxGoodsApplyDetail> getZxGoodsApplyDetailListByCondition(Map<String,Object> condition){
+		try{
+			return zxGoodsApplyDetailDao.getZxGoodsApplyDetailListByCondition(condition);
+		} catch (Exception e) {
+			/**捕捉异常并回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+	}
+	/**
+	* 查询对象
+	* @param id 
+	* @return
+	*/
+	public ZxGoodsApplyDetail getZxGoodsApplyDetailById(String id){
+		try{
+			ZxGoodsApplyDetail zxGoodsApplyDetail = zxGoodsApplyDetailDao.getZxGoodsApplyDetailById(id);
+			return zxGoodsApplyDetail;
+		} catch (Exception e) {
+			/**捕捉异常并回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+	}
+	/**
+	* 添加
+	* @param zx_goods_apply_detail 
+	* @return
+	*/
+	public int addZxGoodsApplyDetail(ZxGoodsApplyDetail zxGoodsApplyDetail){
+		int i = 0;
+		try {
+			i = zxGoodsApplyDetailDao.addZxGoodsApplyDetail(zxGoodsApplyDetail);
+		} catch (Exception e) {
+			i = 0;
+			/**捕捉异常并回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+		return i;
+	}
+	/**
+	* 修改
+	* @param zx_goods_apply_detail 
+	* @return
+	*/
+	public int updateZxGoodsApplyDetail(ZxGoodsApplyDetail zxGoodsApplyDetail){
+		int i = 0;
+		try {
+			i = zxGoodsApplyDetailDao.updateZxGoodsApplyDetail(zxGoodsApplyDetail);
+		} catch (Exception e) {
+			i = 0;
+			/**捕捉异常并回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+		return i;
+	}
+	/**
+	* 修改（根据动态条件）
+	* @param zx_goods_apply_detail 
+	* @return
+	*/
+	public int updateZxGoodsApplyDetailBySelective(ZxGoodsApplyDetail zxGoodsApplyDetail){
+		int i = 0;
+		try {
+			i = zxGoodsApplyDetailDao.updateZxGoodsApplyDetailBySelective(zxGoodsApplyDetail);
+		} catch (Exception e) {
+			i = 0;
+			/**捕捉异常并回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+		return i;
+	}
+	/**
+	* 删除
+	* @param condition 
+	* @return
+	*/
+	public int delZxGoodsApplyDetail(Map<String,Object> condition){
+		int i = 0;
+		try {
+			i = zxGoodsApplyDetailDao.delZxGoodsApplyDetail(condition);
+		} catch (Exception e) {
+			i = 0;
+			/**捕捉异常并回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+		return i;
+	}
+	
+	/**
+	* 删除byid
+	* @param condition 
+	* @return
+	*/
+	public int delZxGoodsApplyDetailById(Map<String,Object> condition){
+		int i = 0;
+		try {
+			i = zxGoodsApplyDetailDao.delZxGoodsApplyDetailById(condition);
+		} catch (Exception e) {
+			i = 0;
+			/**捕捉异常并回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+		return i;
+	}
+	/**
+	* 批量添加
+	* @param zx_goods_apply_detailList 
+	* @return
+	*/
+	public int addBatchZxGoodsApplyDetail(List<ZxGoodsApplyDetail> zxGoodsApplyDetailList){
+		int i = 0;
+		try {
+			i = zxGoodsApplyDetailDao.addBatchZxGoodsApplyDetail(zxGoodsApplyDetailList);
+		} catch (Exception e) {
+			i = 0;
+			/**捕捉异常并回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+		return i;
+	}
+	/**
+	* 批量修改
+	* @param zx_goods_apply_detailList 
+	* @return
+	*/
+	public int updateBatchZxGoodsApplyDetail(List<ZxGoodsApplyDetail> zxGoodsApplyDetailList){
+		int i = 0;
+		try {
+			i = zxGoodsApplyDetailDao.updateBatchZxGoodsApplyDetail(zxGoodsApplyDetailList);
+		} catch (Exception e) {
+			i = 0;
+			/**捕捉异常并回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+		return i;
+	}
+	/**
+	* 批量修改（根据动态条件）
+	* @param zx_goods_apply_detailList 
+	* @return
+	*/
+	public int updateBatchZxGoodsApplyDetailBySelective(List<ZxGoodsApplyDetail> zxGoodsApplyDetailList){
+		int i = 0;
+		try {
+			i = zxGoodsApplyDetailDao.updateBatchZxGoodsApplyDetailBySelective(zxGoodsApplyDetailList);
+		} catch (Exception e) {
+			i = 0;
+			/**捕捉异常并回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+		return i;
+	}
+	/**
+	* 根据外键删除方法
+	* @param apply_id
+	* @return
+	*/
+	public int delZxGoodsApplyDetailByForeignKey(String apply_id){
+		int i = 0;
+		try {
+			i = zxGoodsApplyDetailDao.delZxGoodsApplyDetailByForeignKey(apply_id);
+		} catch (Exception e) {
+			i = 0;
+			/**捕捉异常并回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+		return i;
+	}
+}

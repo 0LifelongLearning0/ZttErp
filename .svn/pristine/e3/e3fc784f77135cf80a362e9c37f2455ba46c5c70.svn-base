@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZxOfficeClassify">
+	<!--初始化分页-->
+	<select id="getZxOfficeClassifyListByCondition" resultType="jehc.zxmodules.model.ZxOfficeClassify" parameterType="map">
+		SELECT
+			`classify_id`,
+			`classify_parentId`,
+			`classify_name`,
+			`classify_num`,
+			`classify_leaf`,
+			`classify_isdelete`,
+			`classify_time`,
+			`classify_sort`
+		FROM 
+			zx_office_classify
+		WHERE 1=1
+	</select>
+	
+
+
+	
+	<!--  查找孩子  -->
+	<select id="getZxOfficeClassifyListChild" parameterType="map" resultType="jehc.zxmodules.model.ZxOfficeClassify">
+	SELECT
+		    `classify_id`,
+			`classify_parentId`,
+			`classify_name`,
+			`classify_num`,
+			`classify_leaf`,
+			`classify_isdelete`,
+			`classify_time`,
+			`classify_sort`
+		FROM 
+			zx_office_classify
+		WHERE classify_parentId = #{classify_parentId} 
+		ORDER BY classify_sort ASC
+		
+	</select>
+
+
+<!--  查找孩子  -->
+	<select id="getZxOfficeClassifyByClick" parameterType="map" resultType="jehc.zxmodules.model.ZxOfficeClassify">
+	SELECT
+		    `classify_id`,
+			`classify_parentId`,
+			`classify_name`,
+			`classify_num`,
+			`classify_leaf`,
+			`classify_isdelete`,
+			`classify_time`,
+			`classify_sort`
+		FROM 
+			zx_office_classify
+		WHERE classify_parentId = #{Id} 
+		ORDER BY classify_sort ASC
+		
+	</select>
+	<!--查询对象-->
+	<select id="getZxOfficeClassifyById" resultType="jehc.zxmodules.model.ZxOfficeClassify" parameterType="string">
+		SELECT
+			`classify_id`,
+			`classify_parentId`,
+			`classify_name`,
+			`classify_num`,
+			`classify_leaf`,
+			`classify_isdelete`,
+			`classify_time`,
+			`classify_sort`
+		FROM 
+			zx_office_classify
+		WHERE classify_id=#{classify_id}
+		
+	</select>
+	
+	
+<!--  查询所有系统菜单  -->
+	<select id="getZxOfficeClassifyListAll" resultType="jehc.zxmodules.model.ZxOfficeClassify" parameterType="map">
+		SELECT
+		   `classify_id`,
+			`classify_parentId`,
+			`classify_name`,
+			`classify_num`,
+			`classify_leaf`,
+			`classify_isdelete`,
+			`classify_time`,
+			`classify_sort`
+		FROM 
+			zx_office_classify
+		WHERE 1=1
+		ORDER BY classify_sort ASC
+	</select>
+	
+	<!--  查找集合父ID为零  -->
+	<select id="getZxOfficeClassifyList" resultType="jehc.zxmodules.model.ZxOfficeClassify">
+		SELECT
+		    `classify_id`,
+			`classify_parentId`,
+			`classify_name`,
+			`classify_num`,
+			`classify_leaf`,
+			`classify_isdelete`,
+			`classify_time`,
+			`classify_sort`
+		FROM 
+			zx_office_classify
+		WHERE classify_parentId = '0'
+		ORDER BY classify_sort ASC
+	</select>
+	
+	<!--添加-->
+	<insert id="addZxOfficeClassify" parameterType="jehc.zxmodules.model.ZxOfficeClassify">
+		INSERT INTO
+			zx_office_classify
+			(
+			`classify_id`,
+			`classify_parentId`,
+			`classify_name`,
+			`classify_num`,
+			`classify_leaf`,
+			`classify_isdelete`,
+			`classify_time`,
+			`classify_sort`
+			)
+			VALUES
+			(
+			#{classify_id},
+			#{classify_parentId},
+			#{classify_name},
+			#{classify_num},
+			#{classify_leaf},
+			#{classify_isdelete},
+			#{classify_time},
+			#{classify_sort}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZxOfficeClassify" parameterType="jehc.zxmodules.model.ZxOfficeClassify">
+		UPDATE
+			zx_office_classify
+		SET
+			`classify_parentId` = #{classify_parentId},
+			`classify_name` = #{classify_name},
+			`classify_sort` = #{classify_sort}
+		WHERE classify_id=#{classify_id}
+	</update>
+	
+		<!--修改子页-->
+	<update id="updateZxOfficeClassifyLeaf" parameterType="string">
+		UPDATE
+			zx_office_classify
+		SET
+			`classify_leaf` ='0'
+		WHERE classify_id=#{classify_id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZxOfficeClassifyBySelective" parameterType="jehc.zxmodules.model.ZxOfficeClassify">
+		UPDATE
+			zx_office_classify
+		<set>
+			<if test="classify_parentId != null">
+				`classify_parentId` = #{classify_parentId},
+			</if>
+			<if test="classify_name != null">
+				`classify_name` = #{classify_name},
+			</if>
+			<if test="classify_num != null">
+				`classify_num` = #{classify_num},
+			</if>
+			<if test="classify_leaf != null">
+				`classify_leaf` = #{classify_leaf},
+			</if>
+			<if test="classify_isdelete != null">
+				`classify_isdelete` = #{classify_isdelete},
+			</if>
+			<if test="classify_time != null">
+				`classify_time` = #{classify_time},
+			</if>
+			<if test="classify_sort != null">
+				`classify_sort` = #{classify_sort},
+			</if>
+		</set>
+		WHERE classify_id=#{classify_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZxOfficeClassify" parameterType="map">
+		DELETE FROM zx_office_classify WHERE classify_id IN
+		<foreach item="item" index="index" collection="classify_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZxOfficeClassify" parameterType="list">
+		INSERT INTO
+			zx_office_classify
+			(
+			`classify_id`,
+			`classify_parentId`,
+			`classify_name`,
+			`classify_num`,
+			`classify_leaf`,
+			`classify_isdelete`,
+			`classify_time`,
+			`classify_sort`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.classify_id},
+			#{item.classify_parentId},
+			#{item.classify_name},
+			#{item.classify_num},
+			#{item.classify_leaf},
+			#{item.classify_isdelete},
+			#{item.classify_time},
+			#{item.classify_sort}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZxOfficeClassify" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_office_classify
+			SET
+				`classify_parentId` = #{item.classify_parentId},
+				`classify_name` = #{item.classify_name},
+				`classify_num` = #{item.classify_num},
+				`classify_leaf` = #{item.classify_leaf},
+				`classify_isdelete` = #{item.classify_isdelete},
+				`classify_time` = #{item.classify_time},
+				`classify_sort` = #{item.classify_sort}
+			WHERE classify_id=#{item.classify_id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZxOfficeClassifyBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_office_classify
+			<set>
+				<if test="item.classify_parentId != null">
+					`classify_parentId` = #{item.classify_parentId},
+				</if>
+				<if test="item.classify_name != null">
+					`classify_name` = #{item.classify_name},
+				</if>
+				<if test="item.classify_num != null">
+					`classify_num` = #{item.classify_num},
+				</if>
+				<if test="item.classify_leaf != null">
+					`classify_leaf` = #{item.classify_leaf},
+				</if>
+				<if test="item.classify_isdelete != null">
+					`classify_isdelete` = #{item.classify_isdelete},
+				</if>
+				<if test="item.classify_time != null">
+					`classify_time` = #{item.classify_time},
+				</if>
+				<if test="item.classify_sort != null">
+					`classify_sort` = #{item.classify_sort},
+				</if>
+			</set>
+			WHERE classify_id=#{item.classify_id}
+		</foreach>
+	</update>
+</mapper>

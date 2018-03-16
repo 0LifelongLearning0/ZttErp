@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZxMachine">
+	<!--初始化分页-->
+	<select id="getZxMachineListByCondition" resultType="jehc.zxmodules.model.ZxMachine" parameterType="map">
+		SELECT
+			`id`,
+			`name`
+		FROM 
+			zx_machine
+		WHERE 1=1
+		<if test="null != name">
+			AND instr(name,#{name})
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getZxMachineById" resultType="jehc.zxmodules.model.ZxMachine" parameterType="string">
+		SELECT
+			`id`,
+			`name`
+		FROM 
+			zx_machine
+		WHERE id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addZxMachine" parameterType="jehc.zxmodules.model.ZxMachine">
+		INSERT INTO
+			zx_machine
+			(
+			`id`,
+			`name`
+			)
+			VALUES
+			(
+			#{id},
+			#{name}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZxMachine" parameterType="jehc.zxmodules.model.ZxMachine">
+		UPDATE
+			zx_machine
+		SET
+			`name` = #{name}
+		WHERE id=#{id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZxMachineBySelective" parameterType="jehc.zxmodules.model.ZxMachine">
+		UPDATE
+			zx_machine
+		<set>
+			<if test="name != null">
+				`name` = #{name},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZxMachine" parameterType="map">
+		DELETE FROM zx_machine WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZxMachine" parameterType="list">
+		INSERT INTO
+			zx_machine
+			(
+			`id`,
+			`name`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.name}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZxMachine" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_machine
+			SET
+				`name` = #{item.name}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZxMachineBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_machine
+			<set>
+				<if test="item.name != null">
+					`name` = #{item.name},
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+</mapper>

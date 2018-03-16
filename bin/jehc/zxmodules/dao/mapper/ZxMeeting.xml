@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZxMeeting">
+	<!--初始化分页-->
+	<select id="getZxMeetingListByCondition" resultType="jehc.zxmodules.model.ZxMeeting" parameterType="map">
+		SELECT
+			t1.`id`,
+			t1.`title`,
+			t1.`content`,
+			t1.`user_id`,
+			t1.`house_id`,
+			DATE_FORMAT(t1.`time_start`,'%Y-%m-%d %H:%i:%s') AS `time_start`,
+			DATE_FORMAT(t1.`time_end`,'%Y-%m-%d %H:%i:%s') AS `time_end`,
+			t1.`is_record`,
+			t1.`state`,
+			<if test="null != is_connect">
+				t2.xt_userinfo_realName  AS user_realname,
+			</if>
+			DATE_FORMAT(t1.`create_date`,'%Y-%m-%d %H:%i:%s') AS `create_date`
+		FROM 
+			zx_meeting t1
+			<if test="null != is_connect">
+				LEFT JOIN xt_userinfo t2 ON t1.user_id = t2.xt_userinfo_id 
+			</if>	
+		WHERE 1=1
+		<if test="null != title">
+			AND instr(t1.title,#{title})
+		</if>
+		<if test="null != is_record">
+			AND t1.is_record = #{is_record}
+		</if>
+		<if test="null != house_id">
+			AND t1.house_id = #{house_id}
+		</if>
+		ORDER BY t1.is_record,t1.time_start desc 
+	</select>
+
+	<!--查询对象-->
+	<select id="getZxMeetingById" resultType="jehc.zxmodules.model.ZxMeeting" parameterType="string">
+		SELECT
+			`id`,
+			`title`,
+			`content`,
+			`house_id`,
+			`user_id`,
+			DATE_FORMAT(`time_start`,'%Y-%m-%d %H:%i:%s') AS `time_start`,
+			DATE_FORMAT(`time_end`,'%Y-%m-%d %H:%i:%s') AS `time_end`,
+			`is_record`,
+			`state`,
+			DATE_FORMAT(`create_date`,'%Y-%m-%d %H:%i:%s') AS `create_date`
+		FROM 
+			zx_meeting
+		WHERE id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addZxMeeting" parameterType="jehc.zxmodules.model.ZxMeeting">
+		INSERT INTO
+			zx_meeting
+			(
+			`id`,
+			`title`,
+			`content`,
+			`house_id`,
+			`user_id`,
+			`time_start`,
+			`time_end`,
+			`is_record`,
+			`state`,
+			`create_date`
+			)
+			VALUES
+			(
+			#{id},
+			#{title},
+			#{content},
+			#{house_id},
+			#{user_id},
+			#{time_start},
+			#{time_end},
+			#{is_record},
+			#{state},
+			#{create_date}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZxMeeting" parameterType="jehc.zxmodules.model.ZxMeeting">
+		UPDATE
+			zx_meeting
+		SET
+			`title` = #{title},
+			`content` = #{content},
+			`house_id` = #{house_id},
+			`user_id` = #{user_id},
+			`time_start` = #{time_start},
+			`time_end` = #{time_end},
+			`is_record` = #{is_record},
+			`state` = #{state},
+			`create_date` = #{create_date}
+		WHERE id=#{id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZxMeetingBySelective" parameterType="jehc.zxmodules.model.ZxMeeting">
+		UPDATE
+			zx_meeting
+		<set>
+			<if test="title != null">
+				`title` = #{title},
+			</if>
+			<if test="content != null">
+				`content` = #{content},
+			</if>
+			<if test="house_id != null">
+				`house_id` = #{house_id},
+			</if>
+			<if test="user_id != null">
+				`user_id` = #{user_id},
+			</if>
+			<if test="time_start != null">
+				`time_start` = #{time_start},
+			</if>
+			<if test="time_end != null">
+				`time_end` = #{time_end},
+			</if>
+			<if test="is_record != null">
+				`is_record` = #{is_record},
+			</if>
+			<if test="state != null">
+				`state` = #{state},
+			</if>
+			<if test="create_date != null">
+				`create_date` = #{create_date},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZxMeeting" parameterType="map">
+		DELETE FROM zx_meeting WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZxMeeting" parameterType="list">
+		INSERT INTO
+			zx_meeting
+			(
+			`id`,
+			`title`,
+			`content`,
+			`house_id`,
+			`user_id`,
+			`time_start`,
+			`time_end`,
+			`is_record`,
+			`state`,
+			`create_date`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.title},
+			#{item.content},
+			#{item.house_id},
+			#{item.user_id},
+			#{item.time_start},
+			#{item.time_end},
+			#{item.is_record},
+			#{item.state},
+			#{item.create_date}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZxMeeting" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_meeting
+			SET
+				`title` = #{item.title},
+				`content` = #{item.content},
+				`house_id` = #{item.house_id},
+				`user_id` = #{item.user_id},
+				`time_start` = #{item.time_start},
+				`time_end` = #{item.time_end},
+				`is_record` = #{item.is_record},
+				`state` = #{item.state},
+				`create_date` = #{item.create_date}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZxMeetingBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_meeting
+			<set>
+				<if test="item.title != null">
+					`title` = #{item.title},
+				</if>
+				<if test="item.content != null">
+					`content` = #{item.content},
+				</if>
+				<if test="item.house_id != null">
+					`house_id` = #{item.house_id},
+				</if>
+				<if test="item.user_id != null">
+					`user_id` = #{item.user_id},
+				</if>
+				<if test="item.time_start != null">
+					`time_start` = #{item.time_start},
+				</if>
+				<if test="item.time_end != null">
+					`time_end` = #{item.time_end},
+				</if>
+				<if test="item.is_record != null">
+					`is_record` = #{item.is_record},
+				</if>
+				<if test="item.state != null">
+					`state` = #{item.state},
+				</if>
+				<if test="item.create_date != null">
+					`create_date` = #{item.create_date},
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+</mapper>

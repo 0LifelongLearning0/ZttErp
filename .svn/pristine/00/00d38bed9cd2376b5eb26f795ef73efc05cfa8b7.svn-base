@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZxOutApply">
+	<!--初始化分页-->
+	<select id="getZxOutApplyListByCondition" resultType="jehc.zxmodules.model.ZxOutApply" parameterType="map">
+		SELECT
+			apply.`id`,
+			apply.`apply_num`,
+			apply.`project_id`,
+			apply.`draw_num`,
+			apply.`make_num`,
+			apply.`make_user_id`,
+			apply.`apply_user_id`,
+			DATE_FORMAT(apply.`apply_time`,'%Y-%m-%d %H:%i:%s') AS `apply_time`,
+			apply.`need_time`,
+			DATE_FORMAT(apply.`send_draw_time`,'%Y-%m-%d %H:%i:%s') AS `send_draw_time`,
+			apply.`status`,
+			apply.`remark`
+		FROM 
+			zx_out_apply apply LEFT JOIN zx_project project ON apply.project_id = project.id 
+		WHERE 1=1
+		<if test="null != status">
+			AND instr(apply.status,#{status})
+		</if>
+		<if test="null != apply_user_id">
+			AND instr(apply.apply_user_id,#{apply_user_id})
+		</if>
+		<if test="null != draw_num">
+			AND instr(apply.draw_num,#{draw_num})
+		</if>
+		<if test="null != project_id">
+			AND instr(apply.project_id,#{project_id})
+		</if>
+		<if test="null != apply_num">
+			AND instr(apply.apply_num,#{apply_num})
+		</if>
+		<if test="null != project_num">
+			AND instr(project.num,#{project_num})
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getZxOutApplyById" resultType="jehc.zxmodules.model.ZxOutApply" parameterType="string">
+		SELECT
+			`id`,
+			`apply_num`,
+			`project_id`,
+			`draw_num`,
+			`make_num`,
+			`make_user_id`,
+			`apply_user_id`,
+			DATE_FORMAT(`apply_time`,'%Y-%m-%d %H:%i:%s') AS `apply_time`,
+			`need_time`,
+			DATE_FORMAT(`send_draw_time`,'%Y-%m-%d %H:%i:%s') AS `send_draw_time`,
+			`status`,
+			`remark`
+		FROM 
+			zx_out_apply
+		WHERE id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addZxOutApply" parameterType="jehc.zxmodules.model.ZxOutApply">
+		INSERT INTO
+			zx_out_apply
+			(
+			`id`,
+			`apply_num`,
+			`project_id`,
+			`draw_num`,
+			`make_num`,
+			`make_user_id`,
+			`apply_user_id`,
+			`apply_time`,
+			`need_time`,
+			`send_draw_time`,
+			`status`,
+			`remark`
+			)
+			VALUES
+			(
+			#{id},
+			#{apply_num},
+			#{project_id},
+			#{draw_num},
+			#{make_num},
+			#{make_user_id},
+			#{apply_user_id},
+			#{apply_time},
+			#{need_time},
+			#{send_draw_time},
+			#{status},
+			#{remark}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZxOutApply" parameterType="jehc.zxmodules.model.ZxOutApply">
+		UPDATE
+			zx_out_apply
+		SET
+			`apply_num` = #{apply_num},
+			`project_id` = #{project_id},
+			`draw_num` = #{draw_num},
+			`make_num` = #{make_num},
+			`make_user_id` = #{make_user_id},
+			`apply_user_id` = #{apply_user_id},
+			`apply_time` = #{apply_time},
+			`need_time` = #{need_time},
+			`send_draw_time` = #{send_draw_time},
+			`status` = #{status},
+			`remark` = #{remark}
+		WHERE id=#{id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZxOutApplyBySelective" parameterType="jehc.zxmodules.model.ZxOutApply">
+		UPDATE
+			zx_out_apply
+		<set>
+			<if test="apply_num != null">
+				`apply_num` = #{apply_num},
+			</if>
+			<if test="project_id != null">
+				`project_id` = #{project_id},
+			</if>
+			<if test="draw_num != null">
+				`draw_num` = #{draw_num},
+			</if>
+			<if test="make_num != null">
+				`make_num` = #{make_num},
+			</if>
+			<if test="make_user_id != null">
+				`make_user_id` = #{make_user_id},
+			</if>
+			<if test="apply_user_id != null">
+				`apply_user_id` = #{apply_user_id},
+			</if>
+			<if test="apply_time != null">
+				`apply_time` = #{apply_time},
+			</if>
+			<if test="need_time != null">
+				`need_time` = #{need_time},
+			</if>
+			<if test="send_draw_time != null">
+				`send_draw_time` = #{send_draw_time},
+			</if>
+			<if test="status != null">
+				`status` = #{status},
+			</if>
+			<if test="remark != null">
+				`remark` = #{remark},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZxOutApply" parameterType="map">
+		DELETE FROM zx_out_apply WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZxOutApply" parameterType="list">
+		INSERT INTO
+			zx_out_apply
+			(
+			`id`,
+			`apply_num`,
+			`project_id`,
+			`draw_num`,
+			`make_num`,
+			`make_user_id`,
+			`apply_user_id`,
+			`apply_time`,
+			`need_time`,
+			`send_draw_time`,
+			`status`,
+			`remark`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.apply_num},
+			#{item.project_id},
+			#{item.draw_num},
+			#{item.make_num},
+			#{item.make_user_id},
+			#{item.apply_user_id},
+			#{item.apply_time},
+			#{item.need_time},
+			#{item.send_draw_time},
+			#{item.status},
+			#{item.remark}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZxOutApply" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_out_apply
+			SET
+				`apply_num` = #{item.apply_num},
+				`project_id` = #{item.project_id},
+				`draw_num` = #{item.draw_num},
+				`make_num` = #{item.make_num},
+				`make_user_id` = #{item.make_user_id},
+				`apply_user_id` = #{item.apply_user_id},
+				`apply_time` = #{item.apply_time},
+				`need_time` = #{item.need_time},
+				`send_draw_time` = #{item.send_draw_time},
+				`status` = #{item.status},
+				`remark` = #{item.remark}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZxOutApplyBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_out_apply
+			<set>
+				<if test="item.apply_num != null">
+					`apply_num` = #{item.apply_num},
+				</if>
+				<if test="item.project_id != null">
+					`project_id` = #{item.project_id},
+				</if>
+				<if test="item.draw_num != null">
+					`draw_num` = #{item.draw_num},
+				</if>
+				<if test="item.make_num != null">
+					`make_num` = #{item.make_num},
+				</if>
+				<if test="item.make_user_id != null">
+					`make_user_id` = #{item.make_user_id},
+				</if>
+				<if test="item.apply_user_id != null">
+					`apply_user_id` = #{item.apply_user_id},
+				</if>
+				<if test="item.apply_time != null">
+					`apply_time` = #{item.apply_time},
+				</if>
+				<if test="item.need_time != null">
+					`need_time` = #{item.need_time},
+				</if>
+				<if test="item.send_draw_time != null">
+					`send_draw_time` = #{item.send_draw_time},
+				</if>
+				<if test="item.status != null">
+					`status` = #{item.status},
+				</if>
+				<if test="item.remark != null">
+					`remark` = #{item.remark},
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+</mapper>

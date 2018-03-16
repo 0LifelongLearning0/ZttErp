@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZxJudgeAgainResult">
+	<!--初始化分页-->
+	<select id="getZxJudgeAgainResultListByCondition" resultType="jehc.zxmodules.model.ZxJudgeAgainResult" parameterType="map">
+		SELECT
+			t1.`id`,
+			t1.`supplier_id`,
+			t1.`judge_date`,
+			t1.`score`,
+			t1.`grade`,
+			t1.`check_user_id`,
+			t1.`status`,
+			t1.`state`,
+			<if test="null != is_connect||null != supplier_name">
+				t2.`name` AS supplier_name,
+			</if>	
+			DATE_FORMAT(t1.`check_date`,'%Y-%m-%d %H:%i:%s') AS `check_date`,
+			DATE_FORMAT(t1.`create_date`,'%Y-%m-%d %H:%i:%s') AS `create_date`
+		FROM 
+			zx_judge_again_result t1
+		<if test="null != is_connect||null != supplier_name">
+			LEFT JOIN zx_supplier t2 ON t1.supplier_id = t2.id
+		</if>	
+		WHERE 1=1
+		<if test="null != supplier_id">
+			AND t1.supplier_id = #{supplier_id} 
+		</if>
+		<if test="null != judge_date">
+			AND t1.judge_date = #{judge_date} 
+		</if>
+		<if test="null != state">
+			AND t1.state = #{state} 
+		</if>
+		<if test="null != id">
+			AND t1.id = #{id} 
+		</if>
+		<if test="null != status">
+			AND t1.status = #{status} 
+		</if>
+		<if test="null != grade">
+			AND t1.grade = #{grade} 
+		</if>
+		<if test="null != supplier_name">
+			AND instr(t2.name,#{supplier_name})
+		</if>
+		<if test="null != order_by_judge_date">
+			ORDER BY t1.judge_date DESC 
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getZxJudgeAgainResultById" resultType="jehc.zxmodules.model.ZxJudgeAgainResult" parameterType="string">
+		SELECT
+			`id`,
+			`supplier_id`,
+			`judge_date`,
+			`score`,
+			`grade`,
+			`check_user_id`,
+			`status`,
+			`state`,
+			DATE_FORMAT(`check_date`,'%Y-%m-%d %H:%i:%s') AS `check_date`,
+			DATE_FORMAT(`create_date`,'%Y-%m-%d %H:%i:%s') AS `create_date`
+		FROM 
+			zx_judge_again_result
+		WHERE id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addZxJudgeAgainResult" parameterType="jehc.zxmodules.model.ZxJudgeAgainResult">
+		INSERT INTO
+			zx_judge_again_result
+			(
+			`id`,
+			`supplier_id`,
+			`judge_date`,
+			`score`,
+			`grade`,
+			`check_user_id`,
+			`status`,
+			`state`,
+			`check_date`,
+			`create_date`
+			)
+			VALUES
+			(
+			#{id},
+			#{supplier_id},
+			#{judge_date},
+			#{score},
+			#{grade},
+			#{check_user_id},
+			#{status},
+			#{state},
+			#{check_date},
+			#{create_date}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZxJudgeAgainResult" parameterType="jehc.zxmodules.model.ZxJudgeAgainResult">
+		UPDATE
+			zx_judge_again_result
+		SET
+			`supplier_id` = #{supplier_id},
+			`judge_date` = #{judge_date},
+			`score` = #{score},
+			`grade` = #{grade},
+			`check_user_id` = #{check_user_id},
+			`status` = #{status},
+			`state` = #{state},
+			`check_date` = #{check_date},
+			`create_date` = #{create_date}
+		WHERE id=#{id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZxJudgeAgainResultBySelective" parameterType="jehc.zxmodules.model.ZxJudgeAgainResult">
+		UPDATE
+			zx_judge_again_result
+		<set>
+			<if test="supplier_id != null">
+				`supplier_id` = #{supplier_id},
+			</if>
+			<if test="judge_date != null">
+				`judge_date` = #{judge_date},
+			</if>
+			<if test="score != null">
+				`score` = #{score},
+			</if>
+			<if test="grade != null">
+				`grade` = #{grade},
+			</if>
+			<if test="check_user_id != null">
+				`check_user_id` = #{check_user_id},
+			</if>
+			<if test="status != null">
+				`status` = #{status},
+			</if>
+			<if test="state != null">
+				`state` = #{state},
+			</if>
+			<if test="check_date != null">
+				`check_date` = #{check_date},
+			</if>
+			<if test="create_date != null">
+				`create_date` = #{create_date},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZxJudgeAgainResult" parameterType="map">
+		DELETE FROM zx_judge_again_result WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZxJudgeAgainResult" parameterType="list">
+		INSERT INTO
+			zx_judge_again_result
+			(
+			`id`,
+			`supplier_id`,
+			`judge_date`,
+			`score`,
+			`grade`,
+			`check_user_id`,
+			`status`,
+			`state`,
+			`check_date`,
+			`create_date`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.supplier_id},
+			#{item.judge_date},
+			#{item.score},
+			#{item.grade},
+			#{item.check_user_id},
+			#{item.status},
+			#{item.state},
+			#{item.check_date},
+			#{item.create_date}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZxJudgeAgainResult" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_judge_again_result
+			SET
+				`supplier_id` = #{item.supplier_id},
+				`judge_date` = #{item.judge_date},
+				`score` = #{item.score},
+				`grade` = #{item.grade},
+				`check_user_id` = #{item.check_user_id},
+				`status` = #{item.status},
+				`state` = #{item.state},
+				`check_date` = #{item.check_date},
+				`create_date` = #{item.create_date}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZxJudgeAgainResultBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_judge_again_result
+			<set>
+				<if test="item.supplier_id != null">
+					`supplier_id` = #{item.supplier_id},
+				</if>
+				<if test="item.judge_date != null">
+					`judge_date` = #{item.judge_date},
+				</if>
+				<if test="item.score != null">
+					`score` = #{item.score},
+				</if>
+				<if test="item.grade != null">
+					`grade` = #{item.grade},
+				</if>
+				<if test="item.check_user_id != null">
+					`check_user_id` = #{item.check_user_id},
+				</if>
+				<if test="item.status != null">
+					`status` = #{item.status},
+				</if>
+				<if test="item.state != null">
+					`state` = #{item.state},
+				</if>
+				<if test="item.check_date != null">
+					`check_date` = #{item.check_date},
+				</if>
+				<if test="item.create_date != null">
+					`create_date` = #{item.create_date},
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+</mapper>

@@ -1,0 +1,194 @@
+package jehc.zxmodules.web;
+import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import org.springframework.ui.Model;
+import jehc.zxmodules.model.ZxGoodsApplyDetail;
+import jehc.zxmodules.service.ZxGoodsApplyDetailService;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+import com.github.pagehelper.PageInfo;
+import jehc.xtmodules.xtcore.base.BaseAction;
+import jehc.xtmodules.xtcore.base.BaseSearch;
+import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
+import jehc.xtmodules.xtcore.util.UUID;
+import jehc.zxmodules.model.ZxGoodsApply;
+import jehc.zxmodules.service.ZxGoodsApplyService;
+
+/**
+* 办公用品主表 
+* 2018-01-08 13:18:13  季建吉
+*/
+@Controller
+@RequestMapping("/zxGoodsApplyController")
+public class ZxGoodsApplyController extends BaseAction{
+	@Autowired
+	private ZxGoodsApplyService zxGoodsApplyService;
+	@Autowired
+	private ZxGoodsApplyDetailService zxGoodsApplyDetailService;
+	/**
+	* 载入初始化页面
+	* @param zx_goods_apply 
+	* @param request 
+	* @return
+	*/
+	@RequestMapping(value="/loadZxGoodsApply",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView loadZxGoodsApply(ZxGoodsApply zxGoodsApply,HttpServletRequest request){
+		return new ModelAndView("pc/zx-view/zx-goods-apply/zx-goods-apply-list");
+	}
+	/**
+	* 加载初始化列表数据并分页
+	* @param zx_goods_apply 
+	* @param request 
+	*/
+	@ResponseBody
+	@RequestMapping(value="/getZxGoodsApplyListByCondition",method={RequestMethod.POST,RequestMethod.GET})
+	public String getZxGoodsApplyListByCondition(BaseSearch baseSearch,HttpServletRequest request){
+		Map<String, Object> condition = baseSearch.convert();
+		commonHPager(condition,request);
+		List<ZxGoodsApply> zxGoodsApplyList = zxGoodsApplyService.getZxGoodsApplyListByCondition(condition);
+		PageInfo<ZxGoodsApply> page = new PageInfo<ZxGoodsApply>(zxGoodsApplyList);
+		return outPageBootStr(page,request);
+	}
+	/**
+	* 获取对象
+	* @param apply_id 
+	* @param request 
+	*/
+	@ResponseBody
+	@RequestMapping(value="/getZxGoodsApplyById",method={RequestMethod.POST,RequestMethod.GET})
+	public String getZxGoodsApplyById(String apply_id,HttpServletRequest request){
+		ZxGoodsApply zxGoodsApply = zxGoodsApplyService.getZxGoodsApplyById(apply_id);
+		return outDataStr(zxGoodsApply);
+	}
+	/**
+	* 添加
+	* @param zx_goods_apply 
+	* @param request 
+	*/
+	@ResponseBody
+	@RequestMapping(value="/addZxGoodsApply",method={RequestMethod.POST,RequestMethod.GET})
+	public String addZxGoodsApply(ZxGoodsApply zxGoodsApply,HttpServletRequest request){
+		int i = 0;
+		if(null != zxGoodsApply && !"".equals(zxGoodsApply)){
+			zxGoodsApply.setApply_id(UUID.toUUID());
+			i=zxGoodsApplyService.addZxGoodsApply(zxGoodsApply);
+		}
+		if(i>0){
+			return outAudStr(true);
+		}else{
+			return outAudStr(false);
+		}
+	}
+	/**
+	* 修改
+	* @param zx_goods_apply 
+	* @param request 
+	*/
+	@ResponseBody
+	@RequestMapping(value="/updateZxGoodsApply",method={RequestMethod.POST,RequestMethod.GET})
+	public String updateZxGoodsApply(ZxGoodsApply zxGoodsApply,HttpServletRequest request){
+		int i = 0;
+		if(null != zxGoodsApply && !"".equals(zxGoodsApply)){
+			i=zxGoodsApplyService.updateZxGoodsApply(zxGoodsApply);
+		}
+		if(i>0){
+			return outAudStr(true);
+		}else{
+			return outAudStr(false);
+		}
+	}
+	/**
+	* 删除
+	* @param apply_id 
+	* @param request 
+	*/
+	@ResponseBody
+	@RequestMapping(value="/delZxGoodsApply",method={RequestMethod.POST,RequestMethod.GET})
+	public String delZxGoodsApply(String apply_id,HttpServletRequest request){
+		int i = 0;
+		if(null != apply_id && !"".equals(apply_id)){
+			Map<String, Object> condition = new HashMap<String, Object>();
+			condition.put("apply_id",apply_id.split(","));
+			i=zxGoodsApplyService.delZxGoodsApply(condition);
+		}
+		if(i>0){
+			return outAudStr(true);
+		}else{
+			return outAudStr(false);
+		}
+	}
+	/**
+	* 复制一行并生成记录
+	* @param apply_id 
+	* @param request 
+	*/
+	@ResponseBody
+	@RequestMapping(value="/copyZxGoodsApply",method={RequestMethod.POST,RequestMethod.GET})
+	public String copyZxGoodsApply(String apply_id,HttpServletRequest request){
+		int i = 0;
+		ZxGoodsApply zxGoodsApply = zxGoodsApplyService.getZxGoodsApplyById(apply_id);
+		if(null != zxGoodsApply && !"".equals(zxGoodsApply)){
+			zxGoodsApply.setApply_id(UUID.toUUID());
+			Map<String, Object> condition = new HashMap<String, Object>();
+			condition.put("apply_id", apply_id);
+			List<ZxGoodsApplyDetail> zxGoodsApplyDetailList = zxGoodsApplyDetailService.getZxGoodsApplyDetailListByCondition(condition);
+			zxGoodsApply.setZxGoodsApplyDetail(zxGoodsApplyDetailList);
+			i=zxGoodsApplyService.addZxGoodsApply(zxGoodsApply);
+		}
+		if(i>0){
+			return outAudStr(true);
+		}else{
+			return outAudStr(false);
+		}
+	}
+	/**
+	* 导出
+	* @param excleData 
+	* @param excleHeader 
+	* @param excleText 
+	* @param request 
+	* @param request 
+	*/
+	@RequestMapping(value="/exportZxGoodsApply",method={RequestMethod.POST,RequestMethod.GET})
+	public void exportZxGoodsApply(String excleData,String excleHeader,String excleText,HttpServletRequest request,HttpServletResponse response){
+		ExportExcel exportExcel = new ExportExcel();
+		exportExcel.exportExcel(excleData, excleHeader,excleText,response);
+	}
+	/**
+	* 发送至新增页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toZxGoodsApplyAdd",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toZxGoodsApplyAdd(ZxGoodsApply zxGoodsApply,HttpServletRequest request){
+		return new ModelAndView("pc/zx-view/zx-goods-apply/zx-goods-apply-add");
+	}
+	/**
+	* 发送至编辑页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toZxGoodsApplyUpdate",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toZxGoodsApplyUpdate(String apply_id,HttpServletRequest request, Model model){
+		ZxGoodsApply zxGoodsApply = zxGoodsApplyService.getZxGoodsApplyById(apply_id);
+		model.addAttribute("zxGoodsApply", zxGoodsApply);
+		model.addAttribute("zxGoodsApplyJSON", outItemsStr(zxGoodsApply));
+		return new ModelAndView("pc/zx-view/zx-goods-apply/zx-goods-apply-update");
+	}
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toZxGoodsApplyDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toZxGoodsApplyDetail(String apply_id,HttpServletRequest request, Model model){
+		ZxGoodsApply zxGoodsApply = zxGoodsApplyService.getZxGoodsApplyById(apply_id);
+		model.addAttribute("zxGoodsApply", zxGoodsApply);
+		model.addAttribute("zxGoodsApplyJSON", outItemsStr(zxGoodsApply));
+		return new ModelAndView("pc/zx-view/zx-goods-apply/zx-goods-apply-detail");
+	}
+}

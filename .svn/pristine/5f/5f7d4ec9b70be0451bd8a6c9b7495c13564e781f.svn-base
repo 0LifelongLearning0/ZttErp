@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtStartStopLog">
+	<!--初始化分页-->
+	<select id="getXtStartStopLogListByCondition" resultType="jehc.xtmodules.xtmodel.XtStartStopLog" parameterType="map">
+		SELECT
+			xt_start_stop_log_id,
+			xt_start_stop_log_starttime,
+			xt_start_stop_log_stoptime,
+			xt_start_stop_log_iserror,
+			xt_start_stop_log_content
+		FROM 
+			xt_start_stop_log
+		WHERE 1=1
+		<if test="null != xt_start_stop_log_stoptime_st and xt_start_stop_log_stoptime_st != ''">
+			AND xt_start_stop_log_stoptime &gt;=#{xt_start_stop_log_stoptime_st}
+		</if>
+		<if test="null != xt_start_stop_log_stoptime_et and xt_start_stop_log_stoptime_et != ''">
+			AND xt_start_stop_log_stoptime &lt;=#{xt_start_stop_log_stoptime_et}
+		</if>
+		<if test="null != xt_start_stop_log_starttime_st and xt_start_stop_log_starttime_st != ''">
+			AND xt_start_stop_log_starttime &gt;=#{xt_start_stop_log_starttime_st}
+		</if>
+		<if test="null != xt_start_stop_log_starttime_et and xt_start_stop_log_starttime_et != ''">
+			AND xt_start_stop_log_starttime &lt;=#{xt_start_stop_log_starttime_et}
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getXtStartStopLogById" resultType="jehc.xtmodules.xtmodel.XtStartStopLog" parameterType="string">
+		SELECT
+			xt_start_stop_log_id,
+			xt_start_stop_log_starttime,
+			xt_start_stop_log_stoptime,
+			xt_start_stop_log_iserror,
+			xt_start_stop_log_content
+		FROM 
+			xt_start_stop_log
+		WHERE xt_start_stop_log_id=#{xt_start_stop_log_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtStartStopLog" parameterType="jehc.xtmodules.xtmodel.XtStartStopLog">
+		INSERT INTO
+			xt_start_stop_log
+			(
+			xt_start_stop_log_id,
+			xt_start_stop_log_starttime,
+			xt_start_stop_log_stoptime,
+			xt_start_stop_log_iserror,
+			xt_start_stop_log_content
+			)
+			VALUES
+			(
+			#{xt_start_stop_log_id},
+			#{xt_start_stop_log_starttime},
+			#{xt_start_stop_log_stoptime},
+			#{xt_start_stop_log_iserror},
+			#{xt_start_stop_log_content}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtStartStopLog" parameterType="jehc.xtmodules.xtmodel.XtStartStopLog">
+		UPDATE
+			xt_start_stop_log
+		SET
+			xt_start_stop_log_starttime = #{xt_start_stop_log_starttime},
+			xt_start_stop_log_stoptime = #{xt_start_stop_log_stoptime},
+			xt_start_stop_log_iserror = #{xt_start_stop_log_iserror},
+			xt_start_stop_log_content = #{xt_start_stop_log_content}
+		WHERE xt_start_stop_log_id=#{xt_start_stop_log_id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateXtStartStopLogBySelective" parameterType="jehc.xtmodules.xtmodel.XtStartStopLog">
+		UPDATE
+			xt_start_stop_log
+		<set>
+			<if test="xt_start_stop_log_starttime != null">
+				xt_start_stop_log_starttime = #{xt_start_stop_log_starttime},
+			</if>
+			<if test="xt_start_stop_log_stoptime != null">
+				xt_start_stop_log_stoptime = #{xt_start_stop_log_stoptime},
+			</if>
+			<if test="xt_start_stop_log_iserror != null">
+				xt_start_stop_log_iserror = #{xt_start_stop_log_iserror},
+			</if>
+			<if test="xt_start_stop_log_content != null">
+				xt_start_stop_log_content = #{xt_start_stop_log_content},
+			</if>
+		</set>
+		WHERE xt_start_stop_log_id=#{xt_start_stop_log_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delXtStartStopLog" parameterType="map">
+		DELETE FROM xt_start_stop_log WHERE xt_start_stop_log_id IN
+		<foreach item="item" index="index" collection="xt_start_stop_log_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchXtStartStopLog" parameterType="list">
+		INSERT INTO
+			xt_start_stop_log
+			(
+			xt_start_stop_log_id,
+			xt_start_stop_log_starttime,
+			xt_start_stop_log_stoptime,
+			xt_start_stop_log_iserror,
+			xt_start_stop_log_content
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.xt_start_stop_log_id},
+			#{item.xt_start_stop_log_starttime},
+			#{item.xt_start_stop_log_stoptime},
+			#{item.xt_start_stop_log_iserror},
+			#{item.xt_start_stop_log_content}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchXtStartStopLog" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				xt_start_stop_log
+			SET
+				xt_start_stop_log_starttime = #{item.xt_start_stop_log_starttime},
+				xt_start_stop_log_stoptime = #{item.xt_start_stop_log_stoptime},
+				xt_start_stop_log_iserror = #{item.xt_start_stop_log_iserror},
+				xt_start_stop_log_content = #{item.xt_start_stop_log_content}
+			WHERE xt_start_stop_log_id=#{item.xt_start_stop_log_id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchXtStartStopLogBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				xt_start_stop_log
+			<set>
+				<if test="item.xt_start_stop_log_starttime != null">
+					xt_start_stop_log_starttime = #{item.xt_start_stop_log_starttime},
+				</if>
+				<if test="item.xt_start_stop_log_stoptime != null">
+					xt_start_stop_log_stoptime = #{item.xt_start_stop_log_stoptime},
+				</if>
+				<if test="item.xt_start_stop_log_iserror != null">
+					xt_start_stop_log_iserror = #{item.xt_start_stop_log_iserror},
+				</if>
+				<if test="item.xt_start_stop_log_content != null">
+					xt_start_stop_log_content = #{item.xt_start_stop_log_content},
+				</if>
+			</set>
+			WHERE xt_start_stop_log_id=#{item.xt_start_stop_log_id}
+		</foreach>
+	</update>
+</mapper>

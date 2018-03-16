@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZxCarApply">
+	<!--初始化分页-->
+	<select id="getZxCarApplyListByCondition" resultType="jehc.zxmodules.model.ZxCarApply" parameterType="map">
+		SELECT
+			`id`,
+			`state`,
+			`apply_type`,
+			`apply_user_id`,
+			DATE_FORMAT(`apply_time`,'%Y-%m-%d %H:%i:%s') AS `apply_time`,
+			`driver_age`,
+			`driver_id`,
+			`car_id`,
+			DATE_FORMAT(`apply_time_begin`,'%Y-%m-%d %H:%i:%s') AS `apply_time_begin`,
+			DATE_FORMAT(`apply_time_end`,'%Y-%m-%d %H:%i:%s') AS `apply_time_end`,
+			`apply_car_address`,
+			`user_car_reason`,
+			`user_car_person`,
+			`out_mileage`,
+			DATE_FORMAT(`usecar_outtime`,'%Y-%m-%d %H:%i:%s') AS `usecar_outtime`,
+			`out_guard_id`,
+			`back_mileage`,
+			DATE_FORMAT(`usercar_backtime`,'%Y-%m-%d %H:%i:%s') AS `usercar_backtime`,
+			`back_guard_id`,
+			`comment`
+		FROM 
+			zx_car_apply LEFT JOIN xt_userinfo AS xt_userinfo ON zx_car_apply.apply_user_id = xt_userinfo.xt_userinfo_id
+		WHERE 1=1
+		<if test="null != car_id">
+			AND instr(car_id,#{car_id})
+		</if>
+		<if test="null != apply_user_id">
+			AND instr(apply_user_id,#{apply_user_id})
+		</if>
+		<if test="null != apply_type">
+			AND instr(apply_type,#{apply_type})
+		</if>
+		<if test="null != state">
+			AND instr(state,#{state})
+		</if>
+		<if test="null != xt_userinfo_id">
+			AND zx_car_apply.`apply_user_id` IN
+			<foreach item="item" index="index" collection="xt_userinfo_id" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getZxCarApplyById" resultType="jehc.zxmodules.model.ZxCarApply" parameterType="string">
+		SELECT
+			`id`,
+			`state`,
+			`apply_type`,
+			`apply_user_id`,
+			DATE_FORMAT(`apply_time`,'%Y-%m-%d %H:%i:%s') AS `apply_time`,
+			`driver_age`,
+			`driver_id`,
+			`car_id`,
+			DATE_FORMAT(`apply_time_begin`,'%Y-%m-%d %H:%i:%s') AS `apply_time_begin`,
+			DATE_FORMAT(`apply_time_end`,'%Y-%m-%d %H:%i:%s') AS `apply_time_end`,
+			`apply_car_address`,
+			`user_car_reason`,
+			`user_car_person`,
+			`out_mileage`,
+			DATE_FORMAT(`usecar_outtime`,'%Y-%m-%d %H:%i:%s') AS `usecar_outtime`,
+			`out_guard_id`,
+			`back_mileage`,
+			DATE_FORMAT(`usercar_backtime`,'%Y-%m-%d %H:%i:%s') AS `usercar_backtime`,
+			`back_guard_id`,
+			`comment`
+		FROM 
+			zx_car_apply
+		WHERE id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addZxCarApply" parameterType="jehc.zxmodules.model.ZxCarApply">
+		INSERT INTO
+			zx_car_apply
+			(
+			`id`,
+			`state`,
+			`apply_type`,
+			`apply_user_id`,
+			`apply_time`,
+			`apply_time_begin`,
+			`apply_time_end`,
+			`apply_car_address`,
+			`user_car_reason`,
+			`user_car_person`
+			<if test="state != null">
+				,`comment`
+			</if>
+			)
+			VALUES
+			(
+			#{id},
+			#{state},
+			#{apply_type},
+			#{apply_user_id},
+			#{apply_time},
+			#{apply_time_begin},
+			#{apply_time_end},
+			#{apply_car_address},
+			#{user_car_reason},
+			#{user_car_person}
+			<if test="state != null">
+				,#{comment}
+			</if>
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZxCarApply" parameterType="jehc.zxmodules.model.ZxCarApply">
+		UPDATE
+			zx_car_apply
+		SET
+			`state` = #{state},
+			`apply_type` = #{apply_type},
+			`apply_user_id` = #{apply_user_id},
+			`apply_time` = #{apply_time},
+			`driver_age` = #{driver_age},
+			`driver_id` = #{driver_id},
+			`car_id` = #{car_id},
+			`apply_time_begin` = #{apply_time_begin},
+			`apply_time_end` = #{apply_time_end},
+			`apply_car_address` = #{apply_car_address},
+			`user_car_reason` = #{user_car_reason},
+			`user_car_person` = #{user_car_person},
+			`out_mileage` = #{out_mileage},
+			`usecar_outtime` = #{usecar_outtime},
+			`out_guard_id` = #{out_guard_id},
+			`back_mileage` = #{back_mileage},
+			`usercar_backtime` = #{usercar_backtime},
+			`back_guard_id` = #{back_guard_id},
+			`comment` = #{comment}
+		WHERE id=#{id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZxCarApplyBySelective" parameterType="jehc.zxmodules.model.ZxCarApply">
+		UPDATE
+			zx_car_apply
+		<set>
+			<if test="state != null">
+				`state` = #{state},
+			</if>
+			<if test="apply_type != null">
+				`apply_type` = #{apply_type},
+			</if>
+			<if test="apply_user_id != null">
+				`apply_user_id` = #{apply_user_id},
+			</if>
+			<if test="apply_time != null">
+				`apply_time` = #{apply_time},
+			</if>
+			<if test="driver_age != null">
+				`driver_age` = #{driver_age},
+			</if>
+			<if test="driver_id != null">
+				`driver_id` = #{driver_id},
+			</if>
+			<if test="car_id != null">
+				`car_id` = #{car_id},
+			</if>
+			<if test="apply_time_begin != null">
+				`apply_time_begin` = #{apply_time_begin},
+			</if>
+			<if test="apply_time_end != null">
+				`apply_time_end` = #{apply_time_end},
+			</if>
+			<if test="apply_car_address != null">
+				`apply_car_address` = #{apply_car_address},
+			</if>
+			<if test="user_car_reason != null">
+				`user_car_reason` = #{user_car_reason},
+			</if>
+			<if test="user_car_person != null">
+				`user_car_person` = #{user_car_person},
+			</if>
+			<if test="out_mileage != null">
+				`out_mileage` = #{out_mileage},
+			</if>
+			<if test="usecar_outtime != null">
+				`usecar_outtime` = #{usecar_outtime},
+			</if>
+			<if test="out_guard_id != null">
+				`out_guard_id` = #{out_guard_id},
+			</if>
+			<if test="back_mileage != null">
+				`back_mileage` = #{back_mileage},
+			</if>
+			<if test="usercar_backtime != null">
+				`usercar_backtime` = #{usercar_backtime},
+			</if>
+			<if test="back_guard_id != null">
+				`back_guard_id` = #{back_guard_id},
+			</if>
+			<if test="comment != null">
+				`comment` = #{comment},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZxCarApply" parameterType="map">
+		DELETE FROM zx_car_apply WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZxCarApply" parameterType="list">
+		INSERT INTO
+			zx_car_apply
+			(
+			`id`,
+			`state`,
+			`apply_type`,
+			`apply_user_id`,
+			`apply_time`,
+			`driver_age`,
+			`driver_id`,
+			`car_id`,
+			`apply_time_begin`,
+			`apply_time_end`,
+			`apply_car_address`,
+			`user_car_reason`,
+			`user_car_person`,
+			`out_mileage`,
+			`usecar_outtime`,
+			`out_guard_id`,
+			`back_mileage`,
+			`usercar_backtime`,
+			`back_guard_id`,
+			`comment`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.state},
+			#{item.apply_type},
+			#{item.apply_user_id},
+			#{item.apply_time},
+			#{item.driver_age},
+			#{item.driver_id},
+			#{item.car_id},
+			#{item.apply_time_begin},
+			#{item.apply_time_end},
+			#{item.apply_car_address},
+			#{item.user_car_reason},
+			#{item.user_car_person},
+			#{item.out_mileage},
+			#{item.usecar_outtime},
+			#{item.out_guard_id},
+			#{item.back_mileage},
+			#{item.usercar_backtime},
+			#{item.back_guard_id},
+			#{item.comment}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZxCarApply" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_car_apply
+			SET
+				`state` = #{item.state},
+				`apply_type` = #{item.apply_type},
+				`apply_user_id` = #{item.apply_user_id},
+				`apply_time` = #{item.apply_time},
+				`driver_age` = #{item.driver_age},
+				`driver_id` = #{item.driver_id},
+				`car_id` = #{item.car_id},
+				`apply_time_begin` = #{item.apply_time_begin},
+				`apply_time_end` = #{item.apply_time_end},
+				`apply_car_address` = #{item.apply_car_address},
+				`user_car_reason` = #{item.user_car_reason},
+				`user_car_person` = #{item.user_car_person},
+				`out_mileage` = #{item.out_mileage},
+				`usecar_outtime` = #{item.usecar_outtime},
+				`out_guard_id` = #{item.out_guard_id},
+				`back_mileage` = #{item.back_mileage},
+				`usercar_backtime` = #{item.usercar_backtime},
+				`back_guard_id` = #{item.back_guard_id},
+				`comment` = #{item.comment}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZxCarApplyBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_car_apply
+			<set>
+				<if test="item.state != null">
+					`state` = #{item.state},
+				</if>
+				<if test="item.apply_type != null">
+					`apply_type` = #{item.apply_type},
+				</if>
+				<if test="item.apply_user_id != null">
+					`apply_user_id` = #{item.apply_user_id},
+				</if>
+				<if test="item.apply_time != null">
+					`apply_time` = #{item.apply_time},
+				</if>
+				<if test="item.driver_age != null">
+					`driver_age` = #{item.driver_age},
+				</if>
+				<if test="item.driver_id != null">
+					`driver_id` = #{item.driver_id},
+				</if>
+				<if test="item.car_id != null">
+					`car_id` = #{item.car_id},
+				</if>
+				<if test="item.apply_time_begin != null">
+					`apply_time_begin` = #{item.apply_time_begin},
+				</if>
+				<if test="item.apply_time_end != null">
+					`apply_time_end` = #{item.apply_time_end},
+				</if>
+				<if test="item.apply_car_address != null">
+					`apply_car_address` = #{item.apply_car_address},
+				</if>
+				<if test="item.user_car_reason != null">
+					`user_car_reason` = #{item.user_car_reason},
+				</if>
+				<if test="item.user_car_person != null">
+					`user_car_person` = #{item.user_car_person},
+				</if>
+				<if test="item.out_mileage != null">
+					`out_mileage` = #{item.out_mileage},
+				</if>
+				<if test="item.usecar_outtime != null">
+					`usecar_outtime` = #{item.usecar_outtime},
+				</if>
+				<if test="item.out_guard_id != null">
+					`out_guard_id` = #{item.out_guard_id},
+				</if>
+				<if test="item.back_mileage != null">
+					`back_mileage` = #{item.back_mileage},
+				</if>
+				<if test="item.usercar_backtime != null">
+					`usercar_backtime` = #{item.usercar_backtime},
+				</if>
+				<if test="item.back_guard_id != null">
+					`back_guard_id` = #{item.back_guard_id},
+				</if>
+				<if test="item.comment != null">
+					`comment` = #{item.comment},
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+</mapper>

@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZxProjectNode">
+	<!--初始化分页-->
+	<select id="getZxProjectNodeListByCondition" resultType="jehc.zxmodules.model.ZxProjectNode" parameterType="map">
+		SELECT
+			`id`,
+			`project_id`,
+			`workpiece_id`,
+			`propties`,
+			`stuff`,
+			`library`,
+			`single_amount`,
+			`all_amount`,
+			`plan_date`,
+			DATE_FORMAT(`in_warehouse_date`,'%Y-%m-%d %H:%i:%s') AS `in_warehouse_date`,
+			`in_warehuse_amount`,
+			DATE_FORMAT(`out_warehouse_date`,'%Y-%m-%d %H:%i:%s') AS `out_warehouse_date`,
+			`out_warehuse_amount`,
+			`status`
+		FROM 
+			zx_project_node
+		WHERE 1=1
+		<if test="null != project_id">
+			AND project_id = #{project_id}
+		</if>
+		<if test="null != workpiece_id">
+			AND workpiece_id = #{workpiece_id}
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getZxProjectNodeById" resultType="jehc.zxmodules.model.ZxProjectNode" parameterType="string">
+		SELECT
+			`id`,
+			`project_id`,
+			`workpiece_id`,
+			`propties`,
+			`stuff`,
+			`library`,
+			`single_amount`,
+			`all_amount`,
+			`plan_date`,
+			DATE_FORMAT(`in_warehouse_date`,'%Y-%m-%d %H:%i:%s') AS `in_warehouse_date`,
+			`in_warehuse_amount`,
+			DATE_FORMAT(`out_warehouse_date`,'%Y-%m-%d %H:%i:%s') AS `out_warehouse_date`,
+			`out_warehuse_amount`,
+			`status`
+		FROM 
+			zx_project_node
+		WHERE id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addZxProjectNode" parameterType="jehc.zxmodules.model.ZxProjectNode">
+		INSERT INTO
+			zx_project_node
+			(
+			`id`,
+			`project_id`,
+			`workpiece_id`,
+			`propties`,
+			`stuff`,
+			`library`,
+			`single_amount`,
+			`status`,
+			<if test="all_amount != null and all_amount != ''">
+				`all_amount`,
+			</if>
+			<if test="in_warehouse_date != null and in_warehouse_date != ''">
+				`in_warehouse_date`,
+			</if>
+			<if test="in_warehuse_amount != null and in_warehuse_amount != ''">
+				`in_warehuse_amount`,
+			</if>
+			<if test="out_warehouse_date != null and out_warehouse_date != ''">
+				`out_warehouse_date`,
+			</if>
+			<if test="out_warehuse_amount != null and out_warehuse_amount != ''">
+				`out_warehuse_amount`,
+			</if>
+			`plan_date`
+			)
+			VALUES
+			(
+			#{id},
+			#{project_id},
+			#{workpiece_id},
+			#{propties},
+			#{stuff},
+			#{library},
+			#{single_amount},
+			#{status},
+			<if test="all_amount != null and all_amount != ''">
+				#{all_amount},
+			</if>
+			<if test="in_warehouse_date != null and in_warehouse_date != ''">
+				#{in_warehouse_date},
+			</if>
+			<if test="in_warehuse_amount != null and in_warehuse_amount != ''">
+				#{in_warehuse_amount},
+			</if>
+			<if test="out_warehouse_date != null and out_warehouse_date != ''">
+				#{out_warehouse_date},
+			</if>
+			<if test="out_warehuse_amount != null and out_warehuse_amount != ''">
+				#{out_warehuse_amount},
+			</if>
+			#{plan_date}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZxProjectNode" parameterType="jehc.zxmodules.model.ZxProjectNode">
+		UPDATE
+			zx_project_node
+		SET
+			`project_id` = #{project_id},
+			`workpiece_id` = #{workpiece_id},
+			`propties` = #{propties},
+			`stuff` = #{stuff},
+			`library` = #{library},
+			`single_amount` = #{single_amount},
+			`all_amount` = #{all_amount},
+			`plan_date` = #{plan_date},
+			`in_warehouse_date` = #{in_warehouse_date},
+			`in_warehuse_amount` = #{in_warehuse_amount},
+			`out_warehouse_date` = #{out_warehouse_date},
+			`out_warehuse_amount` = #{out_warehuse_amount},
+			`status` = #{status}
+		WHERE id=#{id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZxProjectNodeBySelective" parameterType="jehc.zxmodules.model.ZxProjectNode">
+		UPDATE
+			zx_project_node
+		<set>
+			<if test="project_id != null and project_id != ''">
+				`project_id` = #{project_id},
+			</if>
+			<if test="workpiece_id != null and workpiece_id != ''">
+				`workpiece_id` = #{workpiece_id},
+			</if>
+			<if test="propties != null and propties != ''">
+				`propties` = #{propties},
+			</if>
+			<if test="stuff != null and stuff != ''">
+				`stuff` = #{stuff},
+			</if>
+			<if test="library != null and library != ''">
+				`library` = #{library},
+			</if>
+			<if test="single_amount != null and single_amount != ''">
+				`single_amount` = #{single_amount},
+			</if>
+			<if test="all_amount != null and all_amount != ''">
+				`all_amount` = #{all_amount},
+			</if>
+			<if test="plan_date != null and plan_date != ''">
+				`plan_date` = #{plan_date},
+			</if>
+			<if test="in_warehouse_date != null and in_warehouse_date != ''">
+				`in_warehouse_date` = #{in_warehouse_date},
+			</if>
+			<if test="in_warehuse_amount != null and in_warehuse_amount != ''">
+				`in_warehuse_amount` = #{in_warehuse_amount},
+			</if>
+			<if test="out_warehouse_date != null and out_warehouse_date != ''">
+				`out_warehouse_date` = #{out_warehouse_date},
+			</if>
+			<if test="out_warehuse_amount != null and out_warehuse_amount != ''">
+				`out_warehuse_amount` = #{out_warehuse_amount},
+			</if>
+			<if test="status != null and status != ''">
+				`status` = #{status},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZxProjectNode" parameterType="map">
+		DELETE FROM zx_project_node WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZxProjectNode" parameterType="list">
+		INSERT INTO
+			zx_project_node
+			(
+			`id`,
+			`project_id`,
+			`workpiece_id`,
+			`propties`,
+			`stuff`,
+			`library`,
+			`single_amount`,
+			`all_amount`,
+			`plan_date`,
+			`in_warehouse_date`,
+			`in_warehuse_amount`,
+			`out_warehouse_date`,
+			`out_warehuse_amount`,
+			`status`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.project_id},
+			#{item.workpiece_id},
+			#{item.propties},
+			#{item.stuff},
+			#{item.library},
+			#{item.single_amount},
+			#{item.all_amount},
+			#{item.plan_date},
+			#{item.in_warehouse_date},
+			#{item.in_warehuse_amount},
+			#{item.out_warehouse_date},
+			#{item.out_warehuse_amount},
+			#{item.status}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZxProjectNode" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_project_node
+			SET
+				`project_id` = #{item.project_id},
+				`workpiece_id` = #{item.workpiece_id},
+				`propties` = #{item.propties},
+				`stuff` = #{item.stuff},
+				`library` = #{item.library},
+				`single_amount` = #{item.single_amount},
+				`all_amount` = #{item.all_amount},
+				`plan_date` = #{item.plan_date},
+				`in_warehouse_date` = #{item.in_warehouse_date},
+				`in_warehuse_amount` = #{item.in_warehuse_amount},
+				`out_warehouse_date` = #{item.out_warehouse_date},
+				`out_warehuse_amount` = #{item.out_warehuse_amount},
+				`status` = #{item.status}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZxProjectNodeBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_project_node
+			<set>
+				<if test="item.project_id != null">
+					`project_id` = #{item.project_id},
+				</if>
+				<if test="item.workpiece_id != null">
+					`workpiece_id` = #{item.workpiece_id},
+				</if>
+				<if test="item.propties != null">
+					`propties` = #{item.propties},
+				</if>
+				<if test="item.stuff != null">
+					`stuff` = #{item.stuff},
+				</if>
+				<if test="item.library != null">
+					`library` = #{item.library},
+				</if>
+				<if test="item.single_amount != null">
+					`single_amount` = #{item.single_amount},
+				</if>
+				<if test="item.all_amount != null">
+					`all_amount` = #{item.all_amount},
+				</if>
+				<if test="item.plan_date != null">
+					`plan_date` = #{item.plan_date},
+				</if>
+				<if test="item.in_warehouse_date != null">
+					`in_warehouse_date` = #{item.in_warehouse_date},
+				</if>
+				<if test="item.in_warehuse_amount != null">
+					`in_warehuse_amount` = #{item.in_warehuse_amount},
+				</if>
+				<if test="item.out_warehouse_date != null">
+					`out_warehouse_date` = #{item.out_warehouse_date},
+				</if>
+				<if test="item.out_warehuse_amount != null">
+					`out_warehuse_amount` = #{item.out_warehuse_amount},
+				</if>
+				<if test="item.status != null">
+					`status` = #{item.status}
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+</mapper>

@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZxExpressdelivery">
+	<!--初始化分页-->
+	<select id="getZxExpressdeliveryListByCondition" resultType="jehc.zxmodules.model.ZxExpressdelivery" parameterType="map">
+		SELECT
+			`id`,
+			`apply_user_id`,
+			DATE_FORMAT(`apply_time`,'%Y-%m-%d %H:%i:%s') AS `apply_time`,
+			`company`,
+			`address`,
+			`addressee`,
+			`addressee_concat`,
+			`goods`,
+			`type`,
+			`num`,
+			`money`,
+			DATE_FORMAT(`send_time`,'%Y-%m-%d %H:%i:%s') AS `send_time`,
+			`status`
+		FROM 
+			zx_expressdelivery
+		WHERE 1=1
+		<if test="null != company">
+			AND instr(company,#{company})
+		</if>
+		<if test="null != status">
+			AND instr(status,#{status})
+		</if>
+		<if test="null != num">
+			AND instr(num,#{num})
+		</if>
+		<if test="null != type">
+			AND instr(type,#{type})
+		</if>
+		<if test="null != apply_user_id">
+			AND instr(apply_user_id,#{apply_user_id})
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getZxExpressdeliveryById" resultType="jehc.zxmodules.model.ZxExpressdelivery" parameterType="string">
+		SELECT
+			`id`,
+			`apply_user_id`,
+			DATE_FORMAT(`apply_time`,'%Y-%m-%d %H:%i:%s') AS `apply_time`,
+			`company`,
+			`address`,
+			`addressee`,
+			`addressee_concat`,
+			`goods`,
+			`type`,
+			`num`,
+			`money`,
+			DATE_FORMAT(`send_time`,'%Y-%m-%d %H:%i:%s') AS `send_time`,
+			`status`
+		FROM 
+			zx_expressdelivery
+		WHERE id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addZxExpressdelivery" parameterType="jehc.zxmodules.model.ZxExpressdelivery">
+		INSERT INTO
+			zx_expressdelivery
+			(
+			`id`,
+			`apply_user_id`,
+			`apply_time`,
+			`company`,
+			`address`,
+			`addressee`,
+			`addressee_concat`,
+			`goods`,
+			`type`,
+			`status`
+			)
+			VALUES
+			(
+			#{id},
+			#{apply_user_id},
+			#{apply_time},
+			#{company},
+			#{address},
+			#{addressee},
+			#{addressee_concat},
+			#{goods},
+			#{type},
+			#{status}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZxExpressdelivery" parameterType="jehc.zxmodules.model.ZxExpressdelivery">
+		UPDATE
+			zx_expressdelivery
+		SET
+			`apply_user_id` = #{apply_user_id},
+			`apply_time` = #{apply_time},
+			`company` = #{company},
+			`address` = #{address},
+			`addressee` = #{addressee},
+			`addressee_concat` = #{addressee_concat},
+			`goods` = #{goods},
+			`type` = #{type},
+			`num` = #{num},
+			`money` = #{money},
+			`send_time` = #{send_time},
+			`status` = #{status}
+		WHERE id=#{id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZxExpressdeliveryBySelective" parameterType="jehc.zxmodules.model.ZxExpressdelivery">
+		UPDATE
+			zx_expressdelivery
+		<set>
+			<if test="apply_user_id != null">
+				`apply_user_id` = #{apply_user_id},
+			</if>
+			<if test="apply_time != null">
+				`apply_time` = #{apply_time},
+			</if>
+			<if test="company != null">
+				`company` = #{company},
+			</if>
+			<if test="address != null">
+				`address` = #{address},
+			</if>
+			<if test="addressee != null">
+				`addressee` = #{addressee},
+			</if>
+			<if test="addressee_concat != null">
+				`addressee_concat` = #{addressee_concat},
+			</if>
+			<if test="goods != null">
+				`goods` = #{goods},
+			</if>
+			<if test="type != null">
+				`type` = #{type},
+			</if>
+			<if test="num != null">
+				`num` = #{num},
+			</if>
+			<if test="money != null">
+				`money` = #{money},
+			</if>
+			<if test="send_time != null">
+				`send_time` = #{send_time},
+			</if>
+			<if test="status != null">
+				`status` = #{status},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZxExpressdelivery" parameterType="map">
+		DELETE FROM zx_expressdelivery WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZxExpressdelivery" parameterType="list">
+		INSERT INTO
+			zx_expressdelivery
+			(
+			`id`,
+			`apply_user_id`,
+			`apply_time`,
+			`company`,
+			`address`,
+			`addressee`,
+			`addressee_concat`,
+			`goods`,
+			`type`,
+			`num`,
+			`money`,
+			`send_time`,
+			`status`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.apply_user_id},
+			#{item.apply_time},
+			#{item.company},
+			#{item.address},
+			#{item.addressee},
+			#{item.addressee_concat},
+			#{item.goods},
+			#{item.type},
+			#{item.num},
+			#{item.money},
+			#{item.send_time},
+			#{item.status}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZxExpressdelivery" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_expressdelivery
+			SET
+				`apply_user_id` = #{item.apply_user_id},
+				`apply_time` = #{item.apply_time},
+				`company` = #{item.company},
+				`address` = #{item.address},
+				`addressee` = #{item.addressee},
+				`addressee_concat` = #{item.addressee_concat},
+				`goods` = #{item.goods},
+				`type` = #{item.type},
+				`num` = #{item.num},
+				`money` = #{item.money},
+				`send_time` = #{item.send_time},
+				`status` = #{item.status}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZxExpressdeliveryBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_expressdelivery
+			<set>
+				<if test="item.apply_user_id != null">
+					`apply_user_id` = #{item.apply_user_id},
+				</if>
+				<if test="item.apply_time != null">
+					`apply_time` = #{item.apply_time},
+				</if>
+				<if test="item.company != null">
+					`company` = #{item.company},
+				</if>
+				<if test="item.address != null">
+					`address` = #{item.address},
+				</if>
+				<if test="item.addressee != null">
+					`addressee` = #{item.addressee},
+				</if>
+				<if test="item.addressee_concat != null">
+					`addressee_concat` = #{item.addressee_concat},
+				</if>
+				<if test="item.goods != null">
+					`goods` = #{item.goods},
+				</if>
+				<if test="item.type != null">
+					`type` = #{item.type},
+				</if>
+				<if test="item.num != null">
+					`num` = #{item.num},
+				</if>
+				<if test="item.money != null">
+					`money` = #{item.money},
+				</if>
+				<if test="item.send_time != null">
+					`send_time` = #{item.send_time},
+				</if>
+				<if test="item.status != null">
+					`status` = #{item.status},
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+</mapper>

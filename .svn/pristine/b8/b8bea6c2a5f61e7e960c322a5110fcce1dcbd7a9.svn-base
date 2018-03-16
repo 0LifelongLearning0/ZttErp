@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZxGoodsApply">
+	<!--初始化分页-->
+	<select id="getZxGoodsApplyListByCondition" resultType="jehc.zxmodules.model.ZxGoodsApply" parameterType="map">
+		SELECT
+			apply_id,
+			user_id,
+			reason,
+			create_date,
+			status
+		FROM 
+			zx_goods_apply
+		WHERE 1=1
+	</select>
+
+	<!--查询对象-->
+	<select id="getZxGoodsApplyById" resultType="jehc.zxmodules.model.ZxGoodsApply" parameterType="string">
+		SELECT
+			apply_id,
+			user_id,
+			reason,
+			create_date,
+			status
+		FROM 
+			zx_goods_apply
+		WHERE apply_id=#{apply_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addZxGoodsApply" parameterType="jehc.zxmodules.model.ZxGoodsApply">
+		INSERT INTO
+			zx_goods_apply
+			(
+			apply_id,
+			user_id,
+			reason,
+			create_date,
+			status
+			)
+			VALUES
+			(
+			#{apply_id},
+			#{user_id},
+			#{reason},
+			#{create_date},
+			#{status}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZxGoodsApply" parameterType="jehc.zxmodules.model.ZxGoodsApply">
+		UPDATE
+			zx_goods_apply
+		SET
+			user_id = #{user_id},
+			reason = #{reason},
+			create_date = #{create_date},
+			status = #{status}
+		WHERE apply_id=#{apply_id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZxGoodsApplyBySelective" parameterType="jehc.zxmodules.model.ZxGoodsApply">
+		UPDATE
+			zx_goods_apply
+		<set>
+			<if test="user_id != null">
+				user_id = #{user_id},
+			</if>
+			<if test="reason != null">
+				reason = #{reason},
+			</if>
+			<if test="create_date != null">
+				create_date = #{create_date},
+			</if>
+			<if test="status != null">
+				status = #{status},
+			</if>
+		</set>
+		WHERE apply_id=#{apply_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZxGoodsApply" parameterType="map">
+		DELETE FROM zx_goods_apply WHERE apply_id IN
+		<foreach item="item" index="index" collection="apply_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZxGoodsApply" parameterType="list">
+		INSERT INTO
+			zx_goods_apply
+			(
+			apply_id,
+			user_id,
+			reason,
+			create_date,
+			status
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.apply_id},
+			#{item.user_id},
+			#{item.reason},
+			#{item.create_date},
+			#{item.status}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZxGoodsApply" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_goods_apply
+			SET
+				user_id = #{item.user_id},
+				reason = #{item.reason},
+				create_date = #{item.create_date},
+				status = #{item.status}
+			WHERE apply_id=#{item.apply_id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZxGoodsApplyBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_goods_apply
+			<set>
+				<if test="item.user_id != null">
+					user_id = #{item.user_id},
+				</if>
+				<if test="item.reason != null">
+					reason = #{item.reason},
+				</if>
+				<if test="item.create_date != null">
+					create_date = #{item.create_date},
+				</if>
+				<if test="item.status != null">
+					status = #{item.status},
+				</if>
+			</set>
+			WHERE apply_id=#{item.apply_id}
+		</foreach>
+	</update>
+</mapper>

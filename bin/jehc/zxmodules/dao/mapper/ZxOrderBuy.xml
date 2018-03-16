@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZxOrderBuy">
+	<!--初始化分页-->
+	<select id="getZxOrderBuyListByCondition" resultType="jehc.zxmodules.model.ZxOrderBuy" parameterType="map">
+		SELECT
+			zx_order_buy.`id`,
+			zx_order_buy.`order_num`,
+			zx_order_buy.`order_name`,
+			zx_order_buy.`description`,
+			DATE_FORMAT(zx_order_buy.`create_time`,'%Y-%m-%d %H:%i:%s') AS `create_time`,
+			zx_order_buy.`create_user_id`,
+			zx_order_buy.`buy_user_id`,
+			zx_order_buy.`buy_time`,
+			zx_order_buy.`suppier_id`,
+			zx_order_buy.`agree_time`
+		FROM 
+			zx_order_buy LEFT JOIN zx_supplier on zx_order_buy.suppier_id = zx_supplier.id 
+			 LEFT JOIN xt_userinfo on zx_order_buy.buy_user_id = xt_userinfo.xt_userinfo_id 
+		WHERE 1=1
+		<if test="null != query_suppier">
+			AND instr(zx_supplier.name,#{query_suppier})
+		</if>
+		<if test="null != query_buy_user">
+			AND instr(xt_userinfo.xt_userinfo_realName,#{query_buy_user})
+		</if>
+		<if test="null != order_num">
+			AND instr(zx_order_buy.order_num,#{order_num})
+		</if>
+		<if test="null != buy_user_id and '' != buy_user_id">
+			AND zx_order_buy.buy_user_id = #{buy_user_id}
+		</if>
+		<if test="null != orderby and orderby == 1">
+			ORDER BY order_num desc
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getZxOrderBuyById" resultType="jehc.zxmodules.model.ZxOrderBuy" parameterType="string">
+		SELECT
+			`id`,
+			`order_num`,
+			`order_name`,
+			`description`,
+			DATE_FORMAT(`create_time`,'%Y-%m-%d %H:%i:%s') AS `create_time`,
+			`create_user_id`,
+			`buy_user_id`,
+			`buy_time`,
+			`suppier_id`,
+			`agree_time`
+		FROM 
+			zx_order_buy
+		WHERE id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addZxOrderBuy" parameterType="jehc.zxmodules.model.ZxOrderBuy">
+		INSERT INTO
+			zx_order_buy
+			(
+			`id`,
+			`order_num`,
+			`order_name`,
+			`description`,
+			`create_time`,
+			`create_user_id`,
+			`buy_user_id`,
+			`buy_time`,
+			`suppier_id`,
+			`agree_time`
+			)
+			VALUES
+			(
+			#{id},
+			#{order_num},
+			#{order_name},
+			#{description},
+			#{create_time},
+			#{create_user_id},
+			#{buy_user_id},
+			#{buy_time},
+			#{suppier_id},
+			#{agree_time}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZxOrderBuy" parameterType="jehc.zxmodules.model.ZxOrderBuy">
+		UPDATE
+			zx_order_buy
+		SET
+			`order_num` = #{order_num},
+			`order_name` = #{order_name},
+			`description` = #{description},
+			`create_time` = #{create_time},
+			`create_user_id` = #{create_user_id},
+			`buy_user_id` = #{buy_user_id},
+			`buy_time` = #{buy_time},
+			`suppier_id` = #{suppier_id},
+			`agree_time` = #{agree_time}
+		WHERE id=#{id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZxOrderBuyBySelective" parameterType="jehc.zxmodules.model.ZxOrderBuy">
+		UPDATE
+			zx_order_buy
+		<set>
+			<if test="order_num != null">
+				`order_num` = #{order_num},
+			</if>
+			<if test="order_name != null">
+				`order_name` = #{order_name},
+			</if>
+			<if test="description != null">
+				`description` = #{description},
+			</if>
+			<if test="create_time != null">
+				`create_time` = #{create_time},
+			</if>
+			<if test="create_user_id != null">
+				`create_user_id` = #{create_user_id},
+			</if>
+			<if test="buy_user_id != null">
+				`buy_user_id` = #{buy_user_id},
+			</if>
+			<if test="buy_time != null">
+				`buy_time` = #{buy_time},
+			</if>
+			<if test="suppier_id != null">
+				`suppier_id` = #{suppier_id},
+			</if>
+			<if test="agree_time != null">
+				`agree_time` = #{agree_time},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZxOrderBuy" parameterType="map">
+		DELETE FROM zx_order_buy WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZxOrderBuy" parameterType="list">
+		INSERT INTO
+			zx_order_buy
+			(
+			`id`,
+			`order_num`,
+			`order_name`,
+			`description`,
+			`create_time`,
+			`create_user_id`,
+			`buy_user_id`,
+			`buy_time`,
+			`suppier_id`,
+			`agree_time`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.order_num},
+			#{item.order_name},
+			#{item.description},
+			#{item.create_time},
+			#{item.create_user_id},
+			#{item.buy_user_id},
+			#{item.buy_time},
+			#{item.suppier_id},
+			#{item.agree_time}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZxOrderBuy" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_order_buy
+			SET
+				`order_num` = #{item.order_num},
+				`order_name` = #{item.order_name},
+				`description` = #{item.description},
+				`create_time` = #{item.create_time},
+				`create_user_id` = #{item.create_user_id},
+				`buy_user_id` = #{item.buy_user_id},
+				`buy_time` = #{item.buy_time},
+				`suppier_id` = #{item.suppier_id},
+				`agree_time` = #{item.agree_time}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZxOrderBuyBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_order_buy
+			<set>
+				<if test="item.order_num != null">
+					`order_num` = #{item.order_num},
+				</if>
+				<if test="item.order_name != null">
+					`order_name` = #{item.order_name},
+				</if>
+				<if test="item.description != null">
+					`description` = #{item.description},
+				</if>
+				<if test="item.create_time != null">
+					`create_time` = #{item.create_time},
+				</if>
+				<if test="item.create_user_id != null">
+					`create_user_id` = #{item.create_user_id},
+				</if>
+				<if test="item.buy_user_id != null">
+					`buy_user_id` = #{item.buy_user_id},
+				</if>
+				<if test="item.buy_time != null">
+					`buy_time` = #{item.buy_time},
+				</if>
+				<if test="item.suppier_id != null">
+					`suppier_id` = #{item.suppier_id},
+				</if>
+				<if test="item.agree_time != null">
+					`agree_time` = #{item.agree_time},
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+	
+	<!--获取订单下物料分页-->
+	<select id="getZxOMListByCondition" resultType="map" parameterType="map">
+		SELECT
+			apply_material.id,
+			apply_material.apply_id,
+			apply_material.material_id,
+			material.num,
+			material.short_name,
+			material.standard,
+			material.unit,
+			buy_apply.apply_num,
+			apply_material.caizhi,
+			apply_material.brand,
+			apply_material.single_amount,
+			apply_material.amount,
+			DATE_FORMAT(apply_material.need_time,'%Y-%m-%d') AS need_time,
+			apply_material.status,
+			apply_material.remark,
+			order_buy_material.id AS order_buy_material_id,
+			DATE_FORMAT(order_buy_material.agree_time,'%Y-%m-%d') AS agree_time
+		FROM 
+			zx_buy_apply_material apply_material LEFT JOIN zx_material material ON apply_material.material_id = material.material_id 
+			LEFT JOIN zx_buy_apply buy_apply ON apply_material.apply_id = buy_apply.id 
+			LEFT JOIN zx_order_buy_material order_buy_material ON apply_material.id = order_buy_material.apply_material_id  
+		WHERE 1=1
+		<if test="null != order_id and '' != order_id">
+			<if test="flag == 1">
+				AND apply_material.id IN(SELECT apply_material_id FROM zx_order_buy_material WHERE order_id=#{order_id})
+			</if>
+			<if test="flag == 2">
+				AND apply_material.id NOT IN(SELECT apply_material_id FROM zx_order_buy_material WHERE order_id=#{order_id})
+			</if>
+		</if>
+		<if test="null != apply_id and '' != apply_id">
+			AND apply_material.apply_id = #{apply_id}
+		</if>
+	</select>
+</mapper>

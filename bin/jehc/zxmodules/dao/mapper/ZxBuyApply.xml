@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZxBuyApply">
+	<!--初始化分页-->
+	<select id="getZxBuyApplyListByCondition" resultType="jehc.zxmodules.model.ZxBuyApply" parameterType="map">
+		SELECT
+			`id`,
+			`apply_num`,
+			`project_id`,
+			`draw_num`,
+			`make_num`,
+			`make_user_id`,
+			`apply_user_id`,
+			DATE_FORMAT(`apply_time`,'%Y-%m-%d %H:%i:%s') AS `apply_time`,
+			DATE_FORMAT(`need_time`,'%Y-%m-%d') AS `need_time`,
+			DATE_FORMAT(`send_draw_time`,'%Y-%m-%d %H:%i:%s') AS `send_draw_time`,
+			`status`,
+			`remark`
+		FROM 
+			zx_buy_apply
+		WHERE 1=1
+		<if test="null != project_id">
+			AND instr(project_id,#{project_id})
+		</if>
+		<if test="null != draw_num">
+			AND instr(draw_num,#{draw_num})
+		</if>
+		<if test="null != apply_num">
+			AND instr(apply_num,#{apply_num})
+		</if>
+		<if test="null != orderby and orderby == 0">
+			ORDER BY apply_time desc
+		</if>
+		<if test="null != orderby and orderby == 1">
+			ORDER BY apply_num desc
+		</if>
+		<if test="null != orderby and orderby == 2">
+			ORDER BY apply_num asc
+		</if>
+		<if test="null != orderby and orderby == 3">
+			ORDER BY apply_user_id desc
+		</if>
+		<if test="null != orderby and orderby == 4">
+			ORDER BY apply_user_id asc
+		</if>
+		<if test="null != orderby and orderby == 5">
+			ORDER BY draw_num desc
+		</if>
+		<if test="null != orderby and orderby == 6">
+			ORDER BY draw_num asc
+		</if>
+		<if test="null != orderby and orderby == 7">
+			ORDER BY project_id desc
+		</if>
+		<if test="null != orderby and orderby == 8">
+			ORDER BY project_id asc
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getZxBuyApplyById" resultType="jehc.zxmodules.model.ZxBuyApply" parameterType="string">
+		SELECT
+			`id`,
+			`apply_num`,
+			`project_id`,
+			`draw_num`,
+			`make_num`,
+			`make_user_id`,
+			`apply_user_id`,
+			DATE_FORMAT(`apply_time`,'%Y-%m-%d %H:%i:%s') AS `apply_time`,
+			DATE_FORMAT(`need_time`,'%Y-%m-%d') AS `need_time`,
+			DATE_FORMAT(`send_draw_time`,'%Y-%m-%d %H:%i:%s') AS `send_draw_time`,
+			`status`,
+			`remark`
+		FROM 
+			zx_buy_apply
+		WHERE id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addZxBuyApply" parameterType="jehc.zxmodules.model.ZxBuyApply">
+		INSERT INTO
+			zx_buy_apply
+			(
+			`id`,
+			`apply_num`,
+			`project_id`,
+			`draw_num`,
+			`make_num`,
+			`make_user_id`,
+			`apply_user_id`,
+			`apply_time`,
+			`need_time`,
+			`send_draw_time`,
+			`status`,
+			`remark`
+			)
+			VALUES
+			(
+			#{id},
+			#{apply_num},
+			#{project_id},
+			#{draw_num},
+			#{make_num},
+			#{make_user_id},
+			#{apply_user_id},
+			#{apply_time},
+			#{need_time},
+			#{send_draw_time},
+			#{status},
+			#{remark}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZxBuyApply" parameterType="jehc.zxmodules.model.ZxBuyApply">
+		UPDATE
+			zx_buy_apply
+		SET
+			`apply_num` = #{apply_num},
+			`project_id` = #{project_id},
+			`draw_num` = #{draw_num},
+			`make_num` = #{make_num},
+			`make_user_id` = #{make_user_id},
+			`apply_user_id` = #{apply_user_id},
+			`apply_time` = #{apply_time},
+			`need_time` = #{need_time},
+			`send_draw_time` = #{send_draw_time},
+			`status` = #{status},
+			`remark` = #{remark}
+		WHERE id=#{id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZxBuyApplyBySelective" parameterType="jehc.zxmodules.model.ZxBuyApply">
+		UPDATE
+			zx_buy_apply
+		<set>
+			<if test="apply_num != null">
+				`apply_num` = #{apply_num},
+			</if>
+			<if test="project_id != null">
+				`project_id` = #{project_id},
+			</if>
+			<if test="draw_num != null">
+				`draw_num` = #{draw_num},
+			</if>
+			<if test="make_num != null">
+				`make_num` = #{make_num},
+			</if>
+			<if test="make_user_id != null">
+				`make_user_id` = #{make_user_id},
+			</if>
+			<if test="apply_user_id != null">
+				`apply_user_id` = #{apply_user_id},
+			</if>
+			<if test="apply_time != null">
+				`apply_time` = #{apply_time},
+			</if>
+			<if test="need_time != null">
+				`need_time` = #{need_time},
+			</if>
+			<if test="send_draw_time != null">
+				`send_draw_time` = #{send_draw_time},
+			</if>
+			<if test="status != null">
+				`status` = #{status},
+			</if>
+			<if test="remark != null">
+				`remark` = #{remark},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZxBuyApply" parameterType="map">
+		DELETE FROM zx_buy_apply WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZxBuyApply" parameterType="list">
+		INSERT INTO
+			zx_buy_apply
+			(
+			`id`,
+			`apply_num`,
+			`project_id`,
+			`draw_num`,
+			`make_num`,
+			`make_user_id`,
+			`apply_user_id`,
+			`apply_time`,
+			`need_time`,
+			`send_draw_time`,
+			`status`,
+			`remark`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.apply_num},
+			#{item.project_id},
+			#{item.draw_num},
+			#{item.make_num},
+			#{item.make_user_id},
+			#{item.apply_user_id},
+			#{item.apply_time},
+			#{item.need_time},
+			#{item.send_draw_time},
+			#{item.status},
+			#{item.remark}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZxBuyApply" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_buy_apply
+			SET
+				`apply_num` = #{item.apply_num},
+				`project_id` = #{item.project_id},
+				`draw_num` = #{item.draw_num},
+				`make_num` = #{item.make_num},
+				`make_user_id` = #{item.make_user_id},
+				`apply_user_id` = #{item.apply_user_id},
+				`apply_time` = #{item.apply_time},
+				`need_time` = #{item.need_time},
+				`send_draw_time` = #{item.send_draw_time},
+				`status` = #{item.status},
+				`remark` = #{item.remark}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZxBuyApplyBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_buy_apply
+			<set>
+				<if test="item.apply_num != null">
+					`apply_num` = #{item.apply_num},
+				</if>
+				<if test="item.project_id != null">
+					`project_id` = #{item.project_id},
+				</if>
+				<if test="item.draw_num != null">
+					`draw_num` = #{item.draw_num},
+				</if>
+				<if test="item.make_num != null">
+					`make_num` = #{item.make_num},
+				</if>
+				<if test="item.make_user_id != null">
+					`make_user_id` = #{item.make_user_id},
+				</if>
+				<if test="item.apply_user_id != null">
+					`apply_user_id` = #{item.apply_user_id},
+				</if>
+				<if test="item.apply_time != null">
+					`apply_time` = #{item.apply_time},
+				</if>
+				<if test="item.need_time != null">
+					`need_time` = #{item.need_time},
+				</if>
+				<if test="item.send_draw_time != null">
+					`send_draw_time` = #{item.send_draw_time},
+				</if>
+				<if test="item.status != null">
+					`status` = #{item.status},
+				</if>
+				<if test="item.remark != null">
+					`remark` = #{item.remark},
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+</mapper>

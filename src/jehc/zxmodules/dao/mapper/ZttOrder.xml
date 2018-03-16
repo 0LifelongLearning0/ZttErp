@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZttOrder">
+	<!--初始化分页-->
+	<select id="getZttOrderListByCondition" resultType="jehc.zxmodules.model.ZttOrder" parameterType="map">
+		SELECT
+			id,
+			order_number,
+			contract_number,
+			client,
+			linkman,
+			product_name,
+			stardard,
+			attachment,
+			unit,
+			amount,
+			single_price,
+			sum_price,
+			End_data,
+			zttordertime,
+			apply_id,
+			state
+		FROM 
+			ztt_order
+		WHERE 1=1
+	</select>
+
+	<!--查询对象-->
+	<select id="getZttOrderById" resultType="jehc.zxmodules.model.ZttOrder" parameterType="string">
+		SELECT
+			id,
+			order_number,
+			contract_number,
+			client,
+			linkman,
+			product_name,
+			stardard,
+			attachment,
+			unit,
+			amount,
+			single_price,
+			sum_price,
+			End_data,
+			zttordertime,
+			apply_id,
+			state
+		FROM 
+			ztt_order
+		WHERE id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addZttOrder" parameterType="jehc.zxmodules.model.ZttOrder">
+		INSERT INTO
+			ztt_order
+			(
+			id,
+			order_number,
+			contract_number,
+			client,
+			linkman,
+			product_name,
+			stardard,
+			attachment,
+			unit,
+			amount,
+			single_price,
+			sum_price,
+			End_data,
+			zttordertime,
+			apply_id,
+			state
+			)
+			VALUES
+			(
+			#{id},
+			#{order_number},
+			#{contract_number},
+			#{client},
+			#{linkman},
+			#{product_name},
+			#{stardard},
+			#{attachment},
+			#{unit},
+			#{amount},
+			#{single_price},
+			#{sum_price},
+			#{End_data},
+			#{zttordertime},
+			#{apply_id},
+			#{state}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZttOrder" parameterType="jehc.zxmodules.model.ZttOrder">
+		UPDATE
+			ztt_order
+		SET
+			order_number = #{order_number},
+			contract_number = #{contract_number},
+			client = #{client},
+			linkman = #{linkman},
+			product_name = #{product_name},
+			stardard = #{stardard},
+			attachment = #{attachment},
+			unit = #{unit},
+			amount = #{amount},
+			single_price = #{single_price},
+			sum_price = #{sum_price},
+			End_data = #{End_data},
+			zttordertime = #{zttordertime},
+			apply_id = #{apply_id},
+			state = #{state}
+		WHERE id=#{id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZttOrderBySelective" parameterType="jehc.zxmodules.model.ZttOrder">
+		UPDATE
+			ztt_order
+		<set>
+			<if test="order_number != null">
+				order_number = #{order_number},
+			</if>
+			<if test="contract_number != null">
+				contract_number = #{contract_number},
+			</if>
+			<if test="client != null">
+				client = #{client},
+			</if>
+			<if test="linkman != null">
+				linkman = #{linkman},
+			</if>
+			<if test="product_name != null">
+				product_name = #{product_name},
+			</if>
+			<if test="stardard != null">
+				stardard = #{stardard},
+			</if>
+			<if test="attachment != null">
+				attachment = #{attachment},
+			</if>
+			<if test="unit != null">
+				unit = #{unit},
+			</if>
+			<if test="amount != null">
+				amount = #{amount},
+			</if>
+			<if test="single_price != null">
+				single_price = #{single_price},
+			</if>
+			<if test="sum_price != null">
+				sum_price = #{sum_price},
+			</if>
+			<if test="End_data != null">
+				End_data = #{End_data},
+			</if>
+			<if test="zttordertime != null">
+				zttordertime = #{zttordertime},
+			</if>
+			<if test="apply_id != null">
+				apply_id = #{apply_id},
+			</if>
+			<if test="state != null">
+				state = #{state},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZttOrder" parameterType="map">
+		DELETE FROM ztt_order WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZttOrder" parameterType="list">
+		INSERT INTO
+			ztt_order
+			(
+			id,
+			order_number,
+			contract_number,
+			client,
+			linkman,
+			product_name,
+			stardard,
+			attachment,
+			unit,
+			amount,
+			single_price,
+			sum_price,
+			End_data,
+			zttordertime,
+			apply_id,
+			state
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.order_number},
+			#{item.contract_number},
+			#{item.client},
+			#{item.linkman},
+			#{item.product_name},
+			#{item.stardard},
+			#{item.attachment},
+			#{item.unit},
+			#{item.amount},
+			#{item.single_price},
+			#{item.sum_price},
+			#{item.End_data},
+			#{item.zttordertime},
+			#{item.apply_id},
+			#{item.state}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZttOrder" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				ztt_order
+			SET
+				order_number = #{item.order_number},
+				contract_number = #{item.contract_number},
+				client = #{item.client},
+				linkman = #{item.linkman},
+				product_name = #{item.product_name},
+				stardard = #{item.stardard},
+				attachment = #{item.attachment},
+				unit = #{item.unit},
+				amount = #{item.amount},
+				single_price = #{item.single_price},
+				sum_price = #{item.sum_price},
+				End_data = #{item.End_data},
+				zttordertime = #{item.zttordertime},
+				apply_id = #{item.apply_id},
+				state = #{item.state}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZttOrderBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				ztt_order
+			<set>
+				<if test="item.order_number != null">
+					order_number = #{item.order_number},
+				</if>
+				<if test="item.contract_number != null">
+					contract_number = #{item.contract_number},
+				</if>
+				<if test="item.client != null">
+					client = #{item.client},
+				</if>
+				<if test="item.linkman != null">
+					linkman = #{item.linkman},
+				</if>
+				<if test="item.product_name != null">
+					product_name = #{item.product_name},
+				</if>
+				<if test="item.stardard != null">
+					stardard = #{item.stardard},
+				</if>
+				<if test="item.attachment != null">
+					attachment = #{item.attachment},
+				</if>
+				<if test="item.unit != null">
+					unit = #{item.unit},
+				</if>
+				<if test="item.amount != null">
+					amount = #{item.amount},
+				</if>
+				<if test="item.single_price != null">
+					single_price = #{item.single_price},
+				</if>
+				<if test="item.sum_price != null">
+					sum_price = #{item.sum_price},
+				</if>
+				<if test="item.End_data != null">
+					End_data = #{item.End_data},
+				</if>
+				<if test="item.zttordertime != null">
+					zttordertime = #{item.zttordertime},
+				</if>
+				<if test="item.apply_id != null">
+					apply_id = #{item.apply_id},
+				</if>
+				<if test="item.state != null">
+					state = #{item.state},
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+</mapper>

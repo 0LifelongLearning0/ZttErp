@@ -1,0 +1,19 @@
+//返回r
+function goback(){
+	tlocation("../zxSupplierController/loadZxSupplier");
+}
+$('#defaultForm').bootstrapValidator({
+	message:'此值不是有效的'
+});
+//保存
+function addXtUserinfo(){
+	submitBForm('defaultForm','../zxSupplierController/addZxSupplier','../zxSupplierController/loadZxSupplier');
+}
+
+//初始化日期选择器
+$(document).ready(function(){
+	datetimeInit();
+	//InitBDataCombo('gender','xt_userinfo_sex');//读取性别数据字典
+    $("#classify").append("<option value='A'>A</option><option value='B'>B</option><option value='C'>C</option><option value='D'>D</option>");
+    $("#type").append("<option value='1'>供应商</option><option value='2'>加工商</option>");
+});

@@ -1,0 +1,138 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ include file="/deng/include/includeboot.jsp"%>
+<%@ include file="/deng/include/inplugboot.jsp"%>
+<%@include file="user-choose.jsp"%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta charset="UTF-8">
+<title>6S事项新增页面</title>
+<link rel="stylesheet" href="${syspath}/deng/source/plugins/other/bztree/css/bootstrapStyle/bootstrapStyle.css" type="text/css">
+<script type="text/javascript" src="${syspath}/deng/source/plugins/other/bztree/js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="${syspath}/deng/source/plugins/other/bztree/js/jquery.ztree.excheck.js"></script>
+<script type="text/javascript" src="${syspath}/deng/source/plugins/other/bztree/js/jquery.ztree.exedit.js"></script>
+</head>
+<body>
+	<div class="panel-body">
+		<div class="page-header">
+			<h4>创建6S事项信息</h4>
+		</div>
+		<form class="form-horizontal" id="defaultForm" method="post">
+			<input type="hidden" id="six_s_id" name='six_s_id' value="${six_s_id}"/>
+			<fieldset>
+				<legend>基本信息</legend>
+				<div class="row">
+			        <div class="col-md-1">
+			        	<label class="control-label">检查场所</label>
+			        </div>
+			        <div class="col-md-2">
+			        	<div class="form-group">
+							<select class="form-control" maxlength="32" id="place_id"  style="width: 150px;" name="place_id" placeholder="请选择"></select>			        	
+						</div>
+			        </div>
+ 					<div class="col-md-1">
+			        	<label class="control-label">责任部门</label>
+			        </div>
+			        <div class="col-md-2">
+			        	<div class="form-group input-group">
+			        		<input type="hidden" maxlength="32"  name="dep_id" id="dep_id">
+							<input class="form-control" type="text" maxlength="32" readonly="readonly" id ="xt_departinfo_name" name="xt_departinfo_name" placeholder="请选择隶属部门">
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="button" onclick="departSelect()">
+									选择
+								</button>
+							</span>
+						</div>
+			        </div>
+			        <div class="col-md-1">
+			        	<label class="control-label">责任人</label>
+			        </div>
+			        <div class="col-md-2">
+			        	<div class="form-group input-group">
+			        		<input type="hidden" maxlength="32"  name="user_id" id="user_id">
+							<input class="form-control" type="text" maxlength="32" readonly="readonly" id ="user_name" name="user_name" placeholder="请选择责任人">
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="button" onclick="userModalShow('user_id','user_name')">
+									选择
+								</button>
+							</span>			        	
+						</div>
+			        </div>
+			        <div class="col-md-1">
+			        	<label class="control-label">完成期限</label>
+			        </div>
+			        <div class="col-md-2">
+			        	<div class="form-group">
+							<input class="form_date form-control" readonly="readonly" id="end_date" name="end_date" placeholder="请选择时间">
+						</div>
+			        </div>
+			    </div>
+			</fieldset>
+			<fieldset>
+				<legend>说明</legend>
+				<div class="row">
+			        <div class="col-md-1">
+			        	<label class="control-label">不符合项说明</label>
+			        </div>
+			        <div class="col-md-10">
+			        	<div class="form-group">
+							<textarea class="form-control" cols="100" maxlength="256"  name="problem" placeholder="请输入说明"></textarea>			        	
+						</div>
+			        </div>
+			    </div>
+			    <div class="row">
+			        <div class="col-md-1">
+			        	<label class="control-label">改善措施</label>
+			        </div>
+			        <div class="col-md-10">
+			        	<div class="form-group">
+							<textarea class="form-control" cols="100" maxlength="256"  name="measure" placeholder="请输入改善措施"></textarea>			        	
+						</div>
+			        </div>
+			    </div>
+			</fieldset>
+			<fieldset>
+				<legend>照片</legend>
+				<div class="row">
+					<div class="col-md-1">
+			        	<label class="control-label">参考照片</label>
+			        </div>
+			        <div class="col-md-2">
+			        	<div class="form-group">
+			        		<input class="form-control" type="hidden" name="problem_pic" id="problem_pic">
+							<img src = "../deng/images/default/add_d.png" class="img" width="96"  height="96"  id="problem_img_pic">
+			        	</div>
+			        </div>
+			    </div>
+			</fieldset>
+			<div class="form-group">
+				<label class="col-lg-3 control-label"></label>
+				<div class="col-lg-6">
+					<button type="button" class="btn green" onclick="addZxSixSContent()">保存</button>
+					<button type="button" class="btn default" onclick="goback()">返回</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</body>
+<!-- 部门选择器模态框（Modal）开始 -->
+<div class="modal fade" id="departSelectModal" tabindex="-1" role="dialog" aria-labelledby="departSelectModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="departSelectModalLabel">
+					部门选择器
+				</h4>
+			</div>
+			<div class="modal-body">
+				<ul id="tree" class="ztree"></ul>
+			</div>
+			<div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="doDepartSelect()">保存</button>
+            </div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+<script type="text/javascript" src="../view/pc/zx-view/zx-six-s-content/zx-six-s-content-add.js"></script> 
+</html>

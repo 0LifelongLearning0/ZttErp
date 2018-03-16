@@ -1,0 +1,81 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ include file="/deng/include/includeboot.jsp"%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta charset="UTF-8">
+<title>车辆审批表详情页面</title>
+</head>
+<body>
+	<div class="panel panel-default padding-10 no-margin">
+		<legend>
+		<div class="btn-group pull-right" style="margin-right: 20px;">
+			<button type="button" onclick="goback()" class="btn btn-default">
+				<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>返回
+			</button>
+		</div>
+		审批单详情
+		</legend>
+		<fieldset id="printAll${zxCarApply.id }">
+            <div class="container-fluid  col-md-8 col-md-offset-2">
+                <div class="row">
+		            <table class="table table-bordered">
+		                <caption class="text-center h3 no-margin bold">车辆使用审批单</caption>
+		                <tbody>
+		                    <tr>
+		                        <td class="col-md-1 text-center">申&ensp;请&ensp;人</td>
+		                        <td class="col-md-3">${applyUser.xt_userinfo_realName }</td>
+		                        <td class="col-md-1 text-center">部&emsp;&emsp;门</td>
+		                        <td class="col-md-3">${applyUser.xt_departinfo_name }</td>
+		                        <td class="col-md-1 text-center">申请日期</td>
+		                        <td class="col-md-3">${zxCarApply.apply_time }</td>
+		                    </tr>
+		                    <tr>
+		                        <td class="text-center">车辆号码</td>
+		                        <td>${applyCar.car_no }</td>
+		                        <td class="text-center">司&emsp;&emsp;机</td>
+		                        <td colspan="3">${applyDriver.xt_userinfo_realName }</td>
+		                    </tr>
+		                    <tr>
+		                        <td class="text-center">用车时间</td>
+		                        <td>${zxCarApply.apply_time_begin } 至  ${zxCarApply.apply_time_end }</td>
+		                        <td class="text-center">出车地点</td>
+		                        <td colspan="3">${zxCarApply.apply_car_address }</td>
+		                    </tr>
+		                    <tr>
+		                        <td class="text-center">用车事由</td>
+		                        <td>${zxCarApply.user_car_reason }</td>
+		                        <td class="text-center">外出人员</td>
+		                        <td colspan="3">${zxCarApply.user_car_person }</td>
+		                    </tr>
+		                    <tr>
+		                        <td class="text-center">出车里程</td>
+		                        <td>${zxCarApply.out_mileage }</td>
+		                        <td class="text-center">使用时间</td>
+		                        <td>${zxCarApply.usecar_outtime }</td>
+		                        <td class="text-center">门&emsp;&emsp;卫</td>
+		                        <td>${applyOutGuard.xt_userinfo_realName }</td>
+		                    </tr>
+		                    <tr>
+		                        <td class="text-center">回司里程</td>
+		                        <td>${zxCarApply.back_mileage }</td>
+		                        <td class="text-center">结束时间</td>
+		                        <td>${zxCarApply.usercar_backtime }</td>
+		                        <td class="text-center">门&emsp;&emsp;卫</td>
+		                        <td>${applyBackGuard.xt_userinfo_realName }</td>
+		                    </tr>
+		                </tbody>
+		            </table>
+                </div>
+            </div>
+            <div class="col-md-8 col-md-offset-2 thin">
+                <p>1、此表由用车人填写，审批后用车；</p>
+                <p>2、门卫根据实际情况填写出车里程、使用时间、回司里程、结束时间，并检查车辆是否有碰撞痕迹；</p>
+                <p>3、不得公车私用，一经发现严惩不贷；</p>
+                <p>4、请持证驾驶。</p>
+            </div>
+		</fieldset>
+	</div>
+</body>
+<script type="text/javascript" src="../view/pc/zx-view/zx-car-apply/zx-car-apply-detail.js"></script> 
+</html>

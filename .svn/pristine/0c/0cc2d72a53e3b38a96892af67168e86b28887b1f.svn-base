@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZxPurchaseApply">
+	<!--初始化分页-->
+	<select id="getZxPurchaseApplyListByCondition" resultType="jehc.zxmodules.model.ZxPurchaseApply" parameterType="map">
+		SELECT
+			apply_id,
+			user_id,
+			create_time,
+			status
+		FROM 
+			zx_purchase_apply
+		WHERE 1=1
+	</select>
+
+	<!--查询对象-->
+	<select id="getZxPurchaseApplyById" resultType="jehc.zxmodules.model.ZxPurchaseApply" parameterType="string">
+		SELECT
+			apply_id,
+			user_id,
+			create_time,
+			status
+		FROM 
+			zx_purchase_apply
+		WHERE apply_id=#{apply_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addZxPurchaseApply" parameterType="jehc.zxmodules.model.ZxPurchaseApply">
+		INSERT INTO
+			zx_purchase_apply
+			(
+			apply_id,
+			user_id,
+			create_time,
+			status
+			)
+			VALUES
+			(
+			#{apply_id},
+			#{user_id},
+			#{create_time},
+			#{status}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZxPurchaseApply" parameterType="jehc.zxmodules.model.ZxPurchaseApply">
+		UPDATE
+			zx_purchase_apply
+		SET
+			user_id = #{user_id},
+			create_time = #{create_time},
+			status = #{status}
+		WHERE apply_id=#{apply_id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZxPurchaseApplyBySelective" parameterType="jehc.zxmodules.model.ZxPurchaseApply">
+		UPDATE
+			zx_purchase_apply
+		<set>
+			<if test="user_id != null">
+				user_id = #{user_id},
+			</if>
+			<if test="create_time != null">
+				create_time = #{create_time},
+			</if>
+			<if test="status != null">
+				status = #{status},
+			</if>
+		</set>
+		WHERE apply_id=#{apply_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZxPurchaseApply" parameterType="map">
+		DELETE FROM zx_purchase_apply WHERE apply_id IN
+		<foreach item="item" index="index" collection="apply_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZxPurchaseApply" parameterType="list">
+		INSERT INTO
+			zx_purchase_apply
+			(
+			apply_id,
+			user_id,
+			create_time,
+			status
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.apply_id},
+			#{item.user_id},
+			#{item.create_time},
+			#{item.status}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZxPurchaseApply" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_purchase_apply
+			SET
+				user_id = #{item.user_id},
+				create_time = #{item.create_time},
+				status = #{item.status}
+			WHERE apply_id=#{item.apply_id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZxPurchaseApplyBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_purchase_apply
+			<set>
+				<if test="item.user_id != null">
+					user_id = #{item.user_id},
+				</if>
+				<if test="item.create_time != null">
+					create_time = #{item.create_time},
+				</if>
+				<if test="item.status != null">
+					status = #{item.status},
+				</if>
+			</set>
+			WHERE apply_id=#{item.apply_id}
+		</foreach>
+	</update>
+</mapper>

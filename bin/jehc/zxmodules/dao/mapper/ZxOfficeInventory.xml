@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZxOfficeInventory">
+	<!--初始化分页-->
+	<select id="getZxOfficeInventoryListByCondition" resultType="jehc.zxmodules.model.ZxOfficeInventoryShow" parameterType="map">
+		select a.office_id as office_id,
+       a.`name` as office_name,
+       a.num as office_num,
+       a.classify_id as classify_id,
+       a.unit as office_unit,
+       a.`status` as status,
+       a.create_date as create_date,
+       a.standard as standard,
+      b.amount 
+      from zx_office a LEFT JOIN zx_office_inventory b on a.office_id=b.office_id
+      WHERE 1=1
+      <if test="null != classify_id and '' != classify_id">
+			AND a.classify_id = #{classify_id}
+		</if>
+		<if test="null != name">
+			AND instr(a.`name`,#{name})
+		</if>
+		<if test="null == orderby">
+		   ORDER BY a.classify_id ASC,num ASC
+		</if>
+	</select>
+
+
+		<select id="getZxOfficeInventoryClickById" resultType="jehc.zxmodules.model.ZxOfficeInventoryShow" parameterType="map">
+		select a.office_id as office_id,
+       a.`name` as office_name,
+       a.num as office_num,
+       a.classify_id as classify_id,
+       a.unit as office_unit,
+       a.`status` as status,
+       a.create_date as create_date,
+       a.standard as standard,
+      b.amount 
+      from zx_office a LEFT JOIN zx_office_inventory b on a.office_id=b.office_id
+      WHERE 1=1 and a.classify_id=#{id}
+	</select>
+	
+	<!--查询补充信息-->
+	<select id="getZxOfficeInventoryAddById" resultType="jehc.zxmodules.model.ZxOfficeInventoryShow" parameterType="string">
+		select a.office_id as office_id,
+       a.`name` as office_name,
+       a.num as office_num,
+       a.classify_id as classify_id,
+       a.unit as office_unit,
+       a.`status` as status,
+       a.create_date as create_date,
+       a.standard as standard,
+      b.amount 
+      from zx_office a LEFT JOIN zx_office_inventory b on a.office_id=b.office_id
+      WHERE 1=1 and a.office_id=#{id}
+	</select>
+	
+	
+	<!--查询对象-->
+	<select id="getZxOfficeInventoryById" resultType="jehc.zxmodules.model.ZxOfficeInventory" parameterType="string">
+		SELECT
+			`id`,
+			`office_id`,
+			`amount`,
+			`reason`
+		FROM 
+			zx_office_inventory
+		WHERE id=#{id}
+	</select>
+	
+	<!--判断首次-->
+	<select id="judgeZxOfficeInventoryById" resultType="jehc.zxmodules.model.ZxOfficeInventory" parameterType="string">
+		SELECT
+			`id`,
+			`office_id`,
+			`amount`,
+			`reason`
+		FROM 
+			zx_office_inventory
+		WHERE office_id=#{office_id}
+	</select>
+
+	<!--添加补充表-->
+	<insert id="addZxOfficeInventoryadd" parameterType="jehc.zxmodules.model.ZxOfficeInventoryAdd">
+			INSERT INTO
+			zx_office_inventory_add
+			(
+			`id`,
+			`user_id`,
+            `create_time`,
+            `office_id`,
+			`amount`,
+			`reason`
+			)
+			VALUES
+			(
+			#{id},
+			#{user_id},
+			#{create_time},
+			#{office_id},
+			#{amount},
+			#{reason}
+			)
+	</insert>
+
+	<!--添加库存-->
+	<insert id="addZxOfficeInventory" parameterType="jehc.zxmodules.model.ZxOfficeInventory">
+		INSERT INTO
+			zx_office_inventory
+			(
+			`id`,
+			`office_id`,
+			`amount`,
+			`reason`
+			)
+			VALUES
+			(
+			#{id},
+			#{office_id},
+			#{amount},
+			#{reason}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZxOfficeInventory" parameterType="jehc.zxmodules.model.ZxOfficeInventory">
+		UPDATE
+			zx_office_inventory
+		SET
+			`office_id` = #{office_id},
+			`amount` = #{amount},
+			`reason` = #{reason}
+		WHERE id=#{id}
+	</update>
+
+<!--发放时修改库存-->
+	<update id="updateZxOfficeOutInventory" parameterType="jehc.zxmodules.model.ZxOfficeInventory">
+		UPDATE
+			zx_office_inventory
+		SET
+			`amount` = #{amount}
+		WHERE office_id=#{office_id}
+	</update>
+	<!--修改（根据动态条件）-->
+	<update id="updateZxOfficeInventoryBySelective" parameterType="jehc.zxmodules.model.ZxOfficeInventory">
+		UPDATE
+			zx_office_inventory
+		<set>
+			<if test="office_id != null">
+				`office_id` = #{office_id},
+			</if>
+			<if test="amount != null">
+				`amount` = #{amount},
+			</if>
+			<if test="reason != null">
+				`reason` = #{reason},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZxOfficeInventory" parameterType="map">
+		DELETE FROM zx_office_inventory WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZxOfficeInventory" parameterType="list">
+		INSERT INTO
+			zx_office_inventory
+			(
+			`id`,
+			`office_id`,
+			`amount`,
+			`reason`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.office_id},
+			#{item.amount},
+			#{item.reason}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZxOfficeInventory" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_office_inventory
+			SET
+				`office_id` = #{item.office_id},
+				`amount` = #{item.amount},
+				`reason` = #{item.reason}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZxOfficeInventoryBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_office_inventory
+			<set>
+				<if test="item.office_id != null">
+					`office_id` = #{item.office_id},
+				</if>
+				<if test="item.amount != null">
+					`amount` = #{item.amount},
+				</if>
+				<if test="item.reason != null">
+					`reason` = #{item.reason},
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+</mapper>

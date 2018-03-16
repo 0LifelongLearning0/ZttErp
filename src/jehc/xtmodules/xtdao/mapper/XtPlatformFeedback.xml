@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtPlatformFeedback">
+	<!--初始化分页-->
+	<select id="getXtPlatformFeedbackListByCondition" resultType="jehc.xtmodules.xtmodel.XtPlatformFeedback" parameterType="map">
+		SELECT
+			xt_platform_feedback_id,
+			xt_platform_id,
+			xt_platform_feedback_ctime AS xt_platform_feedback_ctime,
+			xt_userinfo_id,
+			xt_platform_feedback_remark,
+			xt_platform_feedback_status
+		FROM 
+			xt_platform_feedback
+		WHERE 1=1
+		<if test = "null != xt_platform_id">
+			AND xt_platform_id = #{xt_platform_id}
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getXtPlatformFeedbackById" resultType="jehc.xtmodules.xtmodel.XtPlatformFeedback" parameterType="string">
+		SELECT
+			xt_platform_feedback_id,
+			xt_platform_id,
+			xt_platform_feedback_ctime AS xt_platform_feedback_ctime,
+			xt_userinfo_id,
+			xt_platform_feedback_remark,
+			xt_platform_feedback_status
+		FROM 
+			xt_platform_feedback
+		WHERE xt_platform_feedback_id=#{xt_platform_feedback_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtPlatformFeedback" parameterType="jehc.xtmodules.xtmodel.XtPlatformFeedback">
+		INSERT INTO
+			xt_platform_feedback
+			(
+			xt_platform_feedback_id,
+			xt_platform_id,
+			xt_platform_feedback_ctime,
+			xt_userinfo_id,
+			xt_platform_feedback_remark,
+			xt_platform_feedback_status
+			)
+			VALUES
+			(
+			#{xt_platform_feedback_id},
+			#{xt_platform_id},
+			#{xt_platform_feedback_ctime},
+			#{xt_userinfo_id},
+			#{xt_platform_feedback_remark},
+			#{xt_platform_feedback_status}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtPlatformFeedback" parameterType="jehc.xtmodules.xtmodel.XtPlatformFeedback">
+		UPDATE
+			xt_platform_feedback
+		SET
+			xt_platform_id = #{xt_platform_id},
+			xt_platform_feedback_ctime = #{xt_platform_feedback_ctime},
+			xt_userinfo_id = #{xt_userinfo_id},
+			xt_platform_feedback_remark = #{xt_platform_feedback_remark},
+			xt_platform_feedback_status = #{xt_platform_feedback_status}
+		WHERE xt_platform_feedback_id=#{xt_platform_feedback_id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateXtPlatformFeedbackBySelective" parameterType="jehc.xtmodules.xtmodel.XtPlatformFeedback">
+		UPDATE
+			xt_platform_feedback
+		<set>
+			<if test="xt_platform_id != null">
+				xt_platform_id = #{xt_platform_id},
+			</if>
+			<if test="xt_platform_feedback_ctime != null">
+				xt_platform_feedback_ctime = #{xt_platform_feedback_ctime},
+			</if>
+			<if test="xt_userinfo_id != null">
+				xt_userinfo_id = #{xt_userinfo_id},
+			</if>
+			<if test="xt_platform_feedback_remark != null">
+				xt_platform_feedback_remark = #{xt_platform_feedback_remark},
+			</if>
+			<if test="xt_platform_feedback_status != null">
+				xt_platform_feedback_status = #{xt_platform_feedback_status},
+			</if>
+		</set>
+		WHERE xt_platform_feedback_id=#{xt_platform_feedback_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delXtPlatformFeedback" parameterType="map">
+		DELETE FROM xt_platform_feedback WHERE xt_platform_feedback_id IN
+		<foreach item="item" index="index" collection="xt_platform_feedback_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchXtPlatformFeedback" parameterType="list">
+		INSERT INTO
+			xt_platform_feedback
+			(
+			xt_platform_feedback_id,
+			xt_platform_id,
+			xt_platform_feedback_ctime,
+			xt_userinfo_id,
+			xt_platform_feedback_remark,
+			xt_platform_feedback_status
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.xt_platform_feedback_id},
+			#{item.xt_platform_id},
+			#{item.xt_platform_feedback_ctime},
+			#{item.xt_userinfo_id},
+			#{item.xt_platform_feedback_remark},
+			#{item.xt_platform_feedback_status}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchXtPlatformFeedback" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				xt_platform_feedback
+			SET
+				xt_platform_id = #{item.xt_platform_id},
+				xt_platform_feedback_ctime = #{item.xt_platform_feedback_ctime},
+				xt_userinfo_id = #{item.xt_userinfo_id},
+				xt_platform_feedback_remark = #{item.xt_platform_feedback_remark},
+				xt_platform_feedback_status = #{item.xt_platform_feedback_status}
+			WHERE xt_platform_feedback_id=#{item.xt_platform_feedback_id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchXtPlatformFeedbackBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				xt_platform_feedback
+			<set>
+				<if test="item.xt_platform_id != null">
+					xt_platform_id = #{item.xt_platform_id},
+				</if>
+				<if test="item.xt_platform_feedback_ctime != null">
+					xt_platform_feedback_ctime = #{item.xt_platform_feedback_ctime},
+				</if>
+				<if test="item.xt_userinfo_id != null">
+					xt_userinfo_id = #{item.xt_userinfo_id},
+				</if>
+				<if test="item.xt_platform_feedback_remark != null">
+					xt_platform_feedback_remark = #{item.xt_platform_feedback_remark},
+				</if>
+				<if test="item.xt_platform_feedback_status != null">
+					xt_platform_feedback_status = #{item.xt_platform_feedback_status},
+				</if>
+			</set>
+			WHERE xt_platform_feedback_id=#{item.xt_platform_feedback_id}
+		</foreach>
+	</update>
+
+	<!--根据外键删除-->
+	<delete id="delXtPlatformFeedbackByForeignKey" parameterType="string">
+		DELETE FROM xt_platform_feedback WHERE xt_platform_id = #{xt_platform_id}
+	</delete>
+</mapper>

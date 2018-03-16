@@ -1,0 +1,613 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZxBuyProgress">
+	<!--初始化分页-->
+	<select id="getZxBuyProgressListByCondition" resultType="map" parameterType="map">
+		SELECT
+			progress.`id`,
+			progress.`apply_id`,
+			apply.apply_num as apply_num,
+			progress.`order_id`,
+			progress.`project_id`,
+			project.num as project_num,
+			project.name as project_name,
+			progress.`material_id`,
+			material.num as material_num,
+			material.name as material_name,
+			material.short_name as material_short_name,
+			material.standard as material_standard,
+			material.unit as material_unit,
+			progress.`brand`,
+			progress.`caizhi`,
+			progress.`apply_amount`,
+			progress.`buy_amount`,
+			progress.`real_amount`,
+			DATE_FORMAT(progress.`need_time`,'%Y-%m-%d') AS `need_time`,
+			progress.`suppier_id`,
+			DATE_FORMAT(progress.`send_draw_time`,'%Y-%m-%d %H:%i:%s') AS `send_draw_time`,
+			progress.`draw_num`,
+			progress.`apply_user_id`,
+			progress.`buy_user_id`,
+			DATE_FORMAT(progress.`buy_time`,'%Y-%m-%d') AS `buy_time`,
+			DATE_FORMAT(progress.`plan_time`,'%Y-%m-%d') AS `plan_time`,
+			DATE_FORMAT(progress.`real_time`,'%Y-%m-%d') AS `real_time`,
+			DATE_FORMAT(progress.`apply_time`,'%Y-%m-%d %H:%i:%s') AS `apply_time`,
+			progress.`xt_userinfo_realName`,
+			progress.`status`,
+			progress.`material_remark`,
+			progress.`remark`,
+			progress.`out_warehouse_amount`,
+			DATE_FORMAT(progress.`out_warehouse_date`,'%Y-%m-%d %H:%i:%s') AS `out_warehouse_date`,
+			DATE_FORMAT(progress.`in_warehouse_date`,'%Y-%m-%d %H:%i:%s') AS `in_warehouse_date`,
+			progress.`in_warehouse_amount`
+		FROM 
+			zx_buy_progress progress LEFT JOIN zx_material material ON progress.material_id = material.material_id
+		 							 LEFT JOIN zx_project project ON progress.project_id = project.id
+		 							 LEFT JOIN zx_buy_apply_material buy_material ON progress.apply_id = buy_material.id
+		 							 LEFT JOIN zx_buy_apply apply ON buy_material.apply_id = apply.id
+		WHERE 1=1
+		<if test="null != status">
+			AND instr(progress.status,#{status})
+		</if>
+		<if test="null != suppier_id">
+			AND instr(progress.suppier_id,#{suppier_id})
+		</if>
+		<if test="null != draw_num">
+			AND instr(progress.draw_num,#{draw_num})
+		</if>
+		<if test="null != apply_user_id">
+			AND instr(progress.apply_user_id,#{apply_user_id})
+		</if>
+		<if test="null != material_id">
+			AND instr(progress.material_id,#{material_id})
+		</if>
+		<if test="null != material_num">
+			AND instr(material.num,#{material_num})
+		</if>
+		<if test="null != material_name">
+			AND instr(material.short_name,#{material_name})
+		</if>
+		<if test="null != project_id">
+			AND instr(progress.project_id,#{project_id})
+		</if>
+		<if test="null != project_num">
+			AND instr(project.num,#{project_num})
+		</if>
+		<if test="null != order_id">
+			AND instr(progress.order_id,#{order_id}) 
+		</if>
+		<if test="null != apply_id">
+			AND instr(progress.apply_id,#{apply_id}) 
+		</if>
+		<if test="null != apply_num">
+			AND instr(apply.apply_num,#{apply_num}) 
+		</if>
+		 ORDER BY progress.apply_time DESC
+		<if test="null != orderby and orderby == 1">
+		   ,progress.apply_id DESC 
+		</if>
+		<if test="null != orderby and orderby == 2">
+		    ,progress.apply_id ASC 
+		</if>
+		<if test="null != orderby and orderby == 3">
+		    ,progress.order_id DESC 
+		</if>
+		<if test="null != orderby and orderby == 4">
+		    ,progress.order_id DESC 
+		</if>
+		<if test="null != orderby and orderby == 5">
+		    ,progress.project_id DESC 
+		</if>
+		<if test="null != orderby and orderby == 6">
+		    ,progress.project_id DESC 
+		</if>
+		<if test="null != orderby and orderby == 7">
+		    ,progress.apply_user_id DESC 
+		</if>
+		<if test="null != orderby and orderby == 8">
+		    ,progress.apply_user_id DESC 
+		</if>
+		<if test="null != orderby and orderby == 9">
+		    ,progress.suppier_id DESC 
+		</if>
+		<if test="null != orderby and orderby == 10">
+		    ,progress.suppier_id DESC 
+		</if>
+		<if test="null != orderby and orderby == 11">
+		    ,progress.order_id DESC,progress.suppier_id DESC,progress.apply_user_id DESC
+		</if>
+		<if test="null != orderby and orderby == 12">
+		    ,progress.draw_num ASC,progress.apply_user_id DESC,progress.suppier_id DESC
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getZxBuyProgressById" resultType="jehc.zxmodules.model.ZxBuyProgress" parameterType="string">
+		SELECT
+			`id`,
+			`apply_id`,
+			`order_id`,
+			`project_id`,
+			`material_id`,
+			`brand`,
+			`caizhi`,
+			`apply_amount`,
+			`buy_amount`,
+			`real_amount`,
+			DATE_FORMAT(`need_time`,'%Y-%m-%d') AS `need_time`,
+			`suppier_id`,
+			DATE_FORMAT(`send_draw_time`,'%Y-%m-%d %H:%i:%s') AS `send_draw_time`,
+			`draw_num`,
+			`apply_user_id`,
+			`buy_user_id`,
+			DATE_FORMAT(`buy_time`,'%Y-%m-%d') AS `buy_time`,
+			DATE_FORMAT(`plan_time`,'%Y-%m-%d') AS `plan_time`,
+			DATE_FORMAT(`real_time`,'%Y-%m-%d') AS `real_time`,
+			DATE_FORMAT(`apply_time`,'%Y-%m-%d %H:%i:%s') AS `apply_time`,
+			`xt_userinfo_realName`,
+			`status`,
+			`material_remark`,
+			`remark`,
+			`out_warehouse_amount`,
+			DATE_FORMAT(`out_warehouse_date`,'%Y-%m-%d %H:%i:%s') AS `out_warehouse_date`,
+			DATE_FORMAT(`in_warehouse_date`,'%Y-%m-%d %H:%i:%s') AS `in_warehouse_date`,
+			`in_warehouse_amount`
+		FROM 
+			zx_buy_progress
+		WHERE id=#{id}
+	</select>
+	
+	
+	<!--查询对象-->
+	<select id="getMapZxBuyProgressById" resultType="map" parameterType="string">
+		SELECT
+			progress.`id`,
+			progress.`apply_id`,
+			apply.apply_num as apply_num,
+			progress.`order_id`,
+			order_buy.order_num as order_num,
+			order_buy.order_name as order_name,
+			order_buy.description as order_description,
+			DATE_FORMAT(order_buy.`agree_time`,'%Y-%m-%d') AS agree_time,
+			progress.`project_id`,
+			project.num as project_num,
+			project.name as project_name,
+			progress.`material_id`,
+			material.num as material_num,
+			material.name as material_name,
+			material.short_name as material_short_name,
+			material.standard as material_standard,
+			material.unit as material_unit,
+			progress.`brand`,
+			progress.`caizhi`,
+			progress.`apply_amount`,
+			progress.`buy_amount`,
+			progress.`real_amount`,
+			DATE_FORMAT(progress.`need_time`,'%Y-%m-%d') AS need_time,
+			progress.`suppier_id`,
+			supplier.name as supplier_name,
+			DATE_FORMAT(progress.`send_draw_time`,'%Y-%m-%d %H:%i:%s') AS send_draw_time,
+			progress.`draw_num`,
+			progress.`apply_user_id`,
+			progress.`buy_user_id`,
+			DATE_FORMAT(progress.`buy_time`,'%Y-%m-%d') AS buy_time,
+			DATE_FORMAT(progress.`plan_time`,'%Y-%m-%d') AS plan_time,
+			DATE_FORMAT(progress.`real_time`,'%Y-%m-%d') AS real_time,
+			DATE_FORMAT(progress.`apply_time`,'%Y-%m-%d %H:%i:%s') AS apply_time,
+			progress.`xt_userinfo_realName`,
+			progress.`status`,
+			progress.`material_remark`,
+			progress.`remark`,
+			progress.`out_warehouse_amount`,
+			DATE_FORMAT(progress.`out_warehouse_date`,'%Y-%m-%d %H:%i:%s') AS `out_warehouse_date`,
+			DATE_FORMAT(progress.`in_warehouse_date`,'%Y-%m-%d %H:%i:%s') AS `in_warehouse_date`,
+			progress.`in_warehouse_amount`
+		FROM 
+			zx_buy_progress progress LEFT JOIN zx_material material ON progress.material_id = material.material_id
+		 							 LEFT JOIN zx_project project ON progress.project_id = project.id
+		 							 LEFT JOIN zx_buy_apply_material buy_material ON progress.apply_id = buy_material.id
+		 							 LEFT JOIN zx_buy_apply apply ON buy_material.apply_id = apply.id 
+		 							 LEFT JOIN zx_order_buy order_buy ON progress.order_id = order_buy.id 
+		 							 LEFT JOIN zx_supplier supplier ON progress.suppier_id = supplier.id
+		WHERE progress.id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addZxBuyProgress" parameterType="jehc.zxmodules.model.ZxBuyProgress">
+		INSERT INTO
+			zx_buy_progress
+			(
+			`id`,
+			`apply_id`,
+			`order_id`,
+			`project_id`,
+			`material_id`,
+			`brand`,
+			`caizhi`,
+			`apply_amount`,
+			`buy_amount`,
+			`real_amount`,
+			`need_time`,
+			`suppier_id`,
+			`send_draw_time`,
+			`draw_num`,
+			`apply_user_id`,
+			`buy_user_id`,
+			`buy_time`,
+			`plan_time`,
+			`real_time`,
+			`apply_time`,
+			`xt_userinfo_realName`,
+			`status`,
+			`material_remark`,
+			`remark`,
+			`out_warehouse_amount`,
+			`out_warehouse_date`,
+			`in_warehouse_date`,
+			`in_warehouse_amount`
+			)
+			VALUES
+			(
+			#{id},
+			#{apply_id},
+			#{order_id},
+			#{project_id},
+			#{material_id},
+			#{brand},
+			#{caizhi},
+			#{apply_amount},
+			#{buy_amount},
+			#{real_amount},
+			#{need_time},
+			#{suppier_id},
+			#{send_draw_time},
+			#{draw_num},
+			#{apply_user_id},
+			#{buy_user_id},
+			#{buy_time},
+			#{plan_time},
+			#{real_time},
+			#{apply_time},
+			#{xt_userinfo_realName},
+			#{status},
+			#{material_remark},
+			#{remark},
+			#{out_warehouse_amount},
+			#{out_warehouse_date},
+			#{in_warehouse_date},
+			#{in_warehouse_amount}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZxBuyProgress" parameterType="jehc.zxmodules.model.ZxBuyProgress">
+		UPDATE
+			zx_buy_progress
+		SET
+			`apply_id` = #{apply_id},
+			`order_id` = #{order_id},
+			`project_id` = #{project_id},
+			`material_id` = #{material_id},
+			`brand` = #{brand},
+			`caizhi` = #{caizhi},
+			`apply_amount` = #{apply_amount},
+			`buy_amount` = #{buy_amount},
+			`real_amount` = #{real_amount},
+			`need_time` = #{need_time},
+			`suppier_id` = #{suppier_id},
+			`send_draw_time` = #{send_draw_time},
+			`draw_num` = #{draw_num},
+			`apply_user_id` = #{apply_user_id},
+			`buy_user_id` = #{buy_user_id},
+			`buy_time` = #{buy_time},
+			`plan_time` = #{plan_time},
+			`real_time` = #{real_time},
+			`apply_time` = #{apply_time},
+			`xt_userinfo_realName` = #{xt_userinfo_realName},
+			`status` = #{status},
+			`material_remark` = #{material_remark},
+			`remark` = #{remark},
+			`out_warehouse_amount` = #{out_warehouse_amount},
+			`out_warehouse_date` = #{out_warehouse_date},
+			`in_warehouse_date` = #{in_warehouse_date},
+			`in_warehouse_amount` = #{in_warehouse_amount}
+		WHERE id=#{id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZxBuyProgressBySelective" parameterType="jehc.zxmodules.model.ZxBuyProgress">
+		UPDATE
+			zx_buy_progress
+		<set>
+			<if test="apply_id != null and apply_id != ''">
+				`apply_id` = #{apply_id},
+			</if>
+			<if test="order_id != null and order_id != ''">
+				`order_id` = #{order_id},
+			</if>
+			<if test="project_id != null and project_id != ''">
+				`project_id` = #{project_id},
+			</if>
+			<if test="material_id != null and material_id != ''">
+				`material_id` = #{material_id},
+			</if>
+			<if test="brand != null and brand != ''">
+				`brand` = #{brand},
+			</if>
+			<if test="caizhi != null and caizhi != ''">
+				`caizhi` = #{caizhi},
+			</if>
+			<if test="apply_amount != null and apply_amount != ''">
+				`apply_amount` = #{apply_amount},
+			</if>
+			<if test="buy_amount != null and buy_amount != ''">
+				`buy_amount` = #{buy_amount},
+			</if>
+			<if test="real_amount != null and real_amount != ''">
+				`real_amount` = #{real_amount},
+			</if>
+			<if test="need_time != null and need_time != ''">
+				`need_time` = #{need_time},
+			</if>
+			<if test="suppier_id != null and suppier_id != ''">
+				`suppier_id` = #{suppier_id},
+			</if>
+			<if test="send_draw_time != null and send_draw_time != ''">
+				`send_draw_time` = #{send_draw_time},
+			</if>
+			<if test="draw_num != null and draw_num != ''">
+				`draw_num` = #{draw_num},
+			</if>
+			<if test="apply_user_id != null and apply_user_id != ''">
+				`apply_user_id` = #{apply_user_id},
+			</if>
+			<if test="buy_user_id != null and buy_user_id != ''">
+				`buy_user_id` = #{buy_user_id},
+			</if>
+			<if test="buy_time != null and buy_time != ''">
+				`buy_time` = #{buy_time},
+			</if>
+			<if test="plan_time != null and plan_time != ''">
+				`plan_time` = #{plan_time},
+			</if>
+			<if test="real_time != null and real_time != ''">
+				`real_time` = #{real_time},
+			</if>
+			<if test="apply_time != null and apply_time != ''">
+				`apply_time` = #{apply_time},
+			</if>
+			<if test="xt_userinfo_realName != null and xt_userinfo_realName != ''">
+				`xt_userinfo_realName` = #{xt_userinfo_realName},
+			</if>
+			<if test="status != null and status != ''">
+				`status` = #{status},
+			</if>
+			<if test="material_remark != null and material_remark != ''">
+				`material_remark` = #{material_remark},
+			</if>
+			<if test="remark != null and remark != ''">
+				`remark` = #{remark},
+			</if>
+			<if test="out_warehouse_amount != null and out_warehouse_amount != ''">
+				`out_warehouse_amount` = #{out_warehouse_amount},
+			</if>
+			<if test="out_warehouse_date != null and out_warehouse_date != ''">
+				`out_warehouse_date` = #{out_warehouse_date},
+			</if>
+			<if test="in_warehouse_date != null and in_warehouse_date != ''">
+				`in_warehouse_date` = #{in_warehouse_date},
+			</if>
+			<if test="in_warehouse_amount != null and in_warehouse_amount != ''">
+				`in_warehouse_amount` = #{in_warehouse_amount},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZxBuyProgress" parameterType="map">
+		DELETE FROM zx_buy_progress WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZxBuyProgress" parameterType="list">
+		INSERT INTO
+			zx_buy_progress
+			(
+			`id`,
+			`apply_id`,
+			`order_id`,
+			`project_id`,
+			`material_id`,
+			`brand`,
+			`caizhi`,
+			`apply_amount`,
+			`buy_amount`,
+			`real_amount`,
+			`need_time`,
+			`suppier_id`,
+			`send_draw_time`,
+			`draw_num`,
+			`apply_user_id`,
+			`buy_user_id`,
+			`buy_time`,
+			`plan_time`,
+			`real_time`,
+			`apply_time`,
+			`xt_userinfo_realName`,
+			`status`,
+			`material_remark`,
+			`remark`,
+			`out_warehouse_amount`,
+			`out_warehouse_date`,
+			`in_warehouse_date`,
+			`in_warehouse_amount`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.apply_id},
+			#{item.order_id},
+			#{item.project_id},
+			#{item.material_id},
+			#{item.brand},
+			#{item.caizhi},
+			#{item.apply_amount},
+			#{item.buy_amount},
+			#{item.real_amount},
+			#{item.need_time},
+			#{item.suppier_id},
+			#{item.send_draw_time},
+			#{item.draw_num},
+			#{item.apply_user_id},
+			#{item.buy_user_id},
+			#{item.buy_time},
+			#{item.plan_time},
+			#{item.real_time},
+			#{item.apply_time},
+			#{item.xt_userinfo_realName},
+			#{item.status},
+			#{item.material_remark},
+			#{item.remark},
+			#{item.out_warehouse_amount},
+			#{item.out_warehouse_date},
+			#{item.in_warehouse_date},
+			#{item.in_warehouse_amount}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZxBuyProgress" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_buy_progress
+			SET
+				`apply_id` = #{item.apply_id},
+				`order_id` = #{item.order_id},
+				`project_id` = #{item.project_id},
+				`material_id` = #{item.material_id},
+				`brand` = #{item.brand},
+				`caizhi` = #{item.caizhi},
+				`apply_amount` = #{item.apply_amount},
+				`buy_amount` = #{item.buy_amount},
+				`real_amount` = #{item.real_amount},
+				`need_time` = #{item.need_time},
+				`suppier_id` = #{item.suppier_id},
+				`send_draw_time` = #{item.send_draw_time},
+				`draw_num` = #{item.draw_num},
+				`apply_user_id` = #{item.apply_user_id},
+				`buy_user_id` = #{item.buy_user_id},
+				`buy_time` = #{item.buy_time},
+				`plan_time` = #{item.plan_time},
+				`real_time` = #{item.real_time},
+				`apply_time` = #{item.apply_time},
+				`xt_userinfo_realName` = #{item.xt_userinfo_realName},
+				`status` = #{item.status},
+				`material_remark` = #{item.material_remark},
+				`remark` = #{item.remark},
+				`out_warehouse_amount` = #{item.out_warehouse_amount},
+				`out_warehouse_date` = #{item.out_warehouse_date},
+				`in_warehouse_date` = #{item.in_warehouse_date},
+				`in_warehouse_amount` = #{item.in_warehouse_amount}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZxBuyProgressBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_buy_progress
+			<set>
+				<if test="item.apply_id != null and item.apply_id != ''">
+					`apply_id` = #{item.apply_id},
+				</if>
+				<if test="item.order_id != null and item.order_id != ''">
+					`order_id` = #{item.order_id},
+				</if>
+				<if test="item.project_id != null and item.project_id != ''">
+					`project_id` = #{item.project_id},
+				</if>
+				<if test="item.material_id != null and item.material_id">
+					`material_id` = #{item.material_id},
+				</if>
+				<if test="item.brand != null and item.brand != ''">
+					`brand` = #{item.brand},
+				</if>
+				<if test="item.caizhi != null and item.caizhi != ''">
+					`caizhi` = #{item.caizhi},
+				</if>
+				<if test="item.apply_amount != null and item.apply_amount != ''">
+					`apply_amount` = #{item.apply_amount},
+				</if>
+				<if test="item.buy_amount != null and item.buy_amount != ''">
+					`buy_amount` = #{item.buy_amount},
+				</if>
+				<if test="item.real_amount != null and item.real_amount != ''">
+					`real_amount` = #{item.real_amount},
+				</if>
+				<if test="item.need_time != null and item.need_time != ''">
+					`need_time` = #{item.need_time},
+				</if>
+				<if test="item.suppier_id != null and item.suppier_id != ''">
+					`suppier_id` = #{item.suppier_id},
+				</if>
+				<if test="item.send_draw_time != null and item.send_draw_time != ''">
+					`send_draw_time` = #{item.send_draw_time},
+				</if>
+				<if test="item.draw_num != null and item.draw_num != ''">
+					`draw_num` = #{item.draw_num},
+				</if>
+				<if test="item.apply_user_id != null and item.apply_user_id != ''">
+					`apply_user_id` = #{item.apply_user_id},
+				</if>
+				<if test="item.buy_user_id != null and item.buy_user_id != ''">
+					`buy_user_id` = #{item.buy_user_id},
+				</if>
+				<if test="item.buy_time != null and item.buy_time != ''">
+					`buy_time` = #{item.buy_time},
+				</if>
+				<if test="item.plan_time != null and item.plan_time != ''">
+					`plan_time` = #{item.plan_time},
+				</if>
+				<if test="item.real_time != null and item.real_time != ''">
+					`real_time` = #{item.real_time},
+				</if>
+				<if test="item.apply_time != null and item.apply_time != ''">
+					`apply_time` = #{item.apply_time},
+				</if>
+				<if test="item.xt_userinfo_realName != null and item.xt_userinfo_realName != ''">
+					`xt_userinfo_realName` = #{item.xt_userinfo_realName},
+				</if>
+				<if test="item.status != null and item.status != ''">
+					`status` = #{item.status},
+				</if>
+				<if test="item.material_remark != null and item.material_remark != ''">
+					`material_remark` = #{item.material_remark},
+				</if>
+				<if test="item.remark != null and item.remark != ''">
+					`remark` = #{item.remark},
+				</if>
+				<if test="item.out_warehouse_amount != null and item.out_warehouse_amount != ''">
+					`out_warehouse_amount` = #{item.out_warehouse_amount},
+				</if>
+				<if test="item.out_warehouse_date != null and item.out_warehouse_date != ''">
+					`out_warehouse_date` = #{item.out_warehouse_date},
+				</if>
+				<if test="item.in_warehouse_date != null and item.in_warehouse_date != ''">
+					`in_warehouse_date` = #{item.in_warehouse_date},
+				</if>
+				<if test="item.in_warehouse_amount != null and item.in_warehouse_amount != ''">
+					`in_warehouse_amount` = #{item.in_warehouse_amount},
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+</mapper>

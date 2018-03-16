@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZxProject">
+	<!--初始化分页-->
+	<select id="getZxProjectListByCondition" resultType="jehc.zxmodules.model.ZxProject" parameterType="map">
+		SELECT
+			`id`,
+			`name`,
+			`num`,
+			`ship_date`
+		FROM 
+			zx_project
+		WHERE 1=1
+		<if test="null != name">
+			AND instr(name,#{name})
+		</if>
+		<if test="null != num">
+			AND instr(num,#{num})
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getZxProjectById" resultType="jehc.zxmodules.model.ZxProject" parameterType="string">
+		SELECT
+			`id`,
+			`name`,
+			`num`,
+			`ship_date`
+		FROM 
+			zx_project
+		WHERE id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addZxProject" parameterType="jehc.zxmodules.model.ZxProject">
+		INSERT INTO
+			zx_project
+			(
+			`id`,
+			`name`,
+			`num`,
+			`ship_date`
+			)
+			VALUES
+			(
+			#{id},
+			#{name},
+			#{num},
+			#{ship_date}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZxProject" parameterType="jehc.zxmodules.model.ZxProject">
+		UPDATE
+			zx_project
+		SET
+			`name` = #{name},
+			`num` = #{num},
+			`ship_date` = #{ship_date}
+		WHERE id=#{id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZxProjectBySelective" parameterType="jehc.zxmodules.model.ZxProject">
+		UPDATE
+			zx_project
+		<set>
+			<if test="name != null">
+				`name` = #{name},
+			</if>
+			<if test="num != null">
+				`num` = #{num},
+			</if>
+			<if test="ship_date != null">
+				`ship_date` = #{ship_date},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZxProject" parameterType="map">
+		DELETE FROM zx_project WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZxProject" parameterType="list">
+		INSERT INTO
+			zx_project
+			(
+			`id`,
+			`name`,
+			`num`,
+			`ship_date`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.name},
+			#{item.num},
+			#{item.ship_date}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZxProject" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_project
+			SET
+				`name` = #{item.name},
+				`num` = #{item.num},
+				`ship_date` = #{item.ship_date}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZxProjectBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_project
+			<set>
+				<if test="item.name != null">
+					`name` = #{item.name},
+				</if>
+				<if test="item.num != null">
+					`num` = #{item.num},
+				</if>
+				<if test="item.ship_date != null">
+					`ship_date` = #{item.ship_date},
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+</mapper>

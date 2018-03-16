@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZxReservedFunds">
+	<!--初始化分页-->
+	<select id="getZxReservedFundsListByCondition" resultType="jehc.zxmodules.model.ZxReservedFunds" parameterType="map">
+		SELECT
+			zrf.id,
+			zrf.xt_departinfo_id,
+			zrf.xt_user_id,
+			zrf.annum,
+			zrf.month,
+			zrf.cardinal_num,
+			zrf.company_payment,
+			zrf.person_payment,
+			zrf.sum_payment,
+			zrf.person_account,
+			DATE_FORMAT(zrf.`create_time`,'%Y-%m-%d %H:%i:%s') AS `create_time`,
+			zrf.remark,
+			t1.xt_userinfo_realName,
+			t2.xt_departinfo_name AS xt_departinfo_name
+		FROM 
+			zx_reserved_funds zrf LEFT JOIN xt_userinfo t1 ON zrf.xt_user_id = t1.xt_userinfo_id
+			LEFT JOIN xt_departinfo t2 ON zrf.xt_departinfo_id = t2.xt_departinfo_id
+		WHERE 1=1
+		<if test="xt_userinfo_realName != null">
+		AND instr(t1.xt_userinfo_realName,#{xt_userinfo_realName})
+		</if>
+		<if test="xt_departinfo_name != null">
+		AND instr(t2.xt_departinfo_name,#{xt_departinfo_name})
+		</if>
+		<if test="person_account != null">
+		AND instr(zrf.person_account,#{person_account})
+		</if>
+		<if test="annum != null">
+		AND zrf.annum = #{annum}
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getZxReservedFundsById" resultType="jehc.zxmodules.model.ZxReservedFunds" parameterType="string">
+		SELECT
+			zrf.id,
+			zrf.xt_departinfo_id,
+			zrf.xt_user_id,
+			zrf.annum,
+			zrf.month,
+			zrf.cardinal_num,
+			zrf.company_payment,
+			zrf.person_payment,
+			zrf.sum_payment,
+			zrf.person_account,
+			DATE_FORMAT(zrf.`create_time`,'%Y-%m-%d %H:%i:%s') AS `create_time`,
+			zrf.remark,
+			t1.xt_userinfo_realName,
+			t2.xt_departinfo_name AS xt_departinfo_name
+		FROM 
+			zx_reserved_funds zrf LEFT JOIN xt_userinfo t1 ON zrf.xt_user_id = t1.xt_userinfo_id
+			LEFT JOIN xt_departinfo t2 ON zrf.xt_departinfo_id = t2.xt_departinfo_id
+		WHERE id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addZxReservedFunds" parameterType="jehc.zxmodules.model.ZxReservedFunds">
+		INSERT INTO
+			zx_reserved_funds
+			(
+			id,
+			xt_departinfo_id,
+			xt_user_id,
+			annum,
+			month,
+			cardinal_num,
+			company_payment,
+			person_payment,
+			sum_payment,
+			person_account,
+			create_time,
+			remark
+			)
+			VALUES
+			(
+			#{id},
+			#{xt_departinfo_id},
+			#{xt_user_id},
+			#{annum},
+			#{month},
+			#{cardinal_num},
+			#{company_payment},
+			#{person_payment},
+			#{sum_payment},
+			#{person_account},
+			#{create_time},
+			#{remark}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZxReservedFunds" parameterType="jehc.zxmodules.model.ZxReservedFunds">
+		UPDATE
+			zx_reserved_funds
+		SET
+			xt_departinfo_id = #{xt_departinfo_id},
+			xt_user_id = #{xt_user_id},
+			annum = #{annum},
+			month = #{month},
+			cardinal_num = #{cardinal_num},
+			company_payment = #{company_payment},
+			person_payment = #{person_payment},
+			sum_payment = #{sum_payment},
+			person_account = #{person_account},
+			create_time = #{create_time},
+			remark = #{remark}
+		WHERE id=#{id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZxReservedFundsBySelective" parameterType="jehc.zxmodules.model.ZxReservedFunds">
+		UPDATE
+			zx_reserved_funds
+		<set>
+			<if test="xt_departinfo_id != null">
+				xt_departinfo_id = #{xt_departinfo_id},
+			</if>
+			<if test="xt_user_id != null">
+				xt_user_id = #{xt_user_id},
+			</if>
+			<if test="year != null">
+				annum = #{annum},
+			</if>
+			<if test="month != null">
+				month = #{month},
+			</if>
+			<if test="cardinal_num != null">
+				cardinal_num = #{cardinal_num},
+			</if>
+			<if test="company_payment != null">
+				company_payment = #{company_payment},
+			</if>
+			<if test="person_payment != null">
+				person_payment = #{person_payment},
+			</if>
+			<if test="sum_payment != null">
+				sum_payment = #{sum_payment},
+			</if>
+			<if test="person_account != null">
+				person_account = #{person_account},
+			</if>
+			<if test="create_time != null">
+				create_time = #{create_time},
+			</if>
+			<if test="remark != null">
+				remark = #{remark},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZxReservedFunds" parameterType="map">
+		DELETE FROM zx_reserved_funds WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZxReservedFunds" parameterType="list">
+		INSERT INTO
+			zx_reserved_funds
+			(
+			id,
+			xt_departinfo_id,
+			xt_user_id,
+			annum,
+			month,
+			cardinal_num,
+			company_payment,
+			person_payment,
+			sum_payment,
+			person_account,
+			create_time,
+			remark
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.xt_departinfo_id},
+			#{item.xt_user_id},
+			#{item.annum},
+			#{item.month},
+			#{item.cardinal_num},
+			#{item.company_payment},
+			#{item.person_payment},
+			#{item.sum_payment},
+			#{item.person_account},
+			#{item.create_time},
+			#{item.remark}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZxReservedFunds" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_reserved_funds
+			SET
+				xt_departinfo_id = #{item.xt_departinfo_id},
+				xt_user_id = #{item.xt_user_id},
+				annum = #{item.annum},
+				month = #{item.month},
+				cardinal_num = #{item.cardinal_num},
+				company_payment = #{item.company_payment},
+				person_payment = #{item.person_payment},
+				sum_payment = #{item.sum_payment},
+				person_account = #{item.person_account},
+				create_time = #{item.create_time},
+				remark = #{item.remark}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZxReservedFundsBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_reserved_funds
+			<set>
+				<if test="item.xt_departinfo_id != null">
+					xt_departinfo_id = #{item.xt_departinfo_id},
+				</if>
+				<if test="item.xt_user_id != null">
+					xt_user_id = #{item.xt_user_id},
+				</if>
+				<if test="item.year != null">
+					annum = #{item.annum},
+				</if>
+				<if test="item.month != null">
+					month = #{item.month},
+				</if>
+				<if test="item.cardinal_num != null">
+					cardinal_num = #{item.cardinal_num},
+				</if>
+				<if test="item.company_payment != null">
+					company_payment = #{item.company_payment},
+				</if>
+				<if test="item.person_payment != null">
+					person_payment = #{item.person_payment},
+				</if>
+				<if test="item.sum_payment != null">
+					sum_payment = #{item.sum_payment},
+				</if>
+				<if test="item.person_account != null">
+					person_account = #{item.person_account},
+				</if>
+				<if test="item.create_time != null">
+					create_time = #{item.create_time},
+				</if>
+				<if test="item.remark != null">
+					remark = #{item.remark},
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+</mapper>

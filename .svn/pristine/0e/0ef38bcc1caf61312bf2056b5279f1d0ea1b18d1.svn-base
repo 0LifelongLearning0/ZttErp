@@ -1,0 +1,21 @@
+//返回r
+function goback(){
+	tlocation("../zxApplyPhoneCardController/loadZxApplyPhoneCard");
+}
+$('#defaultForm').bootstrapValidator({
+	message:'此值不是有效的'
+});
+//保存
+function updateZxCarApply(){
+	submitBForm('defaultForm','../zxApplyPhoneCardController/updateZxApplyPhoneCard','../zxApplyPhoneCardController/loadZxApplyPhoneCard');
+}
+$(function(){
+	  $(":radio").click(function(){
+		  var v = $(this).val();
+		  if(v==5){
+			  $("#other").show();
+		  }else{
+			  $("#other").hide();
+		  }
+	  });
+});

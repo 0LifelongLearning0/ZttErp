@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZxConcordat">
+	<!--初始化分页-->
+	<select id="getZxConcordatListByCondition" resultType="jehc.zxmodules.model.ZxConcordat" parameterType="map">
+		SELECT
+			`id`,
+			`num`,
+			`name`,
+			`descriptiom`
+		FROM 
+			zx_concordat
+		WHERE 1=1
+		<if test="null != num">
+			AND instr(num,#{num})
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getZxConcordatById" resultType="jehc.zxmodules.model.ZxConcordat" parameterType="string">
+		SELECT
+			`id`,
+			`num`,
+			`name`,
+			`descriptiom`
+		FROM 
+			zx_concordat
+		WHERE id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addZxConcordat" parameterType="jehc.zxmodules.model.ZxConcordat">
+		INSERT INTO
+			zx_concordat
+			(
+			`id`,
+			`num`,
+			`name`,
+			`descriptiom`
+			)
+			VALUES
+			(
+			#{id},
+			#{num},
+			#{name},
+			#{descriptiom}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZxConcordat" parameterType="jehc.zxmodules.model.ZxConcordat">
+		UPDATE
+			zx_concordat
+		SET
+			`num` = #{num},
+			`name` = #{name},
+			`descriptiom` = #{descriptiom}
+		WHERE id=#{id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZxConcordatBySelective" parameterType="jehc.zxmodules.model.ZxConcordat">
+		UPDATE
+			zx_concordat
+		<set>
+			<if test="num != null">
+				`num` = #{num},
+			</if>
+			<if test="name != null">
+				`name` = #{name},
+			</if>
+			<if test="descriptiom != null">
+				`descriptiom` = #{descriptiom},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZxConcordat" parameterType="map">
+		DELETE FROM zx_concordat WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZxConcordat" parameterType="list">
+		INSERT INTO
+			zx_concordat
+			(
+			`id`,
+			`num`,
+			`name`,
+			`descriptiom`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.num},
+			#{item.name},
+			#{item.descriptiom}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZxConcordat" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_concordat
+			SET
+				`num` = #{item.num},
+				`name` = #{item.name},
+				`descriptiom` = #{item.descriptiom}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZxConcordatBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_concordat
+			<set>
+				<if test="item.num != null">
+					`num` = #{item.num},
+				</if>
+				<if test="item.name != null">
+					`name` = #{item.name},
+				</if>
+				<if test="item.descriptiom != null">
+					`descriptiom` = #{item.descriptiom},
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+</mapper>

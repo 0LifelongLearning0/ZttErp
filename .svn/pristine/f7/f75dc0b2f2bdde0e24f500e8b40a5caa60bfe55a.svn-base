@@ -1,0 +1,122 @@
+body{background-color: #FFFFFF}
+*{
+  font-family:courier;
+  padding:0 !important;
+}
+#content{
+    width: 100%;margin: 0 auto;
+}
+.smlb {
+    font-size: 20px; color: white; float: right; margin-right: 13%; margin-top: -54%;
+}
+
+.wrap{position:relative; z-index:1;}
+.up{position:absolute; z-index:100; left:0px; top:0px;}
+
+.aorange {
+   font-weight: bold; font-size: 20px; color: #ff5f07; width:257px;border-bottom: 1px solid #f5f5f5;
+}
+.day {
+   font-size: 18px; color: #000000; 
+}
+.day td{
+  color:#9F9E9E;
+}
+.one {
+   font-weight: normal; font-size: 20px; color: #000000; width:257px;border-bottom: 1px solid #f5f5f5;
+}
+.bs {
+   font-size: 12px; color: #9F9E9E;width:257px;height:100px;border-bottom: 1px solid #f5f5f5;border-right: 1px solid #f5f5f5;
+}
+.lb {
+   font-size: 16px; color: #0099ff
+}
+.sm {
+   font-size: 14px; color: #333399
+}
+.dayContent {
+   font-size: 20px; color: #000000;text-align: left !important;width:100px !important;
+}
+.smz {
+   font-weight: bold; font-size: 14px; color: #0099ff
+}
+
+
+#cal-content{
+   height:126px;background-color:"#5fa2dd";text-align: center;
+}
+.detallu{
+   width:100%; border:0; padding:2px; color: white;
+   
+}
+.lnotice{
+  margin-top: 34%;
+}
+#detail{
+   margin-top: 31px;text-align: center;background-color: #5fa2dd;
+}
+#oTime{
+  color: white ;text-align: center;font-family: 
+}
+
+.sm span{
+  color: black;
+
+}
+.thead span{
+   color: #2EBEB7;
+
+}
+#clock{
+    font-family: courier;margin-top: -23%;padding-bottom: 5%;
+  }
+
+
+
+/*��ݣ��·��л�*/
+.year_select{
+  display:inline-block;padding-right: 23px;
+}
+.home_select{
+  display:inline-block; padding-right: 18px;
+}
+/*���ie��Ĭ��ѡ�����ʽ�������������ͷ*/
+select::-ms-expand { display: none; }
+.ch{
+  background-color:#5fa2dd;
+}
+.day td{
+  width:257px;color:white; text-align:center;
+}
+select {
+  margin-bottom: 9px; appearance: none;-moz-appearance: none;-webkit-appearance: none;border: 0; border-radius: 2px; color: #000000; padding-top: 6px; background-color: white; padding-bottom: 2px;
+}
+
+
+
+/*����ͷ��*/
+
+.table_head{
+    background-color: #5fa2dd;width: 100%;
+  }
+  
+.table_head td{
+    text-align:left;text-indent:50px;
+  }
+.week{
+   border-spacing: 0;   
+}
+
+
+div.tishishgen0{ 
+  text-align:center; margin:50px 0 10px 0; color:#666
+}
+
+div.shenbox {
+    margin-top: 20px;
+}
+ {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    font-family: "microsoft yahei",Times New Roman;

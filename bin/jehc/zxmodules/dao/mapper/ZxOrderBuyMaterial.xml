@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZxOrderBuyMaterial">
+	<!--初始化分页-->
+	<select id="getZxOrderBuyMaterialListByCondition" resultType="jehc.zxmodules.model.ZxOrderBuyMaterial" parameterType="map">
+		SELECT
+			`id`,
+			`order_id`,
+			`apply_material_id`,
+			`material_id`,
+			`agree_time`
+		FROM 
+			zx_order_buy_material
+		WHERE 1=1
+		<if test="null != material_id">
+			AND instr(material_id,#{material_id})
+		</if>
+		<if test="null != apply_material_id">
+			AND instr(apply_material_id,#{apply_material_id})
+		</if>
+		<if test="null != order_id">
+			AND instr(order_id,#{order_id})
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getZxOrderBuyMaterialById" resultType="jehc.zxmodules.model.ZxOrderBuyMaterial" parameterType="string">
+		SELECT
+			`id`,
+			`order_id`,
+			`apply_material_id`,
+			`material_id`,
+			`agree_time`
+		FROM 
+			zx_order_buy_material
+		WHERE id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addZxOrderBuyMaterial" parameterType="jehc.zxmodules.model.ZxOrderBuyMaterial">
+		INSERT INTO
+			zx_order_buy_material
+			(
+			`id`,
+			`order_id`,
+			`apply_material_id`,
+			`material_id`,
+			`agree_time`
+			)
+			VALUES
+			(
+			#{id},
+			#{order_id},
+			#{apply_material_id},
+			#{material_id},
+			#{agree_time}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZxOrderBuyMaterial" parameterType="jehc.zxmodules.model.ZxOrderBuyMaterial">
+		UPDATE
+			zx_order_buy_material
+		SET
+			`order_id` = #{order_id},
+			`apply_material_id` = #{apply_material_id},
+			`material_id` = #{material_id},
+			`agree_time` = #{agree_time}
+		WHERE id=#{id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZxOrderBuyMaterialBySelective" parameterType="jehc.zxmodules.model.ZxOrderBuyMaterial">
+		UPDATE
+			zx_order_buy_material
+		<set>
+			<if test="order_id != null">
+				`order_id` = #{order_id},
+			</if>
+			<if test="apply_material_id != null">
+				`apply_material_id` = #{apply_material_id},
+			</if>
+			<if test="material_id != null">
+				`material_id` = #{material_id},
+			</if>
+			<if test="agree_time != null">
+				`agree_time` = #{agree_time},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZxOrderBuyMaterial" parameterType="map">
+		DELETE FROM zx_order_buy_material WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<!--删除-->
+	<delete id="delZxOM" parameterType="map">
+		delete from zx_order_buy_material where apply_material_id in
+		<foreach item="item" index="index" collection="apply_material_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+		and order_id = #{order_id}
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZxOrderBuyMaterial" parameterType="list">
+		INSERT INTO
+			zx_order_buy_material
+			(
+			`id`,
+			`order_id`,
+			`apply_material_id`,
+			`material_id`,
+			`agree_time`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.order_id},
+			#{item.apply_material_id},
+			#{item.material_id},
+			#{item.agree_time}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZxOrderBuyMaterial" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_order_buy_material
+			SET
+				`order_id` = #{item.order_id},
+				`apply_material_id` = #{item.apply_material_id},
+				`material_id` = #{item.material_id},
+				`agree_time` = #{item.agree_time}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZxOrderBuyMaterialBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_order_buy_material
+			<set>
+				<if test="item.order_id != null">
+					`order_id` = #{item.order_id},
+				</if>
+				<if test="item.apply_material_id != null">
+					`apply_material_id` = #{item.apply_material_id},
+				</if>
+				<if test="item.material_id != null">
+					`material_id` = #{item.material_id},
+				</if>
+				<if test="item.agree_time != null">
+					`agree_time` = #{item.agree_time},
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+</mapper>

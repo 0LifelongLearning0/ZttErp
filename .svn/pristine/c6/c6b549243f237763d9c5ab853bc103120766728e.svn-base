@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZxWorkpiece">
+	<!--初始化分页-->
+	<select id="getZxWorkpieceListByCondition" resultType="jehc.zxmodules.model.ZxWorkpiece" parameterType="map">
+		SELECT
+			`id`,
+			`project_id`,
+			`project_name`,
+			`num`,
+			`name`,
+			`unit`,
+			`zubie`
+		FROM 
+			zx_workpiece
+		WHERE 1=1
+		<if test="null != name">
+			AND instr(name,#{name})
+		</if>
+		<if test="null != num">
+			AND instr(num,#{num})
+		</if>
+		<if test="null != project_id">
+			AND project_id = #{project_id}
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getZxWorkpieceById" resultType="jehc.zxmodules.model.ZxWorkpiece" parameterType="string">
+		SELECT
+			`id`,
+			`project_id`,
+			`project_name`,
+			`num`,
+			`name`,
+			`unit`,
+			`zubie`
+		FROM 
+			zx_workpiece
+		WHERE id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addZxWorkpiece" parameterType="jehc.zxmodules.model.ZxWorkpiece">
+		INSERT INTO
+			zx_workpiece
+			(
+			`id`,
+			`project_id`,
+			`project_name`,
+			`num`,
+			`name`,
+			`unit`,
+			`zubie`
+			)
+			VALUES
+			(
+			#{id},
+			#{project_id},
+			#{project_name},
+			#{num},
+			#{name},
+			#{unit},
+			#{zubie}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZxWorkpiece" parameterType="jehc.zxmodules.model.ZxWorkpiece">
+		UPDATE
+			zx_workpiece
+		SET
+			`project_id` = #{project_id},
+			`project_name` = #{project_name},
+			`num` = #{num},
+			`name` = #{name},
+			`unit` = #{unit},
+			`zubie` = #{zubie}
+		WHERE id=#{id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZxWorkpieceBySelective" parameterType="jehc.zxmodules.model.ZxWorkpiece">
+		UPDATE
+			zx_workpiece
+		<set>
+			<if test="project_id != null">
+				`project_id` = #{project_id},
+			</if>
+			<if test="project_name != null">
+				`project_name` = #{project_name},
+			</if>
+			<if test="num != null">
+				`num` = #{num},
+			</if>
+			<if test="name != null">
+				`name` = #{name},
+			</if>
+			<if test="unit != null">
+				`unit` = #{unit},
+			</if>
+			<if test="zubie != null">
+				`zubie` = #{zubie},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZxWorkpiece" parameterType="map">
+		DELETE FROM zx_workpiece WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZxWorkpiece" parameterType="list">
+		INSERT INTO
+			zx_workpiece
+			(
+			`id`,
+			`project_id`,
+			`project_name`,
+			`num`,
+			`name`,
+			`unit`,
+			`zubie`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.project_id},
+			#{item.project_name},
+			#{item.num},
+			#{item.name},
+			#{item.unit},
+			#{item.zubie}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZxWorkpiece" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_workpiece
+			SET
+				`project_id` = #{item.project_id},
+				`project_name` = #{item.project_name},
+				`num` = #{item.num},
+				`name` = #{item.name},
+				`unit` = #{item.unit},
+				`zubie` = #{item.zubie}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZxWorkpieceBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_workpiece
+			<set>
+				<if test="item.project_id != null">
+					`project_id` = #{item.project_id},
+				</if>
+				<if test="item.project_name != null">
+					`project_name` = #{item.project_name},
+				</if>
+				<if test="item.num != null">
+					`num` = #{item.num},
+				</if>
+				<if test="item.name != null">
+					`name` = #{item.name},
+				</if>
+				<if test="item.unit != null">
+					`unit` = #{item.unit},
+				</if>
+				<if test="item.zubie != null">
+					`zubie` = #{item.zubie},
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+</mapper>

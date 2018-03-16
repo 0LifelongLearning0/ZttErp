@@ -1,0 +1,209 @@
+package jehc.zxmodules.service.impl;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import jehc.xtmodules.xtcore.base.BaseService;
+import jehc.xtmodules.xtcore.util.ExceptionUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import jehc.zxmodules.service.ZxOfficeService;
+import jehc.zxmodules.dao.ZxOfficeDao;
+import jehc.zxmodules.dao.ZxOfficeInventoryDao;
+import jehc.zxmodules.model.ZxOffice;
+import jehc.zxmodules.model.ZxOfficeClassify;
+import jehc.zxmodules.model.ZxOfficeInventoryShow;
+
+/**
+* 办公用品管理 
+* 2018-01-11 13:16:08  季建吉
+*/
+@Service("zxOfficeService")
+public class ZxOfficeServiceImpl extends BaseService implements ZxOfficeService{
+	@Autowired
+	private ZxOfficeInventoryDao zxOfficeInventoryDao;
+	@Autowired
+	private ZxOfficeDao zxOfficeDao;
+	private List<String> listid=null;
+	private List<String> listclassfyid=null;
+	private List<ZxOfficeInventoryShow> listzclick=null;
+	/**
+	* 分页
+	* @param condition 
+	* @return
+	*/
+	public List<ZxOffice> getZxOfficeListByCondition(Map<String,Object> condition){
+		try{
+			return zxOfficeDao.getZxOfficeListByCondition(condition);
+		} catch (Exception e) {
+			/**捕捉异常并回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+	}
+	/**
+	* 得到用品
+	* @param condition 
+	* @return
+	*/
+	public List<ZxOfficeInventoryShow> getZxOfficeInventoryClick(String id){
+		try{
+			ZxOfficeClassify ZxOfficeClassify=null;
+			listid=new ArrayList<String>();
+			listzclick=new ArrayList<ZxOfficeInventoryShow>();
+			listclassfyid=getZxOfficeClassfyById(id);
+			for(int i = 0; i < listclassfyid.size(); i++){
+				List<ZxOfficeInventoryShow> listzc=zxOfficeInventoryDao.getZxOfficeInventoryClickById(listclassfyid.get(i));
+				for(int j = 0; j < listzc.size(); j++){
+					listzclick.add(listzc.get(j));
+				}
+			}
+			return listzclick;
+		} catch (Exception e) {
+			/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+	}
+	public List<String> getZxOfficeClassfyById(String id){
+		List<ZxOfficeClassify> self=zxOfficeInventoryDao.getZxOfficeselfById(id);
+		List<ZxOfficeClassify> list= zxOfficeInventoryDao.getZxOfficeInventoryClick(id);
+			if(self.get(0).getClassify_leaf().equals("0")){
+				for(int i = 0; i < list.size(); i++){
+					ZxOfficeClassify zxOfficeClassify = list.get(i);
+					//无子页
+					if(zxOfficeClassify.getClassify_leaf().equals("0")){
+						getZxOfficeClassfyById(zxOfficeClassify.getClassify_id());
+					}else{
+						listid.add(zxOfficeClassify.getClassify_id());
+					}
+				}
+			}else{
+				listid.add(self.get(0).getClassify_id());
+			}
+		return listid;
+	}
+	/**
+	* 查询对象
+	* @param office_id 
+	* @return
+	*/
+	public ZxOffice getZxOfficeById(String office_id){
+		try{
+			ZxOffice zxOffice = zxOfficeDao.getZxOfficeById(office_id);
+			return zxOffice;
+		} catch (Exception e) {
+			/**捕捉异常并回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+	}
+	/**
+	* 添加
+	* @param zx_office 
+	* @return
+	*/
+	public int addZxOffice(ZxOffice zxOffice){
+		int i = 0;
+		try {
+			i = zxOfficeDao.addZxOffice(zxOffice);
+		} catch (Exception e) {
+			i = 0;
+			/**捕捉异常并回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+		return i;
+	}
+	/**
+	* 修改
+	* @param zx_office 
+	* @return
+	*/
+	public int updateZxOffice(ZxOffice zxOffice){
+		int i = 0;
+		try {
+			i = zxOfficeDao.updateZxOffice(zxOffice);
+		} catch (Exception e) {
+			i = 0;
+			/**捕捉异常并回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+		return i;
+	}
+	/**
+	* 修改（根据动态条件）
+	* @param zx_office 
+	* @return
+	*/
+	public int updateZxOfficeBySelective(ZxOffice zxOffice){
+		int i = 0;
+		try {
+			i = zxOfficeDao.updateZxOfficeBySelective(zxOffice);
+		} catch (Exception e) {
+			i = 0;
+			/**捕捉异常并回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+		return i;
+	}
+	/**
+	* 删除
+	* @param condition 
+	* @return
+	*/
+	public int delZxOffice(Map<String,Object> condition){
+		int i = 0;
+		try {
+			i = zxOfficeDao.delZxOffice(condition);
+		} catch (Exception e) {
+			i = 0;
+			/**捕捉异常并回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+		return i;
+	}
+	/**
+	* 批量添加
+	* @param zx_officeList 
+	* @return
+	*/
+	public int addBatchZxOffice(List<ZxOffice> zxOfficeList){
+		int i = 0;
+		try {
+			i = zxOfficeDao.addBatchZxOffice(zxOfficeList);
+		} catch (Exception e) {
+			i = 0;
+			/**捕捉异常并回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+		return i;
+	}
+	/**
+	* 批量修改
+	* @param zx_officeList 
+	* @return
+	*/
+	public int updateBatchZxOffice(List<ZxOffice> zxOfficeList){
+		int i = 0;
+		try {
+			i = zxOfficeDao.updateBatchZxOffice(zxOfficeList);
+		} catch (Exception e) {
+			i = 0;
+			/**捕捉异常并回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+		return i;
+	}
+	/**
+	* 批量修改（根据动态条件）
+	* @param zx_officeList 
+	* @return
+	*/
+	public int updateBatchZxOfficeBySelective(List<ZxOffice> zxOfficeList){
+		int i = 0;
+		try {
+			i = zxOfficeDao.updateBatchZxOfficeBySelective(zxOfficeList);
+		} catch (Exception e) {
+			i = 0;
+			/**捕捉异常并回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+		return i;
+	}
+}

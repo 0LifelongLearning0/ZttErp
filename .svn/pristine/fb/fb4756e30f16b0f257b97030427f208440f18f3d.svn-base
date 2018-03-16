@@ -1,0 +1,360 @@
+package jehc.zxmodules.web;
+import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+
+import org.activiti.engine.task.Task;
+import org.apache.commons.lang.time.DateFormatUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+import com.github.pagehelper.PageInfo;
+
+import jehc.lcmodules.activitiutil.ActivitiUtil;
+import jehc.lcmodules.activitiutil.util.Variable;
+import jehc.lcmodules.lcmodel.LcApply;
+import jehc.lcmodules.lcmodel.LcApproval;
+import jehc.lcmodules.lcmodel.LcDeploymentHis;
+import jehc.lcmodules.lcservice.LcApplyService;
+import jehc.lcmodules.lcservice.LcApprovalService;
+import jehc.lcmodules.lcservice.LcDeploymentHisService;
+import jehc.xtmodules.xtcore.base.BaseAction;
+import jehc.xtmodules.xtcore.base.BaseSearch;
+import jehc.xtmodules.xtmodel.XtConstant;
+import jehc.xtmodules.xtmodel.XtUserinfo;
+import jehc.xtmodules.xtservice.XtUserinfoService;
+import jehc.xtmodules.xtcore.util.CommonUtils;
+import jehc.xtmodules.xtcore.util.UUID;
+import jehc.zxmodules.model.ZxApplyPhoneCard;
+import jehc.zxmodules.model.ZxCar;
+import jehc.zxmodules.service.ZxApplyPhoneCardService;
+import net.sf.json.JSONArray;
+
+/**
+* 员工申请电话卡 
+* 2017-12-05 14:49:41  owen
+*/
+@Controller
+@RequestMapping("/zxApplyPhoneCardController")
+public class ZxApplyPhoneCardController extends BaseAction{
+	@Autowired
+	private ZxApplyPhoneCardService zxApplyPhoneCardService;
+	@Autowired
+	private XtUserinfoService xtUserinfoService;
+	@Autowired
+	private LcDeploymentHisService lc_Deployment_HisService;
+	@Autowired
+	private ActivitiUtil activitiUtil;
+	@Autowired
+	private LcApplyService lcApplyService;
+	@Autowired
+	private LcApprovalService lc_ApprovalService;
+	/**
+	* 载入初始化申请页面
+	* @param zx_apply_phone_card 
+	* @param request 
+	* @return
+	*/
+	@RequestMapping(value="/loadZxApplyPhoneCard",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView loadZxApplyPhoneCard(ZxApplyPhoneCard zxApplyPhoneCard,HttpServletRequest request){
+		return new ModelAndView("pc/zx-view/zx-apply-phone-card/zx-apply-phone-card-list");
+	}
+	/**
+	* 载入初始化发放页面
+	* @param zx_apply_phone_card 
+	* @param request 
+	* @return
+	*/
+	@RequestMapping(value="/loadZxGrantPhoneCard",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView loadZxGrantPhoneCard(ZxApplyPhoneCard zxApplyPhoneCard,HttpServletRequest request){
+		return new ModelAndView("pc/zx-view/zx-apply-phone-card/zx-grant-phone-card-list");
+	}
+	/**
+	* 加载初始化申请列表数据并分页
+	* @param zx_apply_phone_card 
+	* @param request 
+	*/
+	@ResponseBody
+	@RequestMapping(value="/getZxApplyPhoneCardListByCondition",method={RequestMethod.POST,RequestMethod.GET})
+	public String getZxApplyPhoneCardListByCondition(BaseSearch baseSearch,HttpServletRequest request){
+		Map<String, Object> condition = baseSearch.convert();
+		condition.put("xt_userinfo_id", getXtU().getXt_userinfo_id());
+		commonHPager(condition,request);
+		List<ZxApplyPhoneCard> zxApplyPhoneCardList = zxApplyPhoneCardService.getZxApplyPhoneCardListByCondition(condition);
+		PageInfo<ZxApplyPhoneCard> page = new PageInfo<ZxApplyPhoneCard>(zxApplyPhoneCardList);
+		return outPageBootStr(page,request);
+	}
+	/**
+	* 加载初始化发放列表数据并分页
+	* @param zx_apply_phone_card 
+	* @param request 
+	*/
+	@ResponseBody
+	@RequestMapping(value="/getZxApplyPhoneCardListByConditionHR",method={RequestMethod.POST,RequestMethod.GET})
+	public String getZxApplyPhoneCardListByConditionHR(BaseSearch baseSearch,HttpServletRequest request){
+		Map<String, Object> condition = baseSearch.convert();
+		condition.put("status", 3);
+		commonHPager(condition,request);
+		List<ZxApplyPhoneCard> zxApplyPhoneCardList = zxApplyPhoneCardService.getZxApplyPhoneCardListByConditionHR(condition);
+		for (ZxApplyPhoneCard loan : zxApplyPhoneCardList) {
+			XtUserinfo phoneApply = xtUserinfoService.getXtUserinfoById(loan.getApply_user_id());
+			loan.setXt_userinfo_realName(phoneApply.getXt_userinfo_realName());
+		}
+		PageInfo<ZxApplyPhoneCard> page = new PageInfo<ZxApplyPhoneCard>(zxApplyPhoneCardList);
+		return outPageBootStr(page,request);
+	}
+	/**
+	* 获取对象
+	* @param id 
+	* @param request 
+	*/
+	@ResponseBody
+	@RequestMapping(value="/getZxApplyPhoneCardById",method={RequestMethod.POST,RequestMethod.GET})
+	public String getZxApplyPhoneCardById(String id,HttpServletRequest request){
+		ZxApplyPhoneCard zxApplyPhoneCard = zxApplyPhoneCardService.getZxApplyPhoneCardById(id);
+		String outData = outDataStr(zxApplyPhoneCard);
+		String outStr = outData.substring(0,outData.length()-2);
+		XtUserinfo phoneApply = xtUserinfoService.getXtUserinfoById(zxApplyPhoneCard.getApply_user_id());
+		if(null != phoneApply){
+			String jsonStr = JSONArray.fromObject(phoneApply).toString(); 
+			jsonStr = jsonStr.substring(1,jsonStr.length()-1);
+			outStr = outStr.concat(",\"phoneApply\":").concat(jsonStr);
+		}
+		outStr = outStr.concat(outData.substring(outData.length()-2,outData.length()));
+		return outStr;
+	}
+	/**
+	* 获取对象
+	* @param user_id 
+	* @param request 
+	*/
+	@ResponseBody
+	@RequestMapping(value="/getZxApplyPhoneCardByUserId",method={RequestMethod.POST,RequestMethod.GET})
+	public String getZxApplyPhoneCardByUserId(String apply_user_id,HttpServletRequest request){
+		//这里为空
+		List<ZxApplyPhoneCard> list = zxApplyPhoneCardService.getZxApplyPhoneCardByUserId(apply_user_id);
+		return outItemsStr(list);
+	}
+	/**
+	 * 添加
+	 * @param zx_apply_phone_card 
+	 * @param request 
+	 */
+	@ResponseBody
+	@RequestMapping(value="/addZxApplyPhoneCard",method={RequestMethod.POST,RequestMethod.GET})
+	public String addZxApplyPhoneCard(ZxApplyPhoneCard zxApplyPhoneCard,HttpServletRequest request){
+		int i = 0;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:dd");
+		Date d = new Date();
+		if(null != zxApplyPhoneCard && !"".equals(zxApplyPhoneCard)){
+			List<ZxApplyPhoneCard> list = zxApplyPhoneCardService.getZxApplyPhoneCardByUserId(zxApplyPhoneCard.getApply_user_id());
+			XtUserinfo xtUserinfo = xtUserinfoService.getXtUserinfoById(zxApplyPhoneCard.getApply_user_id());
+			if(xtUserinfo.getXt_userinfo_ortherTel().equals("")){
+				//没申请过或者申请失败可以申请
+				if(list.isEmpty()&&list.size()==0){
+					zxApplyPhoneCard.setId(UUID.toUUID());
+					zxApplyPhoneCard.setStatus("1");//注入状态
+					zxApplyPhoneCard.setApply_time(sdf.format(d));
+					i=zxApplyPhoneCardService.addZxApplyPhoneCard(zxApplyPhoneCard);//添加数据
+				}else{
+					i = 0;
+					return "{success:false,msg:'您已有集团短号',responseFlag:false}";
+				}
+			}else{
+				i = 0;
+				return "{success:false,msg:'您已有集团短号',responseFlag:false}";
+			}
+		}
+		if(i>0){
+			return outAudStr(true);
+		}else{
+			return outAudStr(false);
+		}
+	}
+	/**
+	* 修改
+	* @param zxApplyPhoneCard 
+	* @param request 
+	*/
+	@ResponseBody
+	@RequestMapping(value="/updateZxApplyPhoneCard",method={RequestMethod.POST,RequestMethod.GET})
+	public String updateZxApplyPhoneCard(ZxApplyPhoneCard zxApplyPhoneCard,HttpServletRequest request){
+		int i = 0;
+		if(null != zxApplyPhoneCard){
+			zxApplyPhoneCard.setApply_time(DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
+			i=zxApplyPhoneCardService.updateZxApplyPhoneCard(zxApplyPhoneCard);
+		}
+		if(i>0){
+			return outAudStr(true);
+		}else{
+			return outAudStr(false);
+		}
+	}
+	/**
+	* 删除
+	* @param id 
+	* @param request 
+	*/
+	@ResponseBody
+	@RequestMapping(value="/delZxApplyPhoneCard",method={RequestMethod.POST,RequestMethod.GET})
+	public String delZxApplyPhoneCard(String id,HttpServletRequest request){
+		int i = 0;
+		if(null != id && !"".equals(id)){
+			Map<String, Object> condition = new HashMap<String, Object>();
+			condition.put("id",id.split(","));
+			i=zxApplyPhoneCardService.delZxApplyPhoneCard(condition);
+		}
+		if(i>0){
+			return outAudStr(true);
+		}else{
+			return outAudStr(false);
+		}
+	}
+	/**
+	* 申请
+	* @param zx_apply_phone_card 
+	* @param request 
+	*/
+	@ResponseBody
+	@RequestMapping(value="/applyZxApplyPhoneCard",method={RequestMethod.POST,RequestMethod.GET})
+	public String applyZxApplyPhoneCard(String id,HttpServletRequest request){
+		int i = 0;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:dd");
+		Date d = new Date();
+		if(null != id && !"".equals(id)){
+			ZxApplyPhoneCard zxApplyPhoneCard = zxApplyPhoneCardService.getZxApplyPhoneCardById(id);
+			//将业务与工作流流程绑定起来
+			XtConstant Xt_Constant = getXtConstantCache("zx_phone_card");//根据key获取常量
+			Map<String, Object> condition = new HashMap<String, Object>();
+			condition.put("xt_constant_id", Xt_Constant.getXt_constant_id());
+			//根据常量编号查询对象 流程部署历史记录
+			LcDeploymentHis lcDeploymentHis = lc_Deployment_HisService.getLcDeploymentHisNewUnique(condition);
+			//获取流程部署历史记录id
+			String lc_his_id = lcDeploymentHis.getId();
+			LcApply lc_Apply = new LcApply();//new一个流程申请
+			Map<String, Object> variables = new HashMap<String, Object>();
+		    variables.put("taskType","电话卡审批流程" );
+		    //为流程申请注入标题
+		    lc_Apply.setLc_apply_title(CommonUtils.getXtU().getXt_userinfo_name()+"于"+getSimpleDateFormat()+"，提交了电话卡申请流程");
+			lc_Apply.setLc_apply_model_biz_id(zxApplyPhoneCard.getId());//业务编号为申请电话卡编号
+			//发布流程申请，参数历史流程编号，业务编号，变量，流程申请对象
+			if(activitiUtil.addApply(lc_his_id, zxApplyPhoneCard.getId(), variables,lc_Apply)){
+				zxApplyPhoneCard.setStatus("2");//注入状态
+				zxApplyPhoneCard.setApply_time(sdf.format(d));
+				i=zxApplyPhoneCardService.updateZxApplyPhoneCard(zxApplyPhoneCard);//添加数据
+			}else{
+				i = 0;
+			}
+		}
+		if(i>0){
+			return outAudStr(true);
+		}else{
+			return outAudStr(false);
+		}
+	}
+	/**
+	* 审批
+	* @param id 
+	* @param request 
+	*/
+	@ResponseBody
+	@RequestMapping(value="/approvalPhoneCard",method={RequestMethod.POST,RequestMethod.GET})
+	public String approval(String task_id,String task_status,String remark,HttpServletRequest request){
+		int i = 0;
+		if(null != task_id && !"".equals(task_id)){
+			Map<String,Object> taskData = activitiUtil.getTask(task_id);
+			Variable variable = new Variable();
+			ZxApplyPhoneCard zxApplyPhoneCard = zxApplyPhoneCardService.getZxApplyPhoneCardById(taskData.get("businessKey").toString());
+			String vals = task_status;
+			variable.setKeys("status");
+			variable.setTypes("S");
+			variable.setValues(vals);
+			if(activitiUtil.completeTask(task_id, variable)){
+				LcApproval lc_approval = new LcApproval();
+				Map<String,Object> condition = new HashMap<String,Object>();
+				condition.put("processInstance_id", ((Task)taskData.get("task")).getProcessInstanceId());
+				//根据流程实例id获取流程集
+				List<LcApply> list = lcApplyService.getLcApplyListByCondition(condition);
+				if(!list.isEmpty()){
+					lc_approval.setLc_apply_id(list.get(0).getLc_apply_id());
+				}
+				lc_approval.setLc_approval_id(UUID.toUUID());
+				lc_approval.setLc_approval_remark(remark);
+				lc_approval.setLc_approval_time(CommonUtils.getDate());;
+				lc_approval.setLc_status_id(task_status);
+				if(task_status.equals("yes")){
+					lc_approval.setLc_status_name("审批通过");
+					boolean isEnd = activitiUtil.isEnded(((Task) taskData.get("task")).getProcessInstanceId());
+					if(isEnd){
+						zxApplyPhoneCard.setStatus("3");
+						zxApplyPhoneCardService.updateZxApplyPhoneCard(zxApplyPhoneCard);
+					}
+				}else{
+					lc_approval.setLc_status_name("审批不通过");
+					zxApplyPhoneCard.setStatus("4");
+					zxApplyPhoneCardService.updateZxApplyPhoneCard(zxApplyPhoneCard);
+				}
+				lc_approval.setTaskId(task_id);
+				lc_approval.setXt_userinfo_id(CommonUtils.getXtUid());
+				lc_ApprovalService.addLcApproval(lc_approval);
+				i = 1;
+			}
+		}
+		if(i>0){ 
+			return outAudStr(true);
+		}else{
+			return outAudStr(false);
+		}
+	}
+	/**
+	 * 发放卡号
+	 */
+	@ResponseBody
+	@RequestMapping(value="/updateZxApplyPhoneCardBySelective",method={RequestMethod.POST,RequestMethod.GET})
+	public String updateZxApplyPhoneCardBySelective(ZxApplyPhoneCard zxApplyPhoneCard,HttpServletRequest request){
+		int i = 0;
+		int j = 0;
+		if(null != zxApplyPhoneCard){
+			Map<String,Object> condition = new HashMap<String,Object>();
+			String phone_card = zxApplyPhoneCard.getPhone_card().substring(8);
+			String num = "8"+phone_card;
+			condition.put("xt_userinfo_ortherTel", num );
+			List<XtUserinfo> list = xtUserinfoService.getXtUserinfoListAllByCondition(condition);
+			XtUserinfo xtUserinfo = xtUserinfoService.getXtUserinfoById(zxApplyPhoneCard.getApply_user_id());
+			if(xtUserinfo.getXt_userinfo_ortherTel() == "" || xtUserinfo.getXt_userinfo_ortherTel().isEmpty()){
+				if(list.size()==0 && list.isEmpty()){
+					xtUserinfo.setXt_userinfo_ortherTel(num);
+					j = xtUserinfoService.updateXtUserinfo(xtUserinfo);
+				}else{
+					// 此电话卡号已被使用
+					return "{success:false,msg:'此电话卡号已被使用',responseFlag:false}";
+				}
+			}else{
+				return "{success:false,msg:'您已有集团短号',responseFlag:false}";
+			}
+			if(j>0){
+				zxApplyPhoneCard.setStatus("5");
+				i=zxApplyPhoneCardService.updateZxApplyPhoneCardBySelective(zxApplyPhoneCard);
+			}
+		}
+		if(i>0){
+			return outAudStr(true);
+		}else{
+			return outAudStr(false);
+		}
+	}
+	/**
+	* 发送至新增页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toZxApplyPhoneCardAdd",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toZxApplyPhoneCardAdd(ZxApplyPhoneCard zxApplyPhoneCard,HttpServletRequest request){
+		return new ModelAndView("pc/zx-view/zx-apply-phone-card/zx-apply-phone-card-add");
+	}
+}

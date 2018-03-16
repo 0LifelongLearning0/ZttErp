@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZxMeetingHouse">
+	<!--初始化分页-->
+	<select id="getZxMeetingHouseListByCondition" resultType="jehc.zxmodules.model.ZxMeetingHouse" parameterType="map">
+		SELECT
+			`id`,
+			`house_name`,
+			`max_num`,
+			`status`,
+			`state`,
+			`remark`
+		FROM 
+			zx_meeting_house
+		WHERE 1=1
+		<if test="null != house_name and '' != house_name">
+			AND instr(house_name,#{house_name}) 
+		</if>
+		<if test="null != status and '' != status">
+			AND status=#{status} 
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getZxMeetingHouseById" resultType="jehc.zxmodules.model.ZxMeetingHouse" parameterType="string">
+		SELECT
+			`id`,
+			`house_name`,
+			`max_num`,
+			`status`,
+			`state`,
+			`remark`
+		FROM 
+			zx_meeting_house
+		WHERE id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addZxMeetingHouse" parameterType="jehc.zxmodules.model.ZxMeetingHouse">
+		INSERT INTO
+			zx_meeting_house
+			(
+			`id`,
+			`house_name`,
+			`max_num`,
+			`status`,
+			`state`,
+			`remark`
+			)
+			VALUES
+			(
+			#{id},
+			#{house_name},
+			#{max_num},
+			#{status},
+			#{state},
+			#{remark}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZxMeetingHouse" parameterType="jehc.zxmodules.model.ZxMeetingHouse">
+		UPDATE
+			zx_meeting_house
+		SET
+			`house_name` = #{house_name},
+			`max_num` = #{max_num},
+			`status` = #{status},
+			`state` = #{state},
+			`remark` = #{remark}
+		WHERE id=#{id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZxMeetingHouseBySelective" parameterType="jehc.zxmodules.model.ZxMeetingHouse">
+		UPDATE
+			zx_meeting_house
+		<set>
+			<if test="house_name != null">
+				`house_name` = #{house_name},
+			</if>
+			<if test="max_num != null">
+				`max_num` = #{max_num},
+			</if>
+			<if test="status != null">
+				`status` = #{status},
+			</if>
+			<if test="state != null">
+				`state` = #{state},
+			</if>
+			<if test="remark != null">
+				`remark` = #{remark},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZxMeetingHouse" parameterType="map">
+		DELETE FROM zx_meeting_house WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZxMeetingHouse" parameterType="list">
+		INSERT INTO
+			zx_meeting_house
+			(
+			`id`,
+			`house_name`,
+			`max_num`,
+			`status`,
+			`state`,
+			`remark`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.house_name},
+			#{item.max_num},
+			#{item.status},
+			#{item.state},
+			#{item.remark}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZxMeetingHouse" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_meeting_house
+			SET
+				`house_name` = #{item.house_name},
+				`max_num` = #{item.max_num},
+				`status` = #{item.status},
+				`state` = #{item.state},
+				`remark` = #{item.remark}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZxMeetingHouseBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_meeting_house
+			<set>
+				<if test="item.house_name != null">
+					`house_name` = #{item.house_name},
+				</if>
+				<if test="item.max_num != null">
+					`max_num` = #{item.max_num},
+				</if>
+				<if test="item.status != null">
+					`status` = #{item.status},
+				</if>
+				<if test="item.state != null">
+					`state` = #{item.state},
+				</if>
+				<if test="item.remark != null">
+					`remark` = #{item.remark},
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+</mapper>

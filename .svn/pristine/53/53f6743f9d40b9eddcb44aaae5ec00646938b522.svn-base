@@ -1,0 +1,35 @@
+#Created by JInto - www.guh-software.de
+#Mon Jan 08 09:06:33 CST 2018
+databasetype=mysql
+dbname=zxkj_erp_new
+ip=127.0.0.1
+jehc.driverClassTest=com.mysql.jdbc.Driver
+jehc.filters=stat
+jehc.initialSize=2
+jehc.maxActive=5
+jehc.maxOpenPreparedStatements=20
+jehc.maxWait=60000
+jehc.minEvictableIdleTimeMillis=300000
+jehc.minIdle=1
+jehc.passwordTest=root
+jehc.poolPreparedStatements=true
+jehc.testOnBorrow=false
+jehc.testOnReturn=false
+jehc.testWhileIdle=true
+jehc.timeBetweenEvictionRunsMillis=60000
+jehc.urlTest=jdbc\:mysql\://127.0.0.1\:3306/zxkj_erp_new?useOldAliasMetadataBehavior\=true&amp;useUnicode\=true&amp;characterEncoding\=utf8&allowMultiQueries\=true
+jehc.usernameTest=root
+jehc.validationQuery=SELECT 'x'
+master.driverClassName=com.mysql.jdbc.Driver
+master.password=root
+master.url=jdbc\:mysql\://127.0.0.1\:3306/zxkj_erp_new?useOldAliasMetadataBehavior\=true&amp;useUnicode\=true&amp;characterEncoding\=utf8&allowMultiQueries\=true
+master.username=root
+port=3306
+slave.databasetype=mysql
+slave.dbname=zxkj_erp_new
+slave.driverClassName=com.mysql.jdbc.Driver
+slave.ip=127.0.0.1
+slave.password=root
+slave.port=3306
+slave.url=jdbc\:mysql\://127.0.0.1\:3306/zxkj_erp_new?useOldAliasMetadataBehavior\=true&amp;useUnicode\=true&amp;characterEncoding\=utf8&allowMultiQueries\=true
+slave.username=root

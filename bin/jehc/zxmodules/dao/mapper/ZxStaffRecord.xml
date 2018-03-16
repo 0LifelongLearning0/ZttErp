@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZxStaffRecord">
+	<!--初始化分页-->
+	<select id="getZxStaffRecordListByCondition" resultType="jehc.zxmodules.model.ZxStaffRecord" parameterType="map">
+		SELECT
+			zsr.`id`,
+			zsr.`file_num`,
+			zsr.`user_num`,
+			zsr.`user_name`,
+			zsr.`xt_user_id`,
+			zsr.`xt_company_id`,
+			zsr.`xt_departinfo_id`,
+			zsr.`xt_post_id`,
+			zsr.`entry_time`,
+			zsr.`probation_salary`,
+			DATE_FORMAT(zsr.`confirmation_time`,'%Y-%m-%d') AS `confirmation_time`,
+			zsr.`confirmation_salary`,
+			zsr.`social_security_cards`,
+			zsr.`userinfo_phone`,
+			zsr.`userinfo_ortherTel`,
+			zsr.`userinfo_card`,
+			zsr.`family_address`,
+			zsr.`now_address`,
+			zsr.`residence_permit`,
+			zsr.`userinfo_highestDegree`,
+			zsr.`userinfo_schoolName`,
+			zsr.`specialty`,
+			zsr.`etter_of_commitment`,
+			DATE_FORMAT(zsr.`dimission_time`,'%Y-%m-%d') AS `dimission_time`,
+			zsr.`remark`,
+			xd.xt_departinfo_name,
+			xp.xt_post_name,
+			xc.xt_company_name
+		FROM 
+			zx_staff_record AS zsr LEFT JOIN xt_departinfo AS xd ON zsr.xt_departinfo_id = xd.xt_departinfo_id
+			LEFT JOIN xt_post AS xp ON zsr.xt_post_id = xp.xt_post_id
+			LEFT JOIN xt_company AS xc ON zsr.xt_company_id = xc.xt_company_id
+		WHERE 1=1
+		<if test="xt_userinfo_realName != null">
+		AND instr(zsr.user_name,#{xt_userinfo_realName})
+		</if>
+		<if test="file_num != null">
+		AND instr(zsr.file_num,#{file_num})
+		</if>
+		<if test="user_num != null">
+		AND instr(zsr.user_num,#{user_num})
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getZxStaffRecordById" resultType="jehc.zxmodules.model.ZxStaffRecord" parameterType="string">
+		SELECT
+			zsr.`id`,
+			zsr.`file_num`,
+			zsr.`user_num`,
+			zsr.`user_name`,
+			zsr.`xt_user_id`,
+			zsr.`xt_company_id`,
+			zsr.`xt_departinfo_id`,
+			zsr.`xt_post_id`,
+			DATE_FORMAT(zsr.`entry_time`,'%Y-%m-%d') AS `entry_time`,
+			zsr.`probation_salary`,
+			DATE_FORMAT(zsr.`confirmation_time`,'%Y-%m-%d') AS `confirmation_time`,
+			zsr.`confirmation_salary`,
+			zsr.`social_security_cards`,
+			zsr.`userinfo_phone`,
+			zsr.`userinfo_ortherTel`,
+			zsr.`userinfo_card`,
+			zsr.`family_address`,
+			zsr.`now_address`,
+			zsr.`residence_permit`,
+			zsr.`userinfo_highestDegree`,
+			zsr.`userinfo_schoolName`,
+			zsr.`specialty`,
+			zsr.`etter_of_commitment`,
+			DATE_FORMAT(zsr.`dimission_time`,'%Y-%m-%d') AS `dimission_time`,
+			zsr.`remark`,
+			xd.xt_departinfo_name,
+			xp.xt_post_name,
+			xc.xt_company_name
+		FROM 
+			zx_staff_record AS zsr LEFT JOIN xt_departinfo AS xd ON zsr.xt_departinfo_id = xd.xt_departinfo_id
+			LEFT JOIN xt_post AS xp ON zsr.xt_post_id = xp.xt_post_id
+			LEFT JOIN xt_company AS xc ON zsr.xt_company_id = xc.xt_company_id
+		WHERE zsr.id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addZxStaffRecord" parameterType="jehc.zxmodules.model.ZxStaffRecord">
+		INSERT INTO
+			zx_staff_record
+			(
+			`id`,
+			`file_num`,
+			`user_num`,
+			`user_name`,
+			`xt_user_id`,
+			`xt_company_id`,
+			`xt_departinfo_id`,
+			`xt_post_id`,
+			`entry_time`,
+			`probation_salary`,
+			<if test="confirmation_time != '' and confirmation_time != null">
+				`confirmation_time`,
+			</if>
+			`confirmation_salary`,
+			`social_security_cards`,
+			`userinfo_phone`,
+			`userinfo_ortherTel`,
+			`userinfo_card`,
+			`family_address`,
+			`now_address`,
+			`residence_permit`,
+			`userinfo_highestDegree`,
+			`userinfo_schoolName`,
+			`specialty`,
+			`etter_of_commitment`,
+			<if test="dimission_time != '' and dimission_time != null">
+				`dimission_time`,
+			</if>
+			`remark`
+			)
+			VALUES
+			(
+			#{id},
+			#{file_num},
+			#{user_num},
+			#{user_name},
+			#{xt_user_id},
+			#{xt_company_id},
+			#{xt_departinfo_id},
+			#{xt_post_id},
+			#{entry_time},
+			#{probation_salary},
+			<if test="confirmation_time != '' and confirmation_time != null">
+				#{confirmation_time},
+			</if>
+			#{confirmation_salary},
+			#{social_security_cards},
+			#{userinfo_phone},
+			#{userinfo_ortherTel},
+			#{userinfo_card},
+			#{family_address},
+			#{now_address},
+			#{residence_permit},
+			#{userinfo_highestDegree},
+			#{userinfo_schoolName},
+			#{specialty},
+			#{etter_of_commitment},
+			<if test="dimission_time != '' and dimission_time != null">
+				#{dimission_time},
+			</if>
+			#{remark}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZxStaffRecord" parameterType="jehc.zxmodules.model.ZxStaffRecord">
+		UPDATE
+			zx_staff_record
+		SET
+			`file_num` = #{file_num},
+			`user_num` = #{user_num},
+			`user_name` = #{user_name},
+			`xt_user_id` = #{xt_user_id},
+			`xt_company_id` = #{xt_company_id},
+			`xt_departinfo_id` = #{xt_departinfo_id},
+			`xt_post_id` = #{xt_post_id},
+			`entry_time` = #{entry_time},
+			`probation_salary` = #{probation_salary},
+			`confirmation_time` = #{confirmation_time},
+			`confirmation_salary` = #{confirmation_salary},
+			`social_security_cards` = #{social_security_cards},
+			`userinfo_phone` = #{userinfo_phone},
+			`userinfo_ortherTel` = #{userinfo_ortherTel},
+			`userinfo_card` = #{userinfo_card},
+			`family_address` = #{family_address},
+			`now_address` = #{now_address},
+			`residence_permit` = #{residence_permit},
+			`userinfo_highestDegree` = #{userinfo_highestDegree},
+			`userinfo_schoolName` = #{userinfo_schoolName},
+			`specialty` = #{specialty},
+			`etter_of_commitment` = #{etter_of_commitment},
+			`dimission_time` = #{dimission_time},
+			`remark` = #{remark}
+		WHERE id=#{id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZxStaffRecordBySelective" parameterType="jehc.zxmodules.model.ZxStaffRecord">
+		UPDATE
+			zx_staff_record
+		<set>
+			<if test="file_num != null">
+				`file_num` = #{file_num},
+			</if>
+			<if test="user_num != null">
+				`user_num` = #{user_num},
+			</if>
+			<if test="user_name != null">
+				`user_name` = #{user_name},
+			</if>
+			<if test="xt_user_id != null">
+				`xt_user_id` = #{xt_user_id},
+			</if>
+			<if test="xt_company_id != null">
+				`xt_company_id` = #{xt_company_id},
+			</if>
+			<if test="xt_departinfo_id != null">
+				`xt_departinfo_id` = #{xt_departinfo_id},
+			</if>
+			<if test="xt_post_id != null">
+				`xt_post_id` = #{xt_post_id},
+			</if>
+			<if test="entry_time != null">
+				`entry_time` = #{entry_time},
+			</if>
+			<if test="probation_salary != null">
+				`probation_salary` = #{probation_salary},
+			</if>
+			<if test="confirmation_time != null and confirmation_time != ''">
+				`confirmation_time` = #{confirmation_time},
+			</if>
+			<if test="confirmation_salary != null">
+				`confirmation_salary` = #{confirmation_salary},
+			</if>
+			<if test="social_security_cards != null">
+				`social_security_cards` = #{social_security_cards},
+			</if>
+			<if test="userinfo_phone != null">
+				`userinfo_phone` = #{userinfo_phone},
+			</if>
+			<if test="userinfo_ortherTel != null">
+				`userinfo_ortherTel` = #{userinfo_ortherTel},
+			</if>
+			<if test="userinfo_card != null">
+				`userinfo_card` = #{userinfo_card},
+			</if>
+			<if test="family_address != null">
+				`family_address` = #{family_address},
+			</if>
+			<if test="now_address != null">
+				`now_address` = #{now_address},
+			</if>
+			<if test="residence_permit != null">
+				`residence_permit` = #{residence_permit},
+			</if>
+			<if test="userinfo_highestDegree != null">
+				`userinfo_highestDegree` = #{userinfo_highestDegree},
+			</if>
+			<if test="userinfo_schoolName != null">
+				`userinfo_schoolName` = #{userinfo_schoolName},
+			</if>
+			<if test="specialty != null">
+				`specialty` = #{specialty},
+			</if>
+			<if test="etter_of_commitment != null">
+				`etter_of_commitment` = #{etter_of_commitment},
+			</if>
+			<if test="dimission_time != null and dimission_time!=''">
+				`dimission_time` = #{dimission_time},
+			</if>
+			<if test="remark != null">
+				`remark` = #{remark},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZxStaffRecord" parameterType="map">
+		DELETE FROM zx_staff_record WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZxStaffRecord" parameterType="list">
+		INSERT INTO
+			zx_staff_record
+			(
+			`id`,
+			`file_num`,
+			`user_num`,
+			`user_name`,
+			`xt_user_id`,
+			`xt_company_id`,
+			`xt_departinfo_id`,
+			`xt_post_id`,
+			`entry_time`,
+			`probation_salary`,
+			`confirmation_time`,
+			`confirmation_salary`,
+			`social_security_cards`,
+			`userinfo_phone`,
+			`userinfo_ortherTel`,
+			`userinfo_card`,
+			`family_address`,
+			`now_address`,
+			`residence_permit`,
+			`userinfo_highestDegree`,
+			`userinfo_schoolName`,
+			`specialty`,
+			`etter_of_commitment`,
+			`dimission_time`,
+			`remark`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.file_num},
+			#{item.user_num},
+			#{item.user_name},
+			#{item.xt_user_id},
+			#{item.xt_company_id},
+			#{item.xt_departinfo_id},
+			#{item.xt_post_id},
+			#{item.entry_time},
+			#{item.probation_salary},
+			#{item.confirmation_time},
+			#{item.confirmation_salary},
+			#{item.social_security_cards},
+			#{item.userinfo_phone},
+			#{item.userinfo_ortherTel},
+			#{item.userinfo_card},
+			#{item.family_address},
+			#{item.now_address},
+			#{item.residence_permit},
+			#{item.userinfo_highestDegree},
+			#{item.userinfo_schoolName},
+			#{item.specialty},
+			#{item.etter_of_commitment},
+			#{item.dimission_time},
+			#{item.remark}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZxStaffRecord" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_staff_record
+			SET
+				`file_num` = #{item.file_num},
+				`user_num` = #{item.user_num},
+				`user_name` = #{item.user_name},
+				`xt_user_id` = #{item.xt_user_id},
+				`xt_company_id` = #{item.xt_company_id},
+				`xt_departinfo_id` = #{item.xt_departinfo_id},
+				`xt_post_id` = #{item.xt_post_id},
+				`entry_time` = #{item.entry_time},
+				`probation_salary` = #{item.probation_salary},
+				`confirmation_time` = #{item.confirmation_time},
+				`confirmation_salary` = #{item.confirmation_salary},
+				`social_security_cards` = #{item.social_security_cards},
+				`userinfo_phone` = #{item.userinfo_phone},
+				`userinfo_ortherTel` = #{item.userinfo_ortherTel},
+				`userinfo_card` = #{item.userinfo_card},
+				`family_address` = #{item.family_address},
+				`now_address` = #{item.now_address},
+				`residence_permit` = #{item.residence_permit},
+				`userinfo_highestDegree` = #{item.userinfo_highestDegree},
+				`userinfo_schoolName` = #{item.userinfo_schoolName},
+				`specialty` = #{item.specialty},
+				`etter_of_commitment` = #{item.etter_of_commitment},
+				`dimission_time` = #{item.dimission_time},
+				`remark` = #{item.remark}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZxStaffRecordBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_staff_record
+			<set>
+				<if test="item.file_num != null">
+					`file_num` = #{item.file_num},
+				</if>
+				<if test="item.user_num != null">
+					`user_num` = #{item.user_num},
+				</if>
+				<if test="item.user_name != null">
+					`user_name` = #{item.user_name},
+				</if>
+				<if test="item.xt_user_id != null">
+					`xt_user_id` = #{item.xt_user_id},
+				</if>
+				<if test="item.xt_company_id != null">
+					`xt_company_id` = #{item.xt_company_id},
+				</if>
+				<if test="item.xt_departinfo_id != null">
+					`xt_departinfo_id` = #{item.xt_departinfo_id},
+				</if>
+				<if test="item.xt_post_id != null">
+					`xt_post_id` = #{item.xt_post_id},
+				</if>
+				<if test="item.entry_time != null">
+					`entry_time` = #{item.entry_time},
+				</if>
+				<if test="item.probation_salary != null">
+					`probation_salary` = #{item.probation_salary},
+				</if>
+				<if test="item.confirmation_time != null">
+					`confirmation_time` = #{item.confirmation_time},
+				</if>
+				<if test="item.confirmation_salary != null">
+					`confirmation_salary` = #{item.confirmation_salary},
+				</if>
+				<if test="item.social_security_cards != null">
+					`social_security_cards` = #{item.social_security_cards},
+				</if>
+				<if test="item.userinfo_phone != null">
+					`userinfo_phone` = #{item.userinfo_phone},
+				</if>
+				<if test="item.userinfo_ortherTel != null">
+					`userinfo_ortherTel` = #{item.userinfo_ortherTel},
+				</if>
+				<if test="item.userinfo_card != null">
+					`userinfo_card` = #{item.userinfo_card},
+				</if>
+				<if test="item.family_address != null">
+					`family_address` = #{item.family_address},
+				</if>
+				<if test="item.now_address != null">
+					`now_address` = #{item.now_address},
+				</if>
+				<if test="item.residence_permit != null">
+					`residence_permit` = #{item.residence_permit},
+				</if>
+				<if test="item.userinfo_highestDegree != null">
+					`userinfo_highestDegree` = #{item.userinfo_highestDegree},
+				</if>
+				<if test="item.userinfo_schoolName != null">
+					`userinfo_schoolName` = #{item.userinfo_schoolName},
+				</if>
+				<if test="item.specialty != null">
+					`specialty` = #{item.specialty},
+				</if>
+				<if test="item.etter_of_commitment != null">
+					`etter_of_commitment` = #{item.etter_of_commitment},
+				</if>
+				<if test="item.dimission_time != null">
+					`dimission_time` = #{item.dimission_time},
+				</if>
+				<if test="item.remark != null">
+					`remark` = #{item.remark},
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+</mapper>

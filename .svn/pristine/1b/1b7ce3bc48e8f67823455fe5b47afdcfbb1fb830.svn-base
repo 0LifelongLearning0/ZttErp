@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZxOffice">
+	<!--初始化分页-->
+	<select id="getZxOfficeListByCondition" resultType="jehc.zxmodules.model.ZxOffice" parameterType="map">
+		SELECT
+			`office_id`,
+			`name`,
+			`num`,
+			`classify_id`,
+			`unit`,
+			`status`,
+			DATE_FORMAT(`create_date`,'%Y-%m-%d %H:%i:%s') AS `create_date`,
+			`standard`
+		FROM 
+			zx_office
+		WHERE 1=1
+		<if test="null != name">
+			AND instr(name,#{name})
+		</if>
+		<if test="null != num">
+			AND instr(num,#{num})
+		</if>
+		<if test="null != status">
+			AND status = #{status}
+		</if>
+		<if test="null != classify_id and '' != classify_id">
+			AND classify_id = #{classify_id}
+		</if>
+		<if test="null == orderby">
+		   ORDER BY classify_id ASC,num ASC
+		</if>
+		<if test="null != orderby and orderby == 0">
+		   ORDER BY classify_id ASC,num ASC
+		</if>
+		<if test="null != orderby and orderby == 1">
+		   ORDER BY num ASC 
+		</if>
+		<if test="null != orderby and orderby == 2">
+		   ORDER BY num DESC 
+		</if>
+		<if test="null != orderby and orderby == 3">
+		   ORDER BY classify_id ASC 
+		</if>
+		<if test="null != orderby and orderby == 4">
+		   ORDER BY classify_id DESC 
+		</if>
+		<if test="null != orderby and orderby == 5">
+		   ORDER BY name ASC 
+		</if>
+		<if test="null != orderby and orderby == 6">
+		   ORDER BY name DESC 
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getZxOfficeById" resultType="jehc.zxmodules.model.ZxOffice" parameterType="string">
+		SELECT
+			`office_id`,
+			`name`,
+			`num`,
+			`classify_id`,
+			`unit`,
+			`status`,
+			DATE_FORMAT(`create_date`,'%Y-%m-%d %H:%i:%s') AS `create_date`,
+			`standard`
+		FROM 
+			zx_office
+		WHERE office_id=#{office_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addZxOffice" parameterType="jehc.zxmodules.model.ZxOffice">
+		INSERT INTO
+			zx_office
+			(
+			`office_id`,
+			`name`,
+			`classify_id`,
+			`unit`,
+			`status`,
+			`create_date`,
+			`standard`
+			)
+			VALUES
+			(
+			#{office_id},
+			#{name},
+			#{classify_id},
+			#{unit},
+			'0',
+			#{create_date},
+			#{standard}
+			)
+	</insert>
+
+	<!--修改-->
+	<!--<update id="updateZxOffice" parameterType="jehc.zxmodules.model.ZxOffice">
+		UPDATE
+			zx_office
+		SET
+			`name` = #{name},
+			`num` = #{num},
+			`classify_id` = #{classify_id},
+			`unit` = #{unit},
+			`status` = #{status},
+			`create_date` = #{create_date},
+			`standard` = #{standard}
+		WHERE office_id=#{office_id}
+	</update>-->
+	
+	<!--修改-->
+	<update id="updateZxOffice" parameterType="jehc.zxmodules.model.ZxOffice">
+		UPDATE
+			zx_office
+		SET
+			`name` = #{name},
+			`classify_id` = #{classify_id},
+			`unit` = #{unit},
+			`standard` = #{standard}
+		WHERE office_id=#{office_id}
+	</update>
+	
+	
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZxOfficeBySelective" parameterType="jehc.zxmodules.model.ZxOffice">
+		UPDATE
+			zx_office
+		<set>
+			<if test="name != null">
+				`name` = #{name},
+			</if>
+			<if test="num != null">
+				`num` = #{num},
+			</if>
+			<if test="classify_id != null">
+				`classify_id` = #{classify_id},
+			</if>
+			<if test="unit != null">
+				`unit` = #{unit},
+			</if>
+			<if test="status != null">
+				`status` = #{status},
+			</if>
+			<if test="create_date != null">
+				`create_date` = #{create_date},
+			</if>
+			<if test="standard != null">
+				`standard` = #{standard},
+			</if>
+		</set>
+		WHERE office_id=#{office_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZxOffice" parameterType="map">
+		DELETE FROM zx_office WHERE office_id IN
+		<foreach item="item" index="index" collection="office_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZxOffice" parameterType="list">
+		INSERT INTO
+			zx_office
+			(
+			`office_id`,
+			`name`,
+			`num`,
+			`classify_id`,
+			`unit`,
+			`status`,
+			`create_date`,
+			`standard`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.office_id},
+			#{item.name},
+			#{item.num},
+			#{item.classify_id},
+			#{item.unit},
+			#{item.status},
+			#{item.create_date},
+			#{item.standard}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZxOffice" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_office
+			SET
+				`name` = #{item.name},
+				`num` = #{item.num},
+				`classify_id` = #{item.classify_id},
+				`unit` = #{item.unit},
+				`status` = #{item.status},
+				`create_date` = #{item.create_date},
+				`standard` = #{item.standard}
+			WHERE office_id=#{item.office_id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZxOfficeBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_office
+			<set>
+				<if test="item.name != null">
+					`name` = #{item.name},
+				</if>
+				<if test="item.num != null">
+					`num` = #{item.num},
+				</if>
+				<if test="item.classify_id != null">
+					`classify_id` = #{item.classify_id},
+				</if>
+				<if test="item.unit != null">
+					`unit` = #{item.unit},
+				</if>
+				<if test="item.status != null">
+					`status` = #{item.status},
+				</if>
+				<if test="item.create_date != null">
+					`create_date` = #{item.create_date},
+				</if>
+				<if test="item.standard != null">
+					`standard` = #{item.standard},
+				</if>
+			</set>
+			WHERE office_id=#{item.office_id}
+		</foreach>
+	</update>
+</mapper>

@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZxCar">
+	<!--初始化分页-->
+	<select id="getZxCarListByCondition" resultType="jehc.zxmodules.model.ZxCar" parameterType="map">
+		SELECT
+			`id`,
+			`state`,
+			`car_no`,
+			`people_num`,
+			`model`,
+			`brand`,
+			`car_img`,
+			`summary`,
+			DATE_FORMAT(`buy_time`,'%Y-%m-%d %H:%i:%s') AS `buy_time`
+		FROM 
+			zx_car
+		WHERE 1=1
+		<if test="null != car_no">
+			AND instr(car_no,#{car_no})
+		</if>
+		<if test="null != state">
+			AND state = #{state}
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getZxCarById" resultType="jehc.zxmodules.model.ZxCar" parameterType="string">
+		SELECT
+			`id`,
+			`state`,
+			`car_no`,
+			`people_num`,
+			`model`,
+			`brand`,
+			`car_img`,
+			`summary`,
+			DATE_FORMAT(`buy_time`,'%Y-%m-%d %H:%i:%s') AS `buy_time`
+		FROM 
+			zx_car
+		WHERE id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addZxCar" parameterType="jehc.zxmodules.model.ZxCar">
+		INSERT INTO
+			zx_car
+			(
+			`id`,
+			`state`,
+			`car_no`,
+			`people_num`,
+			`model`,
+			`brand`,
+			`car_img`,
+			`summary`,
+			`buy_time`
+			)
+			VALUES
+			(
+			#{id},
+			#{state},
+			#{car_no},
+			#{people_num},
+			#{model},
+			#{brand},
+			#{car_img},
+			#{summary},
+			#{buy_time}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZxCar" parameterType="jehc.zxmodules.model.ZxCar">
+		UPDATE
+			zx_car
+		SET
+			`state` = #{state},
+			`car_no` = #{car_no},
+			`people_num` = #{people_num},
+			`model` = #{model},
+			`brand` = #{brand},
+			`car_img` = #{car_img},
+			`summary` = #{summary},
+			`buy_time` = #{buy_time}
+		WHERE id=#{id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZxCarBySelective" parameterType="jehc.zxmodules.model.ZxCar">
+		UPDATE
+			zx_car
+		<set>
+			<if test="state != null">
+				`state` = #{state},
+			</if>
+			<if test="car_no != null">
+				`car_no` = #{car_no},
+			</if>
+			<if test="people_num != null">
+				`people_num` = #{people_num},
+			</if>
+			<if test="model != null">
+				`model` = #{model},
+			</if>
+			<if test="brand != null">
+				`brand` = #{brand},
+			</if>
+			<if test="car_img != null">
+				`car_img` = #{car_img},
+			</if>
+			<if test="summary != null">
+				`summary` = #{summary},
+			</if>
+			<if test="buy_time != null">
+				`buy_time` = #{buy_time},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZxCar" parameterType="map">
+		DELETE FROM zx_car WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZxCar" parameterType="list">
+		INSERT INTO
+			zx_car
+			(
+			`id`,
+			`state`,
+			`car_no`,
+			`people_num`,
+			`model`,
+			`brand`,
+			`car_img`,
+			`summary`,
+			`buy_time`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.state},
+			#{item.car_no},
+			#{item.people_num},
+			#{item.model},
+			#{item.brand},
+			#{item.car_img},
+			#{item.summary},
+			#{item.buy_time}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZxCar" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_car
+			SET
+				`state` = #{item.state},
+				`car_no` = #{item.car_no},
+				`people_num` = #{item.people_num},
+				`model` = #{item.model},
+				`brand` = #{item.brand},
+				`car_img` = #{item.car_img},
+				`summary` = #{item.summary},
+				`buy_time` = #{item.buy_time}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZxCarBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_car
+			<set>
+				<if test="item.state != null">
+					`state` = #{item.state},
+				</if>
+				<if test="item.car_no != null">
+					`car_no` = #{item.car_no},
+				</if>
+				<if test="item.people_num != null">
+					`people_num` = #{item.people_num},
+				</if>
+				<if test="item.model != null">
+					`model` = #{item.model},
+				</if>
+				<if test="item.brand != null">
+					`brand` = #{item.brand},
+				</if>
+				<if test="item.car_img != null">
+					`car_img` = #{item.car_img},
+				</if>
+				<if test="item.summary != null">
+					`summary` = #{item.summary},
+				</if>
+				<if test="item.buy_time != null">
+					`buy_time` = #{item.buy_time},
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+</mapper>

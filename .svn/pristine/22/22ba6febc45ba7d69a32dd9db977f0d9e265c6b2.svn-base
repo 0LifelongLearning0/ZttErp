@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZxSignContract">
+	<!--初始化分页-->
+	<select id="getZxSignContractListByCondition" resultType="jehc.zxmodules.model.ZxSignContract" parameterType="map">
+		SELECT
+			zsc.id,
+			zsc.contract_num,
+			zsc.create_time,
+			zsc.sign_time,
+			zsc.begin_time,
+			zsc.end_time,
+			zsc.xt_user_id,
+			zsc.remark,
+			t2.xt_userinfo_realName
+		FROM 
+			zx_sign_contract zsc LEFT JOIN xt_userinfo t2 ON zsc.xt_user_id = t2.xt_userinfo_id 
+		WHERE 1=1
+		<if test="xt_userinfo_realName != null">
+		AND instr(t2.xt_userinfo_realName,#{xt_userinfo_realName})
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getZxSignContractById" resultType="jehc.zxmodules.model.ZxSignContract" parameterType="string">
+		SELECT
+			zsc.id,
+			zsc.contract_num,
+			zsc.create_time,
+			zsc.sign_time,
+			zsc.begin_time,
+			zsc.end_time,
+			zsc.xt_user_id,
+			zsc.remark,
+			t2.xt_userinfo_realName
+		FROM 
+			zx_sign_contract zsc LEFT JOIN xt_userinfo t2 ON zsc.xt_user_id = t2.xt_userinfo_id 
+		WHERE zsc.id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addZxSignContract" parameterType="jehc.zxmodules.model.ZxSignContract">
+		INSERT INTO
+			zx_sign_contract
+			(
+			id,
+			contract_num,
+			create_time,
+			sign_time,
+			begin_time,
+			end_time,
+			xt_user_id,
+			remark
+			)
+			VALUES
+			(
+			#{id},
+			#{contract_num},
+			#{create_time},
+			#{sign_time},
+			#{begin_time},
+			#{end_time},
+			#{xt_user_id},
+			#{remark}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZxSignContract" parameterType="jehc.zxmodules.model.ZxSignContract">
+		UPDATE
+			zx_sign_contract
+		SET
+			contract_num = #{contract_num},
+			create_time = #{create_time},
+			sign_time = #{sign_time},
+			begin_time = #{begin_time},
+			end_time = #{end_time},
+			xt_user_id = #{xt_user_id},
+			remark = #{remark}
+		WHERE id=#{id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZxSignContractBySelective" parameterType="jehc.zxmodules.model.ZxSignContract">
+		UPDATE
+			zx_sign_contract
+		<set>
+			<if test="contract_num != null">
+				contract_num = #{contract_num},
+			</if>
+			<if test="create_time != null">
+				create_time = #{create_time},
+			</if>
+			<if test="sign_time != null">
+				sign_time = #{sign_time},
+			</if>
+			<if test="begin_time != null">
+				begin_time = #{begin_time},
+			</if>
+			<if test="end_time != null">
+				end_time = #{end_time},
+			</if>
+			<if test="xt_user_id != null">
+				xt_user_id = #{xt_user_id},
+			</if>
+			<if test="remark !=null">
+				remark = #{remark},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZxSignContract" parameterType="map">
+		DELETE FROM zx_sign_contract WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZxSignContract" parameterType="list">
+		INSERT INTO
+			zx_sign_contract
+			(
+			id,
+			contract_num,
+			create_time,
+			sign_time,
+			begin_time,
+			end_time,
+			xt_user_id,
+			remark
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.contract_num},
+			#{item.create_time},
+			#{item.sign_time},
+			#{item.begin_time},
+			#{item.end_time},
+			#{item.xt_user_id},
+			#{remark}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZxSignContract" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_sign_contract
+			SET
+				contract_num = #{item.contract_num},
+				create_time = #{item.create_time},
+				sign_time = #{item.sign_time},
+				begin_time = #{item.begin_time},
+				end_time = #{item.end_time},
+				xt_user_id = #{item.xt_user_id},
+				remark = #{item.remark}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZxSignContractBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_sign_contract
+			<set>
+				<if test="item.contract_num != null">
+					contract_num = #{item.contract_num},
+				</if>
+				<if test="item.create_time != null">
+					create_time = #{item.create_time},
+				</if>
+				<if test="item.sign_time != null">
+					sign_time = #{item.sign_time},
+				</if>
+				<if test="item.begin_time != null">
+					begin_time = #{item.begin_time},
+				</if>
+				<if test="item.end_time != null">
+					end_time = #{item.end_time},
+				</if>
+				<if test="item.xt_user_id != null">
+					xt_user_id = #{item.xt_user_id},
+				</if>
+				<if test="item.remark != null">
+					remark = #{remark}
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+</mapper>

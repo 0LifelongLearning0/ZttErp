@@ -1,0 +1,68 @@
+package jehc.zxmodules.model;
+import jehc.xtmodules.xtcore.base.BaseEntity;
+import java.io.Serializable;
+import java.util.Date;
+
+/**
+* zx_relieve_contract 解除合同 
+* 2018-01-11 17:48:26  邓纯杰
+*/
+public class ZxRelieveContract extends BaseEntity implements Serializable{
+	private static final long serialVersionUID = 1L;
+	private String id;/**序号**/
+	private String contract_num;/**合同编号**/
+	private Date create_time;/**登记日期**/
+	private Date sign_time;/**签署时间**/
+	private Date begin_time;/**开始日期**/
+	private Date end_time;/**结束日期**/
+	private Date relieve_time;/**解除日期**/
+	private String xt_user_id;/**员工id**/
+	public void setId(String id){
+		this.id=id;
+	}
+	public String getId(){
+		return id;
+	}
+	public void setContract_num(String contract_num){
+		this.contract_num=contract_num;
+	}
+	public String getContract_num(){
+		return contract_num;
+	}
+	public void setCreate_time(Date create_time){
+		this.create_time=create_time;
+	}
+	public Date getCreate_time(){
+		return create_time;
+	}
+	public void setSign_time(Date sign_time){
+		this.sign_time=sign_time;
+	}
+	public Date getSign_time(){
+		return sign_time;
+	}
+	public void setBegin_time(Date begin_time){
+		this.begin_time=begin_time;
+	}
+	public Date getBegin_time(){
+		return begin_time;
+	}
+	public void setEnd_time(Date end_time){
+		this.end_time=end_time;
+	}
+	public Date getEnd_time(){
+		return end_time;
+	}
+	public void setRelieve_time(Date relieve_time){
+		this.relieve_time=relieve_time;
+	}
+	public Date getRelieve_time(){
+		return relieve_time;
+	}
+	public void setXt_user_id(String xt_user_id){
+		this.xt_user_id=xt_user_id;
+	}
+	public String getXt_user_id(){
+		return xt_user_id;
+	}
+}

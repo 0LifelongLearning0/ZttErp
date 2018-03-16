@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZxProjectWoking">
+	<!--初始化分页-->
+	<select id="getZxProjectWokingListByCondition" resultType="jehc.zxmodules.model.ZxProjectWoking" parameterType="map">
+		SELECT
+			`id`,
+			`node_id`,
+			`process_id`,
+			`single_wokeing_hours`,
+			`all_woking_hours`,
+			`time_sort`
+		FROM 
+			zx_project_woking
+		WHERE 1=1
+		<if test = "null != node_id">
+			AND node_id = #{node_id}
+		</if>
+		ORDER BY time_sort 
+	</select>
+
+	<!--查询对象-->
+	<select id="getZxProjectWokingById" resultType="jehc.zxmodules.model.ZxProjectWoking" parameterType="string">
+		SELECT
+			`id`,
+			`node_id`,
+			`process_id`,
+			`single_wokeing_hours`,
+			`all_woking_hours`,
+			`time_sort`
+		FROM 
+			zx_project_woking
+		WHERE id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addZxProjectWoking" parameterType="jehc.zxmodules.model.ZxProjectWoking">
+		INSERT INTO
+			zx_project_woking
+			(
+			`id`,
+			`node_id`,
+			`process_id`,
+			`time_sort`
+			)
+			VALUES
+			(
+			#{id},
+			#{node_id},
+			#{process_id},
+			#{time_sort}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZxProjectWoking" parameterType="jehc.zxmodules.model.ZxProjectWoking">
+		UPDATE
+			zx_project_woking
+		SET
+			`node_id` = #{node_id},
+			`process_id` = #{process_id},
+			`single_wokeing_hours` = #{single_wokeing_hours},
+			`all_woking_hours` = #{all_woking_hours},
+			`time_sort` = #{time_sort}
+		WHERE id=#{id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZxProjectWokingBySelective" parameterType="jehc.zxmodules.model.ZxProjectWoking">
+		UPDATE
+			zx_project_woking
+		<set>
+			<if test="node_id != null">
+				`node_id` = #{node_id},
+			</if>
+			<if test="process_id != null">
+				`process_id` = #{process_id},
+			</if>
+			<if test="single_wokeing_hours != null and single_wokeing_hours != ''">
+				`single_wokeing_hours` = #{single_wokeing_hours},
+			</if>
+			<if test="all_woking_hours != null and all_woking_hours != ''">
+				`all_woking_hours` = #{all_woking_hours},
+			</if>
+			<if test="time_sort != null and time_sort != ''">
+				`time_sort` = #{time_sort},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZxProjectWoking" parameterType="map">
+		DELETE FROM zx_project_woking WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZxProjectWoking" parameterType="list">
+		INSERT INTO
+			zx_project_woking
+			(
+			`id`,
+			`node_id`,
+			`process_id`,
+			`time_sort`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.node_id},
+			#{item.process_id},
+			#{item.time_sort}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZxProjectWoking" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_project_woking
+			SET
+				`node_id` = #{item.node_id},
+				`process_id` = #{item.process_id},
+				`single_wokeing_hours` = #{item.single_wokeing_hours},
+				`all_woking_hours` = #{item.all_woking_hours},
+				`time_sort` = #{item.time_sort}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZxProjectWokingBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_project_woking
+			<set>
+				<if test="item.node_id != null">
+					`node_id` = #{item.node_id},
+				</if>
+				<if test="item.process_id != null">
+					`process_id` = #{item.process_id},
+				</if>
+				<if test="item.single_wokeing_hours != null and item.single_wokeing_hours != ''">
+					`single_wokeing_hours` = #{item.single_wokeing_hours},
+				</if>
+				<if test="item.all_woking_hours != null and item.all_woking_hours != ''">
+					`all_woking_hours` = #{item.all_woking_hours},
+				</if>
+				<if test="item.time_sort != null and item.time_sort != ''">
+					`time_sort` = #{item.time_sort},
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--根据外键删除-->
+	<delete id="delZxProjectWokingByForeignKey" parameterType="string">
+		DELETE FROM zx_project_woking WHERE node_id = #{node_id}
+	</delete>
+</mapper>

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZxPurchaseApplyDetail">
+	<!--初始化分页-->
+	<select id="getZxPurchaseApplyDetailListByCondition" resultType="jehc.zxmodules.model.ZxPurchaseApplyDetail" parameterType="map">
+		SELECT
+			a.id as id,
+      a.apply_id as apply_id,
+      a.goods_id as goods_id,
+      a.amount as amount,
+      a.estimated_price as estimated_price,
+      a.amount_store as amount_store,
+      a.reason as reason,
+      b.`name` as name,
+      b.standard as standard
+		FROM 
+			zx_purchase_apply_detail a,zx_office b
+		WHERE a.goods_id=b.office_id  and  1=1
+		<if test = "null != apply_id">
+			AND apply_id = #{apply_id}
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getZxPurchaseApplyDetailById" resultType="jehc.zxmodules.model.ZxPurchaseApplyDetail" parameterType="string">
+		SELECT
+			id,
+			apply_id,
+			create_time,
+			goods_id,
+			amount,
+			estimated_price,
+			amount_store,
+			reason
+		FROM 
+			zx_purchase_apply_detail
+		WHERE id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addZxPurchaseApplyDetail" parameterType="jehc.zxmodules.model.ZxPurchaseApplyDetail">
+		INSERT INTO
+			zx_purchase_apply_detail
+			(
+			id,
+			apply_id,
+			create_time,
+			goods_id,
+			amount,
+			estimated_price,
+			amount_store,
+			reason
+			)
+			VALUES
+			(
+			#{id},
+			#{apply_id},
+			#{create_time},
+			#{goods_id},
+			#{amount},
+			#{estimated_price},
+			#{amount_store},
+			#{reason}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZxPurchaseApplyDetail" parameterType="jehc.zxmodules.model.ZxPurchaseApplyDetail">
+		UPDATE
+			zx_purchase_apply_detail
+		SET
+			apply_id = #{apply_id},
+			create_time = #{create_time},
+			goods_id = #{goods_id},
+			amount = #{amount},
+			estimated_price = #{estimated_price},
+			amount_store = #{amount_store},
+			reason = #{reason}
+		WHERE id=#{id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZxPurchaseApplyDetailBySelective" parameterType="jehc.zxmodules.model.ZxPurchaseApplyDetail">
+		UPDATE
+			zx_purchase_apply_detail
+		<set>
+			<if test="apply_id != null">
+				apply_id = #{apply_id},
+			</if>
+			<if test="create_time != null">
+				create_time = #{create_time},
+			</if>
+			<if test="goods_id != null">
+				goods_id = #{goods_id},
+			</if>
+			<if test="amount != null">
+				amount = #{amount},
+			</if>
+			<if test="amount != null">
+				estimated_price = #{estimated_price},
+			</if>
+			<if test="amount_store != null">
+				amount_store = #{amount_store},
+			</if>
+			<if test="reason != null">
+				reason = #{reason},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZxPurchaseApplyDetail" parameterType="map">
+		DELETE FROM zx_purchase_apply_detail WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZxPurchaseApplyDetail" parameterType="list">
+		INSERT INTO
+			zx_purchase_apply_detail
+			(
+			id,
+			apply_id,
+			create_time,
+			goods_id,
+			amount,
+			estimated_price,
+			amount_store,
+			reason
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.apply_id},
+			#{item.create_time},
+			#{item.goods_id},
+			#{item.amount},
+			#{item.estimated_price},
+			#{item.amount_store},
+			#{item.reason}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZxPurchaseApplyDetail" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_purchase_apply_detail
+			SET
+				apply_id = #{item.apply_id},
+				create_time = #{item.create_time},
+				goods_id = #{item.goods_id},
+				amount = #{item.amount},
+				estimated_price = #{item.estimated_price},
+				amount_store = #{item.amount_store},
+				reason = #{item.reason}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZxPurchaseApplyDetailBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_purchase_apply_detail
+			<set>
+				<if test="item.apply_id != null">
+					apply_id = #{item.apply_id},
+				</if>
+				<if test="item.create_time != null">
+					create_time = #{item.create_time},
+				</if>
+				<if test="item.goods_id != null">
+					goods_id = #{item.goods_id},
+				</if>
+				<if test="item.amount != null">
+					amount = #{item.amount},
+				</if>
+				<if test="item.estimated_price != null">
+					amount = #{item.estimated_price},
+				</if>
+				<if test="item.amount_store != null">
+					amount_store = #{item.amount_store},
+				</if>
+				<if test="item.reason != null">
+					reason = #{item.reason},
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+	
+	<!--入库修改（根据动态条件）-->
+	<update id="updateBatchZxPurchaseApplystore" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_purchase_apply_detail
+			<set>
+				<if test="item.amount_store != null">
+					amount_store = #{item.amount_store},
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--根据外键删除-->
+	<delete id="delZxPurchaseApplyDetailByForeignKey" parameterType="string">
+		DELETE FROM zx_purchase_apply_detail WHERE apply_id = #{apply_id}
+	</delete>
+</mapper>

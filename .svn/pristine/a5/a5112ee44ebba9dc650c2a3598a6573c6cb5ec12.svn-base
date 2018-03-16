@@ -1,0 +1,265 @@
+package jehc.zxmodules.service.impl;
+import java.util.List;
+import java.util.Map;
+import jehc.xtmodules.xtcore.base.BaseService;
+import jehc.xtmodules.xtcore.util.ExceptionUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import jehc.zxmodules.model.ZxPurchaseApplyDetail;
+import jehc.zxmodules.service.ZxPurchaseApplyDetailService;
+import java.util.HashMap;
+import java.util.ArrayList;
+import jehc.xtmodules.xtcore.allutils.StringUtil;
+import jehc.zxmodules.service.ZxPurchaseApplyService;
+import jehc.zxmodules.dao.ZxPurchaseApplyDao;
+import jehc.zxmodules.model.ZxPurchaseApply;
+
+/**
+* 采购申领表 
+* 2018-01-15 09:50:27  季建吉
+*/
+@Service("zxPurchaseApplyService")
+public class ZxPurchaseApplyServiceImpl extends BaseService implements ZxPurchaseApplyService{
+	@Autowired
+	private ZxPurchaseApplyDao zxPurchaseApplyDao;
+	@Autowired
+	private ZxPurchaseApplyDetailService zxPurchaseApplyDetailService;
+	/**
+	* 分页
+	* @param condition 
+	* @return
+	*/
+	public List<ZxPurchaseApply> getZxPurchaseApplyListByCondition(Map<String,Object> condition){
+		try{
+			return zxPurchaseApplyDao.getZxPurchaseApplyListByCondition(condition);
+		} catch (Exception e) {
+			/**捕捉异常并回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+	}
+	/**
+	* 查询对象
+	* @param apply_id 
+	* @return
+	*/
+	public ZxPurchaseApply getZxPurchaseApplyById(String apply_id){
+		try{
+			ZxPurchaseApply zxPurchaseApply = zxPurchaseApplyDao.getZxPurchaseApplyById(apply_id);
+			Map<String, Object> condition = new HashMap<String, Object>();
+			condition.put("apply_id", apply_id);
+			List<ZxPurchaseApplyDetail> zxPurchaseApplyDetail = zxPurchaseApplyDetailService.getZxPurchaseApplyDetailListByCondition(condition);
+			zxPurchaseApply.setZxPurchaseApplyDetail(zxPurchaseApplyDetail);
+			return zxPurchaseApply;
+		} catch (Exception e) {
+			/**捕捉异常并回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+	}
+	/**
+	* 添加
+	* @param zx_purchase_apply 
+	* @return
+	*/
+	public int addZxPurchaseApply(ZxPurchaseApply zxPurchaseApply){
+		int i = 0;
+		try {
+			i = zxPurchaseApplyDao.addZxPurchaseApply(zxPurchaseApply);
+			List<ZxPurchaseApplyDetail> zxPurchaseApplyDetailTempList = zxPurchaseApply.getZxPurchaseApplyDetail();
+			List<ZxPurchaseApplyDetail> zxPurchaseApplyDetailList = new ArrayList<ZxPurchaseApplyDetail>();
+			for(int j = 0; j < zxPurchaseApplyDetailTempList.size(); j++){
+				/*if(zxPurchaseApply.getZxPurchaseApplyDetail_removed_flag().indexOf(","+j+",") == -1){*/
+					zxPurchaseApplyDetailTempList.get(j).setApply_id(zxPurchaseApply.getApply_id());
+					zxPurchaseApplyDetailTempList.get(j).setId(toUUID());
+					zxPurchaseApplyDetailList.add(zxPurchaseApplyDetailTempList.get(j));
+				/*}*/
+			}
+			if(!zxPurchaseApplyDetailList.isEmpty()&&zxPurchaseApplyDetailList.size()>0){
+				zxPurchaseApplyDetailService.addBatchZxPurchaseApplyDetail(zxPurchaseApplyDetailList);
+			}
+		} catch (Exception e) {
+			i = 0;
+			/**捕捉异常并回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+		return i;
+	}
+	/**
+	* 修改
+	* @param zx_purchase_apply 
+	* @return
+	*/
+	public int updateZxPurchaseApply(ZxPurchaseApply zxPurchaseApply){
+		int i = 0;
+		try {
+			i = zxPurchaseApplyDao.updateZxPurchaseApply(zxPurchaseApply);
+			List<ZxPurchaseApplyDetail> zxPurchaseApplyDetailList = zxPurchaseApply.getZxPurchaseApplyDetail();
+			List<ZxPurchaseApplyDetail> zxPurchaseApplyDetailAddList = new ArrayList<ZxPurchaseApplyDetail>();
+			List<ZxPurchaseApplyDetail> zxPurchaseApplyDetailUpdateList = new ArrayList<ZxPurchaseApplyDetail>();
+			for(int j = 0; j < zxPurchaseApplyDetailList.size(); j++){
+				if(zxPurchaseApply.getZxPurchaseApplyDetail_removed_flag().indexOf(","+j+",") == -1){
+					zxPurchaseApplyDetailList.get(j).setApply_id(zxPurchaseApply.getApply_id());
+					if(StringUtil.isEmpty(zxPurchaseApplyDetailList.get(j).getId())){
+						zxPurchaseApplyDetailList.get(j).setId(toUUID());
+						zxPurchaseApplyDetailAddList.add(zxPurchaseApplyDetailList.get(j));
+					}else{
+						zxPurchaseApplyDetailUpdateList.add(zxPurchaseApplyDetailList.get(j));
+					}
+				}
+			}
+			if(!zxPurchaseApplyDetailAddList.isEmpty()&&zxPurchaseApplyDetailAddList.size()>0){
+				zxPurchaseApplyDetailService.addBatchZxPurchaseApplyDetail(zxPurchaseApplyDetailAddList);
+			}
+			if(!zxPurchaseApplyDetailUpdateList.isEmpty()&&zxPurchaseApplyDetailUpdateList.size()>0){
+				zxPurchaseApplyDetailService.updateBatchZxPurchaseApplyDetail(zxPurchaseApplyDetailUpdateList);
+			}
+		} catch (Exception e) {
+			i = 0;
+			/**捕捉异常并回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+		return i;
+	}
+	/**
+	* 批量入库
+	* @param zx_purchase_apply 
+	* @return
+	*/
+	public int updateZxPurchaseApplyCheck(ZxPurchaseApply zxPurchaseApply){
+		int i = 0;
+		try {
+			List<ZxPurchaseApplyDetail> zxPurchaseApplyDetailList = zxPurchaseApply.getZxPurchaseApplyDetail();
+			List<ZxPurchaseApplyDetail> zxPurchaseApplyDetailUpdateList = new ArrayList<ZxPurchaseApplyDetail>();
+			for(int j = 0; j < zxPurchaseApplyDetailList.size(); j++){
+						zxPurchaseApplyDetailUpdateList.add(zxPurchaseApplyDetailList.get(j));
+			}
+			if(!zxPurchaseApplyDetailUpdateList.isEmpty()&&zxPurchaseApplyDetailUpdateList.size()>0){
+				i=zxPurchaseApplyDetailService.updateBatchZxPurchaseApplystore(zxPurchaseApplyDetailUpdateList);
+			}
+		} catch (Exception e) {
+			i = 0;
+			/**捕捉异常并回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+		return i;
+	}
+	/**
+	* 修改（根据动态条件）
+	* @param zx_purchase_apply 
+	* @return
+	*/
+	public int updateZxPurchaseApplyBySelective(ZxPurchaseApply zxPurchaseApply){
+		int i = 0;
+		try {
+			i = zxPurchaseApplyDao.updateZxPurchaseApplyBySelective(zxPurchaseApply);
+			List<ZxPurchaseApplyDetail> zxPurchaseApplyDetailList = zxPurchaseApply.getZxPurchaseApplyDetail();
+			List<ZxPurchaseApplyDetail> zxPurchaseApplyDetailAddList = new ArrayList<ZxPurchaseApplyDetail>();
+			List<ZxPurchaseApplyDetail> zxPurchaseApplyDetailUpdateList = new ArrayList<ZxPurchaseApplyDetail>();
+			for(int j = 0; j < zxPurchaseApplyDetailList.size(); j++){
+				if(zxPurchaseApply.getZxPurchaseApplyDetail_removed_flag().indexOf(","+j+",") == -1){
+					zxPurchaseApplyDetailList.get(j).setApply_id(zxPurchaseApply.getApply_id());
+					if(StringUtil.isEmpty(zxPurchaseApplyDetailList.get(j).getId())){
+						zxPurchaseApplyDetailList.get(j).setId(toUUID());
+						zxPurchaseApplyDetailAddList.add(zxPurchaseApplyDetailList.get(j));
+					}else{
+						zxPurchaseApplyDetailUpdateList.add(zxPurchaseApplyDetailList.get(j));
+					}
+				}
+			}
+			if(!zxPurchaseApplyDetailAddList.isEmpty()&&zxPurchaseApplyDetailAddList.size()>0){
+				zxPurchaseApplyDetailService.addBatchZxPurchaseApplyDetail(zxPurchaseApplyDetailAddList);
+			}
+			if(!zxPurchaseApplyDetailUpdateList.isEmpty()&&zxPurchaseApplyDetailUpdateList.size()>0){
+				zxPurchaseApplyDetailService.updateBatchZxPurchaseApplyDetailBySelective(zxPurchaseApplyDetailUpdateList);
+			}
+		} catch (Exception e) {
+			i = 0;
+			/**捕捉异常并回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+		return i;
+	}
+	/**
+	* 修改（根据动态条件）
+	* @param zx_purchase_apply 
+	* @return
+	*/
+	public int updateZxPurchaseApplyBySelectiveByCondition(ZxPurchaseApply zxPurchaseApply){
+		int i = 0;
+		try {
+			i = zxPurchaseApplyDao.updateZxPurchaseApplyBySelective(zxPurchaseApply);
+		} catch (Exception e) {
+			i = 0;
+			/**捕捉异常并回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+		return i;
+	}
+	/**
+	* 删除
+	* @param condition 
+	* @return
+	*/
+	public int delZxPurchaseApply(Map<String,Object> condition){
+		int i = 0;
+		try {
+			i = zxPurchaseApplyDao.delZxPurchaseApply(condition);
+			String[] apply_idList= (String[])condition.get("apply_id");
+			for(String apply_id:apply_idList){
+				zxPurchaseApplyDetailService.delZxPurchaseApplyDetailByForeignKey(apply_id);
+			}
+		} catch (Exception e) {
+			i = 0;
+			/**捕捉异常并回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+		return i;
+	}
+	/**
+	* 批量添加
+	* @param zx_purchase_applyList 
+	* @return
+	*/
+	public int addBatchZxPurchaseApply(List<ZxPurchaseApply> zxPurchaseApplyList){
+		int i = 0;
+		try {
+			i = zxPurchaseApplyDao.addBatchZxPurchaseApply(zxPurchaseApplyList);
+		} catch (Exception e) {
+			i = 0;
+			/**捕捉异常并回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+		return i;
+	}
+	/**
+	* 批量修改
+	* @param zx_purchase_applyList 
+	* @return
+	*/
+	public int updateBatchZxPurchaseApply(List<ZxPurchaseApply> zxPurchaseApplyList){
+		int i = 0;
+		try {
+			i = zxPurchaseApplyDao.updateBatchZxPurchaseApply(zxPurchaseApplyList);
+		} catch (Exception e) {
+			i = 0;
+			/**捕捉异常并回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+		return i;
+	}
+	/**
+	* 批量修改（根据动态条件）
+	* @param zx_purchase_applyList 
+	* @return
+	*/
+	public int updateBatchZxPurchaseApplyBySelective(List<ZxPurchaseApply> zxPurchaseApplyList){
+		int i = 0;
+		try {
+			i = zxPurchaseApplyDao.updateBatchZxPurchaseApplyBySelective(zxPurchaseApplyList);
+		} catch (Exception e) {
+			i = 0;
+			/**捕捉异常并回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+		return i;
+	}
+}

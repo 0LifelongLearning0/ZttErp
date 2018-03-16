@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZxTrainApply">
+	<!--初始化分页-->
+	<select id="getZxTrainApplyListByCondition" resultType="jehc.zxmodules.model.ZxTrainApply" parameterType="map">
+		SELECT
+			`id`,
+			`train_dept`,
+			`train_userid`,
+			DATE_FORMAT(`create_time`,'%Y-%m-%d %H:%i:%s') AS `create_time`,
+			DATE_FORMAT(`approve_time`,'%Y-%m-%d %H:%i:%s') AS `approve_time`,
+			`train_num`,
+			`train_name`,
+			`train_purpose`,
+			`train_cato`,
+			`train_address`,
+			`train_agreement`,
+			`train_fee`,
+			`remark`,
+			`status`
+		FROM 
+			zx_train_apply
+		WHERE 1=1
+		<if test="null != train_dept">
+			AND instr(train_dept,#{train_dept})
+		</if>
+		<if test="null != status">
+			AND instr(status,#{status})
+		</if>
+	</select>
+<!--初始化分页-->
+	<select id="getZxTrainApproveListByCondition" resultType="jehc.zxmodules.model.ZxTrainApply" parameterType="map">
+		SELECT
+			`id`,
+			`train_dept`,
+			`train_userid`,
+			DATE_FORMAT(`create_time`,'%Y-%m-%d %H:%i:%s') AS `create_time`,
+			DATE_FORMAT(`approve_time`,'%Y-%m-%d %H:%i:%s') AS `approve_time`,
+			`train_num`,
+			`train_name`,
+			`train_purpose`,
+			`train_cato`,
+			`train_address`,
+			`train_agreement`,
+			`train_fee`,
+			`remark`,
+			`status`
+		FROM 
+			zx_train_apply
+		WHERE status='3' and 1=1 
+		<if test="null != train_dept">
+			AND instr(train_dept,#{train_dept})
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getZxTrainApplyById" resultType="jehc.zxmodules.model.ZxTrainApply" parameterType="string">
+		SELECT
+			`id`,
+			`train_dept`,
+			`train_userid`,
+			DATE_FORMAT(`create_time`,'%Y-%m-%d %H:%i:%s') AS `create_time`,
+			DATE_FORMAT(`approve_time`,'%Y-%m-%d %H:%i:%s') AS `approve_time`,
+			`train_num`,
+			`train_name`,
+			`train_purpose`,
+			`train_cato`,
+			`train_address`,
+			`train_agreement`,
+			`train_fee`,
+			`remark`,
+			`train_plan`,
+			`train_effect`,
+			`status`
+		FROM 
+			zx_train_apply
+		WHERE id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addZxTrainApply" parameterType="jehc.zxmodules.model.ZxTrainApply">
+		INSERT INTO
+			zx_train_apply
+			(
+			`id`,
+			`train_dept`,
+			`train_userid`,
+			`create_time`,
+			`approve_time`,
+			`train_num`,
+			`train_name`,
+			`train_purpose`,
+			`train_cato`,
+			`train_address`,
+			`train_agreement`,
+			`train_fee`,
+			`remark`,
+			`status`
+			)
+			VALUES
+			(
+			#{id},
+			#{train_dept},
+			#{train_userid},
+			#{create_time},
+			#{approve_time},
+			#{train_num},
+			#{train_name},
+			#{train_purpose},
+			#{train_cato},
+			#{train_address},
+			#{train_agreement},
+			#{train_fee},
+			#{remark},
+			#{status}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZxTrainApply" parameterType="jehc.zxmodules.model.ZxTrainApply">
+		UPDATE
+			zx_train_apply
+		SET
+			`train_dept` = #{train_dept},
+			`train_num` = #{train_num},
+			`train_name` = #{train_name},
+			`train_purpose` = #{train_purpose},
+			`train_cato` = #{train_cato},
+			`train_address` = #{train_address},
+			`train_agreement` = #{train_agreement},
+			`train_fee` = #{train_fee},
+			`remark` = #{remark}
+		WHERE id=#{id}
+	</update>
+		<!--通过申请-->
+	<update id="updateZxTrainApplyApply" parameterType="jehc.zxmodules.model.ZxTrainApply">
+		UPDATE
+			zx_train_apply
+		SET
+		    status='1'
+		WHERE id=#{id}
+	</update>
+	
+	<update id="updateapproveZxTrainApprove" parameterType="jehc.zxmodules.model.ZxTrainApply">
+		UPDATE
+			zx_train_apply
+			<set>
+				<if test="status != null">
+		    status=#{status},
+		    </if>
+		    <if test="train_plan != null">
+		    train_plan=#{train_plan},
+		    </if>
+		    <if test="train_effect != null">
+		    train_effect=#{train_effect},
+		    </if>
+		    </set>
+		WHERE id=#{id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZxTrainApplyBySelective" parameterType="jehc.zxmodules.model.ZxTrainApply">
+		UPDATE
+			zx_train_apply
+		<set>
+			<if test="train_dept != null">
+				`train_dept` = #{train_dept},
+			</if>
+			<if test="train_userid != null">
+				`train_userid` = #{train_userid},
+			</if>
+			<if test="create_time != null">
+				`create_time` = #{create_time},
+			</if>
+			<if test="approve_time != null">
+				`approve_time` = #{approve_time},
+			</if>
+			<if test="train_num != null">
+				`train_num` = #{train_num},
+			</if>
+			<if test="train_name != null">
+				`train_name` = #{train_name},
+			</if>
+			<if test="train_purpose != null">
+				`train_purpose` = #{train_purpose},
+			</if>
+			<if test="train_cato != null">
+				`train_cato` = #{train_cato},
+			</if>
+			<if test="train_address != null">
+				`train_address` = #{train_address},
+			</if>
+			<if test="train_agreement != null">
+				`train_agreement` = #{train_agreement},
+			</if>
+			<if test="train_fee != null">
+				`train_fee` = #{train_fee},
+			</if>
+			<if test="remark != null">
+				`remark` = #{remark},
+			</if>
+			<if test="status != null">
+				`status` = #{status},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZxTrainApply" parameterType="map">
+		DELETE FROM zx_train_apply WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZxTrainApply" parameterType="list">
+		INSERT INTO
+			zx_train_apply
+			(
+			`id`,
+			`train_dept`,
+			`train_userid`,
+			`create_time`,
+			`approve_time`,
+			`train_num`,
+			`train_name`,
+			`train_purpose`,
+			`train_cato`,
+			`train_address`,
+			`train_agreement`,
+			`train_fee`,
+			`remark`,
+			`status`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.train_dept},
+			#{item.train_userid},
+			#{item.create_time},
+			#{item.approve_time},
+			#{item.train_num},
+			#{item.train_name},
+			#{item.train_purpose},
+			#{item.train_cato},
+			#{item.train_address},
+			#{item.train_agreement},
+			#{item.train_fee},
+			#{item.remark},
+			#{item.status}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZxTrainApply" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_train_apply
+			SET
+				`train_dept` = #{item.train_dept},
+				`train_userid` = #{item.train_userid},
+				`create_time` = #{item.create_time},
+				`approve_time` = #{item.approve_time},
+				`train_num` = #{item.train_num},
+				`train_name` = #{item.train_name},
+				`train_purpose` = #{item.train_purpose},
+				`train_cato` = #{item.train_cato},
+				`train_address` = #{item.train_address},
+				`train_agreement` = #{item.train_agreement},
+				`train_fee` = #{item.train_fee},
+				`remark` = #{item.remark},
+				`status` = #{item.status}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZxTrainApplyBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_train_apply
+			<set>
+				<if test="item.train_dept != null">
+					`train_dept` = #{item.train_dept},
+				</if>
+				<if test="item.train_userid != null">
+					`train_userid` = #{item.train_userid},
+				</if>
+				<if test="item.create_time != null">
+					`create_time` = #{item.create_time},
+				</if>
+				<if test="item.approve_time != null">
+					`approve_time` = #{item.approve_time},
+				</if>
+				<if test="item.train_num != null">
+					`train_num` = #{item.train_num},
+				</if>
+				<if test="item.train_name != null">
+					`train_name` = #{item.train_name},
+				</if>
+				<if test="item.train_purpose != null">
+					`train_purpose` = #{item.train_purpose},
+				</if>
+				<if test="item.train_cato != null">
+					`train_cato` = #{item.train_cato},
+				</if>
+				<if test="item.train_address != null">
+					`train_address` = #{item.train_address},
+				</if>
+				<if test="item.train_agreement != null">
+					`train_agreement` = #{item.train_agreement},
+				</if>
+				<if test="item.train_fee != null">
+					`train_fee` = #{item.train_fee},
+				</if>
+				<if test="item.remark != null">
+					`remark` = #{item.remark},
+				</if>
+				<if test="item.status != null">
+					`status` = #{item.status},
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+</mapper>

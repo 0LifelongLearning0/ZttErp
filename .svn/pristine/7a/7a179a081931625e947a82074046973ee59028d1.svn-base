@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZxSixS">
+	<!--初始化分页-->
+	<select id="getZxSixSListByCondition" resultType="jehc.zxmodules.model.ZxSixS" parameterType="map">
+		SELECT
+			t1.`id`,
+			t1.`title`,
+			DATE_FORMAT(t1.`check_date`,'%Y-%m-%d %H:%i:%s') AS `check_date`,
+			t1.`status`,
+			t1.`user_id`,
+			t1.`state`,
+			<if test="null != is_connect">
+				t2.xt_userinfo_realName  AS user_realname,
+			</if>
+			DATE_FORMAT(t1.`create_date`,'%Y-%m-%d %H:%i:%s') AS `create_date`
+		FROM 
+			zx_six_s t1
+		<if test="null != is_connect">
+			LEFT JOIN xt_userinfo t2 ON t1.user_id = t2.xt_userinfo_id 
+		</if>	
+		<if test="null != is_join_content">
+			JOIN zx_six_s_content t3 
+		</if>
+		WHERE 1=1
+		<if test="null != state">
+			AND t1.state = #{state}
+		</if>
+		<if test="null != status">
+			AND t1.status = #{status}
+		</if>
+		<if test="null != title and '' != title">
+			AND instr(title,#{title})
+		</if>
+		<if test="null != is_join_content">
+			AND t1.id = t3.six_s_id AND '47F503BA1DA844DCB5BC84F9DC39F2EF'
+			<if test="null != zeren_user_id">
+				AND t3.user_id= #{zeren_user_id}  
+			</if>
+		    GROUP BY t1.id,t3.user_id
+		</if>
+		ORDER BY t1.status ASC,t1.create_date DESC 
+	</select>
+	
+	<!--查询对象-->
+	<select id="getZxSixSById" resultType="jehc.zxmodules.model.ZxSixS" parameterType="string">
+		SELECT
+			`id`,
+			`title`,
+			DATE_FORMAT(`check_date`,'%Y-%m-%d %H:%i:%s') AS `check_date`,
+			`status`,
+			`user_id`,
+			`state`,
+			DATE_FORMAT(`create_date`,'%Y-%m-%d %H:%i:%s') AS `create_date`
+		FROM 
+			zx_six_s
+		WHERE id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addZxSixS" parameterType="jehc.zxmodules.model.ZxSixS">
+		INSERT INTO
+			zx_six_s
+			(
+			`id`,
+			`title`,
+			`check_date`,
+			`status`,
+			`user_id`,
+			`state`,
+			`create_date`
+			)
+			VALUES
+			(
+			#{id},
+			#{title},
+			#{check_date},
+			#{status},
+			#{user_id},
+			#{state},
+			#{create_date}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZxSixS" parameterType="jehc.zxmodules.model.ZxSixS">
+		UPDATE
+			zx_six_s
+		SET
+			`title` = #{title},
+			`check_date` = #{check_date},
+			`status` = #{status},
+			`user_id` = #{user_id},
+			`state` = #{state},
+			`create_date` = #{create_date}
+		WHERE id=#{id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZxSixSBySelective" parameterType="jehc.zxmodules.model.ZxSixS">
+		UPDATE
+			zx_six_s
+		<set>
+			<if test="title != null">
+				`title` = #{title},
+			</if>
+			<if test="check_date != null">
+				`check_date` = #{check_date},
+			</if>
+			<if test="status != null">
+				`status` = #{status},
+			</if>
+			<if test="user_id != null">
+				`user_id` = #{user_id},
+			</if>
+			<if test="state != null">
+				`state` = #{state},
+			</if>
+			<if test="create_date != null">
+				`create_date` = #{create_date},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZxSixS" parameterType="map">
+		DELETE FROM zx_six_s WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZxSixS" parameterType="list">
+		INSERT INTO
+			zx_six_s
+			(
+			`id`,
+			`title`,
+			`check_date`,
+			`status`,
+			`user_id`,
+			`state`,
+			`create_date`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.title},
+			#{item.check_date},
+			#{item.status},
+			#{item.user_id},
+			#{item.state},
+			#{item.create_date}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZxSixS" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_six_s
+			SET
+				`title` = #{item.title},
+				`check_date` = #{item.check_date},
+				`status` = #{item.status},
+				`user_id` = #{item.user_id},
+				`state` = #{item.state},
+				`create_date` = #{item.create_date}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZxSixSBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_six_s
+			<set>
+				<if test="item.title != null">
+					`title` = #{item.title},
+				</if>
+				<if test="item.check_date != null">
+					`check_date` = #{item.check_date},
+				</if>
+				<if test="item.status != null">
+					`status` = #{item.status},
+				</if>
+				<if test="item.user_id != null">
+					`user_id` = #{item.user_id},
+				</if>
+				<if test="item.state != null">
+					`state` = #{item.state},
+				</if>
+				<if test="item.create_date != null">
+					`create_date` = #{item.create_date},
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+</mapper>

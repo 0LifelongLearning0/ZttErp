@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZxOrderOutWorkpiece">
+	<!--初始化分页-->
+	<select id="getZxOrderOutWorkpieceListByCondition" resultType="jehc.zxmodules.model.ZxOrderOutWorkpiece" parameterType="map">
+		SELECT
+			`id`,
+			`order_id`,
+			`apply_workpiece_id`,
+			`workpiece_id`,
+			`agree_time`
+		FROM 
+			zx_order_out_workpiece
+		WHERE 1=1
+		<if test="null != workpiece_id">
+			AND instr(workpiece_id,#{workpiece_id})
+		</if>
+		<if test="null != apply_workpiece_id">
+			AND instr(apply_workpiece_id,#{apply_workpiece_id})
+		</if>
+		<if test="null != order_id">
+			AND instr(order_id,#{order_id})
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getZxOrderOutWorkpieceById" resultType="jehc.zxmodules.model.ZxOrderOutWorkpiece" parameterType="string">
+		SELECT
+			`id`,
+			`order_id`,
+			`apply_workpiece_id`,
+			`workpiece_id`,
+			`agree_time`
+		FROM 
+			zx_order_out_workpiece
+		WHERE id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addZxOrderOutWorkpiece" parameterType="jehc.zxmodules.model.ZxOrderOutWorkpiece">
+		INSERT INTO
+			zx_order_out_workpiece
+			(
+			`id`,
+			`order_id`,
+			`apply_workpiece_id`,
+			`workpiece_id`,
+			`agree_time`
+			)
+			VALUES
+			(
+			#{id},
+			#{order_id},
+			#{apply_workpiece_id},
+			#{workpiece_id},
+			#{agree_time}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZxOrderOutWorkpiece" parameterType="jehc.zxmodules.model.ZxOrderOutWorkpiece">
+		UPDATE
+			zx_order_out_workpiece
+		SET
+			`order_id` = #{order_id},
+			`apply_workpiece_id` = #{apply_workpiece_id},
+			`workpiece_id` = #{workpiece_id},
+			`agree_time` = #{agree_time}
+		WHERE id=#{id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZxOrderOutWorkpieceBySelective" parameterType="jehc.zxmodules.model.ZxOrderOutWorkpiece">
+		UPDATE
+			zx_order_out_workpiece
+		<set>
+			<if test="order_id != null">
+				`order_id` = #{order_id},
+			</if>
+			<if test="apply_workpiece_id != null">
+				`apply_workpiece_id` = #{apply_workpiece_id},
+			</if>
+			<if test="workpiece_id != null">
+				`workpiece_id` = #{workpiece_id},
+			</if>
+			<if test="agree_time != null">
+				`agree_time` = #{agree_time},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZxOrderOutWorkpiece" parameterType="map">
+		DELETE FROM zx_order_out_workpiece WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--删除-->
+	<delete id="delZxOW" parameterType="map">
+		delete from zx_order_out_workpiece where apply_workpiece_id in
+		<foreach item="item" index="index" collection="apply_workpiece_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+		and order_id = #{order_id}
+	</delete>
+	
+	<!--批量添加-->
+	<insert id="addBatchZxOrderOutWorkpiece" parameterType="list">
+		INSERT INTO
+			zx_order_out_workpiece
+			(
+			`id`,
+			`order_id`,
+			`apply_workpiece_id`,
+			`workpiece_id`,
+			`agree_time`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.order_id},
+			#{item.apply_workpiece_id},
+			#{item.workpiece_id},
+			#{item.agree_time}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZxOrderOutWorkpiece" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_order_out_workpiece
+			SET
+				`order_id` = #{item.order_id},
+				`apply_workpiece_id` = #{item.apply_workpiece_id},
+				`workpiece_id` = #{item.workpiece_id},
+				`agree_time` = #{item.agree_time}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZxOrderOutWorkpieceBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_order_out_workpiece
+			<set>
+				<if test="item.order_id != null">
+					`order_id` = #{item.order_id},
+				</if>
+				<if test="item.apply_workpiece_id != null">
+					`apply_workpiece_id` = #{item.apply_workpiece_id},
+				</if>
+				<if test="item.workpiece_id != null">
+					`workpiece_id` = #{item.workpiece_id},
+				</if>
+				<if test="item.agree_time != null">
+					`agree_time` = #{item.agree_time},
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+</mapper>

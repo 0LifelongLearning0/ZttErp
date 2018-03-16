@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZxJudgeUser">
+	<!--初始化分页-->
+	<select id="getZxJudgeUserListByCondition" resultType="jehc.zxmodules.model.ZxJudgeUser" parameterType="map">
+		SELECT
+			t1.`id`,
+			t1.`type`,
+			t1.`result_id`,
+			t1.`user_id`,
+			t1.`status`,
+			t1.`state`,
+			<if test="null != is_connect">
+				t2.xt_departinfo_id AS dep_id,
+				t2.xt_userinfo_name AS user_name,
+				t2.xt_userinfo_realName AS user_realName,
+			</if>	
+			DATE_FORMAT(t1.`create_date`,'%Y-%m-%d %H:%i:%s') AS `create_date`
+		FROM 
+			zx_judge_user t1 
+		<if test="null != is_connect">
+			LEFT JOIN 
+				xt_userinfo t2 
+			ON 
+				t1.user_id = t2.xt_userinfo_id 
+		</if>	
+		WHERE 1=1
+		<if test="null != result_id">
+			AND t1.result_id = #{result_id}
+		</if>
+		<if test="null != user_id">
+			AND t1.user_id = #{user_id}
+		</if>
+		<if test="null != type">
+			AND t1.type = #{type}
+		</if>
+		<if test="null != state">
+			AND t1.state = #{state}
+		</if>
+		<if test="null != dep_id">
+			AND t2.xt_departinfo_id = #{dep_id}
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getZxJudgeUserById" resultType="jehc.zxmodules.model.ZxJudgeUser" parameterType="string">
+		SELECT
+			`id`,
+			`type`,
+			`result_id`,
+			`user_id`,
+			`status`,
+			`state`,
+			DATE_FORMAT(`create_date`,'%Y-%m-%d %H:%i:%s') AS `create_date`
+		FROM 
+			zx_judge_user
+		WHERE id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addZxJudgeUser" parameterType="jehc.zxmodules.model.ZxJudgeUser">
+		INSERT INTO
+			zx_judge_user
+			(
+			`id`,
+			`type`,
+			`result_id`,
+			`user_id`,
+			`status`,
+			`state`,
+			`create_date`
+			)
+			VALUES
+			(
+			#{id},
+			#{type},
+			#{result_id},
+			#{user_id},
+			#{status},
+			#{state},
+			#{create_date}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZxJudgeUser" parameterType="jehc.zxmodules.model.ZxJudgeUser">
+		UPDATE
+			zx_judge_user
+		SET
+			`type` = #{type},
+			`result_id` = #{result_id},
+			`user_id` = #{user_id},
+			`status` = #{status},
+			`state` = #{state},
+			`create_date` = #{create_date}
+		WHERE id=#{id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZxJudgeUserBySelective" parameterType="jehc.zxmodules.model.ZxJudgeUser">
+		UPDATE
+			zx_judge_user
+		<set>
+			<if test="type != null">
+				`type` = #{type},
+			</if>
+			<if test="result_id != null">
+				`result_id` = #{result_id},
+			</if>
+			<if test="user_id != null">
+				`user_id` = #{user_id},
+			</if>
+			<if test="status != null">
+				`status` = #{status},
+			</if>
+			<if test="state != null">
+				`state` = #{state},
+			</if>
+			<if test="create_date != null">
+				`create_date` = #{create_date},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZxJudgeUser" parameterType="map">
+		DELETE FROM zx_judge_user WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZxJudgeUser" parameterType="list">
+		INSERT INTO
+			zx_judge_user
+			(
+			`id`,
+			`type`,
+			`result_id`,
+			`user_id`,
+			`status`,
+			`state`,
+			`create_date`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.type},
+			#{item.result_id},
+			#{item.user_id},
+			#{item.status},
+			#{item.state},
+			#{item.create_date}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZxJudgeUser" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_judge_user
+			SET
+				`type` = #{item.type},
+				`result_id` = #{item.result_id},
+				`user_id` = #{item.user_id},
+				`status` = #{item.status},
+				`state` = #{item.state},
+				`create_date` = #{item.create_date}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZxJudgeUserBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_judge_user
+			<set>
+				<if test="item.type != null">
+					`type` = #{item.type},
+				</if>
+				<if test="item.result_id != null">
+					`result_id` = #{item.result_id},
+				</if>
+				<if test="item.user_id != null">
+					`user_id` = #{item.user_id},
+				</if>
+				<if test="item.status != null">
+					`status` = #{item.status},
+				</if>
+				<if test="item.state != null">
+					`state` = #{item.state},
+				</if>
+				<if test="item.create_date != null">
+					`create_date` = #{item.create_date},
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+</mapper>

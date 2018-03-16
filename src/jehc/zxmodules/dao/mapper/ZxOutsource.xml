@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZxOutsource">
+	<!--初始化分页-->
+	<select id="getZxOutsourceListByCondition" resultType="jehc.zxmodules.model.ZxOutsource" parameterType="map">
+		SELECT
+			`id`,
+			`workpiece_id`,
+			`amount`,
+			`need_date`,
+			`plan_date`,
+			`real_date`,
+			`machine_id`,
+			`status`,
+			`remark`,
+			DATE_FORMAT(`create_date`,'%Y-%m-%d %H:%i:%s') AS `create_date`,
+			`concordat_id`,
+			`concordat_num`,
+			`buy_id`,
+			`buy_num`
+		FROM 
+			zx_outsource
+		WHERE 1=1
+		<if test="null != workpiece_id">
+			AND instr(workpiece_id,#{workpiece_id})
+		</if>
+		<if test="null != concordat_num">
+			AND instr(concordat_num,#{concordat_num})
+		</if>
+		<if test="null != buy_num">
+			AND instr(buy_num,#{buy_num})
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getZxOutsourceById" resultType="jehc.zxmodules.model.ZxOutsource" parameterType="string">
+		SELECT
+			`id`,
+			`workpiece_id`,
+			`amount`,
+			`need_date`,
+			`plan_date`,
+			`real_date`,
+			`machine_id`,
+			`status`,
+			`remark`,
+			DATE_FORMAT(`create_date`,'%Y-%m-%d %H:%i:%s') AS `create_date`,
+			`concordat_id`,
+			`concordat_num`,
+			`buy_id`,
+			`buy_num`
+		FROM 
+			zx_outsource
+		WHERE id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addZxOutsource" parameterType="jehc.zxmodules.model.ZxOutsource">
+		INSERT INTO
+			zx_outsource
+			(
+			`id`,
+			`workpiece_id`,
+			`amount`,
+			<if test="need_date != null and need_date != ''">
+				`need_date`,
+			</if>
+			<if test="plan_date != null and plan_date != ''">
+				`plan_date`,
+			</if>
+			`machine_id`,
+			`status`,
+			<if test="remark != null and remark != ''">
+				`remark`,
+			</if>
+			<if test="concordat_id != null and concordat_id != ''">
+				`concordat_id`,
+			</if>
+			<if test="concordat_num != null and concordat_num != ''">
+				`concordat_num`,
+			</if>
+			<if test="buy_id != null and buy_id != ''">
+				`buy_id`,
+			</if>
+			<if test="buy_num != null and buy_num != ''">
+				`buy_num`,
+			</if>
+			`create_date`
+			)
+			VALUES
+			(
+			#{id},
+			#{workpiece_id},
+			#{amount},
+			<if test="need_date != null">
+				#{need_date},
+			</if>
+			<if test="plan_date != null and plan_date != ''">
+				#{plan_date},
+			</if>
+			#{machine_id},
+			#{status},
+			<if test="remark != null and remark != ''">
+				#{remark},
+			</if>
+			<if test="concordat_id != null and concordat_id != ''">
+				#{concordat_id},
+			</if>
+			<if test="concordat_num != null and concordat_num != ''">
+				#{concordat_num},
+			</if>
+			<if test="buy_id != null and buy_id != ''">
+				#{buy_id},
+			</if>
+			<if test="buy_num != null and buy_num != ''">
+				#{buy_num},
+			</if>
+			#{create_date}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZxOutsource" parameterType="jehc.zxmodules.model.ZxOutsource">
+		UPDATE
+			zx_outsource
+		SET
+			`workpiece_id` = #{workpiece_id},
+			`amount` = #{amount},
+			`need_date` = #{need_date},
+			`plan_date` = #{plan_date},
+			`real_date` = #{real_date},
+			`machine_id` = #{machine_id},
+			`status` = #{status},
+			`remark` = #{remark},
+			`create_date` = #{create_date},
+			`concordat_id` = #{concordat_id},
+			`concordat_num` = #{concordat_num},
+			`buy_id` = #{buy_id},
+			`buy_num` = #{buy_num}
+		WHERE id=#{id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZxOutsourceBySelective" parameterType="jehc.zxmodules.model.ZxOutsource">
+		UPDATE
+			zx_outsource
+		<set>
+			<if test="workpiece_id != null and workpiece_id != ''">
+				`workpiece_id` = #{workpiece_id},
+			</if>
+			<if test="amount != null and amount != ''">
+				`amount` = #{amount},
+			</if>
+			<if test="need_date != null and need_date != ''">
+				`need_date` = #{need_date},
+			</if>
+			<if test="plan_date != null and plan_date != ''">
+				`plan_date` = #{plan_date},
+			</if>
+			<if test="real_date != null and real_date != ''">
+				`real_date` = #{real_date},
+			</if>
+			<if test="machine_id != null and machine_id != ''">
+				`machine_id` = #{machine_id},
+			</if>
+			<if test="status != null and status != ''">
+				`status` = #{status},
+			</if>
+			<if test="remark != null and remark != ''">
+				`remark` = #{remark},
+			</if>
+			<if test="create_date != null and create_date != ''">
+				`create_date` = #{create_date},
+			</if>
+			<if test="concordat_id != null and concordat_id != ''">
+				`concordat_id` = #{concordat_id},
+			</if>
+			<if test="concordat_num != null and concordat_num != ''">
+				`concordat_num` = #{concordat_num},
+			</if>
+			<if test="buy_id != null and buy_id != ''">
+				`buy_id` = #{buy_id},
+			</if>
+			<if test="buy_num != null and buy_num != ''">
+				`buy_num` = #{buy_num},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZxOutsource" parameterType="map">
+		DELETE FROM zx_outsource WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZxOutsource" parameterType="list">
+		INSERT INTO
+			zx_outsource
+			(
+			`id`,
+			`workpiece_id`,
+			`amount`,
+			`need_date`,
+			`plan_date`,
+			`real_date`,
+			`machine_id`,
+			`status`,
+			`remark`,
+			`create_date`,
+			`concordat_id`,
+			`concordat_num`,
+			`buy_id`,
+			`buy_num`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.workpiece_id},
+			#{item.amount},
+			#{item.need_date},
+			#{item.plan_date},
+			#{item.real_date},
+			#{item.machine_id},
+			#{item.status},
+			#{item.remark},
+			#{item.create_date},
+			#{item.concordat_id},
+			#{item.concordat_num},
+			#{item.buy_id},
+			#{item.buy_num}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZxOutsource" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_outsource
+			SET
+				`workpiece_id` = #{item.workpiece_id},
+				`amount` = #{item.amount},
+				`need_date` = #{item.need_date},
+				`plan_date` = #{item.plan_date},
+				`real_date` = #{item.real_date},
+				`machine_id` = #{item.machine_id},
+				`status` = #{item.status},
+				`remark` = #{item.remark},
+				`create_date` = #{item.create_date},
+				`concordat_id` = #{item.concordat_id},
+				`concordat_num` = #{item.concordat_num},
+				`buy_id` = #{item.buy_id},
+				`buy_num` = #{item.buy_num}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZxOutsourceBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_outsource
+			<set>
+				<if test="item.workpiece_id != null">
+					`workpiece_id` = #{item.workpiece_id},
+				</if>
+				<if test="item.amount != null">
+					`amount` = #{item.amount},
+				</if>
+				<if test="item.need_date != null">
+					`need_date` = #{item.need_date},
+				</if>
+				<if test="item.plan_date != null">
+					`plan_date` = #{item.plan_date},
+				</if>
+				<if test="item.real_date != null">
+					`real_date` = #{item.real_date},
+				</if>
+				<if test="item.machine_id != null">
+					`machine_id` = #{item.machine_id},
+				</if>
+				<if test="item.status != null">
+					`status` = #{item.status},
+				</if>
+				<if test="item.remark != null">
+					`remark` = #{item.remark},
+				</if>
+				<if test="item.create_date != null">
+					`create_date` = #{item.create_date},
+				</if>
+				<if test="item.concordat_id != null">
+					`concordat_id` = #{item.concordat_id},
+				</if>
+				<if test="item.concordat_num != null">
+					`concordat_num` = #{item.concordat_num},
+				</if>
+				<if test="item.buy_id != null">
+					`buy_id` = #{item.buy_id},
+				</if>
+				<if test="item.buy_num != null">
+					`buy_num` = #{item.buy_num},
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+</mapper>

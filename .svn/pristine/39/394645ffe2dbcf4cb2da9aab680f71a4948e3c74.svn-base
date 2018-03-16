@@ -1,0 +1,146 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ include file="/deng/include/includeboot.jsp"%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta charset="UTF-8">
+<title>车辆审批表编辑页面</title>
+</head>
+<body>
+	<div class="panel-body">
+		<div class="page-header">
+			<h4>编辑车辆审批表</h4>
+		</div>
+		<form class="form-horizontal" id="defaultForm" method="post">
+			<div class="form-group" style="display:none;">
+				<label class="col-lg-3 control-label">Id</label>
+				<div class="col-lg-6">
+					<input class="form-control" type="hidden" name="id"  placeholder="请输入Id" value="${zxCarApply.id }">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-3 control-label">状态</label>
+				<div class="col-lg-6">
+					<input class="form-control" type="text" maxlength="32"  data-bv-notempty data-bv-notempty-message="请输入状态"  name="state" placeholder="请输入状态" value="${zxCarApply.state }">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-3 control-label">申请类型</label>
+				<div class="col-lg-6">
+					<input class="form-control" type="text" maxlength="32"  name="apply_type" placeholder="请输入申请类型" value="${zxCarApply.apply_type }">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-3 control-label">申请人标识</label>
+				<div class="col-lg-6">
+					<input class="form-control" type="text" maxlength="32"  data-bv-notempty data-bv-notempty-message="请输入申请人标识"  name="apply_user_id" placeholder="请输入申请人标识" value="${zxCarApply.apply_user_id }">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-3 control-label">申请时间</label>
+				<div class="col-lg-6">
+					<input class="form_datetime form-control" name="apply_time"  data-bv-notempty data-bv-notempty-message="请输入申请时间"  placeholder="请选择时间" value="${zxCarApply.apply_time }">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-3 control-label">司机驾龄</label>
+				<div class="col-lg-6">
+					<input class="form-control" type="text" maxlength="10"  name="driver_age" placeholder="请输入司机驾龄" value="${zxCarApply.driver_age }">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-3 control-label">司机标识</label>
+				<div class="col-lg-6">
+					<input class="form-control" type="text" maxlength="32"  name="driver_id" placeholder="请输入司机标识" value="${zxCarApply.driver_id }">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-3 control-label">车辆Id</label>
+				<div class="col-lg-6">
+					<input class="form-control" type="text" maxlength="32"  name="car_id" placeholder="请输入车辆Id" value="${zxCarApply.car_id }">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-3 control-label">申请用车时间始</label>
+				<div class="col-lg-6">
+					<input class="form_datetime form-control" name="apply_time_begin"  data-bv-notempty data-bv-notempty-message="请输入申请用车时间始"  placeholder="请选择时间" value="${zxCarApply.apply_time_begin }">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-3 control-label">申请用车时间末</label>
+				<div class="col-lg-6">
+					<input class="form_datetime form-control" name="apply_time_end"  data-bv-notempty data-bv-notempty-message="请输入申请用车时间末"  placeholder="请选择时间" value="${zxCarApply.apply_time_end }">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-3 control-label">申请用车地点</label>
+				<div class="col-lg-6">
+					<input class="form-control" type="text" maxlength="255"  data-bv-notempty data-bv-notempty-message="请输入申请用车地点"  name="apply_car_address" placeholder="请输入申请用车地点" value="${zxCarApply.apply_car_address }">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-3 control-label">用车理由</label>
+				<div class="col-lg-6">
+					<input class="form-control" type="text" maxlength="255"  name="user_car_reason" placeholder="请输入用车理由" value="${zxCarApply.user_car_reason }">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-3 control-label">外车人员</label>
+				<div class="col-lg-6">
+					<input class="form-control" type="text" maxlength="255"  data-bv-notempty data-bv-notempty-message="请输入外车人员"  name="user_car_person" placeholder="请输入外车人员" value="${zxCarApply.user_car_person }">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-3 control-label">出车里程</label>
+				<div class="col-lg-6">
+					<input class="form-control" maxlength="10" value="0"  data-bv-numeric data-bv-numeric-message="出车里程为数字类型"  name="out_mileage" placeholder="请输入出车里程" value="${zxCarApply.out_mileage }">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-3 control-label">开始使用时间</label>
+				<div class="col-lg-6">
+					<input class="form_datetime form-control" name="usecar_outtime"  placeholder="请选择时间" value="${zxCarApply.usecar_outtime }">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-3 control-label">出车门卫</label>
+				<div class="col-lg-6">
+					<input class="form-control" type="text" maxlength="32"  name="out_guard_id" placeholder="请输入出车门卫" value="${zxCarApply.out_guard_id }">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-3 control-label">回公司里程</label>
+				<div class="col-lg-6">
+					<input class="form-control" maxlength="10" value="0"  data-bv-numeric data-bv-numeric-message="回公司里程为数字类型"  name="back_mileage" placeholder="请输入回公司里程" value="${zxCarApply.back_mileage }">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-3 control-label">结束时间</label>
+				<div class="col-lg-6">
+					<input class="form_datetime form-control" name="usercar_backtime"  placeholder="请选择时间" value="${zxCarApply.usercar_backtime }">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-3 control-label">回司门卫</label>
+				<div class="col-lg-6">
+					<input class="form-control" type="text" maxlength="32"  name="back_guard_id" placeholder="请输入回司门卫" value="${zxCarApply.back_guard_id }">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-3 control-label">携带物品</label>
+				<div class="col-lg-6">
+					<input class="form-control" type="text" maxlength="255"  name="comment" placeholder="请输入携带物品" value="${zxCarApply.comment }">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-3 control-label"></label>
+				<div class="col-lg-6">
+					<button type="button" class="btn green" onclick="updateZxCarApply()">保存</button>
+					<button type="button" class="btn default" onclick="goback()">返回</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</body>
+<script type="text/javascript" src="../view/pc/zx-view/zx-car-apply/zx-car-apply-update.js"></script> 
+</html>

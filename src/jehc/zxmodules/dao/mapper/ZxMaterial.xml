@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZxMaterial">
+	<!--初始化分页-->
+	<select id="getZxMaterialListByCondition" resultType="jehc.zxmodules.model.ZxMaterial" parameterType="map">
+		SELECT
+			`material_id`,
+			`name`,
+			`short_name`,
+			`num`,
+			`classify_id`,
+			`unit`,
+			`status`,
+			DATE_FORMAT(`create_date`,'%Y-%m-%d %H:%i:%s') AS `create_date`,
+			`weight`,
+			`standard`,
+			`team`,
+			`property`
+		FROM 
+			zx_material
+		WHERE 1=1
+		<if test="null != name">
+			AND instr(name,#{name})
+		</if>
+		<if test="null != num">
+			AND instr(num,#{num})
+		</if>
+		<if test="null != status">
+			AND status = #{status}
+		</if>
+		<if test="null != classify_id and '' != classify_id">
+			AND classify_id = #{classify_id}
+		</if>
+		<if test="null == orderby">
+		   ORDER BY classify_id ASC,num ASC
+		</if>
+		<if test="null != orderby and orderby == 0">
+		   ORDER BY classify_id ASC,num ASC
+		</if>
+		<if test="null != orderby and orderby == 1">
+		   ORDER BY num ASC 
+		</if>
+		<if test="null != orderby and orderby == 2">
+		   ORDER BY num DESC 
+		</if>
+		<if test="null != orderby and orderby == 3">
+		   ORDER BY classify_id ASC 
+		</if>
+		<if test="null != orderby and orderby == 4">
+		   ORDER BY classify_id DESC 
+		</if>
+		<if test="null != orderby and orderby == 5">
+		   ORDER BY name ASC 
+		</if>
+		<if test="null != orderby and orderby == 6">
+		   ORDER BY name DESC 
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getZxMaterialById" resultType="jehc.zxmodules.model.ZxMaterial" parameterType="string">
+		SELECT
+			`material_id`,
+			`name`,
+			`short_name`,
+			`num`,
+			`classify_id`,
+			`unit`,
+			`status`,
+			DATE_FORMAT(`create_date`,'%Y-%m-%d %H:%i:%s') AS `create_date`,
+			`weight`,
+			`standard`,
+			`team`,
+			`property`
+		FROM 
+			zx_material
+		WHERE material_id=#{material_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addZxMaterial" parameterType="jehc.zxmodules.model.ZxMaterial">
+		INSERT INTO
+			zx_material
+			(
+			`material_id`,
+			`name`,
+			`short_name`,
+			`num`,
+			`classify_id`,
+			`unit`,
+			`status`,
+			`create_date`,
+			<if test="weight != null and weight != ''">
+				`weight`,
+			</if>
+			<if test="standard != null and standard != ''">
+				`standard`,
+			</if>
+			`team`
+			)
+			VALUES
+			(
+			#{material_id},
+			#{name},
+			#{short_name},
+			#{num},
+			#{classify_id},
+			#{unit},
+			#{status},
+			#{create_date},
+			<if test="weight != null and weight != ''">
+				#{weight},
+			</if>
+			<if test="standard != null and standard != ''">
+				#{standard},
+			</if>
+			#{team},
+			#{property}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZxMaterial" parameterType="jehc.zxmodules.model.ZxMaterial">
+		UPDATE
+			zx_material
+		SET
+			`name` = #{name},
+			`short_name` = #{short_name},
+			`num` = #{num},
+			`classify_id` = #{classify_id},
+			`unit` = #{unit},
+			`status` = #{status},
+			`create_date` = #{create_date},
+			`weight` = #{weight},
+			`standard` = #{standard},
+			`team` = #{team},
+			`property` = #{property}
+		WHERE material_id=#{material_id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZxMaterialBySelective" parameterType="jehc.zxmodules.model.ZxMaterial">
+		UPDATE
+			zx_material
+		<set>
+			<if test="name != null">
+				`name` = #{name},
+			</if>
+			<if test="short_name != null">
+				`short_name` = #{short_name},
+			</if>
+			<if test="num != null">
+				`num` = #{num},
+			</if>
+			<if test="classify_id != null">
+				`classify_id` = #{classify_id},
+			</if>
+			<if test="unit != null">
+				`unit` = #{unit},
+			</if>
+			<if test="status != null">
+				`status` = #{status},
+			</if>
+			<if test="create_date != null">
+				`create_date` = #{create_date},
+			</if>
+			<if test="weight != null and weight != ''">
+				`weight` = #{weight},
+			</if>
+			<if test="standard != null and standard != ''">
+				`standard` = #{standard},
+			</if>
+			<if test="team != null">
+				`team` = #{team},
+			</if>
+			<if test="property != null">
+				`property` = #{property},
+			</if>
+		</set>
+		WHERE material_id=#{material_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZxMaterial" parameterType="map">
+		DELETE FROM zx_material WHERE material_id IN
+		<foreach item="item" index="index" collection="material_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZxMaterial" parameterType="list">
+		INSERT INTO
+			zx_material
+			(
+			`material_id`,
+			`name`,
+			`short_name`,
+			`num`,
+			`classify_id`,
+			`unit`,
+			`status`,
+			`create_date`,
+			`weight`,
+			`standard`,
+			`team`,
+			`property`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.material_id},
+			#{item.name},
+			#{item.short_name},
+			#{item.num},
+			#{item.classify_id},
+			#{item.unit},
+			#{item.status},
+			#{item.create_date},
+			#{item.weight},
+			#{item.standard},
+			#{item.team},
+			#{item.property}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZxMaterial" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_material
+			SET
+				`name` = #{item.name},
+				`short_name` = #{item.short_name},
+				`num` = #{item.num},
+				`classify_id` = #{item.classify_id},
+				`unit` = #{item.unit},
+				`status` = #{item.status},
+				`create_date` = #{item.create_date},
+				`weight` = #{item.weight},
+				`standard` = #{item.standard},
+				`team` = #{item.team},
+				`property` = #{item.property}
+			WHERE material_id=#{item.material_id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZxMaterialBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				zx_material
+			<set>
+				<if test="item.name != null">
+					`name` = #{item.name},
+				</if>
+				<if test="item.short_name != null">
+					`short_name` = #{item.short_name},
+				</if>
+				<if test="item.num != null">
+					`num` = #{item.num},
+				</if>
+				<if test="item.classify_id != null">
+					`classify_id` = #{item.classify_id},
+				</if>
+				<if test="item.unit != null">
+					`unit` = #{item.unit},
+				</if>
+				<if test="item.status != null">
+					`status` = #{item.status},
+				</if>
+				<if test="item.create_date != null">
+					`create_date` = #{item.create_date},
+				</if>
+				<if test="item.weight != null">
+					`weight` = #{item.weight},
+				</if>
+				<if test="item.standard != null">
+					`standard` = #{item.standard},
+				</if>
+				<if test="item.team != null">
+					`team` = #{item.team},
+				</if>
+				<if test="property != null">
+					`property` = #{item.property},
+				</if>
+			</set>
+			WHERE material_id=#{item.material_id}
+		</foreach>
+	</update>
+</mapper>

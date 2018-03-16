@@ -1,0 +1,75 @@
+//返回r
+function goback(){
+	tlocation("../zxGoodsApplyController/loadZxGoodsApply");
+}
+$('#defaultForm').bootstrapValidator({
+	message:'此值不是有效的'
+});
+//保存
+function updateZxGoodsApply(){
+	submitBForm('defaultForm','../zxGoodsApplyController/updateZxGoodsApply','../zxGoodsApplyController/loadZxGoodsApply');
+}
+//初始化日期选择器
+$(document).ready(function(){
+	datetimeInit();
+});
+
+function updateZxGoodsApplyDetailItems(){
+	validatorDestroy('defaultForm');
+	var numbers = $('#zxGoodsApplyDetailFormNumber').val();
+	numbers = parseInt(numbers)+1;
+	$('#zxGoodsApplyDetailFormNumber').val(numbers);
+	//点击添加新一行
+	var removeBtn = '<a class="btn btn-danger" href="javascript:delZxGoodsApplyDetailItems(this,'+numbers+')" >删除该条信息</a>';
+	var form = '<div id="form_zxGoodsApplyDetail_'+numbers+'">'+
+	           '<fieldset>'+
+	           '<legend><h5>序号'+numbers+'</h5></legend>'+
+	           '<div class="form-group"><div class="col-lg-3">'+removeBtn+'</div></div>'+
+			'<div class="form-group" style="display:none;">'+
+				'<label class="col-lg-3 control-label">父id</label>'+
+				'<div class="col-lg-6">'+
+					'<input class="form-control" type="text" maxlength="32"  id="zxGoodsApplyDetail_'+numbers+'_apply_id" name="zxGoodsApplyDetail['+numbers+'].apply_id"  placeholder="请输入父id">'+
+				'</div>'+
+			'</div>'+
+	           '<div class="form-group" style="display:none;">'+
+				'<label class="col-lg-3 control-label">用品id</label>'+
+				'<div class="col-lg-6">'+
+				     '<input class="form-control" type="text" maxlength="32"  id="zxGoodsApplyDetail['+numbers+'].goods_id" name="zxGoodsApplyDetail['+numbers+'].goods_id">'+
+				'</div>'+
+			   '</div>'+
+			    '<div class="form-group">'+
+				'<label class="col-lg-3 control-label">用品</label>'+
+				'<div class="col-lg-6">'+
+				     '<input class="form-control" type="text" maxlength="32"  id="zxGoodsApplyDetail['+numbers+'].office_name" name="zxGoodsApplyDetail['+numbers+'].office_name" data-bv-notempty data-bv-notempty-message="请输入用品" onclick="GoodsSelect('+numbers+')">'+
+				'</div>'+
+			   '</div>'+
+	           '<div class="form-group">'+
+	             '<label class="col-lg-3 control-label">补充数量</label>'+
+	             '<div class="col-lg-6">'+
+					'<input class="form-control" type="text" maxlength="20"  name="zxGoodsApplyDetail['+numbers+'].amount"  id="zxGoodsApplyDetail_'+numbers+'_amount"   data-bv-notempty data-bv-notempty-message="请输入数量" min="0" max="99999">'+
+				  '</div>'+
+				'</div>'+
+				  '<div class="form-group">'+
+	             '<label class="col-lg-3 control-label">用途</label>'+
+	             '<div class="col-lg-6">'+
+					'<input class="form-control" type="text" maxlength="20"  name="zxGoodsApplyDetail['+numbers+'].reason"  id="zxGoodsApplyDetail_'+numbers+'_reason"   data-bv-notempty data-bv-notempty-message="请输入用途">'+
+				  '</div>'+
+				'</div>'+
+				    '</fieldset>'+
+					'</div>'
+	$(".form_zxGoodsApplyDetail").append(form);
+
+	datetimeInit();
+	reValidator('defaultForm');
+}
+function delZxGoodsApplyDetailItems(thiz,numbers){
+	validatorDestroy('defaultForm');
+	$("#form_zxGoodsApplyDetail_"+numbers).remove();
+	var zxGoodsApplyDetail_removed_flag = $('#zxGoodsApplyDetail_removed_flag').val()
+	if(null == zxGoodsApplyDetail_removed_flag || '' == zxGoodsApplyDetail_removed_flag){
+		$('#zxGoodsApplyDetail_removed_flag').val(','+numbers+',');
+	}else{
+		$('#zxGoodsApplyDetail_removed_flag').val(zxGoodsApplyDetail_removed_flag+numbers+',')
+	}
+	reValidator('defaultForm');
+}
