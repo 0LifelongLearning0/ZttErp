@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZttOrderbybuy">
+	<!--初始化分页-->
+	<select id="getZttOrderbybuyListByCondition" resultType="jehc.zxmodules.model.ZttOrderbybuy" parameterType="map">
+		SELECT
+			id,
+			order_id,
+			buymanager_id,
+			buy_end_data,
+			update_date,
+			product_dispatch_id,
+			product_dispatch_attachment,
+			product_is_qualified,
+			product_update_date
+		FROM 
+			ztt_orderbybuy
+		WHERE 1=1
+	</select>
+
+	<!--查询对象-->
+	<select id="getZttOrderbybuyById" resultType="jehc.zxmodules.model.ZttOrderbybuy" parameterType="string">
+		SELECT
+			id,
+			order_id,
+			buymanager_id,
+			buy_end_data,
+			update_date,
+			product_dispatch_id,
+			product_dispatch_attachment,
+			product_is_qualified,
+			product_update_date
+		FROM 
+			ztt_orderbybuy
+		WHERE id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addZttOrderbybuy" parameterType="jehc.zxmodules.model.ZttOrderbybuy">
+		INSERT INTO
+			ztt_orderbybuy
+			(
+			id,
+			order_id,
+			buymanager_id,
+			buy_end_data,
+			update_date,
+			product_dispatch_id,
+			product_dispatch_attachment,
+			product_is_qualified,
+			product_update_date
+			)
+			VALUES
+			(
+			#{id},
+			#{order_id},
+			#{buymanager_id},
+			#{buy_end_data},
+			#{update_date},
+			#{product_dispatch_id},
+			#{product_dispatch_attachment},
+			#{product_is_qualified},
+			#{product_update_date}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZttOrderbybuy" parameterType="jehc.zxmodules.model.ZttOrderbybuy">
+		UPDATE
+			ztt_orderbybuy
+		SET
+			order_id = #{order_id},
+			buymanager_id = #{buymanager_id},
+			buy_end_data = #{buy_end_data},
+			update_date = #{update_date},
+			product_dispatch_id = #{product_dispatch_id},
+			product_dispatch_attachment = #{product_dispatch_attachment},
+			product_is_qualified = #{product_is_qualified},
+			product_update_date = #{product_update_date}
+		WHERE id=#{id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZttOrderbybuyBySelective" parameterType="jehc.zxmodules.model.ZttOrderbybuy">
+		UPDATE
+			ztt_orderbybuy
+		<set>
+			<if test="order_id != null">
+				order_id = #{order_id},
+			</if>
+			<if test="buymanager_id != null">
+				buymanager_id = #{buymanager_id},
+			</if>
+			<if test="buy_end_data != null">
+				buy_end_data = #{buy_end_data},
+			</if>
+			<if test="update_date != null">
+				update_date = #{update_date},
+			</if>
+			<if test="product_dispatch_id != null">
+				product_dispatch_id = #{product_dispatch_id},
+			</if>
+			<if test="product_dispatch_attachment != null">
+				product_dispatch_attachment = #{product_dispatch_attachment},
+			</if>
+			<if test="product_is_qualified != null">
+				product_is_qualified = #{product_is_qualified},
+			</if>
+			<if test="product_update_date != null">
+				product_update_date = #{product_update_date},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZttOrderbybuy" parameterType="map">
+		DELETE FROM ztt_orderbybuy WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZttOrderbybuy" parameterType="list">
+		INSERT INTO
+			ztt_orderbybuy
+			(
+			id,
+			order_id,
+			buymanager_id,
+			buy_end_data,
+			update_date,
+			product_dispatch_id,
+			product_dispatch_attachment,
+			product_is_qualified,
+			product_update_date
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.order_id},
+			#{item.buymanager_id},
+			#{item.buy_end_data},
+			#{item.update_date},
+			#{item.product_dispatch_id},
+			#{item.product_dispatch_attachment},
+			#{item.product_is_qualified},
+			#{item.product_update_date}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZttOrderbybuy" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				ztt_orderbybuy
+			SET
+				order_id = #{item.order_id},
+				buymanager_id = #{item.buymanager_id},
+				buy_end_data = #{item.buy_end_data},
+				update_date = #{item.update_date},
+				product_dispatch_id = #{item.product_dispatch_id},
+				product_dispatch_attachment = #{item.product_dispatch_attachment},
+				product_is_qualified = #{item.product_is_qualified},
+				product_update_date = #{item.product_update_date}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZttOrderbybuyBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				ztt_orderbybuy
+			<set>
+				<if test="item.order_id != null">
+					order_id = #{item.order_id},
+				</if>
+				<if test="item.buymanager_id != null">
+					buymanager_id = #{item.buymanager_id},
+				</if>
+				<if test="item.buy_end_data != null">
+					buy_end_data = #{item.buy_end_data},
+				</if>
+				<if test="item.update_date != null">
+					update_date = #{item.update_date},
+				</if>
+				<if test="item.product_dispatch_id != null">
+					product_dispatch_id = #{item.product_dispatch_id},
+				</if>
+				<if test="item.product_dispatch_attachment != null">
+					product_dispatch_attachment = #{item.product_dispatch_attachment},
+				</if>
+				<if test="item.product_is_qualified != null">
+					product_is_qualified = #{item.product_is_qualified},
+				</if>
+				<if test="item.product_update_date != null">
+					product_update_date = #{item.product_update_date},
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+</mapper>

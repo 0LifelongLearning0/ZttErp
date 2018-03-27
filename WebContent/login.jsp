@@ -249,7 +249,7 @@
 		                    <input class="form-control placeholder-no-fix" type="password" placeholder="请输入密码" name="password" id="password"/> 
 		                    </div>
 		                </div>
-		                <div class="row">
+		                <%-- <div class="row">
 		                    <div class="col-sm-6">
 		                    	 <div class="form-group">
 				                    <div class="input-icon">
@@ -262,7 +262,7 @@
 		                    	<img src="${syspath}/VerifyCodeServlet" id="safecode" width="180" onclick="this.src=${syspath}/VerifyCodeServlet"/>
 		                    	<br><a href="javascript:clickYZM()">换一张</a><br><br>
 		                    </div>
-		                </div>
+		                </div> --%>
 		                <div class="form-actions">
 		                    <label class="rememberme mt-checkbox mt-checkbox-outline">
 		                        <input type="checkbox" name="readme" id="readme" value="1" /> 记住我？
@@ -289,9 +289,9 @@ function callFocus(){
 	if(password == null || password == ''){
 		return  $('#password')[0].focus();
 	}
-	if(validateCode == null || validateCode ==''){
+	/* if(validateCode == null || validateCode ==''){
 		return  $('#validateCode')[0].focus();
-	}
+	} */
 }
 $(document).ready(function() {
 	if(getnavigator()==7 || getnavigator()==8 || getnavigator()==9 || getnavigator() == 6 || getnavigator() == 0){
@@ -365,19 +365,19 @@ $(function(){
 });  
 //提交登录form
 function login(){
-	callFocus();
+	callFocus(); 
 	var bootform =  $('#loginForm');
 	if(typeof(bootform) == "undefined" ||null == bootform || '' == bootform){
 		window.parent.toastrBoot(4,"未能获取到form对象!");
 		return;
 	}
 	//验证
-	var boostrapValidator = bootform.data('bootstrapValidator');
-	boostrapValidator.validate();
+/* 	var boostrapValidator = bootform.data('bootstrapValidator');
+	boostrapValidator.validate(); */
 	//验证有效开启发送异步请求
-	if(boostrapValidator.isValid()){
-		$("#loginBtn").attr("disabled",true);  
-		$("#loginBtn").val("正在登录中......")
+	/* if(boostrapValidator.isValid()){ */
+		 $("#loginBtn").attr("disabled",true);  
+		$("#loginBtn").val("正在登录中......") 
 		$.ajax({
             url:basePath+'/login/login',
             type:'POST',//PUT DELETE POST
@@ -390,16 +390,16 @@ function login(){
             	$("#loginBtn").attr("disabled",false); 
             }
         })
-	}else{
+	/* }else{
 		//window.parent.toastrBoot(4,"存在不合法的字段!");
-	}
+	} */
 }
 
 function call(result){
 	try{
 		var obj = eval("(" + result + ")");
 		if(obj.success == false){
-			clickYZM();
+			/* clickYZM(); */
 			window.parent.toastrBoot(4,obj.msg);
 			$("#loginBtn").val("登录");
 			$("#loginBtn").attr("disabled",false); 

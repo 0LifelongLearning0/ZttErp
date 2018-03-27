@@ -7,8 +7,23 @@
 <title>业务人员下单表详情页面</title>
 </head>
 <body>
-<label id="downloadnumber" />
-<a href="JavaScript:downloadFile('${zttOrder.attachment }')">'${zttOrder.attachment }'</a><br>
+<%-- <label id="downloadnumber" />
+
+<a href="JavaScript:downloadFile('${zttOrder.attachment }')">'${zttOrder.attachment }'</a><br> --%>
+
+	<div class="panel-body">
+		<div class="btn-group pull-right" style="margin-right: 20px;">
+		</div>
+		<table id="datatables" class="table table-bordered table-striped table-hover">
+			<thead>
+				<tr>
+					<th>序号</th>
+					<th>文件名</th>
+					<th>下载</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
 
 </body>
 <script type="text/javascript"

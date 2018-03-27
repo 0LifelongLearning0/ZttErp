@@ -24,6 +24,9 @@
 		<if test="null != xt_post_name">
 			AND xt_post.xt_post_name LIKE CONCAT(CONCAT('%',#{xt_post_name}),'%')
 		</if>
+		<if test="null != xt_post_id">
+			AND xt_post.xt_post_id LIKE CONCAT(CONCAT('%',#{xt_post_id}),'%')
+		</if>
 	</select>
 
 	<!--查询对象-->

@@ -11,6 +11,11 @@
 		<fieldset>
 			<legend>查询区域</legend>
 			<form method="POST" id="searchForm" class="form-inline">
+			<div class="form-group">
+					<label>标题</label>
+					<input type="text" class="form-control" name="car_num" placeholder="请输入标题">
+					<input type="text" class="form-control" name="apply_id" placeholder="请输入标题">
+				</div>
 			<div class="form-group" style="margin-left: 35px;">
 				<button class="btn btn-primary" type="button" onclick="search('datatables')">
 					<i class="glyphicon glyphicon-search"></i>&nbsp;检索
@@ -40,18 +45,12 @@
 				<tr>
 					<th><label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" class="checkall" /><span></span></label></th>
 					<th>序号</th>
-					
-					<th>订单号/申请号</th>
-					<th>合同号</th>
+					<th>工令号</th>
 					<th>客户</th>
-					<th>联系人</th>
 					<th>产品名称</th>
-					<th>规格</th>
-					<th>单位</th>
 					<th>数量</th>
-					<th>销售单价</th>
-					<th>销售总价</th>
-					<th>交货日期</th>
+					<th>申请日期</th>
+					<th>业务员</th>
 					<th>状态</th>
 					<th>操作</th>
 				</tr>

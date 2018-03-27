@@ -128,10 +128,7 @@
 		                        <td class="col-md-2">${applyUser.xt_departinfo_name }</td>
 		                        <td class="col-md-1 text-center">申请日期</td>
 		                        <td class="col-md-3">
-		                        <%  java.text.SimpleDateFormat simpleDateFormat = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");    
-							    java.util.Date currentTime = new java.util.Date();    
-							    String time = simpleDateFormat.format(currentTime).toString();  
-							    out.println(time);%>  </td>
+		                      ${zttOrder.zttordertime } </td>
 		                    </tr>
 		                    <tr>
 		                        <td class="text-center">订单号/申请号</td>
@@ -170,7 +167,7 @@
 		                        <td class="col-md-1 text-center">交货日期</td>
 		                        <td class="col-md-2">${zttOrder.end_data }</td>
 		                        <td class="col-md-1 text-center">附件</td>
-		                        <td class="col-md-3"><button class="btn btn-primary" data-toggle="button" onclick="downloadattachment('${zttOrder.id}')">查看附件</button>
+		                        <td class="col-md-3"><label id="attachment" style="display: none;">${zttOrder.attachment }</label><button class="btn btn-primary" data-toggle="button" onclick="downloadattachment('${zttOrder.id}')">查看附件</button>
 					
 		                    </tr>
 		                </tbody>

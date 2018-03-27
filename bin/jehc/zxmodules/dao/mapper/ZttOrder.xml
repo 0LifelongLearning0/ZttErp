@@ -2,130 +2,260 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="jehc.zxmodules.model.ZttOrder">
-	<!--初始化分页-->
-	<select id="getZttOrderListByCondition" resultType="jehc.zxmodules.model.ZttOrder" parameterType="map">
+	<!--初始化分页 -->
+	<select id="getZttOrderListByCondition" resultType="jehc.zxmodules.model.ZttOrder"
+		parameterType="map">
 		SELECT
-			id,
-			order_number,
-			contract_number,
-			client,
-			linkman,
-			product_name,
-			stardard,
-			attachment,
-			unit,
-			amount,
-			single_price,
-			sum_price,
-			End_data,
-			zttordertime,
-			apply_id,
-			state
-		FROM 
-			ztt_order
-		WHERE 1=1
+		a.id,
+		a.order_number,
+		a.contract_number,
+		a.erp_number,
+		a.product_order_number,
+		a.client,
+		a.linkman,
+		a.product_name,
+		a.stardard,
+		a.attachment,
+		a.unit,
+		a.amount,
+		a.single_price,
+		a.sum_price,
+		a.End_data,
+		a.zttordertime,
+		a.apply_id,
+		a.state,
+    b.xt_userinfo_realName as personname
+		FROM
+		ztt_order a,xt_userinfo b
+		WHERE 1=1 and a.apply_id=b.xt_userinfo_id
+		<if test="null == orderby">
+			ORDER BY zttordertime desc
+		</if>
 	</select>
 
-	<!--查询对象-->
-	<select id="getZttOrderById" resultType="jehc.zxmodules.model.ZttOrder" parameterType="string">
+	<!--查询对象 -->
+	<select id="getZttOrderById" resultType="jehc.zxmodules.model.ZttOrder"
+		parameterType="string">
 		SELECT
-			id,
-			order_number,
-			contract_number,
-			client,
-			linkman,
-			product_name,
-			stardard,
-			attachment,
-			unit,
-			amount,
-			single_price,
-			sum_price,
-			End_data,
-			zttordertime,
-			apply_id,
-			state
-		FROM 
-			ztt_order
+		id,
+		order_number,
+		contract_number,
+		erp_number,
+		product_order_number,
+		client,
+		linkman,
+		product_name,
+		stardard,
+		attachment,
+		unit,
+		amount,
+		single_price,
+		sum_price,
+		End_data,
+		zttordertime,
+		apply_id,
+		state
+		FROM
+		ztt_order
+		WHERE id=#{id}
+	</select>
+<!--查询机械加工对象 -->
+	<select id="getprocessingtechnicById" resultType="jehc.zxmodules.model.ztt_processproduct"
+		parameterType="map">
+		SELECT
+		id,
+		order_id,
+		Processname,
+		Processcontent,
+		equipment,
+		tooling,
+		single_price,
+		sum_price,
+		product_person_id,
+		product_date,
+		qualified_number,
+		qualified_date
+		FROM
+		ztt_processproduct
+		WHERE order_id=#{order_id}
+	</select>
+	<!--查询对象 -->
+	<select id="getZttOrdernumberbyId" resultType="jehc.zxmodules.model.ZttOrdernumber"
+		parameterType="string">
+		SELECT
+		id,
+		ordernumber_first,
+		ordernumber_second,
+		ordernumber_third
+		FROM
+		ztt_ordernumber
 		WHERE id=#{id}
 	</select>
 
-	<!--添加-->
-	<insert id="addZttOrder" parameterType="jehc.zxmodules.model.ZttOrder">
+	<!--查询对象 -->
+	<select id="getzttordernumberthirdbyId" resultType="jehc.zxmodules.model.ZttOrdernumber_third"
+		parameterType="string">
+		SELECT
+		ordernumber_third,
+		order_id
+		FROM
+		ztt_ordernumber_third
+		WHERE order_id=#{order_id}
+	</select>
+	<!--查询最大id -->
+	<select id="ZttOrdernumber_selectmaxid" resultType="jehc.zxmodules.model.ZttOrdernumber_third"
+		parameterType="string">
+		select
+		*
+		from ztt_ordernumber_third where
+		ordernumber_third=(select
+		max(ordernumber_third)
+		from
+		ztt_ordernumber_third);
+	</select>
+
+	<!--添加 -->
+	<insert id="addZttOrdnum" parameterType="jehc.zxmodules.model.ZttOrdernumber_third">
 		INSERT INTO
-			ztt_order
-			(
-			id,
-			order_number,
-			contract_number,
-			client,
-			linkman,
-			product_name,
-			stardard,
-			attachment,
-			unit,
-			amount,
-			single_price,
-			sum_price,
-			End_data,
-			zttordertime,
-			apply_id,
-			state
-			)
-			VALUES
-			(
-			#{id},
-			#{order_number},
-			#{contract_number},
-			#{client},
-			#{linkman},
-			#{product_name},
-			#{stardard},
-			#{attachment},
-			#{unit},
-			#{amount},
-			#{single_price},
-			#{sum_price},
-			#{End_data},
-			#{zttordertime},
-			#{apply_id},
-			#{state}
-			)
+		ztt_ordernumber_third
+		(
+		ordernumber_third,
+		order_id
+		)
+		VALUES
+		(
+		#{ordernumber_third},
+		#{order_id}
+		)
 	</insert>
 
-	<!--修改-->
+
+	<!--添加 -->
+	<insert id="addZttOrder" parameterType="jehc.zxmodules.model.ZttOrder">
+		INSERT INTO
+		ztt_order
+		(
+		id,
+		order_number,
+		contract_number,
+		erp_number,
+		product_order_number,
+		client,
+		linkman,
+		product_name,
+		stardard,
+		attachment,
+		unit,
+		amount,
+		single_price,
+		sum_price,
+		End_data,
+		zttordertime,
+		apply_id,
+		state
+		)
+		VALUES
+		(
+		#{id},
+		#{order_number},
+		#{contract_number},
+		#{erp_number},
+		#{product_order_number},
+		#{client},
+		#{linkman},
+		#{product_name},
+		#{stardard},
+		#{attachment},
+		#{unit},
+		#{amount},
+		#{single_price},
+		#{sum_price},
+		#{End_data},
+		#{zttordertime},
+		#{apply_id},
+		#{state}
+		)
+	</insert>
+	
+		<!--添加 -->
+	<insert id="addztt_processproduct" parameterType="jehc.zxmodules.model.ztt_processproduct">
+		INSERT INTO
+		ztt_processproduct
+		(
+		id,
+		order_id,
+		Processname,
+		Processcontent,
+		equipment,
+		tooling,
+		single_price,
+		sum_price,
+		product_person_id,
+		product_date,
+		qualified_number,
+		qualified_date
+		)
+		VALUES
+		(
+		#{id},
+		#{order_id},
+		#{Processname},
+		#{Processcontent},
+		#{equipment},
+		#{tooling},
+		#{single_price},
+		#{sum_price},
+		#{product_person_id},
+		#{product_date},
+		#{qualified_number},
+		#{qualified_date}
+		)
+	</insert>
+
+	<!--修改 -->
 	<update id="updateZttOrder" parameterType="jehc.zxmodules.model.ZttOrder">
 		UPDATE
-			ztt_order
+		ztt_order
 		SET
-			order_number = #{order_number},
-			contract_number = #{contract_number},
-			client = #{client},
-			linkman = #{linkman},
-			product_name = #{product_name},
-			stardard = #{stardard},
-			attachment = #{attachment},
-			unit = #{unit},
-			amount = #{amount},
-			single_price = #{single_price},
-			sum_price = #{sum_price},
-			End_data = #{End_data},
-			zttordertime = #{zttordertime},
-			apply_id = #{apply_id},
-			state = #{state}
+		order_number = #{order_number},
+		contract_number = #{contract_number},
+		erp_number = #{erp_number},
+		product_order_number =
+		#{product_order_number},
+		client = #{client},
+		linkman = #{linkman},
+		product_name = #{product_name},
+		stardard = #{stardard},
+		attachment =
+		#{attachment},
+		unit = #{unit},
+		amount = #{amount},
+		single_price =
+		#{single_price},
+		sum_price = #{sum_price},
+		End_data = #{End_data},
+		zttordertime = #{zttordertime},
+		apply_id = #{apply_id},
+		state = #{state}
 		WHERE id=#{id}
 	</update>
 
-	<!--修改（根据动态条件）-->
+	<!--修改（根据动态条件） -->
 	<update id="updateZttOrderBySelective" parameterType="jehc.zxmodules.model.ZttOrder">
 		UPDATE
-			ztt_order
+		ztt_order
 		<set>
 			<if test="order_number != null">
 				order_number = #{order_number},
 			</if>
 			<if test="contract_number != null">
 				contract_number = #{contract_number},
+			</if>
+			<if test="erp_number != null">
+				erp_number = #{erp_number},
+			</if>
+			<if test="product_order_number != null">
+				product_order_number = #{product_order_number},
 			</if>
 			<if test="client != null">
 				client = #{client},
@@ -166,19 +296,26 @@
 			<if test="state != null">
 				state = #{state},
 			</if>
+			<if test="producter_id != null">
+				producter_id = #{producter_id},
+			</if>
+			<if test="product_end_time != null">
+				product_end_time = #{product_end_time},
+			</if>
 		</set>
 		WHERE id=#{id}
 	</update>
 
-	<!--删除-->
+	<!--删除 -->
 	<delete id="delZttOrder" parameterType="map">
 		DELETE FROM ztt_order WHERE id IN
-		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+		<foreach item="item" index="index" collection="id" open="("
+			separator="," close=")">
 			#{item}
 		</foreach>
 	</delete>
 
-	<!--批量添加-->
+	<!--批量添加 -->
 	<insert id="addBatchZttOrder" parameterType="list">
 		INSERT INTO
 			ztt_order
@@ -186,6 +323,8 @@
 			id,
 			order_number,
 			contract_number,
+			erp_number,
+			product_order_number,
 			client,
 			linkman,
 			product_name,
@@ -206,6 +345,8 @@
 			#{item.id},
 			#{item.order_number},
 			#{item.contract_number},
+			#{item.erp_number},
+			#{item.product_order_number},
 			#{item.client},
 			#{item.linkman},
 			#{item.product_name},
@@ -231,6 +372,8 @@
 			SET
 				order_number = #{item.order_number},
 				contract_number = #{item.contract_number},
+				erp_number = #{item.erp_number},
+				product_order_number = #{item.product_order_number},
 				client = #{item.client},
 				linkman = #{item.linkman},
 				product_name = #{item.product_name},
@@ -259,6 +402,12 @@
 				</if>
 				<if test="item.contract_number != null">
 					contract_number = #{item.contract_number},
+				</if>
+				<if test="item.erp_number != null">
+					erp_number = #{item.erp_number},
+				</if>
+				<if test="item.product_order_number != null">
+					product_order_number = #{item.product_order_number},
 				</if>
 				<if test="item.client != null">
 					client = #{item.client},

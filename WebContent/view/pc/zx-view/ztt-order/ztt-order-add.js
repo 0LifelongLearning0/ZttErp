@@ -14,10 +14,13 @@ function addZttOrder(){
 		layer.alert('输入数量不合法')
 		flag=1;
 	}
-	if(!/^(?:[1-9]\d*|0)(?:\.\d+)?$/.test(single_price)){
+	if(single_price==""){
+		$('#single_price').val(0);
+	}
+	/*if(!/^(?:[1-9]\d*|0)(?:\.\d+)?$/.test(single_price)){
 		layer.alert('输入的单价不合法')
 		flag=1;
-	}
+	}*/
 	if(flag==0){
 		submitBForm('defaultForm','../zttOrderController/addZttOrder','../zttOrderController/loadZttOrder');
 	}
@@ -28,7 +31,7 @@ function uploadattachment(){
 	layer.open({
 		title: '上传附件',
 		type: 2, 
-		area: ['500px', '500px'],
+		area: ['800px', '500px'],
 		btn: ['确定', '取消'],
 	  content: "../zttOrderController/uploadattachment",
 	 
@@ -44,7 +47,7 @@ function uploadattachment(){
 
 
 $(function() {
-	$(".form_datetime").datetimepicker({
+	$(".form_datetime").datepicker({
 		 format:"yyyy-mm-dd",
 		 autoclose:true,
 		 todayBtn:true,
@@ -52,7 +55,6 @@ $(function() {
 		 showMeridian:true,
 		 pickerPosition:"bottom-left",
 		 language:'zh-CN',//中文，需要引用zh-CN.js包
-		 startView:2,//月视图
 	});
 	
 });

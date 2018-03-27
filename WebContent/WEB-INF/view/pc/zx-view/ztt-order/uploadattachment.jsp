@@ -14,14 +14,15 @@
  <input type="button" value="上传图片" id="upload" onclick="ajaxFileUpload()"/> <br/> -->
 	<table class="table table-bordered">
 		<tbody>
-			<tr>
+		<!-- 	<tr>
 				<td class="col-md-1 text-center"><input type="file" id="file_upload"/></td>
 
 			</tr>
 			<tr>
 				<td class="col-md-1 text-left"><input type="button" value="上传图片" id="upload" onclick="ajaxFileUpload()"/></td>
 
-			</tr>
+			</tr> -->
+			<div id="easyContainer"></div>
 		</tbody>
 	</table>
 

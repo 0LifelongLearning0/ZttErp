@@ -2,6 +2,7 @@ package jehc.zxmodules.service;
 import java.util.List;
 import java.util.Map;
 import jehc.zxmodules.model.ZttOrder;
+import jehc.zxmodules.model.ztt_processproduct;
 
 /**
 * 业务人员下单表 
@@ -26,6 +27,9 @@ public interface ZttOrderService{
 	* @return
 	*/
 	public int addZttOrder(ZttOrder zttOrder);
+	public String add_ordernumber(ZttOrder zttOrder);
+	public int addztt_processproduct(ZttOrder zttOrder);
+	public ZttOrder getprocessingtechnicById(String id);
 	/**
 	* 修改
 	* @param ztt_order 

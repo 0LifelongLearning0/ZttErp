@@ -40,7 +40,7 @@
                             <li>2、为保证，物品正常使用，应提前进行申请。</li>
                         </ul>
                     </div>
-                    <div>
+                    <div>adddetail
                         <button class="btn btn-default pull-right" type="button" data-toggle="modal" data-target="#addModal"  onclick="addZxGoodsApplyDetailItems()">
                         <span class="glyphicon glyphicon-plus"></span> 添加</button>
                         <!-- Modal -->

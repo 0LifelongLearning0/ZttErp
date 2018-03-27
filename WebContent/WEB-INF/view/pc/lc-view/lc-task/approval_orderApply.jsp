@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ include file="/deng/include/include.jsp"%>
 <%@ include file="/deng/include/includeboot.jsp"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -33,6 +34,8 @@ text-align:center;
 									<td class="col-md-2"><label id="zttordertime" /></td>
 								</tr>
 								<tr>
+								<td class="text-center">工令号</td>
+									<td><label id="product_order_number" /></td>
 									<td class="text-center">订单号/申请号</td>
 									<td><label id="order_number" /></td>
 									<td class="text-center">合同号</td>
@@ -69,16 +72,19 @@ text-align:center;
 								</tr>
 								<tr>
 									<td class="text-center">附件</td>
-									<td colspan="2"><button class="btn btn-primary"
+									<td colspan="2">
+									<label id="attachment" style="display: none;"></label>
+									<button class="btn btn-primary"
 											data-toggle="button"
-											onclick="downloadattachment('${zttOrder.id}')">查看附件</button></td>
-									<td class="text-center">产品类型</td>
-									<td colspan="2"><select style="width:150px" >
-											<option value="0">自制</option>
-											<option value="1">仓库</option>
-											<option value="2">生产部</option>
-											<option value="3">采购</option>
-											<option value="4">其他</option>
+											onclick="downloadattachment('${taskData.businessKey }')">查看附件</button></td>
+												<td class="text-center">产品类型</td>
+									<td colspan="2"><select style="width:150px" id='select'>
+									        <option value="0">请选择</option>
+											<option value="madebyself">自制</option>
+											<option value="warehouse">仓库</option>
+											<option value="PD">生产部</option>
+											<option value="outside">外协</option>
+											<option value="others">其他</option>
 									</select>
 									</td>
 								</tr>
@@ -86,11 +92,11 @@ text-align:center;
 						</table>
 						<div class="col-lg-6" style="text-align:center">
 							<button type="button" class="btn btn-success"
-								onclick='approveZxGoodsApply(${taskData.task.id },"true",this)'>
+								onclick='approveZttOrderApply(${taskData.task.id },"yes",this)'>
 								<span class="glyphicon glyphicon-saved" aria-hidden="true"></span>同意
 							</button>
 							<button type="button" class="btn btn-warning"
-								onclick='approveZxGoodsApply(${taskData.task.id },"false")'>
+								onclick='approveZttOrderApply(${taskData.task.id },"no",this)'>
 								<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>驳回
 							</button>
 						</div>
@@ -103,4 +109,5 @@ text-align:center;
 </body>
 <script type="text/javascript"
 	src="../view/pc/lc-view/lc-task/approval_orderApply.js"></script>
+	<script type="text/javascript" src="../view/pc/zx-view/ztt-order/ztt-order-list.js"></script> 
 </html>

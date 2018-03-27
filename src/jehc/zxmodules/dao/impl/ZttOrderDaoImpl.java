@@ -5,6 +5,10 @@ import org.springframework.stereotype.Repository;
 import jehc.xtmodules.xtcore.base.impl.BaseDaoImpl;
 import jehc.zxmodules.dao.ZttOrderDao;
 import jehc.zxmodules.model.ZttOrder;
+import jehc.zxmodules.model.ZttOrdernumber;
+import jehc.zxmodules.model.ZttOrdernumber_third;
+import jehc.zxmodules.model.ZxGoodsApplyDetail;
+import jehc.zxmodules.model.ztt_processproduct;
 
 /**
 * 业务人员下单表 
@@ -26,6 +30,38 @@ public class ZttOrderDaoImpl  extends BaseDaoImpl implements ZttOrderDao{
 	* @param id 
 	* @return
 	*/
+	public ZttOrdernumber getZttOrdernumberbyId(String id){
+		return (ZttOrdernumber)this.get("getZttOrdernumberbyId", id);
+	}
+	/**
+	* 查询对象
+	* @param id 
+	* @return
+	*/
+	public ZttOrdernumber_third getzttordernumberthirdbyId(String order_id){
+		return (ZttOrdernumber_third)this.get("getzttordernumberthirdbyId", order_id);
+	}
+	/**
+	* 得到最大id
+	* @param id 
+	* @return
+	*/
+	public ZttOrdernumber_third selectmax_id(String order_id){
+		return (ZttOrdernumber_third)this.get("ZttOrdernumber_selectmaxid", order_id);
+	}
+	/**
+	* 查询对象
+	* @param id 
+	* @return
+	*/
+	public List<ztt_processproduct> getprocessingtechnicById(String order_id){
+		return (List<ztt_processproduct>)this.getList("getprocessingtechnicById",order_id);
+	}
+	/**
+	* 查询机械加工对象
+	* @param id 
+	* @return
+	*/
 	public ZttOrder getZttOrderById(String id){
 		return (ZttOrder)this.get("getZttOrderById", id);
 	}
@@ -34,8 +70,24 @@ public class ZttOrderDaoImpl  extends BaseDaoImpl implements ZttOrderDao{
 	* @param ztt_order 
 	* @return
 	*/
+	public int addZttOrdnum(ZttOrdernumber_third zttOrdernumber_third){
+		return this.add("addZttOrdnum", zttOrdernumber_third);
+	}
+	/**
+	* 添加
+	* @param ztt_order 
+	* @return
+	*/
 	public int addZttOrder(ZttOrder zttOrder){
 		return this.add("addZttOrder", zttOrder);
+	}
+	/**
+	* 添加机械加工工艺
+	* @param ztt_order 
+	* @return
+	*/
+	public int addztt_processproduct(ztt_processproduct ztt_processproduct){
+		return this.add("addztt_processproduct", ztt_processproduct);
 	}
 	/**
 	* 修改

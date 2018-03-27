@@ -83,6 +83,9 @@
         <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css" />
         <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
         <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/clockface/css/clockface.css" rel="stylesheet" type="text/css" />
+        <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/easyUpload/easy-upload.css" rel="stylesheet" type="text/css" />
+        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/easyUpload/easyUpload.js" type="text/javascript"></script>
+        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/easyUpload/vendor/jquery.cookie-1.4.1.min.js" type="text/javascript"></script>
         <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/moment.min.js" type="text/javascript"></script>
         <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-daterangepicker/daterangepicker.min.js" type="text/javascript"></script>
         <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>

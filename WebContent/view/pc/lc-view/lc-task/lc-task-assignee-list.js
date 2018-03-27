@@ -360,9 +360,9 @@ function completeTask(){
 	var params = {taskId:taskId};
 	if(null != record.items[0].data.formKey && record.items[0].data.formKey != ''){
 		reGetWidthAndHeight();
-		approvalFormWin = Ext.create('Ext.Window',{
+		/*approvalFormWin = Ext.create('Ext.Window',{
 			layout:'fit',
-			width:1050,                    
+			width:1500,                    
 			height:clientHeight*0.8, 
 			maximizable:true,
 			minimizable:true,
@@ -381,7 +381,14 @@ function completeTask(){
 				}
 			}
 		});
-		approvalFormWin.show();
+		approvalFormWin.show();*/
+		layer.open({
+			type: 2, 
+			area: ['1000px', '600px'],
+			btn: ['关闭'],
+		  content: "../lcTaskController/redirectPage?taskId="+taskId+'&formKey='+formKey,
+		 
+		}); 
 	}else{
 		Ext.Msg.confirm('提示','确定要完成该任务？',function(btn){
 			if(btn == 'yes'){

@@ -1,7 +1,11 @@
 package jehc.zxmodules.dao;
 import java.util.List;
 import java.util.Map;
+
 import jehc.zxmodules.model.ZttOrder;
+import jehc.zxmodules.model.ZttOrdernumber;
+import jehc.zxmodules.model.ZttOrdernumber_third;
+import jehc.zxmodules.model.ztt_processproduct;
 
 /**
 * 业务人员下单表 
@@ -20,6 +24,12 @@ public interface ZttOrderDao{
 	* @return
 	*/
 	public ZttOrder getZttOrderById(String id);
+	public ZttOrdernumber getZttOrdernumberbyId(String id);
+	public ZttOrdernumber_third getzttordernumberthirdbyId(String order_id);
+	public ZttOrdernumber_third selectmax_id(String order_id);
+	public int addZttOrdnum(ZttOrdernumber_third zttOrdernumber_third);
+	public int addztt_processproduct(ztt_processproduct ztt_processproduct);
+	public List<ztt_processproduct> getprocessingtechnicById(String order_id);
 	/**
 	* 添加
 	* @param ztt_order 

@@ -15,6 +15,8 @@ import org.springframework.ui.Model;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.activiti.engine.impl.task.TaskDefinition;
+import org.activiti.engine.task.Task;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,20 +31,34 @@ import org.springframework.web.servlet.ModelAndView;
 import com.github.pagehelper.PageInfo;
 
 import jehc.lcmodules.activitiutil.ActivitiUtil;
+import jehc.lcmodules.activitiutil.util.Variable;
 import jehc.lcmodules.lcmodel.LcApply;
+import jehc.lcmodules.lcmodel.LcApproval;
+import jehc.lcmodules.lcservice.LcApplyService;
+import jehc.lcmodules.lcservice.LcApprovalService;
 import jehc.lcmodules.lcservice.LcDeploymentHisService;
 import jehc.xtmodules.xtcore.base.BaseAction;
 import jehc.xtmodules.xtcore.base.BaseSearch;
 import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
 import jehc.xtmodules.xtmodel.XtConstant;
+import jehc.xtmodules.xtmodel.XtPost;
 import jehc.xtmodules.xtmodel.XtUserinfo;
 import jehc.xtmodules.xtservice.XtURService;
 import jehc.xtmodules.xtservice.XtUserinfoService;
+import jehc.xtmodules.xtservice.XtPostService;
+import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.zxmodules.model.ZttOrder;
+import jehc.zxmodules.model.ZttOrderFileDownload;
+import jehc.zxmodules.model.ZttOrderbybuy;
+import jehc.zxmodules.model.ZttOrderbyself;
 import jehc.zxmodules.model.ZxGoodsApply;
 import jehc.zxmodules.model.ZxPurchaseApply;
+import jehc.zxmodules.model.ztt_processproduct;
 import jehc.zxmodules.service.ZttOrderService;
+import jehc.zxmodules.service.ZttOrderbybuyService;
+import jehc.zxmodules.service.ZttOrderbyselfService;
+import net.sf.json.JSONObject;
 
 /**
 * 业务人员下单表 
@@ -60,7 +76,18 @@ public class ZttOrderController extends BaseAction{
 	@Autowired
 	private LcDeploymentHisService lc_Deployment_HisService;
 	@Autowired
-	private ActivitiUtil activitiUtil;
+	private  ActivitiUtil activitiUtil;
+	@Autowired
+	private LcApplyService lcApplyService;
+	@Autowired
+	private LcApprovalService lc_ApprovalService;
+	@Autowired
+	private XtPostService XtPostService;
+	@Autowired
+	private ZttOrderbyselfService zttOrderbyselfService;
+	@Autowired
+	private ZttOrderbybuyService zttOrderbybuyService;
+	
 	/**
 	* 载入初始化页面
 	* @param ztt_order 
@@ -80,11 +107,36 @@ public class ZttOrderController extends BaseAction{
 	@RequestMapping(value="/getZttOrderListByCondition",method={RequestMethod.POST,RequestMethod.GET})
 	public String getZttOrderListByCondition(BaseSearch baseSearch,HttpServletRequest request){
 		Map<String, Object> condition = baseSearch.convert();
+		condition.put("apply_id", getXtU().getXt_userinfo_id());
+		condition.put("xt_post_id", getXtU().getXt_post_id());
+		List<XtPost> xtpost=XtPostService.getXtPostListByCondition(condition);
+		if(xtpost.get(0).getXt_post_grade()>0){
+			condition.clear();
+		}
+		
 		commonHPager(condition,request);
 		List<ZttOrder> zttOrderList = zttOrderService.getZttOrderListByCondition(condition);
 		PageInfo<ZttOrder> page = new PageInfo<ZttOrder>(zttOrderList);
 		return outPageBootStr(page,request);
 	}
+	/**
+	* 加载初始化列表数据并分页
+	* @param ztt_order 
+	* @param request 
+	*/
+	@ResponseBody
+	@RequestMapping(value="/getZttOrderfiledownListByCondition",method={RequestMethod.POST,RequestMethod.GET})
+	public String getZttOrderfiledownListByCondition(String id,BaseSearch baseSearch,HttpServletRequest request){
+		List<ZttOrderFileDownload> zttOrderList = null;
+		ZttOrderFileDownload l=new ZttOrderFileDownload();
+		l.setId("1");
+		l.setFilename("aa");
+		l.setFilelink("bb");
+		zttOrderList.add(l);
+		PageInfo<ZttOrderFileDownload> page = new PageInfo<ZttOrderFileDownload>(zttOrderList);
+		return outPageBootStr(page,request);
+	}
+	
 	/**
 	* 获取对象
 	* @param id 
@@ -158,6 +210,25 @@ public class ZttOrderController extends BaseAction{
 		}
 	}
 	/**
+	* 加工工艺过程添加
+	* @param request 
+	*/
+	@ResponseBody
+	@RequestMapping(value="/processingtechnicAdd",method={RequestMethod.POST,RequestMethod.GET})
+	public String processingtechnicAdd(ZttOrder zttOrder,HttpServletRequest request){
+		int i = 0;
+		i=zttOrderService.addztt_processproduct(zttOrder);
+		/*XtUserinfo applyUser = xtUserinfoService.getXtUserinfoById(getXtUid());
+		if(null != ztt_processproduct && !"".equals(ztt_processproduct)){
+			i=zttOrderService.addztt_processproduct(ztt_processproduct);
+		}*/
+		if(i>0){
+			return outAudStr(true);
+		}else{
+			return outAudStr(false);
+		}
+	}
+	/**
 	* 复制一行并生成记录
 	* @param id 
 	* @param request 
@@ -215,10 +286,32 @@ public class ZttOrderController extends BaseAction{
 	* @param request 
 	*/
 	@RequestMapping(value="/toZttOrderDetail",method={RequestMethod.POST,RequestMethod.GET})
-	public ModelAndView toZttOrderDetail(String id,HttpServletRequest request, Model model){
+	public ModelAndView toZttOrderDetail(String id,String state,HttpServletRequest request, Model model){
 		ZttOrder zttOrder = zttOrderService.getZttOrderById(id);
+		XtUserinfo applyUser = xtUserinfoService.getXtUserinfoById(zttOrder.getApply_id());
+		String path="";
+		if(state.equals("11")){
+			path="pc/zx-view/ztt-order/ztt-order-detail_erp";
+		}else{
+			path="pc/zx-view/ztt-order/ztt-order-detail";
+		}
+		model.addAttribute("applyUser", applyUser);
 		model.addAttribute("zttOrder", zttOrder);
-		return new ModelAndView("pc/zx-view/ztt-order/ztt-order-detail");
+		return new ModelAndView(path);
+	}
+	/**
+	* 发送至生产部明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toZttprocessingtechnicDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toZttprocessingtechnicDetail(String id,String state,HttpServletRequest request, Model model){
+		ZttOrder zttOrder = zttOrderService.getprocessingtechnicById(id);
+		XtUserinfo applyUser = xtUserinfoService.getXtUserinfoById(zttOrder.getApply_id());
+		model.addAttribute("zttOrder", zttOrder);
+		model.addAttribute("size", zttOrder.getZtt_processproduct().size());
+		String	path="pc/zx-view/ztt-order/processingtechnicproduct";
+		model.addAttribute("applyUser", applyUser);
+		return new ModelAndView(path);
 	}
 	/**
 	* 发送至上传页面
@@ -231,6 +324,17 @@ public class ZttOrderController extends BaseAction{
 		return new ModelAndView("pc/zx-view/ztt-order/uploadattachment");
 	}
 	/**
+	* 发送至加工工艺过程页面
+	* @param request 
+	*/
+	@RequestMapping(value="/processingtechnic",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView processingtechnic(String id,String index,HttpServletRequest request, Model model){
+		ZttOrder zttOrder = zttOrderService.getZttOrderById(id);
+		model.addAttribute("zttOrder", zttOrder);
+		model.addAttribute("index", index);
+		return new ModelAndView("pc/zx-view/ztt-order/processingtechnic");
+	}
+	/**
 	* 发送至下载页面
 	* @param request 
 	*/
@@ -238,7 +342,7 @@ public class ZttOrderController extends BaseAction{
 	public ModelAndView Downloadattachment(String id,HttpServletRequest request, Model model){
 		ZttOrder zttOrder = zttOrderService.getZttOrderById(id);
 		model.addAttribute("zttOrder", zttOrder);
-		return new ModelAndView("pc/zx-view/ztt-order/downloadattachment");
+		return new ModelAndView("pc/zx-view/ztt-order/downloadattachmenttech");
 	}
 	/**
 	* 上传
@@ -248,7 +352,8 @@ public class ZttOrderController extends BaseAction{
 	public @ResponseBody String jqueryUploadFile(HttpServletResponse response,HttpServletRequest request,
             @RequestParam(value="file", required=false) MultipartFile file){
 		long startTime = System.currentTimeMillis();
-		String path="E:/upload/"+"date--"+new Date().getTime()+file.getOriginalFilename();
+		String path="E:/upload/"+"date--"+new Date().getTime()+"-----"+file.getOriginalFilename();
+		Map<String,String> result = new HashMap<String,String>();
         try{
             //获取输出流
             OutputStream os = new FileOutputStream(path);
@@ -262,12 +367,15 @@ public class ZttOrderController extends BaseAction{
             os.flush();
             os.close();
             is.close();
+            result.put("path",path);
+            result.put("flag", "true");
         }catch(Exception e){
             e.printStackTrace();
         }
         long endTime = System.currentTimeMillis();
         System.out.println("方法一的运行时间："+String.valueOf(endTime-startTime)+"ms");
-        return path;
+        JSONObject jsonObject = JSONObject.fromObject(result);
+        return jsonObject.toString();
 	}
 	/**
 	* 下载
@@ -284,7 +392,8 @@ public class ZttOrderController extends BaseAction{
 		        //获取输出流
 		        response.setCharacterEncoding("UTF-8");
 		        response.setContentType("application/octet-stream");  
-		        response.setHeader("Content-disposition", "attachment; filename="+ new String(fileName.getBytes("utf-8"), "ISO8859-1")); 
+		        String name=fileName.split("-----")[1];
+		        response.setHeader("Content-disposition", "attachment; filename="+ new String(name.getBytes("utf-8"), "ISO8859-1")); 
 		        bos = new BufferedOutputStream(response.getOutputStream()); 
 
 		        //定义缓冲池大小，开始读写
@@ -332,6 +441,7 @@ public class ZttOrderController extends BaseAction{
 			conditionr.put("flag", 1);
 			List<XtUserinfo> xtUserinfoList = xtURService.getXtURListByCondition(conditionr);
 			ZttOrder zttOrder = zttOrderService.getZttOrderById(apply_id);
+			String order_number=zttOrderService.add_ordernumber(zttOrder);
 			XtConstant Xt_Constant = getXtConstantCache("ZttOrderApply");
 			Map<String, Object> condition = new HashMap<String, Object>();
 			condition.put("xt_constant_id", Xt_Constant.getXt_constant_id());
@@ -344,7 +454,7 @@ public class ZttOrderController extends BaseAction{
 			lc_Apply.setLc_apply_model_biz_id(zttOrder.getId());
 			if(activitiUtil.addApply(lc_his_id, zttOrder.getId(), variables,lc_Apply)){
 				zttOrder.setState("1");
-				
+				zttOrder.setProduct_order_number(order_number);
 				i=zttOrderService.updateZttOrderBySelective(zttOrder);
 			}
 		}
@@ -354,4 +464,105 @@ public class ZttOrderController extends BaseAction{
 			return outAudStr(false);
 		}
 	}
+/*	public static void main(String[] args) {
+		Variable variables = new Variable();
+		ActivitiUtil a=new ActivitiUtil();
+		variables.setTypes("S");
+		variables.setKeys("status");
+		variables.setValues("no");
+		activitiUtil.completeTask("167506", variables);
+	}*/
+	/**
+	* 审批
+	* @param id 
+	* @param request 
+	*/
+	@ResponseBody
+	@RequestMapping(value="/approvalOrderApply",method={RequestMethod.POST,RequestMethod.GET})
+	public String approvalOrderApply(String task_id,String task_status,String remark,HttpServletRequest request){
+		int i = 0;
+		if(null != task_id && !"".equals(task_id)){
+			Map<String, Object> taskData = activitiUtil.getTask(task_id);
+		    Variable variables = new Variable();
+		    ZttOrder zttOrder = zttOrderService.getZttOrderById(taskData.get("businessKey").toString());
+		    String vals = task_status + "," + zttOrder.getApply_id() + ",";
+		    variables.setKeys("status,owner,applyType");
+		    variables.setTypes("S,S,S");
+		    vals +=remark;
+		    variables.setValues(vals);
+		    String s=remark;
+		    Map<String, Object> taskData1= (Map<String, Object>) activitiUtil.getTask(task_id).get("taskVariables");
+		    taskData1.get("owner");
+		    TaskDefinition t=activitiUtil.getNextTaskDefinition(task_id,s);
+			if(activitiUtil.completeTask(task_id, variables)){
+				LcApproval lc_approval = new LcApproval();
+				Map<String, Object> condition = new HashMap<String, Object>();
+				condition.put("processInstance_id", ((Task) taskData.get("task")).getProcessInstanceId());
+				List<LcApply> list = lcApplyService.getLcApplyListByCondition(condition);
+				if(!list.isEmpty()){
+					lc_approval.setLc_apply_id(list.get(0).getLc_apply_id());
+				}
+				lc_approval.setLc_approval_id(UUID.toUUID());
+				lc_approval.setLc_approval_remark(remark);
+				lc_approval.setLc_approval_time(CommonUtils.getDate());
+				lc_approval.setLc_status_id(task_status);
+				if(task_status.equals("yes")){
+					lc_approval.setLc_status_name("主管审批通过");
+					if(remark.equals("outside")){
+						String erpnumber=remark;
+						lc_approval.setLc_status_name("外协单,带数据分析师通过");
+						zttOrder.setErp_number(erpnumber);
+						zttOrder.setState("2");
+					}else if(remark.equals("madebyself")){
+						lc_approval.setLc_status_name("自制单,待工艺设计");
+						zttOrder.setState("4");
+					}else if(remark.equals("others")){
+						lc_approval.setLc_status_name("流程结束");
+						zttOrder.setState("11");
+					}
+					boolean isEnd = activitiUtil.isEnded(((Task) taskData.get("task")).getProcessInstanceId());
+					if(isEnd){
+						zttOrder.setState("11");
+					}
+					zttOrderService.updateZttOrderBySelective(zttOrder);
+				}else if(task_status.equals("no")){
+					lc_approval.setLc_status_name("审批不通过");
+					zttOrder.setState("10");
+					zttOrderService.updateZttOrderBySelective(zttOrder);
+				}else if(task_status.equals("erp")){
+						zttOrder.setState("11");
+						zttOrder.setErp_number(remark);
+					zttOrderService.updateZttOrderBySelective(zttOrder);
+				}else if(task_status.equals("selftech")){
+					
+					lc_approval.setLc_status_name("自制单,待生产");
+					zttOrder.setTechmanager_attachment(remark);
+					zttOrder.setTechmanager_id(getXtUid());
+					zttOrder.setTechmanager_update_date(DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
+					zttOrder.setState("5");
+					zttOrderService.updateZttOrderBySelective(zttOrder);
+					
+				}else if(task_status.equals("selfwaitcheck")){
+					
+					lc_approval.setLc_status_name("自制单生产完成,待质检");
+					zttOrder.setProducter_id(getXtUid());
+					zttOrder.setProduct_end_time(DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
+					zttOrder.setState("6");
+					zttOrderService.updateZttOrderBySelective(zttOrder);
+					
+				}
+				lc_approval.setTaskId(task_id);
+				lc_approval.setXt_userinfo_id(CommonUtils.getXtUid());
+				lc_ApprovalService.addLcApproval(lc_approval);
+				i = 1;
+			}else{
+				i = 0;
+			};
+		}
+		if(i>0){ 
+			return outAudStr(true);
+		}else{
+			return outAudStr(false);
+		}
+}
 }

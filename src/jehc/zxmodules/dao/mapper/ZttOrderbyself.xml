@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZttOrderbyself">
+	<!--初始化分页-->
+	<select id="getZttOrderbyselfListByCondition" resultType="jehc.zxmodules.model.ZttOrderbyself" parameterType="map">
+		SELECT
+			id,
+			order_id,
+			techmanager_id,
+			attachment,
+			update_date,
+			product_dispatch_id,
+			product_update_date
+		FROM 
+			ztt_orderbyself
+		WHERE 1=1
+	</select>
+
+	<!--查询对象-->
+	<select id="getZttOrderbyselfById" resultType="jehc.zxmodules.model.ZttOrderbyself" parameterType="string">
+		SELECT
+			id,
+			order_id,
+			techmanager_id,
+			attachment,
+			update_date,
+			product_dispatch_id,
+			product_update_date
+		FROM 
+			ztt_orderbyself
+		WHERE id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addZttOrderbyself" parameterType="jehc.zxmodules.model.ZttOrderbyself">
+		INSERT INTO
+			ztt_orderbyself
+			(
+			id,
+			order_id,
+			techmanager_id,
+			attachment,
+			update_date,
+			product_dispatch_id,
+			product_update_date
+			)
+			VALUES
+			(
+			#{id},
+			#{order_id},
+			#{techmanager_id},
+			#{attachment},
+			#{update_date},
+			#{product_dispatch_id},
+			#{product_update_date}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZttOrderbyself" parameterType="jehc.zxmodules.model.ZttOrderbyself">
+		UPDATE
+			ztt_orderbyself
+		SET
+			order_id = #{order_id},
+			techmanager_id = #{techmanager_id},
+			attachment = #{attachment},
+			update_date = #{update_date},
+			product_dispatch_id = #{product_dispatch_id},
+			product_update_date = #{product_update_date}
+		WHERE id=#{id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZttOrderbyselfBySelective" parameterType="jehc.zxmodules.model.ZttOrderbyself">
+		UPDATE
+			ztt_orderbyself
+		<set>
+			<if test="order_id != null">
+				order_id = #{order_id},
+			</if>
+			<if test="techmanager_id != null">
+				techmanager_id = #{techmanager_id},
+			</if>
+			<if test="attachment != null">
+				attachment = #{attachment},
+			</if>
+			<if test="update_date != null">
+				update_date = #{update_date},
+			</if>
+			<if test="product_dispatch_id != null">
+				product_dispatch_id = #{product_dispatch_id},
+			</if>
+			<if test="product_update_date != null">
+				product_update_date = #{product_update_date},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZttOrderbyself" parameterType="map">
+		DELETE FROM ztt_orderbyself WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZttOrderbyself" parameterType="list">
+		INSERT INTO
+			ztt_orderbyself
+			(
+			id,
+			order_id,
+			techmanager_id,
+			attachment,
+			update_date,
+			product_dispatch_id,
+			product_update_date
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.order_id},
+			#{item.techmanager_id},
+			#{item.attachment},
+			#{item.update_date},
+			#{item.product_dispatch_id},
+			#{item.product_update_date}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZttOrderbyself" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				ztt_orderbyself
+			SET
+				order_id = #{item.order_id},
+				techmanager_id = #{item.techmanager_id},
+				attachment = #{item.attachment},
+				update_date = #{item.update_date},
+				product_dispatch_id = #{item.product_dispatch_id},
+				product_update_date = #{item.product_update_date}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZttOrderbyselfBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				ztt_orderbyself
+			<set>
+				<if test="item.order_id != null">
+					order_id = #{item.order_id},
+				</if>
+				<if test="item.techmanager_id != null">
+					techmanager_id = #{item.techmanager_id},
+				</if>
+				<if test="item.attachment != null">
+					attachment = #{item.attachment},
+				</if>
+				<if test="item.update_date != null">
+					update_date = #{item.update_date},
+				</if>
+				<if test="item.product_dispatch_id != null">
+					product_dispatch_id = #{item.product_dispatch_id},
+				</if>
+				<if test="item.product_update_date != null">
+					product_update_date = #{item.product_update_date},
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+</mapper>
