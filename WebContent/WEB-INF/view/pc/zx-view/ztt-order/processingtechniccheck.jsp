@@ -29,18 +29,19 @@
 					<div class="text-center h3 pbp">机械加工工艺过程卡片</div>
 					<div class="text-bold pba text-center clearfix">
 						<p class="col-md-3">产品名称：${zttOrder.product_name }</p>
-						<p class="col-md-3">零件名称：${zttOrder.machine_part }</p>
+						<p class="col-md-3">零件名称：${applyUser.xt_departinfo_name }</p>
 						<p class="col-md-3">工令号：${zttOrder.product_order_number }</p>
-						<p class="col-md-3">零件图号：${zttOrder.machine_part_number }</p>
+						<p class="col-md-3">零件图号</p>
 					</div>
 					<div class="text-bold pba text-center clearfix">
 						<p class="col-md-3">下单日期：${zttOrder.zttordertime }</p>
 						<p class="col-md-3">交货日期：${zttOrder.end_data }</p>
 						<p class="col-md-3">加工数量：${zttOrder.amount }</p>
-						<p class="col-md-3">材料牌号：${zttOrder.material_id }</p>
+						<p class="col-md-3">材料牌号 :</p>
 					</div>
 					<div style="display:none;">
                       <input class="form-control"  type="hidden" "size" id="size"  value='${size }'>
+                      <input class="form-control"  type="hidden" "size" id="message"  value='${message }'>
                        </div>
 					<div>
 						<!-- Modal -->
@@ -49,7 +50,8 @@
 					</div>
 					<form class="form-horizontal" id="defaultForm" method="post">
 					<input class="form-control" type="hidden" maxlength="32" id="id" name="id" value="${zttOrder.id }">
-					<input class="form-control" type="hidden" maxlength="32" id="index" name="index" value="${index }">
+					<input class="form-control" type="hidden" maxlength="32" id="product_end_time" name="product_end_time" value="${zttOrder.product_end_time}">
+					<input class="form-control" type="hidden" maxlength="32" id="producter_name"  value="${producter.xt_userinfo_realName }">
 						<table id="example" class="table table-bordered">
 							<thead>
 								<tr class="text-bold">
@@ -60,11 +62,20 @@
 									<th class="col-md-2 text-center">工艺装备</th>
 									<th class="col-md-2 text-center">单价</th>
 									<th class="col-md-2 text-center">总价</th>
+									<th class="col-md-2 text-center">操作者</th>
+									<th class="col-md-2 text-center">操作日期</th>
+									<th class="col-md-1 text-center">合格件数</th>
 								</tr>
 							</thead>
 							<tfoot>
 							</tfoot>
 						</table>
+						<div class="text-center">
+							<button type="button" class="btn btn-success"
+								onclick="addZxGoodsApply()" id="buttonsave">
+								<span class="glyphicon glyphicon-saved" aria-hidden="true"></span>保存
+							</button>
+						</div>
 					</form>
 				</div>
 
@@ -78,6 +89,12 @@
 				<div id="form_zxGoodsApplyDetail_${ztt_processproductStatus.index}">
 			<fieldset>
 				<legend><h5>序号${ztt_processproductStatus.index+1}</h5></legend>
+					<div class="form-group">f
+						<label class="col-lg-3 control-label">序列号</label>
+						<div class="col-lg-6">
+							<input class="form-control" type="text" maxlength="32"  id="ztt_processproduct[${ztt_processproductStatus.index}].id" name="ztt_processproduct[${ztt_processproductStatus.index}].id" value="${ztt_processproduct.id }">
+						</div>
+					</div>
 					<div class="form-group">f
 						<label class="col-lg-3 control-label">序列号</label>
 						<div class="col-lg-6">
@@ -114,6 +131,12 @@
 							<input class="form-control" type="text" maxlength="255"  id="ztt_processproduct[${ztt_processproductStatus.index}].sum_price" name="ztt_processproduct[${ztt_processproductStatus.index}].sum_price" placeholder="请输入备注" value="${ztt_processproduct.sum_price }">
 						</div>
 					</div>
+					<div class="form-group">
+						<label class="col-lg-3 control-label">用途</label>
+						<div class="col-lg-6">
+							<input class="form-control" type="text" maxlength="255"  id="ztt_processproduct[${ztt_processproductStatus.index}].qualified_number" name="ztt_processproduct[${ztt_processproductStatus.index}].qualified_number" placeholder="请输入备注" value="${ztt_processproduct.qualified_number }">
+						</div>
+					</div>
 				
 					
 				</fieldset>
@@ -122,5 +145,5 @@
 		 </div>
 </body>
 	<script type="text/javascript"
-		src="../view/pc/zx-view/ztt-order/processingtechnicproduct.js"></script>
+		src="../view/pc/zx-view/ztt-order/processingtechniccheck.js"></script>
 </html>

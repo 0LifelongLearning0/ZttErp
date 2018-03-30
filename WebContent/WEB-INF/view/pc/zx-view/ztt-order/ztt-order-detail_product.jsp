@@ -8,9 +8,6 @@
 </head>
 
 <body>
-	
-	
-	
 	<div class="panel panel-default padding-10 no-margin">
 		<legend>
 		<div class="btn-group pull-right" style="margin-right: 20px;">
@@ -23,9 +20,9 @@
 		<fieldset id="printAll${zxCarApply.id }">
             <div class="container-fluid  col-md-8 col-md-offset-2">
                 <div class="row">
-                 <input class="form-control" type="hidden" maxlength="255"  name="erp_number" id="erp_number" value='${zttOrder.erp_number }'>
 		            <table class="table table-bordered">
 		                <caption class="text-center h3 no-margin bold">业务人员下单表</caption>
+		                <input class="form-control" type="hidden" maxlength="255"  name="state" id="state" value="${zttOrder.id}">
 		                <tbody>
 		                    <tr>
 		                        <td class="col-md-1 text-center">申&ensp;请&ensp;人</td>
@@ -74,13 +71,25 @@
 		                        <td class="col-md-2">${zttOrder.end_data }</td>
 		                        <td class="col-md-1 text-center">附件</td>
 		                        <td class="col-md-3">
-		                        <input class="form-control" type="hidden" maxlength="255"  name="attachment" id="attachment" value='${zttOrder.attachment }'>
 		                        <button class="btn btn-primary" data-toggle="button" onclick="downloadattachment('${zttOrder.id}')">查看附件</button>
-					
+								<input class="form-control" type="hidden" maxlength="255"  name="attachment" id="attachment" value='${zttOrder.attachment }'>
+								</td>
 		                    </tr>
-		                     <tr>
-		                     <td class="col-md-1 text-center" id="erp1">erp号</td>
-		                        <td class="col-md-3" id="erp2">${zttOrder.erp_number }</td>
+		                    <tr>
+		                     <td class="text-center">查看图纸</td>
+									<td colspan="2">
+									<button class="btn btn-primary"
+											data-toggle="button"
+											onclick="downloadattachmenttech('${zttOrder.id }')">查看附件</button>
+											<input class="form-control" type="hidden" maxlength="255"  name="techmanager_attachment" id="techmanager_attachment" value='${zttOrder.techmanager_attachment }'>
+											</td>
+											<td class="text-center">机械加工工艺过程</td>
+									<td colspan="2"><button class="btn btn-primary"
+											data-toggle="button"
+											onclick="progressupload('${zttOrder.id }')">查看</button>
+											<label id="id"></label>
+											</td>
+					
 		                    </tr>
 		                </tbody>
 		            </table>
@@ -89,5 +98,5 @@
 		</fieldset>
 	</div>
 </body>
-<script type="text/javascript" src="../view/pc/zx-view/ztt-order/ztt-order-detail.js"></script> 
+<script type="text/javascript" src="../view/pc/zx-view/ztt-order/ztt-order-detail_product.js"></script> 
 </html>

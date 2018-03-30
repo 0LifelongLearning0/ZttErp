@@ -57,6 +57,7 @@ function getbyapplyid(id){
 }
 //保存
 function approveZttOrderApply(taskid,status,obj){
+	var datatables = parent.$('#datatables').DataTable();
 	var url="../zxGoodsApplyController/approvalOrderApply";
 	status="outsidecheck";
 	var remark=document.getElementById("buy_end_data").value;

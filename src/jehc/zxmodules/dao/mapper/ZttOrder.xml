@@ -27,7 +27,7 @@
     b.xt_userinfo_realName as personname
 		FROM
 		ztt_order a,xt_userinfo b
-		WHERE 1=1 and a.apply_id=b.xt_userinfo_id
+		WHERE 1=1 and a.apply_id=b.xt_userinfo_id and a.state!='20'
 		<if test="null == orderby">
 			ORDER BY zttordertime desc
 		</if>
@@ -54,7 +54,19 @@
 		End_data,
 		zttordertime,
 		apply_id,
-		state
+		state,
+		techmanager_id,
+		techmanager_produc_id,
+		techmanager_update_date,
+		techmanager_attachment,
+		producter_id,
+		product_end_time,
+		checker_id,
+		checker_attachment,
+		check_end_time,
+		dept_check_id,
+		dept_check_attachment,
+		dept_check_end_time
 		FROM
 		ztt_order
 		WHERE id=#{id}
@@ -240,6 +252,24 @@
 		WHERE id=#{id}
 	</update>
 
+
+<!--修改（根据动态条件） -->
+	<update id="updateztt_processproductBySelective" parameterType="jehc.zxmodules.model.ztt_processproduct">
+		UPDATE
+		ztt_processproduct
+		<set>
+			<if test="qualified_number != null">
+				qualified_number = #{qualified_number},
+			</if>
+			<if test="qualified_date != null">
+				qualified_date = #{qualified_date},
+			</if>
+		
+			
+		</set>
+		WHERE id=#{id}
+	</update>
+
 	<!--修改（根据动态条件） -->
 	<update id="updateZttOrderBySelective" parameterType="jehc.zxmodules.model.ZttOrder">
 		UPDATE
@@ -301,6 +331,42 @@
 			</if>
 			<if test="product_end_time != null">
 				product_end_time = #{product_end_time},
+			</if>
+			<if test="machine_part != null">
+				machine_part = #{machine_part},
+			</if>
+			<if test="machine_part_number != null">
+				machine_part_number = #{machine_part_number},
+			</if>
+			<if test="material_id != null">
+				material_id = #{material_id},
+			</if>
+			<if test="techmanager_id != null">
+				techmanager_id = #{techmanager_id},
+			</if>
+			<if test="techmanager_update_date != null">
+				techmanager_update_date = #{techmanager_update_date},
+			</if>
+			<if test="techmanager_attachment != null">
+				techmanager_attachment = #{techmanager_attachment},
+			</if>
+			<if test="checker_id != null">
+				checker_id = #{checker_id},
+			</if>
+			<if test="checker_attachment != null">
+				checker_attachment = #{checker_attachment},
+			</if>
+			<if test="check_end_time != null">
+				check_end_time = #{check_end_time},
+			</if>
+			<if test="dept_check_id != null">
+				dept_check_id = #{dept_check_id},
+			</if>
+			<if test="dept_check_attachment != null">
+				dept_check_attachment = #{dept_check_attachment},
+			</if>
+			<if test="dept_check_end_time != null">
+				dept_check_end_time = #{dept_check_end_time},
 			</if>
 		</set>
 		WHERE id=#{id}

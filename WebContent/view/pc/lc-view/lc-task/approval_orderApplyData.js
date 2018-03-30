@@ -56,6 +56,7 @@ function getbyapplyid(id){
 }
 //保存
 function approveZttOrderApply(taskid,status,obj){
+	var datatables = parent.$('#datatables').DataTable();
 	var erp_number=document.getElementById("erp_number").value;
 	var flag=0;
 	if(erp_number==""){
@@ -74,7 +75,9 @@ function approveZttOrderApply(taskid,status,obj){
 	           type:'POST',
 	           data: params,
 	           success: function (result) { 
-	        	   approvalFormWin.close();
+	        	   var index = parent.layer.getFrameIndex(window.name);
+	        	   parent.layer.close(index);
+	        	   datatables.ajax.reload();
 	            }
 	        });
 	}

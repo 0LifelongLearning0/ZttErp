@@ -106,6 +106,14 @@ public class ZttOrderDaoImpl  extends BaseDaoImpl implements ZttOrderDao{
 		return this.update("updateZttOrderBySelective", zttOrder);
 	}
 	/**
+	* 修改（根据动态条件）
+	* @param ztt_order 
+	* @return
+	*/
+	public int updateztt_processproductBySelective(ztt_processproduct ztt_processproduct){
+		return this.update("updateztt_processproductBySelective", ztt_processproduct);
+	}
+	/**
 	* 删除
 	* @param condition 
 	* @return

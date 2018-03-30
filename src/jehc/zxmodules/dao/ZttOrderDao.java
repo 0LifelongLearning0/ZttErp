@@ -30,6 +30,7 @@ public interface ZttOrderDao{
 	public int addZttOrdnum(ZttOrdernumber_third zttOrdernumber_third);
 	public int addztt_processproduct(ztt_processproduct ztt_processproduct);
 	public List<ztt_processproduct> getprocessingtechnicById(String order_id);
+	public int updateztt_processproductBySelective(ztt_processproduct ztt_processproduct);
 	/**
 	* 添加
 	* @param ztt_order 

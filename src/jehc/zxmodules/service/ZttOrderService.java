@@ -30,6 +30,7 @@ public interface ZttOrderService{
 	public String add_ordernumber(ZttOrder zttOrder);
 	public int addztt_processproduct(ZttOrder zttOrder);
 	public ZttOrder getprocessingtechnicById(String id);
+	public int updateztt_processproduct(ZttOrder zttOrder);
 	/**
 	* 修改
 	* @param ztt_order 

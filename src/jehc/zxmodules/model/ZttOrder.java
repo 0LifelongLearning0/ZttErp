@@ -35,26 +35,90 @@ public class ZttOrder extends BaseEntity implements Serializable{
 	private String techmanager_attachment;/**状态**/
 	private String producter_id;
 	private String product_end_time;
+	private String machine_part;/**零件名称**/
+	private String machine_part_number;/**零件图号**/
+	private String material_id;/**材料牌号**/
+	private String checker_id;
+	private String checker_attachment;
+	private String check_end_time;
+	private String dept_check_id;
+	private String dept_check_attachment;
+	private String dept_check_end_time;
 	private List<ztt_processproduct> ztt_processproduct;/**用品申领详细表**/
+	
 	public void setId(String id){
 		this.id=id;
+	}
+	public String getDept_check_id() {
+		return dept_check_id;
+	}
+	public void setDept_check_id(String dept_check_id) {
+		this.dept_check_id = dept_check_id;
+	}
+	public String getDept_check_attachment() {
+		return dept_check_attachment;
+	}
+	public void setDept_check_attachment(String dept_check_attachment) {
+		this.dept_check_attachment = dept_check_attachment;
+	}
+	public String getDept_check_end_time() {
+		return dept_check_end_time;
+	}
+	public void setDept_check_end_time(String dept_check_end_time) {
+		this.dept_check_end_time = dept_check_end_time;
 	}
 	public String getId(){
 		return id;
 	}
 	
 	
-	public String getProducter_id() {
-		return producter_id;
+	public String getChecker_id() {
+		return checker_id;
 	}
-	public void setProducter_id(String producter_id) {
-		this.producter_id = producter_id;
+	public void setChecker_id(String checker_id) {
+		this.checker_id = checker_id;
+	}
+	public String getChecker_attachment() {
+		return checker_attachment;
+	}
+	public void setChecker_attachment(String checker_attachment) {
+		this.checker_attachment = checker_attachment;
+	}
+	public String getCheck_end_time() {
+		return check_end_time;
+	}
+	public void setCheck_end_time(String check_end_time) {
+		this.check_end_time = check_end_time;
 	}
 	public String getProduct_end_time() {
 		return product_end_time;
 	}
 	public void setProduct_end_time(String product_end_time) {
 		this.product_end_time = product_end_time;
+	}
+	public String getMachine_part() {
+		return machine_part;
+	}
+	public void setMachine_part(String machine_part) {
+		this.machine_part = machine_part;
+	}
+	public String getMachine_part_number() {
+		return machine_part_number;
+	}
+	public void setMachine_part_number(String machine_part_number) {
+		this.machine_part_number = machine_part_number;
+	}
+	public String getMaterial_id() {
+		return material_id;
+	}
+	public void setMaterial_id(String material_id) {
+		this.material_id = material_id;
+	}
+	public String getProducter_id() {
+		return producter_id;
+	}
+	public void setProducter_id(String producter_id) {
+		this.producter_id = producter_id;
 	}
 	public List<ztt_processproduct> getZtt_processproduct() {
 		return ztt_processproduct;

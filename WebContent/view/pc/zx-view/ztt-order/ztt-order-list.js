@@ -134,6 +134,14 @@ function delZttOrder() {
 		toastrBoot(4, "请选择要删除的数据");
 		return;
 	}
+	var str = $(".checkchild:checked").val();
+	var strs = str.split(",");
+	var id = strs[0];
+	var status = strs[1];
+	if(status!=0){
+		toastrBoot(4,"只有待申请状态的数据可以删除");
+		return;
+	}
 	msgTishCallFnBoot("确定要删除所选择的数据？",
 			function() {
 				var id = returncheckIds('checkId').join(",");
@@ -173,7 +181,7 @@ function downloadattachment(id) {
 		title : '下载附件',
 		type : 2,
 		area : [ '500px', '500px' ],
-		btn : [ '确定', '取消' ],
+		btn : [ '关闭'],
 		content : "../zttOrderController/Downloadattachment?id=" + id
 
 	})

@@ -12,6 +12,7 @@
  <input type="file" id="file_upload"/><br/>
  </div>
  <input type="button" value="上传图片" id="upload" onclick="ajaxFileUpload()"/> <br/> -->
+  <input type="hidden" id="upload" value='${upid}'/>
 	<table class="table table-bordered">
 		<tbody>
 		<!-- 	<tr>

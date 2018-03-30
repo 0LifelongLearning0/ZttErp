@@ -1,4 +1,4 @@
-approval_orderApplyselftech<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ include file="/deng/include/include.jsp"%>
 <%@ include file="/deng/include/includeboot.jsp"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -24,6 +24,9 @@ text-align:center;
 					<form class="form-horizontal" id="defaultForm" method="post">
 						<table class="table table-bordered">
 							<caption class="text-center h3 no-margin bold">业务人员下单表</caption>
+							<input class="form-control" type="hidden" maxlength="255"  name="machine_part" id="machine_part">
+							<input class="form-control" type="hidden" maxlength="255"  name="machine_part_number" id="machine_part_number">
+							<input class="form-control" type="hidden" maxlength="255"  name="material_id" id="material_id">
 							<tbody>
 								<tr>
 									<td class="col-md-2 text-center">申&ensp;请&ensp;人</td>
@@ -73,15 +76,16 @@ text-align:center;
 								<tr>
 									<td class="text-center">附件</td>
 									<td colspan="2">
-									<label id="attachment" style="display: none;"></label>
 									<button class="btn btn-primary"
 											data-toggle="button"
-											onclick="downloadattachment('${taskData.businessKey }')">查看附件</button></td>
+											onclick="downloadattachment('${taskData.businessKey }')">查看附件</button>
+											<input class="form-control" type="hidden" maxlength="255"  name="attachment" id="attachment">
+											</td>
 											<td class="text-center">上传图纸</td>
 									<td colspan="2"><button class="btn btn-primary"
 											data-toggle="button"
-											onclick="uploadattachment()">请上传附件</button>
-											<input class="form-control" type="hidden" maxlength="255"  name="techmanager_attachment" id="attachmentupload">
+											onclick="uploadattachmenttech()">请上传附件</button>
+											<input class="form-control" type="hidden" maxlength="255"  name="techmanager_attachment" id="techmanager_attachment">
 											</td>
 								</tr>
 								<tr>
@@ -111,5 +115,4 @@ text-align:center;
 </body>
 <script type="text/javascript"
 	src="../view/pc/lc-view/lc-task/approval_orderApplyselftech.js"></script>
-	<script type="text/javascript" src="../view/pc/zx-view/ztt-order/ztt-order-list.js"></script> 
 </html>

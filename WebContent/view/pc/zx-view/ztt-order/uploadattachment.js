@@ -1,4 +1,4 @@
-function ajaxFileUpload(){
+/*function ajaxFileUpload(){
 	         var formData = new FormData();
 	        formData.append('file',$("#file_upload")[0].files[0]);    //将文件转成二进制形式
 	        $.ajax({
@@ -19,7 +19,7 @@ function ajaxFileUpload(){
 	        }); 
 	    
 }
-
+*/
 $('#easyContainer').easyUpload({
 	  index:0,
 	  allowFileTypes: '*.*',//允许上传文件类型，格式';*.doc;*.pdf'
@@ -45,8 +45,9 @@ $('#easyContainer').easyUpload({
 			  attachment=attachment+","+data;
 		  }
 		  parent.$('#attachment').val(attachment);*/
+		  var id= document.getElementById("upload").value;
 		  var str=res.success.join(",");
-		  parent.$('#attachmentupload').val(str);
+		  parent.$('#'+id).val(str);
 	    console.log('成功回调', res);
 	  },//上传成功回调函数
 	  errorFunc: function(res) {

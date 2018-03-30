@@ -29,18 +29,19 @@
 					<div class="text-center h3 pbp">机械加工工艺过程卡片</div>
 					<div class="text-bold pba text-center clearfix">
 						<p class="col-md-3">产品名称：${zttOrder.product_name }</p>
-						<p class="col-md-3">零件名称：${zttOrder.machine_part }</p>
+						<p class="col-md-3">零件名称：${applyUser.xt_departinfo_name }</p>
 						<p class="col-md-3">工令号：${zttOrder.product_order_number }</p>
-						<p class="col-md-3">零件图号：${zttOrder.machine_part_number }</p>
+						<p class="col-md-3">零件图号</p>
 					</div>
 					<div class="text-bold pba text-center clearfix">
 						<p class="col-md-3">下单日期：${zttOrder.zttordertime }</p>
 						<p class="col-md-3">交货日期：${zttOrder.end_data }</p>
 						<p class="col-md-3">加工数量：${zttOrder.amount }</p>
-						<p class="col-md-3">材料牌号：${zttOrder.material_id }</p>
+						<p class="col-md-3">材料牌号</p>
 					</div>
 					<div style="display:none;">
                       <input class="form-control"  type="hidden" "size" id="size"  value='${size }'>
+                      <input class="form-control"  type="hidden" "size" id="producter_name"  value='${producter.xt_userinfo_realName }'>
                        </div>
 					<div>
 						<!-- Modal -->
@@ -60,6 +61,9 @@
 									<th class="col-md-2 text-center">工艺装备</th>
 									<th class="col-md-2 text-center">单价</th>
 									<th class="col-md-2 text-center">总价</th>
+									<th class="col-md-2 text-center">操作者</th>
+									<th class="col-md-2 text-center">合格件数</th>
+									<th class="col-md-2 text-center">检验员日期</th>
 								</tr>
 							</thead>
 							<tfoot>
@@ -113,8 +117,18 @@
 						<div class="col-lg-6">
 							<input class="form-control" type="text" maxlength="255"  id="ztt_processproduct[${ztt_processproductStatus.index}].sum_price" name="ztt_processproduct[${ztt_processproductStatus.index}].sum_price" placeholder="请输入备注" value="${ztt_processproduct.sum_price }">
 						</div>
+					<div class="form-group">
+						<label class="col-lg-3 control-label">合格件数</label>
+						<div class="col-lg-6">
+							<input class="form-control" type="text" maxlength="255"  id="ztt_processproduct[${ztt_processproductStatus.index}].qualified_number" name="ztt_processproduct[${ztt_processproductStatus.index}].qualified_number" placeholder="请输入备注" value="${ztt_processproduct.qualified_number }">
+						</div>
 					</div>
-				
+				<div class="form-group">
+						<label class="col-lg-3 control-label">检验员日期</label>
+						<div class="col-lg-6">
+							<input class="form-control" type="text" maxlength="255"  id="ztt_processproduct[${ztt_processproductStatus.index}].qualified_date" name="ztt_processproduct[${ztt_processproductStatus.index}].qualified_date" placeholder="请输入备注" value="${ztt_processproduct.qualified_date }">
+						</div>
+					</div>
 					
 				</fieldset>
 				</div>
@@ -122,5 +136,5 @@
 		 </div>
 </body>
 	<script type="text/javascript"
-		src="../view/pc/zx-view/ztt-order/processingtechnicproduct.js"></script>
+		src="../view/pc/zx-view/ztt-order/processingtechnicproductret.js"></script>
 </html>

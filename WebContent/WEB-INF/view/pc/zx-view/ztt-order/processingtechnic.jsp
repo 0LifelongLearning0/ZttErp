@@ -27,18 +27,25 @@
 			<div class="container-fluid">
 				<div class="row col-md-8 col-md-offset-2">
 					<div class="text-center h3 pbp">机械加工工艺过程卡片</div>
-					<div class="text-bold pba text-center clearfix">
-						<p class="col-md-3">产品名称：${zttOrder.product_name }</p>
-						<p class="col-md-3">零件名称：${applyUser.xt_departinfo_name }</p>
-						<p class="col-md-3">工令号：${zttOrder.product_order_number }</p>
-						<p class="col-md-3">零件图号</p>
-					</div>
-					<div class="text-bold pba text-center clearfix">
-						<p class="col-md-3">下单日期：${zttOrder.zttordertime }</p>
-						<p class="col-md-3">交货日期：${zttOrder.end_data }</p>
-						<p class="col-md-3">加工数量：${zttOrder.amount }</p>
-						<p class="col-md-3">材料牌号</p>
-					</div>
+					<form class="form-horizontal" id="defaultForm" method="post">
+					<table id="head" class="table table-bordered">
+							<tbody>
+							<tr class="text-bold">
+									<th class="col-md-1 text-center">产品名称：</th><th class="col-md-2 text-center">${zttOrder.product_name }</th>
+									<th class="col-md-1 text-center">零件名称</th><th class="col-md-2 text-center"><input class="form-control" type="text" maxlength="32" id="machine_part" name="machine_part"></th>
+									<th class="col-md-1 text-center">工令号</th><th class="col-md-2 text-center">${zttOrder.product_order_number }</th>
+									<th class="col-md-1 text-center">零件图号</th><th class="col-md-2 text-center"><input class="form-control" type="text" maxlength="32" id="machine_part_number" name="machine_part_number"></th>
+								</tr>
+								<tr class="text-bold">
+									<th class="col-md-1 text-center">下单日期:</th><th class="col-md-2 text-center">${zttOrder.zttordertime }</th>
+									<th class="col-md-1 text-center">交货日期：</th><th class="col-md-2 text-center">${zttOrder.end_data }</th>
+									<th class="col-md-1 text-center">加工数量：</th><th class="col-md-2 text-center">${zttOrder.amount }</th>
+									<th class="col-md-1 text-center">材料牌号</th><th class="col-md-2 text-center"><input class="form-control" type="text" maxlength="32" id="material_id" name="material_id"></th>
+								</tr>
+							</tbody>
+							<tfoot>
+							</tfoot>
+						</table>
 					<div>
 						<button class="btn btn-default pull-right" type="button"
 							data-toggle="modal"
@@ -49,11 +56,15 @@
 
 
 					</div>
+					
+					
 					<form class="form-horizontal" id="defaultForm" method="post">
 					<input class="form-control" type="hidden" maxlength="32" id="id" name="id" value="${zttOrder.id }">
-					<input class="form-control" type="text" maxlength="32" id="index" name="index" value="${index }">
+					<input class="form-control" type="hidden" maxlength="32" id="index" name="index" value="${index }">
+					<input class="form-control" type="hidden" maxlength="32" id="amount" name="amount" value="${zttOrder.amount }">
 						<table id="example" class="table table-bordered">
 							<thead>
+							
 								<tr class="text-bold">
 									<th class="col-md-1 text-center">工序号</th>
 									<th class="col-md-2 text-center">工序名称</th>

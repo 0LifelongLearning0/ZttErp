@@ -30,25 +30,25 @@
 		                    </tr>
 		                    <tr>
 		                        <td class="text-center">订单号/申请号</td>
-		                        <td class="text-gray"><input class="form-control" type="text" maxlength="255"  name="order_number" placeholder="请输入订单号/申请号"></td>
+		                        <td class="text-gray"><input class="form-control" type="text" maxlength="255"  name="order_number" id="order_number" placeholder="请输入订单号/申请号"></td>
 		                        <td class="text-center">合同号</td>
-		                        <td class="text-gray" colspan="3"><input class="form-control" type="text" maxlength="255"  name="contract_number" placeholder="请输入合同号"></td>
+		                        <td class="text-gray" colspan="3"><input class="form-control" type="text" maxlength="255"  name="contract_number" id="contract_number" placeholder="请输入合同号"></td>
 		                    </tr>
 		                    <tr>
 		                        <td class="text-center">客户</td>
 		                        <td colspan="2">
-									<input class="form-control" type="text" maxlength="255"  name="client" placeholder="请输入客户">
+									<input class="form-control" type="text" maxlength="255"  name="client" id="client" placeholder="请输入客户">
 								</td>
 		                        <td class="text-center">联系人</td>
 		                        <td colspan="2">
-									<input class="form-control" type="text" maxlength="255"  name="linkman" placeholder="请输入联系人">
+									<input class="form-control" type="text" maxlength="255"  name="linkman" id="linkman" placeholder="请输入联系人">
 								</td>
 		                    </tr>
 		                    <tr>
 		                        <td class="text-center">产品名称</td>
-		                        <td colspan="2"><input class="form-control" type="text" maxlength="255"  name="product_name" placeholder="请输入产品名称"></td>
+		                        <td colspan="2"><input class="form-control" type="text" maxlength="255"  name="product_name" id="product_name" placeholder="请输入产品名称"></td>
 		                        <td class="text-center">规格</td>
-		                        <td colspan="2"><input class="form-control" type="text" maxlength="255"  name="stardard" placeholder="请输入规格"></td>
+		                        <td colspan="2"><input class="form-control" type="text" maxlength="255"  name="stardard" id="stardard" placeholder="请输入规格"></td>
 		                    </tr>
 		                    <tr>
 		                        <td class="text-center">单位</td>
@@ -63,7 +63,7 @@
 		                        <td colspan="2"><input type="text"  class="form_datetime form-control"  maxlength="32"  name="End_data" id="end_data" placeholder="请输入交货日期"></td>
 		                        <td class="text-center">附件</td>
 		                        <td colspan="2"><button class="btn btn-primary" data-toggle="button" onclick="uploadattachment()">请上传附件</button>
-					<input class="form-control" type="hidden" maxlength="255"  name="attachment" id="attachmentupload"></td>
+					<input class="form-control" type="hidden" maxlength="255"  name="attachment" id="attachment"></td>
 		                    </tr>
 		                </tbody>
 		            </table>
@@ -81,86 +81,6 @@
             </div>
 		</fieldset>
 	</div>
-			<!-- <div class="form-group">
-				<label class="col-lg-3 control-label">订单号/申请号</label>
-				<div class="col-lg-6">
-					<input class="form-control" type="text" maxlength="255"  name="order_number" placeholder="请输入订单号/申请号">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-lg-3 control-label">合同号</label>
-				<div class="col-lg-6">
-					<input class="form-control" type="text" maxlength="255"  name="contract_number" placeholder="请输入合同号">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-lg-3 control-label">客户</label>
-				<div class="col-lg-6">
-					<input class="form-control" type="text" maxlength="255"  name="client" placeholder="请输入客户">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-lg-3 control-label">联系人</label>
-				<div class="col-lg-6">
-					<input class="form-control" type="text" maxlength="255"  name="linkman" placeholder="请输入联系人">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-lg-3 control-label">产品名称</label>
-				<div class="col-lg-6">
-					<input class="form-control" type="text" maxlength="255"  name="product_name" placeholder="请输入产品名称">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-lg-3 control-label">规格</label>
-				<div class="col-lg-6">
-					<input class="form-control" type="text" maxlength="255"  name="stardard" placeholder="请输入规格">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-lg-3 control-label">附件</label>
-				<div class="col-lg-6">
-					<button class="btn btn-primary" data-toggle="button" onclick="uploadattachment()">请上传附件</button>
-					<input class="form-control" type="text" maxlength="255"  name="attachment" id="attachment" value="aa">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-lg-3 control-label">单位</label>
-				<div class="col-lg-6">
-					<input class="form-control" type="text" maxlength="255"  name="unit" placeholder="请输入单位">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-lg-3 control-label">数量</label>
-				<div class="col-lg-6">
-					<input class="form-control" type="text" maxlength="20"  name="amount" placeholder="请输入数量" id="amount">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-lg-3 control-label">销售单价</label>
-				<div class="col-lg-6">
-					<input class="form-control" type="text" maxlength="20"  name="single_price" placeholder="请输入销售单价">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-lg-3 control-label">销售总价</label>
-				<div class="col-lg-6">
-					<input class="form-control" type="text" maxlength="20"  name="sum_price" placeholder="请输入销售总价">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-lg-3 control-label">交货日期</label>
-				<div class="col-lg-6">
-					<input type="text"  class="form_datetime form-control"  maxlength="32"  name="End_data" id="end_data" placeholder="请输入交货日期">
-				</div>
-			</div> -->
-			<!-- <div class="form-group">
-				<label class="col-lg-3 control-label"></label>
-				<div class="col-lg-6">
-					<button type="button" class="btn green" onclick="addZttOrder()">保存</button>
-					<button type="button" class="btn default" onclick="goback()">返回</button>
-				</div>
-			</div> -->
 		</form>
 	</div>
 </body>

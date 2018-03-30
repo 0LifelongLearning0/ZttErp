@@ -17,6 +17,8 @@ $(document).ready(function(){
 	document.getElementById("single_price").innerText=ajaxobj.single_price;
 	document.getElementById("end_data").innerText=ajaxobj.end_data;
 	document.getElementById("attachment").value=ajaxobj.attachment;
+	document.getElementById("techmanager_attachment").value=ajaxobj.techmanager_attachment;
+	document.getElementById("checker_attachment").value=ajaxobj.checker_attachment;
          /*  var counter = 0;
                 t.row.add([
                     i+1,
@@ -57,19 +59,11 @@ function getbyapplyid(id){
 }
 //保存
 function approveZttOrderApply(taskid,status,obj){
-	var url="../zxGoodsApplyController/approvalOrderApply";
 	var datatables = parent.$('#datatables').DataTable();
-	var flag=0;
-	var approvalFormWin = parent.Ext.getCmp('approvalFormWin'); 
-	var selectindex=document.getElementById("select").selectedIndex;
-	if(selectindex==0){
-		layer.alert('请选择产品类型');
-		flag=1;
-	}
-	var selectvalue=document.getElementById("select").options[selectindex].value;
-	var params = {task_id:taskid,task_status:status,remark:selectvalue};
-	if(flag==0){
-	ajaxBReq('../zttOrderController/approvalOrderApply',params);
+	var url="../zttOrderController/approvalOrderApply";
+	remark="checkself";
+	var path=document.getElementById("checker_attachment").value;
+	var params = {task_id:taskid,task_status:status,remark:remark,path:path};
 	$.ajax({ 
 		   url: url, 
 		   async:false, 
@@ -79,13 +73,38 @@ function approveZttOrderApply(taskid,status,obj){
         	   var index = parent.layer.getFrameIndex(window.name);
         	   parent.layer.close(index);
         	   datatables.ajax.reload();
-        	   tlocation("../lcTaskController/loadAssigneeLcTask");
             }
         });
-	}
 	
 }
-//下载
+//上传
+
+function uploadattachment(){
+	var upid="checker_attachment";
+	layer.open({
+		title: '上传附件',
+		type: 2, 
+		area: ['800px', '500px'],
+		btn: ['确定', '取消'],
+	  content: "../zttOrderController/uploadattachment?upid="+upid,
+	 
+	}); 
+}
+
+//上传
+//保存
+function progressupload(id){
+	var index = parent.layer.getFrameIndex(window.name); 
+	var state="7";
+	parent.layer.open({
+		title: '机械加工工艺过程卡片',
+		type: 2, 
+		area: ['1500px', '700px'],
+		btn: ['关闭'],
+	  content: "../zttOrderController/toZttprocessingtechnicDetail?id="+id+"&state="+state
+	}); 
+}
+//保存
 function downloadattachment(id){
 	var upid="attachment";
 	layer.open({
@@ -96,3 +115,14 @@ function downloadattachment(id){
 	  content: "../zttOrderController/Downloadattachment?id="+id+"&upid="+upid
 	 
 	})}; 
+	//保存
+	function downloadattachmenttech(id){
+		var upid="techmanager_attachment";
+		layer.open({
+			title: '下载附件',
+			type: 2, 
+			area: ['500px', '500px'],
+			btn: ['关闭'],
+		  content: "../zttOrderController/Downloadattachment?id="+id+"&upid="+upid
+		 
+		})}; 

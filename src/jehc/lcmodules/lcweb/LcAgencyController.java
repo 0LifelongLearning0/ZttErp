@@ -100,7 +100,7 @@ public class LcAgencyController extends BaseAction{
 			model.put("processVariables", task.getProcessVariables());
             jsonArray.add(model);
 		}
-		return outPageStr(jsonArray,total, request);
+		return outPageBootStr(jsonArray,total, request);
 	}
 	
 	/**

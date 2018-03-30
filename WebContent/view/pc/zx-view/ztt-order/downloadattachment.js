@@ -18,8 +18,9 @@ function downloadFile(fileName){
 }
 $(function(){
 	var tab= $("#datatables");
+	var id= document.getElementById("download").value;
 	var vTr= "<tr><td>text</td><td>text</td><td>text</td></tr>"
-		var attachment='['+parent.$('#attachment').html()+']';
+		var attachment='['+parent.$('#'+id).val()+']';
 	var json=$.parseJSON(attachment);
 	$.each(json,function(name,value) {
 		var path=value.path.split("-----");

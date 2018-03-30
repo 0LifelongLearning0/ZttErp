@@ -14,6 +14,7 @@
 	<div class="panel-body">
 		<div class="btn-group pull-right" style="margin-right: 20px;">
 		</div>
+		<input type="hidden" id="download" value='${upid}'/>
 		<table id="datatables" class="table table-bordered table-striped table-hover">
 			<thead>
 				<tr>

@@ -1,4 +1,4 @@
-approval_orderApplyselftech<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ include file="/deng/include/include.jsp"%>
 <%@ include file="/deng/include/includeboot.jsp"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -23,7 +23,8 @@ text-align:center;
 				<div class="row">
 					<form class="form-horizontal" id="defaultForm" method="post">
 						<table class="table table-bordered">
-							<caption class="text-center h3 no-margin bold">业务人员下单表</caption>
+							<caption class="text-center h3 no-margin bold" id="caption">业务人员下单表</caption>
+							<input class="form-control" type="hidden" maxlength="255"  name="state" id="state">
 							<tbody>
 								<tr>
 									<td class="col-md-2 text-center">申&ensp;请&ensp;人</td>
@@ -76,13 +77,16 @@ text-align:center;
 									<label id="attachment" style="display: none;"></label>
 									<button class="btn btn-primary"
 											data-toggle="button"
-											onclick="downloadattachment('${taskData.businessKey }')">查看附件</button></td>
+											onclick="downloadattachment('${taskData.businessKey }')">查看附件</button>
+											<input class="form-control" type="hidden" maxlength="255"  name="attachment" id="attachment">
+											</td>
 											<td class="text-center">查看图纸</td>
 									<td colspan="2"><button class="btn btn-primary"
 											data-toggle="button"
-											onclick="downloadattachment('${taskData.businessKey }')">查看附件</button></td>
-											<input class="form-control" type="hidden" maxlength="255"  name="attachmentupload" id="attachmentupload">
+											onclick="downloadattachmenttech('${taskData.businessKey }')">查看附件</button>
+											<input class="form-control" type="hidden" maxlength="255"  name="techmanager_attachment" id="techmanager_attachment">
 											</td>
+											
 								</tr>
 								<tr>
 									<td class="text-center">机械加工工艺过程</td>
@@ -91,14 +95,19 @@ text-align:center;
 											onclick="progressupload('${taskData.businessKey }')">查看</button>
 											<label id="id"></label>
 											</td>
-
+									<td class="text-center" id="checkreport"  style="display:none">检验报告</td>
+									<td colspan="2" id="checkreport1"  style="display:none"><button class="btn btn-primary"
+											data-toggle="button"
+											onclick="downloadattachmentcheck('${taskData.businessKey }')">查看</button>
+											<input class="form-control" type="hidden" maxlength="255"  name="checker_attachment" id="checker_attachment">
+											</td>
 								</tr>
 							</tbody>
 						</table>
 						<div class="col-lg-6" style="text-align:center">
 							<button type="button" class="btn btn-warning"
 								onclick='approveZttOrderApply(${taskData.task.id },"",this)'>
-								<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>提交
+								<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>已完成生产
 							</button>
 						</div>
 					</form>
@@ -109,5 +118,4 @@ text-align:center;
 </body>
 <script type="text/javascript"
 	src="../view/pc/lc-view/lc-task/approval_orderApplyselftechproduct.js"></script>
-	<script type="text/javascript" src="../view/pc/zx-view/ztt-order/ztt-order-list.js"></script> 
 </html>

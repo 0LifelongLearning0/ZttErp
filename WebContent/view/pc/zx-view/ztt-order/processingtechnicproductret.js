@@ -20,6 +20,9 @@ $(document).ready(function(){
                     document.getElementById("ztt_processproduct["+i+"].tooling").value,
                     document.getElementById("ztt_processproduct["+i+"].single_price").value,
                     document.getElementById("ztt_processproduct["+i+"].sum_price").value,
+                    document.getElementById("producter_name").value,
+                    document.getElementById("ztt_processproduct["+i+"].qualified_number").value,
+                    document.getElementById("ztt_processproduct["+i+"].qualified_date").value,
                 ]).draw();
                 
 	}

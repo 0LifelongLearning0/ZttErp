@@ -229,6 +229,25 @@ public class ZttOrderController extends BaseAction{
 		}
 	}
 	/**
+	* 加工工艺过程修改
+	* @param request 
+	*/
+	@ResponseBody
+	@RequestMapping(value="/processingtechnicUpdate",method={RequestMethod.POST,RequestMethod.GET})
+	public String processingtechnicUpdate(ZttOrder zttOrder,HttpServletRequest request){
+		int i = 0;
+		i=zttOrderService.updateztt_processproduct(zttOrder);
+		/*XtUserinfo applyUser = xtUserinfoService.getXtUserinfoById(getXtUid());
+		if(null != ztt_processproduct && !"".equals(ztt_processproduct)){
+			i=zttOrderService.addztt_processproduct(ztt_processproduct);
+		}*/
+		if(i>0){
+			return outAudStr(true);
+		}else{
+			return outAudStr(false);
+		}
+	}
+	/**
 	* 复制一行并生成记录
 	* @param id 
 	* @param request 
@@ -292,6 +311,12 @@ public class ZttOrderController extends BaseAction{
 		String path="";
 		if(state.equals("11")){
 			path="pc/zx-view/ztt-order/ztt-order-detail_erp";
+		}else if(state.equals("5")||state.equals("6")){
+			path="pc/zx-view/ztt-order/ztt-order-detail_product";
+		}else if(state.equals("7")||state.equals("8")){
+			path="pc/zx-view/ztt-order/ztt-order-detail_check";
+		}else if(state.equals("9")||state.equals("12")){
+			path="pc/zx-view/ztt-order/ztt-order-detail_check_dept";
 		}else{
 			path="pc/zx-view/ztt-order/ztt-order-detail";
 		}
@@ -300,17 +325,34 @@ public class ZttOrderController extends BaseAction{
 		return new ModelAndView(path);
 	}
 	/**
-	* 发送至生产部明细页面
+	* 发送至生产部或者质检明细页面
 	* @param request 
 	*/
 	@RequestMapping(value="/toZttprocessingtechnicDetail",method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView toZttprocessingtechnicDetail(String id,String state,HttpServletRequest request, Model model){
 		ZttOrder zttOrder = zttOrderService.getprocessingtechnicById(id);
+		XtUserinfo producter=null;
+		if(zttOrder.getProducter_id()!=null){
+			producter = xtUserinfoService.getXtUserinfoById(zttOrder.getProducter_id());
+		}
 		XtUserinfo applyUser = xtUserinfoService.getXtUserinfoById(zttOrder.getApply_id());
 		model.addAttribute("zttOrder", zttOrder);
 		model.addAttribute("size", zttOrder.getZtt_processproduct().size());
-		String	path="pc/zx-view/ztt-order/processingtechnicproduct";
+		model.addAttribute("producter", producter);
+		String path;
+		if(state.equals("7")){
+			model.addAttribute("message", "not_show");
+			path="pc/zx-view/ztt-order/processingtechniccheck";
+			XtUserinfo techmanager = xtUserinfoService.getXtUserinfoById(zttOrder.getTechmanager_id());
+			model.addAttribute("techmanager", techmanager);
+		}else if(state.equals("8")){
+			path="pc/zx-view/ztt-order/processingtechnicproductret";
+		}else{
+			path="pc/zx-view/ztt-order/processingtechnicproduct";
+		}
+		
 		model.addAttribute("applyUser", applyUser);
+		
 		return new ModelAndView(path);
 	}
 	/**
@@ -318,8 +360,9 @@ public class ZttOrderController extends BaseAction{
 	* @param request 
 	*/
 	@RequestMapping(value="/uploadattachment",method={RequestMethod.POST,RequestMethod.GET})
-	public ModelAndView uploadattachment(String id,HttpServletRequest request, Model model){
+	public ModelAndView uploadattachment(String id,String upid,HttpServletRequest request, Model model){
 		ZttOrder zttOrder = zttOrderService.getZttOrderById(id);
+		model.addAttribute("upid", upid);
 		model.addAttribute("zttOrder", zttOrder);
 		return new ModelAndView("pc/zx-view/ztt-order/uploadattachment");
 	}
@@ -339,8 +382,9 @@ public class ZttOrderController extends BaseAction{
 	* @param request 
 	*/
 	@RequestMapping(value="/Downloadattachment",method={RequestMethod.POST,RequestMethod.GET})
-	public ModelAndView Downloadattachment(String id,HttpServletRequest request, Model model){
+	public ModelAndView Downloadattachment(String id,String upid,HttpServletRequest request, Model model){
 		ZttOrder zttOrder = zttOrderService.getZttOrderById(id);
+		model.addAttribute("upid", upid);
 		model.addAttribute("zttOrder", zttOrder);
 		return new ModelAndView("pc/zx-view/ztt-order/downloadattachmenttech");
 	}
@@ -479,7 +523,7 @@ public class ZttOrderController extends BaseAction{
 	*/
 	@ResponseBody
 	@RequestMapping(value="/approvalOrderApply",method={RequestMethod.POST,RequestMethod.GET})
-	public String approvalOrderApply(String task_id,String task_status,String remark,HttpServletRequest request){
+	public String approvalOrderApply(String task_id,String task_status,String remark,String path,HttpServletRequest request){
 		int i = 0;
 		if(null != task_id && !"".equals(task_id)){
 			Map<String, Object> taskData = activitiUtil.getTask(task_id);
@@ -488,7 +532,12 @@ public class ZttOrderController extends BaseAction{
 		    String vals = task_status + "," + zttOrder.getApply_id() + ",";
 		    variables.setKeys("status,owner,applyType");
 		    variables.setTypes("S,S,S");
-		    vals +=remark;
+		    if(remark.equals("warehouse")||remark.equals("PD")||remark.equals("others")){
+		    	vals +="others";
+		    }else{
+		    	vals +=remark;
+		    }
+		    
 		    variables.setValues(vals);
 		    String s=remark;
 		    Map<String, Object> taskData1= (Map<String, Object>) activitiUtil.getTask(task_id).get("taskVariables");
@@ -519,18 +568,49 @@ public class ZttOrderController extends BaseAction{
 					}else if(remark.equals("others")){
 						lc_approval.setLc_status_name("流程结束");
 						zttOrder.setState("11");
-					}
-					boolean isEnd = activitiUtil.isEnded(((Task) taskData.get("task")).getProcessInstanceId());
-					if(isEnd){
-						zttOrder.setState("11");
+					}else if(remark.equals("checkself")){
+						lc_approval.setLc_status_name("质检合格,待质检部检验");
+						zttOrder.setChecker_attachment(path);
+						zttOrder.setChecker_id(getXtUid());
+						zttOrder.setCheck_end_time(DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
+						zttOrder.setState("7");
+					}else if(remark.equals("deptcheckself")){
+						lc_approval.setLc_status_name("质检部检验合格");
+						zttOrder.setChecker_attachment(path);
+						zttOrder.setChecker_id(getXtUid());
+						zttOrder.setCheck_end_time(DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
+						zttOrder.setState("9");
+					}else if(remark.equals("warehouse")){
+						lc_approval.setLc_status_name("仓库");
+						zttOrder.setState("13");
+					}else if(remark.equals("PD")){
+						lc_approval.setLc_status_name("生产部");
+						zttOrder.setState("14");
+					}else if(remark.equals("others")){
+						lc_approval.setLc_status_name("其他");
+						zttOrder.setState("15");
 					}
 					zttOrderService.updateZttOrderBySelective(zttOrder);
 				}else if(task_status.equals("no")){
 					lc_approval.setLc_status_name("审批不通过");
-					zttOrder.setState("10");
+					if(remark.equals("checkself")){
+						lc_approval.setLc_status_name("自制单,质检不通过,返回生产");
+						zttOrder.setChecker_attachment(path);
+						zttOrder.setChecker_id(getXtUid());
+						zttOrder.setCheck_end_time(DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
+						zttOrder.setState("8");
+					}else if(remark.equals("deptcheckself")){
+						lc_approval.setLc_status_name("质检部检验不合格");
+						zttOrder.setDept_check_attachment(path);
+						zttOrder.setDept_check_id(getXtUid());
+						zttOrder.setDept_check_end_time(DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
+						zttOrder.setState("12");
+					}else{
+						zttOrder.setState("10");
+					}
 					zttOrderService.updateZttOrderBySelective(zttOrder);
 				}else if(task_status.equals("erp")){
-						zttOrder.setState("11");
+						zttOrder.setState("3");
 						zttOrder.setErp_number(remark);
 					zttOrderService.updateZttOrderBySelective(zttOrder);
 				}else if(task_status.equals("selftech")){

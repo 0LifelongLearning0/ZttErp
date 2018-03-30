@@ -15,7 +15,6 @@ $(document).ready(function(){
             	var flag=0;
             	var select;
             	if(index==1){
-            		
             		select="下料";
             	}else if(index==2){
             		select="普车加工";
@@ -32,7 +31,12 @@ $(document).ready(function(){
             	}else if(index==6){
             		select="外协加工";
             	}
-            	
+            	var single_price=document.getElementById("time").value;
+            	if (!/^(?:[1-9]\d*|0)(?:\.\d+)?$/.test(single_price)) {
+            		layer.alert('输入单价不合法');
+            		flag = 1;
+            		return;
+            	}
             	
             	if(index==0){
             		flag=1;
@@ -58,6 +62,11 @@ $(document).ready(function(){
 
 //保存
 function addZxGoodsApply(){
+	var index=document.getElementById("index").value;
+	var body = parent.layer.getChildFrame('body', index);
+	parent.$('#machine_part').val(document.getElementById("machine_part").value);
+	parent.$('#machine_part_number').val(document.getElementById("machine_part_number").value);
+	parent.$('#material_id').val(document.getElementById("material_id").value);
 	submitBForm('defaultForm','../zttOrderController/processingtechnicAdd','../zttOrderController/copyZttOrder');
 }
 
@@ -123,27 +132,6 @@ function showmodal(){
      document.getElementById("time").value="";
 	
 	$('#addModal').modal();
-}
-//弹出框保存
-function doGoodsupload(){
-	numbers = parseInt(numbers)+1;
-var trHTML =  '<tr id="row'+numbers+'">' +
-                             '<td>用品</td><td>' +
-                             /*'<label>' +*/
-                               '<input class="form-control" type="text" maxlength="32"  id="zxGoodsApplyDetail_'+numbers+'_.office_name" name="zxGoodsApplyDetail['+numbers+'].office_name" data-bv-notempty data-bv-notempty-message="请输入用品">'+
-                             '</td><td>数量</td><td>' +
-                             '<input class="form-control" type="text" maxlength="32"  id="zxGoodsApplyDetail_'+numbers+'_.amount" name="zxGoodsApplyDetail['+numbers+'].amount" data-bv-notempty data-bv-notempty-message="请输入用品">'+
-                             '</td><td>用途</td><td>' +
-                             '<input class="form-control" type="text" maxlength="20"  name="zxGoodsApplyDetail['+numbers+'].reason"  id="zxGoodsApplyDetail_'+numbers+'_.reason"   data-bv-notempty data-bv-notempty-message="请输入用途">'+
-                              '</td><td><button type="button" class="btn btn-primary" onclick="delrow('+numbers+')">删除</button></td>' +
-                              
-                             '</tr>';
-      $("#tab").append(trHTML); 
-       document.getElementById("zxGoodsApplyDetail_"+numbers+"_.office_name").value=document.getElementById("detailname").value;
-      document.getElementById("zxGoodsApplyDetail_"+numbers+"_.amount").value=document.getElementById("amount").value;
-      document.getElementById("zxGoodsApplyDetail_"+numbers+"_.reason").value=document.getElementById("reason").value;
-     
-	$('#adddetail').modal('hide');
 }
 
 function delrow(obj){

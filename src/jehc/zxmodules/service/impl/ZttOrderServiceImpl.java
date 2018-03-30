@@ -123,6 +123,26 @@ public class ZttOrderServiceImpl extends BaseService implements ZttOrderService{
 	* @param ztt_order 
 	* @return
 	*/
+	public int updateztt_processproduct(ZttOrder zttOrder){
+		int i = 0;
+		try {
+			List<ztt_processproduct> ztt_processproduct = zttOrder.getZtt_processproduct();
+			for(int j = 0; j < ztt_processproduct.size(); j++){
+				ztt_processproduct.get(j).setQualified_date(DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
+				i = zttOrderDao.updateztt_processproductBySelective(ztt_processproduct.get(j));
+			}
+		} catch (Exception e) {
+			i = 0;
+			/**捕捉异常并回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+		return i;
+	}
+	/**
+	* 修改
+	* @param ztt_order 
+	* @return
+	*/
 	public int updateZttOrder(ZttOrder zttOrder){
 		int i = 0;
 		try {
