@@ -21,7 +21,7 @@ public class MxStartEvent {
 	 * @param mxCel
 	 * @return
 	 */
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings("unchecked")
 	public static String startEvent(Element root,List mxCellList,Element mxCell){
 		String start_node = "";
 		String start_sequenceFlow="";
@@ -176,7 +176,11 @@ public class MxStartEvent {
             		if(null != cell[1] && !"".equals(cell[1]) && "javaclass".equals(cell[1])){
             			excuteStr = "class='"+cell[0]+"'";
             		}
-            		start_node += "<activiti:executionListener event='start' "+excuteStr+">";
+            		//express类型
+            		if(null != cell[1] && !"".equals(cell[1]) && "express".equals(cell[1])){
+            			excuteStr = " expression='Expression'";
+            		}
+            		start_node += "<activiti:executionListener event='"+cell[2]+"' "+excuteStr+">";
                     //1-1字段开始 子循环操作
             		if(null != cell[1] && !"".equals(cell[1]) && ("javaclass".equals(cell[1]) || "express".equals(cell[1]))){
             			//此时存在字段 字段位置在最后一个
@@ -184,9 +188,11 @@ public class MxStartEvent {
             			for(int j = 0; j < field.length; j++){
             				if(!StringUtil.isEmpty(field[j])){
             					String[] fieldV = field[j].split("&",-1);
-                				start_node += "<activiti:field name='"+fieldV[0]+"'>";
-                                start_node += "<activiti:string><![CDATA["+fieldV[1]+"]]></activiti:string>";
-                                start_node += "</activiti:field>";
+            					if(null != fieldV && fieldV.length==3){
+            						start_node += "<activiti:field name='"+fieldV[0]+"'>";
+                                    start_node += "<activiti:string><![CDATA["+fieldV[2]+"]]></activiti:string>";
+                                    start_node += "</activiti:field>";
+            					}
             				}
             			}
             		}
@@ -262,7 +268,7 @@ public class MxStartEvent {
 	 * @param mxCell
 	 * @return
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings("unchecked")
 	public static String startBpmndi(Element root,List mxCellList,Element mxCell){
 		String nodeID = mxCell.attributeValue("nodeID");
 		String id = mxCell.attributeValue("id");

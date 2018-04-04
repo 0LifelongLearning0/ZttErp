@@ -71,7 +71,8 @@ function approveZttOrderApply(taskid,status,obj){
 	var url="../zxGoodsApplyController/approvalOrderApply";
 	status="selfwaitcheck";
 	remark="1";
-	var params = {task_id:taskid,task_status:status,remark:remark};
+	var path=document.getElementById("producter_selfcheck_attachment").value;
+	var params = {task_id:taskid,task_status:status,remark:remark,path:path};
 	var approvalFormWin = parent.Ext.getCmp('approvalFormWin');  
 	ajaxBReq('../zttOrderController/approvalOrderApply',params);
 	$.ajax({ 
@@ -93,24 +94,16 @@ function productreload(){
 	datatables.ajax.reload();
 }
 
-//上传
-//保存
-function uploadattachment(){
+function uploadself_checkattachment(){
+	var upid="producter_selfcheck_attachment";
 	layer.open({
 		title: '上传附件',
 		type: 2, 
 		area: ['800px', '500px'],
 		btn: ['确定', '取消'],
-	  content: "../zttOrderController/uploadattachment",
+	  content: "../zttOrderController/uploadattachment?upid="+upid,
 	 
 	}); 
-	/*var inputObj=document.createElement('input')
-    inputObj.setAttribute('id','_ef');
-    inputObj.setAttribute('type','file');
-    inputObj.setAttribute("style",'visibility:hidden');
-    document.body.appendChild(inputObj);
-    inputObj.click();
-    inputObj.value */
 }
 
 //上传
@@ -160,3 +153,15 @@ function downloadattachment(id){
 			  content: "../zttOrderController/Downloadattachment?id="+id+"&upid="+upid
 			 
 			})}; 
+			//保存
+			function selfcheckreport(id){
+				var index = parent.layer.getFrameIndex(window.name); 
+				var state="38";
+				layer.open({
+					title: '下载附件',
+					type: 2, 
+					area: ['800px', '500px'],
+					btn: ['关闭'],
+				  content: "../zttOrderController/toZttprocessingtechnicDetail?id="+id+"&state="+state
+				 
+				})}; 

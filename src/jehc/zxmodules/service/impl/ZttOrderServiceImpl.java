@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import jehc.zxmodules.service.ZttOrderService;
 import jehc.zxmodules.dao.ZttOrderDao;
 import jehc.zxmodules.model.ZttOrder;
+import jehc.zxmodules.model.ZttOrderCheckHistory;
 import jehc.zxmodules.model.ZttOrdernumber;
 import jehc.zxmodules.model.ZttOrdernumber_third;
 import jehc.zxmodules.model.ZxGoodsApply;
@@ -74,6 +75,36 @@ public class ZttOrderServiceImpl extends BaseService implements ZttOrderService{
 			/**捕捉异常并回滚**/
 			throw new ExceptionUtil(e.getMessage(),e.getCause());
 		}
+	}
+	/**
+	* 查询历史对象
+	* @param id 
+	* @return
+	*/
+	public List<ZttOrderCheckHistory> getprocessinghisById(Map<String,Object> condition){
+		try{
+			List<ZttOrderCheckHistory> list = zttOrderDao.getZttOrderhisById(condition);
+			return list;
+		} catch (Exception e) {
+			/**捕捉异常并回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+	}
+	/**
+	* 添加
+	* @param ztt_order 
+	* @return
+	*/
+	public int addZttOrderCheckHistory(ZttOrderCheckHistory ZttOrderCheckHistory){
+		int i = 0;
+		try {
+			i = zttOrderDao.addZttOrderCheckHistory(ZttOrderCheckHistory);
+		} catch (Exception e) {
+			i = 0;
+			/**捕捉异常并回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+		return i;
 	}
 	/**
 	* 添加

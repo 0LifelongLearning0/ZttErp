@@ -60,11 +60,18 @@
 									<th class="col-md-2 text-center">工艺装备</th>
 									<th class="col-md-2 text-center">单价</th>
 									<th class="col-md-2 text-center">总价</th>
+									<th class="col-md-1 text-center">合格件数</th>
 								</tr>
 							</thead>
 							<tfoot>
 							</tfoot>
 						</table>
+						<div class="text-center">
+							<button type="button" class="btn btn-success"
+								onclick="addZxGoodsApply()" id="buttonsave">
+								<span class="glyphicon glyphicon-saved" aria-hidden="true"></span>保存
+							</button>
+						</div>
 					</form>
 				</div>
 
@@ -78,7 +85,13 @@
 				<div id="form_zxGoodsApplyDetail_${ztt_processproductStatus.index}">
 			<fieldset>
 				<legend><h5>序号${ztt_processproductStatus.index+1}</h5></legend>
-					<div class="form-group">f
+				<div class="form-group">f
+						<label class="col-lg-3 control-label">序列号</label>
+						<div class="col-lg-6">
+							<input class="form-control" type="text" maxlength="32"  id="ztt_processproduct[${ztt_processproductStatus.index}].id" name="ztt_processproduct[${ztt_processproductStatus.index}].id" value="${ztt_processproduct.id }">
+						</div>
+					</div>
+					<div class="form-group">
 						<label class="col-lg-3 control-label">序列号</label>
 						<div class="col-lg-6">
 							<input class="form-control" type="text" maxlength="32"  id="ztt_processproduct[${ztt_processproductStatus.index}].processname" name="ztt_processproduct[${ztt_processproductStatus.index}].processname" value="${ztt_processproduct.processname }">
@@ -114,7 +127,12 @@
 							<input class="form-control" type="text" maxlength="255"  id="ztt_processproduct[${ztt_processproductStatus.index}].sum_price" name="ztt_processproduct[${ztt_processproductStatus.index}].sum_price" placeholder="请输入备注" value="${ztt_processproduct.sum_price }">
 						</div>
 					</div>
-				
+				<div class="form-group">
+						<label class="col-lg-3 control-label">用途</label>
+						<div class="col-lg-6">
+							<input class="form-control" type="text" maxlength="255"  id="ztt_processproduct[${ztt_processproductStatus.index}].qualified_number" name="ztt_processproduct[${ztt_processproductStatus.index}].qualified_number" placeholder="请输入备注" value="${ztt_processproduct.qualified_number }">
+						</div>
+					</div>
 					
 				</fieldset>
 				</div>

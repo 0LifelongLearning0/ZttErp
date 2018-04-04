@@ -26,10 +26,6 @@ function addZttOrder() {
 		layer.alert('产品名称不能为空');
 		flag = 1;
 	}
-	if ($('#stardard').val() == "") {
-		layer.alert('规格不能为空');
-		flag = 1;
-	}
 	if ($('#unit').val() == "") {
 		layer.alert('单位不能为空');
 		flag = 1;

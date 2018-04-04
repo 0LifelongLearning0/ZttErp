@@ -92,24 +92,38 @@ $(document)
 												var opt = "<a href=\"javascript:toZttOrderDetail('"
 														+ data
 														+ "','"+row.state+"')\"><span class='glyphicon glyphicon-eye-open' title='详情'></span></a>&emsp;";
+												return opt;
+											}
+										},
+										{
+											data : "id",
+											width : "150px",
+											render : function(data, type, row,
+													meta) {
+												
+												var opt;
 												if (row.state == '0') {
-													opt += "<a href=\"javascript:toApply('"
+													opt= "<a href=\"javascript:toApply('"
 															+ data
 															+ "')\"><span class='glyphicon glyphicon-transfer text-danger' title='申请审批'></span></a>&emsp;";
 												} else {
-													opt += "<a href=\"javascript:approval('"
+													opt= "<a href=\"javascript:approval('"
 															+ data
 															+ "')\"><span class='glyphicon glyphicon-list-alt text-warning' title='审批记录'></span></a>&emsp;";
 												}
+												opt+="<a href=\"javascript:showLcProcessInstance('"
+												+ data
+													+"')\"><span class='glyphicon glyphicon-tag text-warning' title='查看流程图'></span>";
 												return opt;
 											}
-										} ]
+										}]
 							});
 					grid = $('#datatables').dataTable(options);
 					// 实现全选反选
 					docheckboxall('checkall', 'checkchild');
 					// 实现单击行选中
 					clickrowselected('datatables');
+					InitBDataCombo("ZttOrder","state");
 				});
 // 新增
 function toZttOrderAdd() {
@@ -242,4 +256,47 @@ function approval_record(id) {
 		} ]
 	});
 	approval_grid = $('#datatables_approval').dataTable(options);
+}
+function showLcProcessInstance(id){
+	/*lcProcessInstanceWin = Ext.create('Ext.Window',{
+		layout:'fit',
+		width:clientWidth*0.8,                    
+		height:clientHeight*0.8,
+		maximizable:true,
+		minimizable:true,
+		animateTarget:document.body,
+		plain:true,
+		modal:true,
+		headerPosition:'right',
+		title:'实例监控图',
+		html:'<iframe scrolling="auto" frameborder="0" width="100%" height="100%" src="../lcProcessController/loadLcProcessInstanceImg?processInstanceId='+id+'"></iframe>',
+		listeners:{
+			minimize:function(win,opts){
+				if(!win.collapse()){
+					win.collapse();
+				}else{
+					win.expand();
+				}
+			}
+		}
+	});
+	lcProcessInstanceWin.show();*/
+	$.ajax({
+		 
+		   type: 'POST',
+		   url: "../zttOrderController/getZttOrderInstanceById",
+		  data: { id: id},
+		  success:function(data){
+			  var id=data;
+			  layer.open({
+					title : '查看流程图',
+					type : 2,
+					area : [ '1500px', '600px' ],
+					btn : [ '关闭'],
+					content : "../lcProcessController/loadLcProcessInstanceImg?processInstanceId=" + id
+
+				})
+		  }
+		});
+	
 }

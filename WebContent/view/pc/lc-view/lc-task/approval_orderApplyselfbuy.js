@@ -2,6 +2,22 @@ var numbers=-1;
 var t;
 var counter;
 $(document).ready(function(){
+	$(".form_datetime").datepicker({
+		format : "yyyy-mm-dd",
+		autoclose : true,
+		todayBtn : true,
+		todayHighlight : true,
+		showMeridian : true,
+		pickerPosition : "bottom-left",
+		language : 'zh-CN',// 中文，需要引用zh-CN.js包
+	});
+	$(":radio").click(function(){
+		  if($(this).val()=="no"){
+			  $("#end_data_manual").attr("type" , "text");
+		  }else{
+			  $("#end_data_manual").attr("type" , "hidden");
+		  }
+		  });
 	var ajaxobj=eval("("+getbyapplyid(id)+")").data;
 	document.getElementById("client").innerText=ajaxobj.client;  
 	document.getElementById("zttordertime").innerText=ajaxobj.zttordertime;
@@ -57,20 +73,31 @@ function getbyapplyid(id){
 }
 //保存
 function approveZttOrderApply(taskid,status,obj){
+	var status=$('input:radio:checked').val();
+	
 	var datatables = parent.$('#datatables').DataTable();
-	var url="../zxGoodsApplyController/approvalOrderApply";
-	status="outsidecheck";
-	var remark=document.getElementById("buy_end_data").value;
-	var params = {task_id:taskid,task_status:status,remark:remark};
-	var approvalFormWin = parent.Ext.getCmp('approvalFormWin');  
-	ajaxBReq('../zttOrderController/approvalOrderApply',params);
+	var url="../zttOrderController/approvalOrderApply";
+	var remark;
+	var params;
+	if(status=="yes"){
+		remark="startbuy";
+		params = {task_id:taskid,task_status:status,remark:remark};
+	}
+	
+	if(status=="no"){
+		var end_date=document.getElementById("end_data_manual").value;
+		remark="buydata";
+		params = {task_id:taskid,task_status:status,remark:remark,end_date:end_date};
+	}
 	$.ajax({ 
 		   url: url, 
 		   async:false, 
            type:'POST',
            data: params,
            success: function (result) { 
-        	   approvalFormWin.close();
+        	   var index = parent.layer.getFrameIndex(window.name);
+				parent.layer.close(index);
+				datatables.ajax.reload();
             }
         });
 	

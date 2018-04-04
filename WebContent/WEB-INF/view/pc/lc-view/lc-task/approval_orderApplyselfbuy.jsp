@@ -7,9 +7,8 @@
 <meta charset="UTF-8">
 <title></title>
 <style type="text/css">
-td
-{
-text-align:center;
+td {
+	text-align: center;
 }
 </style>
 </head>
@@ -17,7 +16,7 @@ text-align:center;
     var id = "${taskData.businessKey }"; 
 </script>
 <body>
-外协
+	外协
 	<div class="panel panel-default padding-10 no-margin">
 		<fieldset id="printAll${zxCarApply.id }">
 			<div class="container-fluid  col-md-10 col-md-offset-1">
@@ -35,7 +34,7 @@ text-align:center;
 									<td class="col-md-2"><label id="zttordertime" /></td>
 								</tr>
 								<tr>
-								<td class="text-center">工令号</td>
+									<td class="text-center">工令号</td>
 									<td><label id="product_order_number" /></td>
 									<td class="text-center">订单号/申请号</td>
 									<td><label id="order_number" /></td>
@@ -73,21 +72,24 @@ text-align:center;
 								</tr>
 								<tr>
 									<td class="text-center">附件</td>
-									<td colspan="2">
-									<label id="attachment" style="display: none;"></label>
-									<button class="btn btn-primary"
-											data-toggle="button"
+									<td colspan="2"><label id="attachment"
+										style="display: none;"></label>
+										<button class="btn btn-primary" data-toggle="button"
 											onclick="downloadattachment('${taskData.businessKey }')">查看附件</button></td>
-											<td class="text-center">确认交货日期</td>
-									        <td colspan="2"><input type="text"  class="form_datetime form-control"  maxlength="32"  name="buy_end_data" id="buy_end_data" placeholder="请输入交货日期">
-											</td>
+									<td><input type="radio" name="identity" value="yes"
+										checked="checked" />日期可以满足
+										<p>
+											<input type="radio" name="identity" value="no" />日期不能满足</td>
+									<td><input type="hidden" name="end_data_manual" id="end_data_manual"
+										class="form_datetime form-control" placeholder="请输入您的日期">
+									</td>
 								</tr>
 							</tbody>
 						</table>
-						<div class="col-lg-6" style="text-align:center">
-							<button type="button" class="btn btn-warning"
+						<div class="col-lg-6" style="text-align: center">
+							<button type="button" class="btn btn-primary"
 								onclick='approveZttOrderApply(${taskData.task.id },"",this)'>
-								<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>提交
+								<span class="glyphicon glyphicon-saved" aria-hidden="true"></span>提交
 							</button>
 						</div>
 					</form>
@@ -99,5 +101,6 @@ text-align:center;
 </body>
 <script type="text/javascript"
 	src="../view/pc/lc-view/lc-task/approval_orderApplyselfbuy.js"></script>
-	<script type="text/javascript" src="../view/pc/zx-view/ztt-order/ztt-order-list.js"></script> 
+<script type="text/javascript"
+	src="../view/pc/zx-view/ztt-order/ztt-order-list.js"></script>
 </html>

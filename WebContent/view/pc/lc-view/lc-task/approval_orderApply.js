@@ -17,15 +17,6 @@ $(document).ready(function(){
 	document.getElementById("single_price").innerText=ajaxobj.single_price;
 	document.getElementById("end_data").innerText=ajaxobj.end_data;
 	document.getElementById("attachment").value=ajaxobj.attachment;
-         /*  var counter = 0;
-                t.row.add([
-                    i+1,
-                    document.getElementById("zxGoodsApplyDetail["+i+"].office_name").value,
-                     document.getElementById("zxGoodsApplyDetail["+i+"].standard").value,
-                     document.getElementById("zxGoodsApplyDetail["+i+"].amount").value,
-                    document.getElementById("zxGoodsApplyDetail["+i+"].reason").value
-                ]).draw();*/
-                
 	
 });
 

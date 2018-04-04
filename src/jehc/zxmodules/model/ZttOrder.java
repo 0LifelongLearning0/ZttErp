@@ -33,6 +33,7 @@ public class ZttOrder extends BaseEntity implements Serializable{
 	private String techmanager_produc_id;/**状态**/
 	private String techmanager_update_date;/**状态**/
 	private String techmanager_attachment;/**状态**/
+	private String producter_selfcheck_attachment;
 	private String producter_id;
 	private String product_end_time;
 	private String machine_part;/**零件名称**/
@@ -44,6 +45,9 @@ public class ZttOrder extends BaseEntity implements Serializable{
 	private String dept_check_id;
 	private String dept_check_attachment;
 	private String dept_check_end_time;
+	private String purchase_arrival_date;
+	private String supplier_name;
+	private double supplier_price;
 	private List<ztt_processproduct> ztt_processproduct;/**用品申领详细表**/
 	
 	public void setId(String id){
@@ -51,6 +55,19 @@ public class ZttOrder extends BaseEntity implements Serializable{
 	}
 	public String getDept_check_id() {
 		return dept_check_id;
+	}
+	
+	public String getPurchase_arrival_date() {
+		return purchase_arrival_date;
+	}
+	public void setPurchase_arrival_date(String purchase_arrival_date) {
+		this.purchase_arrival_date = purchase_arrival_date;
+	}
+	public String getProducter_selfcheck_attachment() {
+		return producter_selfcheck_attachment;
+	}
+	public void setProducter_selfcheck_attachment(String producter_selfcheck_attachment) {
+		this.producter_selfcheck_attachment = producter_selfcheck_attachment;
 	}
 	public void setDept_check_id(String dept_check_id) {
 		this.dept_check_id = dept_check_id;
@@ -258,6 +275,18 @@ public class ZttOrder extends BaseEntity implements Serializable{
 	}
 	public void setTechmanager_attachment(String techmanager_attachment) {
 		this.techmanager_attachment = techmanager_attachment;
+	}
+	public String getSupplier_name() {
+		return supplier_name;
+	}
+	public void setSupplier_name(String supplier_name) {
+		this.supplier_name = supplier_name;
+	}
+	public double getSupplier_price() {
+		return supplier_price;
+	}
+	public void setSupplier_price(double supplier_price) {
+		this.supplier_price = supplier_price;
 	}
 	
 }

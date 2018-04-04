@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.Map;
 
 import jehc.zxmodules.model.ZttOrder;
+import jehc.zxmodules.model.ZttOrderCheckHistory;
 import jehc.zxmodules.model.ZttOrdernumber;
 import jehc.zxmodules.model.ZttOrdernumber_third;
 import jehc.zxmodules.model.ztt_processproduct;
@@ -31,6 +32,8 @@ public interface ZttOrderDao{
 	public int addztt_processproduct(ztt_processproduct ztt_processproduct);
 	public List<ztt_processproduct> getprocessingtechnicById(String order_id);
 	public int updateztt_processproductBySelective(ztt_processproduct ztt_processproduct);
+	public int addZttOrderCheckHistory(ZttOrderCheckHistory zttOrderCheckHistory);
+	public List<ZttOrderCheckHistory> getZttOrderhisById(Map<String,Object> condition);
 	/**
 	* 添加
 	* @param ztt_order 

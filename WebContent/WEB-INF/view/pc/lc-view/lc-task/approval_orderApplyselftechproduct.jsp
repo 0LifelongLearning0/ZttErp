@@ -95,10 +95,19 @@ text-align:center;
 											onclick="progressupload('${taskData.businessKey }')">查看</button>
 											<label id="id"></label>
 											</td>
-									<td class="text-center" id="checkreport"  style="display:none">检验报告</td>
+									<td class="text-center" id="selfcheckreport">自检报告</td>
+									<td colspan="2" id="selfcheckreport1"><button class="btn btn-primary"
+											data-toggle="button"
+											onclick="uploadself_checkattachment()">上传</button>
+											<input class="form-control" type="hidden" maxlength="255"  name="producter_selfcheck_attachment" id="producter_selfcheck_attachment">
+											</td>
+											
+								</tr>
+								<tr>
+											<td class="text-center" id="checkreport"  style="display:none">检验报告</td>
 									<td colspan="2" id="checkreport1"  style="display:none"><button class="btn btn-primary"
 											data-toggle="button"
-											onclick="downloadattachmentcheck('${taskData.businessKey }')">查看</button>
+											onclick="selfcheckreport('${taskData.businessKey }')">查看</button>
 											<input class="form-control" type="hidden" maxlength="255"  name="checker_attachment" id="checker_attachment">
 											</td>
 								</tr>

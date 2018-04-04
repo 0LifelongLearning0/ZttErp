@@ -64,6 +64,12 @@ $(document).ready(function(){
 function addZxGoodsApply(){
 	var index=document.getElementById("index").value;
 	var body = parent.layer.getChildFrame('body', index);
+	var machine_part=document.getElementById("machine_part").value;
+	var machine_part_number=document.getElementById("machine_part_number").value;
+	var material_id=document.getElementById("material_id").value;
+	body.contents().find("#machine_part").val(machine_part);
+	body.contents().find("#machine_part_number").val(machine_part_number);
+	body.contents().find("#material_id").val(material_id);
 	parent.$('#machine_part').val(document.getElementById("machine_part").value);
 	parent.$('#machine_part_number').val(document.getElementById("machine_part_number").value);
 	parent.$('#material_id').val(document.getElementById("material_id").value);

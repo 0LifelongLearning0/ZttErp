@@ -7,9 +7,8 @@
 <meta charset="UTF-8">
 <title></title>
 <style type="text/css">
-td
-{
-text-align:center;
+td {
+	text-align: center;
 }
 </style>
 </head>
@@ -34,7 +33,7 @@ text-align:center;
 									<td class="col-md-2"><label id="zttordertime" /></td>
 								</tr>
 								<tr>
-								<td class="text-center">工令号</td>
+									<td class="text-center">工令号</td>
 									<td><label id="product_order_number" /></td>
 									<td class="text-center">订单号/申请号</td>
 									<td><label id="order_number" /></td>
@@ -73,36 +72,47 @@ text-align:center;
 								<tr>
 									<td class="text-center">附件</td>
 									<td colspan="2">
-									<button class="btn btn-primary"
-											data-toggle="button"
+										<button class="btn btn-primary" data-toggle="button"
 											onclick="downloadattachment('${taskData.businessKey }')">查看附件</button>
-											<input class="form-control" type="hidden" maxlength="255"  name="attachment" id="attachment">
-											</td>
-											<td class="text-center">查看图纸</td>
+										<input class="form-control" type="hidden" maxlength="255"
+										name="attachment" id="attachment">
+									</td>
+									<td class="text-center">查看图纸</td>
 									<td colspan="2"><button class="btn btn-primary"
 											data-toggle="button"
 											onclick="downloadattachmenttech('${taskData.businessKey }')">查看附件</button></td>
-											<input class="form-control" type="hidden" maxlength="255"  name="techmanager_attachment" id="techmanager_attachment">
-											</td>
+									<input class="form-control" type="hidden" maxlength="255"
+										name="techmanager_attachment" id="techmanager_attachment">
+									</td>
 								</tr>
 								<tr>
 									<td class="text-center">机械加工工艺过程</td>
 									<td colspan="2"><button class="btn btn-primary"
 											data-toggle="button"
 											onclick="progressupload('${taskData.businessKey }')">查看</button>
-											<label id="id"></label>
-											</td>
-											<td class="text-center">上传检验报告</td>
+										<label id="id"></label></td>
+									<td class="text-center">自检报告</td>
 									<td colspan="2"><button class="btn btn-primary"
-											data-toggle="button"
-											onclick="uploadattachment()">上传</button>
-											<input class="form-control" type="hidden" maxlength="255"  name="checker_attachment" id="checker_attachment">
-											</td>
+											data-toggle="button" onclick="selfcheckreport('${taskData.businessKey }')">查看</button>
+										<input class="form-control" type="hidden" maxlength="255"
+										name="selfchecker_attachment" id="selfchecker_attachment"></td>
 
+								</tr>
+								<tr>
+
+									<td class="text-center">上传检验报告</td>
+									<td colspan="2"><button class="btn btn-primary"
+											data-toggle="button" onclick="uploadattachment()">上传</button>
+										<input class="form-control" type="hidden" maxlength="255"
+										name="checker_attachment" id="checker_attachment"></td>
+									<td class="text-center">检验评审</td>
+									<td colspan="2"><input class="form-control" type="text"
+										maxlength="255" name="checkcomment"
+										id="checkcomment"></td>
 								</tr>
 							</tbody>
 						</table>
-						<div class="col-lg-6" style="text-align:center">
+						<div class="col-lg-6" style="text-align: center">
 							<button type="button" class="btn btn-success"
 								onclick='approveZttOrderApply(${taskData.task.id },"yes",this)'>
 								<span class="glyphicon glyphicon-saved" aria-hidden="true"></span>合格

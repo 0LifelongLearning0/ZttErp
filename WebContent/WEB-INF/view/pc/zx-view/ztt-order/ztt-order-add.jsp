@@ -5,6 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
+<style>
+.font-color-meta-light{ color:red}
+.hse2{ color:#F00}
+.hse3{ color:#FF0000}
+</style>
 </head>
 <body>
 	<div class="panel panel-default padding-10 no-margin">
@@ -29,13 +34,18 @@
 							    out.println(time);%>  </td>
 		                    </tr>
 		                    <tr>
-		                        <td class="text-center">订单号/申请号</td>
-		                        <td class="text-gray"><input class="form-control" type="text" maxlength="255"  name="order_number" id="order_number" placeholder="请输入订单号/申请号"></td>
+		                        <td class="text-center">订单号/申请号
+		                        <span class="font-color-meta-light">（必填项）</span>
+		                        </td>
+		                        <td class="text-gray"><input class="form-control" type="text" maxlength="255"  name="order_number" id="order_number" placeholder="请输入订单号/申请号" >
+		                        </td>
 		                        <td class="text-center">合同号</td>
 		                        <td class="text-gray" colspan="3"><input class="form-control" type="text" maxlength="255"  name="contract_number" id="contract_number" placeholder="请输入合同号"></td>
 		                    </tr>
 		                    <tr>
-		                        <td class="text-center">客户</td>
+		                        <td class="text-center">客户
+		                         <span class="font-color-meta-light">（必填项）</span>
+		                        </td>
 		                        <td colspan="2">
 									<input class="form-control" type="text" maxlength="255"  name="client" id="client" placeholder="请输入客户">
 								</td>
@@ -45,21 +55,29 @@
 								</td>
 		                    </tr>
 		                    <tr>
-		                        <td class="text-center">产品名称</td>
+		                        <td class="text-center">产品名称
+		                         <span class="font-color-meta-light">（必填项）</span>
+		                        </td>
 		                        <td colspan="2"><input class="form-control" type="text" maxlength="255"  name="product_name" id="product_name" placeholder="请输入产品名称"></td>
 		                        <td class="text-center">规格</td>
 		                        <td colspan="2"><input class="form-control" type="text" maxlength="255"  name="stardard" id="stardard" placeholder="请输入规格"></td>
 		                    </tr>
 		                    <tr>
-		                        <td class="text-center">单位</td>
+		                        <td class="text-center">单位
+		                         <span class="font-color-meta-light">（必填项）</span>
+		                        </td>
 		                        <td class="text-gray"><input class="form-control" type="text" maxlength="255"  name="unit" id="unit" placeholder="请输入单位"></td>
-		                        <td class="text-center">数量</td>
+		                        <td class="text-center">数量
+		                         <span class="font-color-meta-light">（必填项）</span>
+		                        </td>
 		                        <td class="text-gray"><input class="form-control" type="text" maxlength="255"  name="amount" id="amount" placeholder="请输入数量"></td>
 		                        <td class="text-center">单价</td>
 		                        <td class="text-gray"><input class="form-control" type="text" maxlength="255"  name="single_price" id="single_price" placeholder="请输入单价"></td>
 		                    </tr>
 		                    <tr>
-		                        <td class="text-center">交货日期</td>
+		                        <td class="text-center">交货日期
+		                         <span class="font-color-meta-light">（必填项）</span>
+		                        </td>
 		                        <td colspan="2"><input type="text"  class="form_datetime form-control"  maxlength="32"  name="End_data" id="end_data" placeholder="请输入交货日期"></td>
 		                        <td class="text-center">附件</td>
 		                        <td colspan="2"><button class="btn btn-primary" data-toggle="button" onclick="uploadattachment()">请上传附件</button>

@@ -126,6 +126,7 @@ public class MxUtils {
 	 * @param mxGraphXml
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public static String mxgraphxml_to_bpmnxml(String mxgraphxml,MxGraphModel mxGraphModel){
 		//定义bpmn标记
 		StringBuffer bpmnxml = new StringBuffer("<?xml version=\"1.0\" encoding=\"UTF-8\"?><definitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:activiti=\"http://activiti.org/bpmn\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" typeLanguage=\"http://www.w3.org/2001/XMLSchema\" expressionLanguage=\"http://www.w3.org/1999/XPath\" targetNamespace=\"http://www.activiti.org/test\">");
@@ -637,7 +638,11 @@ public class MxUtils {
             		if(null != cell[1] && !"".equals(cell[1]) && "javaclass".equals(cell[1])){
             			excuteStr = "class='"+cell[0]+"'";
             		}
-            		eventListenerNode += "<activiti:executionListener event='start' "+excuteStr+">";
+            		//express类型
+            		if(null != cell[1] && !"".equals(cell[1]) && "express".equals(cell[1])){
+            			excuteStr = " expression='Expression'";
+            		}
+            		eventListenerNode += "<activiti:executionListener event='"+cell[2]+"' "+excuteStr+">";
                     //1-1字段开始 子循环操作
             		if(null != cell[1] && !"".equals(cell[1]) && ("javaclass".equals(cell[1]) || "express".equals(cell[1]))){
             			//此时存在字段 字段位置在最后一个
@@ -646,7 +651,7 @@ public class MxUtils {
             				if(!StringUtil.isEmpty(field[j])){
             					String[] fieldV = field[j].split("&",-1);
                 				eventListenerNode += "<activiti:field name='"+fieldV[0]+"'>";
-                				eventListenerNode += "<activiti:string><![CDATA["+fieldV[1]+"]]></activiti:string>";
+                				eventListenerNode += "<activiti:string><![CDATA["+fieldV[2]+"]]></activiti:string>";
                 				eventListenerNode += "</activiti:field>";
             				}
             			}

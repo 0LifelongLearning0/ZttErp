@@ -62,12 +62,19 @@ function approveZttOrderApply(taskid, status, obj) {
 	var datatables = parent.$('#datatables').DataTable();
 	var url = "../zxGoodsApplyController/approvalOrderApply";
 	status = "selftech";
+	var machine_part=document.getElementById("machine_part").value;
+	var machine_part_number=document.getElementById("machine_part_number").value;
+	var material_id=document.getElementById("material_id").value;
 	var remark = document.getElementById("techmanager_attachment").value;
 
 	var params = {
 		task_id : taskid,
 		task_status : status,
-		remark : remark
+		remark : remark,
+		machine_part:machine_part,
+		machine_part_number:machine_part_number,
+		material_id:material_id
+		
 	};
 	ajaxBReq('../zttOrderController/approvalOrderApply', params);
 	$.ajax({

@@ -2,6 +2,7 @@ package jehc.zxmodules.service;
 import java.util.List;
 import java.util.Map;
 import jehc.zxmodules.model.ZttOrder;
+import jehc.zxmodules.model.ZttOrderCheckHistory;
 import jehc.zxmodules.model.ztt_processproduct;
 
 /**
@@ -31,6 +32,8 @@ public interface ZttOrderService{
 	public int addztt_processproduct(ZttOrder zttOrder);
 	public ZttOrder getprocessingtechnicById(String id);
 	public int updateztt_processproduct(ZttOrder zttOrder);
+	public int addZttOrderCheckHistory(ZttOrderCheckHistory ZttOrderCheckHistory);
+	public List<ZttOrderCheckHistory> getprocessinghisById(Map<String,Object> condition);
 	/**
 	* 修改
 	* @param ztt_order 

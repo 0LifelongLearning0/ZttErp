@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZttPurchase">
+	<!--初始化分页-->
+	<select id="getZttPurchaseListByCondition" resultType="jehc.zxmodules.model.ZttPurchase" parameterType="map">
+		SELECT
+			id,
+			Product_order_number,
+			purchase_name,
+			purchase_stardard,
+			material,
+			unit,
+			amount,
+			hope_end_data,
+			apply_id,
+			Product_id,
+			single_price,
+			sum_price,
+			qualified_id,
+			qualified_number,
+			qualified_date,
+			check_attachment,
+			state
+		FROM 
+			ztt_purchase
+		WHERE 1=1
+	</select>
+
+	<!--查询对象-->
+	<select id="getZttPurchaseById" resultType="jehc.zxmodules.model.ZttPurchase" parameterType="string">
+		SELECT
+			id,
+			Product_order_number,
+			purchase_name,
+			purchase_stardard,
+			material,
+			unit,
+			amount,
+			hope_end_data,
+			apply_id,
+			Product_id,
+			single_price,
+			sum_price,
+			qualified_id,
+			qualified_number,
+			qualified_date,
+			check_attachment,
+			state
+		FROM 
+			ztt_purchase
+		WHERE id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addZttPurchase" parameterType="jehc.zxmodules.model.ZttPurchase">
+		INSERT INTO
+			ztt_purchase
+			(
+			id,
+			Product_order_number,
+			purchase_name,
+			purchase_stardard,
+			material,
+			unit,
+			amount,
+			hope_end_data,
+			apply_id,
+			Product_id,
+			single_price,
+			sum_price,
+			qualified_id,
+			qualified_number,
+			qualified_date,
+			check_attachment,
+			state
+			)
+			VALUES
+			(
+			#{id},
+			#{Product_order_number},
+			#{purchase_name},
+			#{purchase_stardard},
+			#{material},
+			#{unit},
+			#{amount},
+			#{hope_end_data},
+			#{apply_id},
+			#{Product_id},
+			#{single_price},
+			#{sum_price},
+			#{qualified_id},
+			#{qualified_number},
+			#{qualified_date},
+			#{check_attachment},
+			#{state}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZttPurchase" parameterType="jehc.zxmodules.model.ZttPurchase">
+		UPDATE
+			ztt_purchase
+		SET
+			Product_order_number = #{Product_order_number},
+			purchase_name = #{purchase_name},
+			purchase_stardard = #{purchase_stardard},
+			material = #{material},
+			unit = #{unit},
+			amount = #{amount},
+			hope_end_data = #{hope_end_data},
+			apply_id = #{apply_id},
+			Product_id = #{Product_id},
+			single_price = #{single_price},
+			sum_price = #{sum_price},
+			qualified_id = #{qualified_id},
+			qualified_number = #{qualified_number},
+			qualified_date = #{qualified_date},
+			check_attachment = #{check_attachment}
+		WHERE id=#{id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZttPurchaseBySelective" parameterType="jehc.zxmodules.model.ZttPurchase">
+		UPDATE
+			ztt_purchase
+		<set>
+			<if test="Product_order_number != null">
+				Product_order_number = #{Product_order_number},
+			</if>
+			<if test="purchase_name != null">
+				purchase_name = #{purchase_name},
+			</if>
+			<if test="purchase_stardard != null">
+				purchase_stardard = #{purchase_stardard},
+			</if>
+			<if test="material != null">
+				material = #{material},
+			</if>
+			<if test="unit != null">
+				unit = #{unit},
+			</if>
+			<if test="amount != null">
+				amount = #{amount},
+			</if>
+			<if test="hope_end_data != null">
+				hope_end_data = #{hope_end_data},
+			</if>
+			<if test="apply_id != null">
+				apply_id = #{apply_id},
+			</if>
+			<if test="Product_id != null">
+				Product_id = #{Product_id},
+			</if>
+			<if test="single_price != null">
+				single_price = #{single_price},
+			</if>
+			<if test="sum_price != null">
+				sum_price = #{sum_price},
+			</if>
+			<if test="qualified_id != null">
+				qualified_id = #{qualified_id},
+			</if>
+			<if test="qualified_number != null">
+				qualified_number = #{qualified_number},
+			</if>
+			<if test="qualified_date != null">
+				qualified_date = #{qualified_date},
+			</if>
+			<if test="check_attachment != null">
+				check_attachment = #{check_attachment},
+			</if>
+			<if test="state != null">
+				state = #{state},
+			</if>
+			<if test="supply_name != null">
+				supply_name = #{supply_name},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZttPurchase" parameterType="map">
+		DELETE FROM ztt_purchase WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZttPurchase" parameterType="list">
+		INSERT INTO
+			ztt_purchase
+			(
+			id,
+			Product_order_number,
+			purchase_name,
+			purchase_stardard,
+			material,
+			unit,
+			amount,
+			hope_end_data,
+			apply_id,
+			Product_id,
+			single_price,
+			sum_price,
+			qualified_id,
+			qualified_number,
+			qualified_date,
+			check_attachment
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.Product_order_number},
+			#{item.purchase_name},
+			#{item.purchase_stardard},
+			#{item.material},
+			#{item.unit},
+			#{item.amount},
+			#{item.hope_end_data},
+			#{item.apply_id},
+			#{item.Product_id},
+			#{item.single_price},
+			#{item.sum_price},
+			#{item.qualified_id},
+			#{item.qualified_number},
+			#{item.qualified_date},
+			#{item.check_attachment}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZttPurchase" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				ztt_purchase
+			SET
+				Product_order_number = #{item.Product_order_number},
+				purchase_name = #{item.purchase_name},
+				purchase_stardard = #{item.purchase_stardard},
+				material = #{item.material},
+				unit = #{item.unit},
+				amount = #{item.amount},
+				hope_end_data = #{item.hope_end_data},
+				apply_id = #{item.apply_id},
+				Product_id = #{item.Product_id},
+				single_price = #{item.single_price},
+				sum_price = #{item.sum_price},
+				qualified_id = #{item.qualified_id},
+				qualified_number = #{item.qualified_number},
+				qualified_date = #{item.qualified_date},
+				check_attachment = #{item.check_attachment}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZttPurchaseBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				ztt_purchase
+			<set>
+				<if test="item.Product_order_number != null">
+					Product_order_number = #{item.Product_order_number},
+				</if>
+				<if test="item.purchase_name != null">
+					purchase_name = #{item.purchase_name},
+				</if>
+				<if test="item.purchase_stardard != null">
+					purchase_stardard = #{item.purchase_stardard},
+				</if>
+				<if test="item.material != null">
+					material = #{item.material},
+				</if>
+				<if test="item.unit != null">
+					unit = #{item.unit},
+				</if>
+				<if test="item.amount != null">
+					amount = #{item.amount},
+				</if>
+				<if test="item.hope_end_data != null">
+					hope_end_data = #{item.hope_end_data},
+				</if>
+				<if test="item.apply_id != null">
+					apply_id = #{item.apply_id},
+				</if>
+				<if test="item.Product_id != null">
+					Product_id = #{item.Product_id},
+				</if>
+				<if test="item.single_price != null">
+					single_price = #{item.single_price},
+				</if>
+				<if test="item.sum_price != null">
+					sum_price = #{item.sum_price},
+				</if>
+				<if test="item.qualified_id != null">
+					qualified_id = #{item.qualified_id},
+				</if>
+				<if test="item.qualified_number != null">
+					qualified_number = #{item.qualified_number},
+				</if>
+				<if test="item.qualified_date != null">
+					qualified_date = #{item.qualified_date},
+				</if>
+				<if test="item.check_attachment != null">
+					check_attachment = #{item.check_attachment},
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+</mapper>

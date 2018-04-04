@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import jehc.xtmodules.xtcore.base.impl.BaseDaoImpl;
 import jehc.zxmodules.dao.ZttOrderDao;
 import jehc.zxmodules.model.ZttOrder;
+import jehc.zxmodules.model.ZttOrderCheckHistory;
 import jehc.zxmodules.model.ZttOrdernumber;
 import jehc.zxmodules.model.ZttOrdernumber_third;
 import jehc.zxmodules.model.ZxGoodsApplyDetail;
@@ -65,6 +66,9 @@ public class ZttOrderDaoImpl  extends BaseDaoImpl implements ZttOrderDao{
 	public ZttOrder getZttOrderById(String id){
 		return (ZttOrder)this.get("getZttOrderById", id);
 	}
+	public List<ZttOrderCheckHistory> getZttOrderhisById(Map<String,Object> condition){
+		return (List<ZttOrderCheckHistory>)this.getList("getprocessinghisById", condition);
+	}
 	/**
 	* 添加
 	* @param ztt_order 
@@ -81,6 +85,9 @@ public class ZttOrderDaoImpl  extends BaseDaoImpl implements ZttOrderDao{
 	public int addZttOrder(ZttOrder zttOrder){
 		return this.add("addZttOrder", zttOrder);
 	}
+	public int addZttOrderCheckHistory(ZttOrderCheckHistory zttOrderCheckHistory){
+		return this.add("addZttOrderCheckHistory", zttOrderCheckHistory);
+	}
 	/**
 	* 添加机械加工工艺
 	* @param ztt_order 
@@ -90,12 +97,12 @@ public class ZttOrderDaoImpl  extends BaseDaoImpl implements ZttOrderDao{
 		return this.add("addztt_processproduct", ztt_processproduct);
 	}
 	/**
-	* 修改
+	* 修改合同号
 	* @param ztt_order 
 	* @return
 	*/
 	public int updateZttOrder(ZttOrder zttOrder){
-		return this.update("updateZttOrder", zttOrder);
+		return this.update("updatecontraact_number", zttOrder);
 	}
 	/**
 	* 修改（根据动态条件）

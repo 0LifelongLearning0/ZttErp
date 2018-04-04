@@ -13,8 +13,11 @@
 			<form method="POST" id="searchForm" class="form-inline">
 			<div class="form-group">
 					<label>标题</label>
-					<input type="text" class="form-control" name="car_num" placeholder="请输入标题">
 					<input type="text" class="form-control" name="apply_id" placeholder="请输入标题">
+				</div>
+					<div class="form-group">
+					<label>状态</label>
+					<select class="form-control" name="state" id="state" placeholder="请选择"></select>
 				</div>
 			<div class="form-group" style="margin-left: 35px;">
 				<button class="btn btn-primary" type="button" onclick="search('datatables')">
@@ -30,11 +33,11 @@
 			<button class="btn btn-default" onclick="toZttOrderAdd()">
 				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
 			</button>
-			<!-- <button class="btn btn-default" onclick="toZttOrderUpdate()">
-				<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
-			</button> -->
 			<button class="btn btn-default" onclick="delZttOrder()">
 				<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+			</button>
+			<button class="btn btn-default" onclick="toZttOrderUpdate()">
+				<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>添加合同号
 			</button>
 			<button class="btn btn-default" onclick="search('datatables')">
 				<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
@@ -52,7 +55,8 @@
 					<th>申请日期</th>
 					<th>业务员</th>
 					<th>状态</th>
-					<th>操作</th>
+					<th>详情</th>
+					<th>审批</th>
 				</tr>
 			</thead>
 		</table>

@@ -28,11 +28,29 @@
 		FROM
 		ztt_order a,xt_userinfo b
 		WHERE 1=1 and a.apply_id=b.xt_userinfo_id and a.state!='20'
+		<if test="null != state">
+			AND instr(state,#{state})
+		</if>
 		<if test="null == orderby">
 			ORDER BY zttordertime desc
 		</if>
+		
 	</select>
-
+	<!--查询历史对象 -->
+	<select id="getprocessinghisById" resultType="jehc.zxmodules.model.ZttOrderCheckHistory"
+		parameterType="map">
+		SELECT
+		*
+		FROM
+		ztt_checkrecord
+		WHERE 1=1
+		<if test="null != order_id">
+			AND instr(order_id,#{order_id})
+		</if>
+		<if test="null != state">
+			AND instr(state,#{state})
+		</if>
+	</select>
 	<!--查询对象 -->
 	<select id="getZttOrderById" resultType="jehc.zxmodules.model.ZttOrder"
 		parameterType="string">
@@ -66,11 +84,15 @@
 		check_end_time,
 		dept_check_id,
 		dept_check_attachment,
-		dept_check_end_time
+		dept_check_end_time,
+		material_id,
+		machine_part,
+		machine_part_number
 		FROM
 		ztt_order
 		WHERE id=#{id}
 	</select>
+	
 <!--查询机械加工对象 -->
 	<select id="getprocessingtechnicById" resultType="jehc.zxmodules.model.ztt_processproduct"
 		parameterType="map">
@@ -188,7 +210,40 @@
 		#{state}
 		)
 	</insert>
-	
+	<!--添加历史记录表 -->
+	<insert id="addZttOrderCheckHistory" parameterType="jehc.zxmodules.model.ZttOrderCheckHistory">
+		INSERT INTO
+		ztt_checkrecord
+		(
+		id,
+		order_id,
+		bussinessid,
+		product_check_self_attachment,
+		product_check_self_time,
+		product_check_attachment,
+		product_check_comment,
+		product_check_time,
+		product_check_dep_attachment,
+		product_check_dep_comment,
+		product_check_dep_time,
+		state
+		)
+		VALUES
+		(
+		#{id},
+		#{order_id},
+		#{bussinessid},
+		#{product_check_self_attachment},
+		#{product_check_self_time},
+		#{product_check_attachment},
+		#{product_check_comment},
+		#{product_check_time},
+		#{product_check_dep_attachment},
+		#{product_check_dep_comment},
+		#{product_check_dep_time},
+		#{state}
+		)
+	</insert>
 		<!--添加 -->
 	<insert id="addztt_processproduct" parameterType="jehc.zxmodules.model.ztt_processproduct">
 		INSERT INTO
@@ -269,6 +324,19 @@
 		</set>
 		WHERE id=#{id}
 	</update>
+	
+	<!--修改合同号（根据动态条件） -->
+	<update id="updatecontraact_number" parameterType="jehc.zxmodules.model.ZttOrder">
+		UPDATE
+		ztt_order
+		<set>
+			<if test="contract_number != null">
+				contract_number = #{contract_number},
+			</if>
+			
+		</set>
+		WHERE id=#{id}
+	</update>
 
 	<!--修改（根据动态条件） -->
 	<update id="updateZttOrderBySelective" parameterType="jehc.zxmodules.model.ZttOrder">
@@ -326,6 +394,9 @@
 			<if test="state != null">
 				state = #{state},
 			</if>
+			<if test="producter_selfcheck_attachment != null">
+				producter_selfcheck_attachment = #{producter_selfcheck_attachment},
+			</if>
 			<if test="producter_id != null">
 				producter_id = #{producter_id},
 			</if>
@@ -367,6 +438,15 @@
 			</if>
 			<if test="dept_check_end_time != null">
 				dept_check_end_time = #{dept_check_end_time},
+			</if>
+			<if test="purchase_arrival_date != null">
+				purchase_arrival_date = #{purchase_arrival_date},
+			</if>
+			<if test="supplier_name != null">
+				supplier_name = #{supplier_name},
+			</if>
+			<if test="supplier_price != null">
+				supplier_price = #{supplier_price},
 			</if>
 		</set>
 		WHERE id=#{id}
