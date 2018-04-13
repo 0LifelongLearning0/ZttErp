@@ -24,17 +24,46 @@
 		a.zttordertime,
 		a.apply_id,
 		a.state,
-    b.xt_userinfo_realName as personname
+		a.cato_type,
+		a.send_time,
+	    a.supplier_name,
+	    a.supplier_price,
+	    a.not_satisfy_reason,
+	    a.cato_type,
+	    a.delivery_note,
+	    a.supplier_bill_date,
+	    a.supplier_bill_price,
+	    a.cost_single_price,
+	    a.cost_sum_price,
+	    a.send_amount,
+	    a.bill_date_open,
+	    a.bill_price,
+	    a.cost_share,
+		b.xt_userinfo_realName as personname
 		FROM
 		ztt_order a,xt_userinfo b
-		WHERE 1=1 and a.apply_id=b.xt_userinfo_id and a.state!='20'
+		WHERE 1=1 and
+		a.apply_id=b.xt_userinfo_id and a.state!='20'
 		<if test="null != state">
 			AND instr(state,#{state})
+		</if>
+		<if test="null != product_name">
+			AND instr(product_name,#{product_name})
+		</if>
+		<if test="null != cato_type">
+			AND instr(cato_type,#{cato_type})
+		</if>
+		<if test="null != apply_time_et">
+			AND zttordertime&lt;#{apply_time_et}
+		</if>
+		<if test="null != apply_time_st">
+			AND zttordertime&gt;#{apply_time_st}
 		</if>
 		<if test="null == orderby">
 			ORDER BY zttordertime desc
 		</if>
 		
+
 	</select>
 	<!--查询历史对象 -->
 	<select id="getprocessinghisById" resultType="jehc.zxmodules.model.ZttOrderCheckHistory"
@@ -47,8 +76,29 @@
 		<if test="null != order_id">
 			AND instr(order_id,#{order_id})
 		</if>
-		<if test="null != state">
-			AND instr(state,#{state})
+		<if test="null != id">
+			AND instr(id,#{id})
+		</if>
+		<if test="null == orderby">
+			ORDER BY product_check_time desc
+		</if>
+	</select>
+	<!--查询文件历史对象 -->
+	<select id="getfilerecordById" resultType="jehc.zxmodules.model.ztt_filerecord"
+		parameterType="map">
+		SELECT
+		*
+		FROM
+		ztt_filerecord
+		WHERE 1=1
+		<if test="null != order_id">
+			AND instr(order_id,#{order_id})
+		</if>
+		<if test="null != id">
+			AND instr(id,#{id})
+		</if>
+		<if test="null == orderby">
+			ORDER BY approval_time desc
 		</if>
 	</select>
 	<!--查询对象 -->
@@ -87,13 +137,26 @@
 		dept_check_end_time,
 		material_id,
 		machine_part,
-		machine_part_number
+		machine_part_number,
+		not_satisfy_reason,
+		cato_type,
+		delivery_note,
+		send_time,
+		supplier_bill_date,
+		supplier_bill_price,
+		cost_single_price,
+		cost_sum_price,
+		send_amount,
+		bill_date_open,
+		bill_price,
+		cost_share
 		FROM
 		ztt_order
-		WHERE id=#{id}
+		WHERE
+		id=#{id}
 	</select>
-	
-<!--查询机械加工对象 -->
+
+	<!--查询机械加工对象 -->
 	<select id="getprocessingtechnicById" resultType="jehc.zxmodules.model.ztt_processproduct"
 		parameterType="map">
 		SELECT
@@ -111,7 +174,8 @@
 		qualified_date
 		FROM
 		ztt_processproduct
-		WHERE order_id=#{order_id}
+		WHERE
+		order_id=#{order_id}
 	</select>
 	<!--查询对象 -->
 	<select id="getZttOrdernumberbyId" resultType="jehc.zxmodules.model.ZttOrdernumber"
@@ -162,7 +226,14 @@
 		#{order_id}
 		)
 	</insert>
-
+	<!--删除 -->
+	<delete id="delZttOrdnum" parameterType="map">
+		DELETE FROM ztt_ordernumber_third WHERE order_id IN
+		<foreach item="item" index="index" collection="order_id" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
 
 	<!--添加 -->
 	<insert id="addZttOrder" parameterType="jehc.zxmodules.model.ZttOrder">
@@ -217,7 +288,6 @@
 		(
 		id,
 		order_id,
-		bussinessid,
 		product_check_self_attachment,
 		product_check_self_time,
 		product_check_attachment,
@@ -232,7 +302,6 @@
 		(
 		#{id},
 		#{order_id},
-		#{bussinessid},
 		#{product_check_self_attachment},
 		#{product_check_self_time},
 		#{product_check_attachment},
@@ -244,7 +313,43 @@
 		#{state}
 		)
 	</insert>
-		<!--添加 -->
+		<!--添加文件历史记录表 -->
+	<insert id="addZttOrderfileRecord" parameterType="jehc.zxmodules.model.ztt_filerecord">
+		INSERT INTO
+		ztt_filerecord
+		(
+		id,
+		order_id,
+		product_check_self_attachment,
+		product_check_self_time,
+		product_check_attachment,
+		product_check_comment,
+		product_check_time,
+		product_check_dep_attachment,
+		product_check_dep_comment,
+		product_check_dep_time,
+		state,
+		status_name,
+		approval_time
+		)
+		VALUES
+		(
+		#{id},
+		#{order_id},
+		#{product_check_self_attachment},
+		#{product_check_self_time},
+		#{product_check_attachment},
+		#{product_check_comment},
+		#{product_check_time},
+		#{product_check_dep_attachment},
+		#{product_check_dep_comment},
+		#{product_check_dep_time},
+		#{state},
+		#{status_name},
+		#{approval_time}
+		)
+	</insert>
+	<!--添加 -->
 	<insert id="addztt_processproduct" parameterType="jehc.zxmodules.model.ztt_processproduct">
 		INSERT INTO
 		ztt_processproduct
@@ -308,7 +413,7 @@
 	</update>
 
 
-<!--修改（根据动态条件） -->
+	<!--修改（根据动态条件） -->
 	<update id="updateztt_processproductBySelective" parameterType="jehc.zxmodules.model.ztt_processproduct">
 		UPDATE
 		ztt_processproduct
@@ -319,12 +424,12 @@
 			<if test="qualified_date != null">
 				qualified_date = #{qualified_date},
 			</if>
-		
-			
+
+
 		</set>
 		WHERE id=#{id}
 	</update>
-	
+
 	<!--修改合同号（根据动态条件） -->
 	<update id="updatecontraact_number" parameterType="jehc.zxmodules.model.ZttOrder">
 		UPDATE
@@ -333,7 +438,7 @@
 			<if test="contract_number != null">
 				contract_number = #{contract_number},
 			</if>
-			
+
 		</set>
 		WHERE id=#{id}
 	</update>
@@ -395,7 +500,8 @@
 				state = #{state},
 			</if>
 			<if test="producter_selfcheck_attachment != null">
-				producter_selfcheck_attachment = #{producter_selfcheck_attachment},
+				producter_selfcheck_attachment =
+				#{producter_selfcheck_attachment},
 			</if>
 			<if test="producter_id != null">
 				producter_id = #{producter_id},
@@ -448,6 +554,42 @@
 			<if test="supplier_price != null">
 				supplier_price = #{supplier_price},
 			</if>
+			<if test="not_satisfy_reason != null">
+				not_satisfy_reason = #{not_satisfy_reason},
+			</if>
+			<if test="cato_type != null">
+				cato_type = #{cato_type},
+			</if>
+			<if test="delivery_note != null">
+				delivery_note = #{delivery_note},
+			</if>
+			<if test="send_time != null">
+				send_time = #{send_time},
+			</if>
+			<if test="supplier_bill_date != null">
+				supplier_bill_date = #{supplier_bill_date},
+			</if>
+			<if test="supplier_bill_price != null">
+				supplier_bill_price = #{supplier_bill_price},
+			</if>
+			<if test="cost_single_price != null">
+				cost_single_price = #{cost_single_price},
+			</if>
+			<if test="cost_sum_price != null">
+				cost_sum_price = #{cost_sum_price},
+			</if>
+			<if test="send_amount != null">
+				send_amount = #{send_amount},
+			</if>
+			<if test="bill_date_open != null">
+				bill_date_open = #{bill_date_open},
+			</if>
+			<if test="bill_price != null">
+				bill_price = #{bill_price},
+			</if>
+			<if test="cost_share != null">
+				cost_share = #{cost_share},
+			</if>
 		</set>
 		WHERE id=#{id}
 	</update>
@@ -464,29 +606,30 @@
 	<!--批量添加 -->
 	<insert id="addBatchZttOrder" parameterType="list">
 		INSERT INTO
-			ztt_order
-			(
-			id,
-			order_number,
-			contract_number,
-			erp_number,
-			product_order_number,
-			client,
-			linkman,
-			product_name,
-			stardard,
-			attachment,
-			unit,
-			amount,
-			single_price,
-			sum_price,
-			End_data,
-			zttordertime,
-			apply_id,
-			state
-			)
-			VALUES
-		<foreach collection="list" item="item" index="index" separator=",">
+		ztt_order
+		(
+		id,
+		order_number,
+		contract_number,
+		erp_number,
+		product_order_number,
+		client,
+		linkman,
+		product_name,
+		stardard,
+		attachment,
+		unit,
+		amount,
+		single_price,
+		sum_price,
+		End_data,
+		zttordertime,
+		apply_id,
+		state
+		)
+		VALUES
+		<foreach collection="list" item="item" index="index"
+			separator=",">
 			(
 			#{item.id},
 			#{item.order_number},
@@ -510,38 +653,40 @@
 		</foreach>
 	</insert>
 
-	<!--批量修改-->
+	<!--批量修改 -->
 	<update id="updateBatchZttOrder" parameterType="list">
-		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+		<foreach collection="list" item="item" index="index" open=""
+			close="" separator=";">
 			UPDATE
-				ztt_order
+			ztt_order
 			SET
-				order_number = #{item.order_number},
-				contract_number = #{item.contract_number},
-				erp_number = #{item.erp_number},
-				product_order_number = #{item.product_order_number},
-				client = #{item.client},
-				linkman = #{item.linkman},
-				product_name = #{item.product_name},
-				stardard = #{item.stardard},
-				attachment = #{item.attachment},
-				unit = #{item.unit},
-				amount = #{item.amount},
-				single_price = #{item.single_price},
-				sum_price = #{item.sum_price},
-				End_data = #{item.End_data},
-				zttordertime = #{item.zttordertime},
-				apply_id = #{item.apply_id},
-				state = #{item.state}
+			order_number = #{item.order_number},
+			contract_number = #{item.contract_number},
+			erp_number = #{item.erp_number},
+			product_order_number = #{item.product_order_number},
+			client = #{item.client},
+			linkman = #{item.linkman},
+			product_name = #{item.product_name},
+			stardard = #{item.stardard},
+			attachment = #{item.attachment},
+			unit = #{item.unit},
+			amount = #{item.amount},
+			single_price = #{item.single_price},
+			sum_price = #{item.sum_price},
+			End_data = #{item.End_data},
+			zttordertime = #{item.zttordertime},
+			apply_id = #{item.apply_id},
+			state = #{item.state}
 			WHERE id=#{item.id}
 		</foreach>
 	</update>
 
-	<!--批量修改（根据动态条件）-->
+	<!--批量修改（根据动态条件） -->
 	<update id="updateBatchZttOrderBySelective" parameterType="list">
-		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+		<foreach collection="list" item="item" index="index" open=""
+			close="" separator=";">
 			UPDATE
-				ztt_order
+			ztt_order
 			<set>
 				<if test="item.order_number != null">
 					order_number = #{item.order_number},
@@ -594,6 +739,7 @@
 				<if test="item.state != null">
 					state = #{item.state},
 				</if>
+
 			</set>
 			WHERE id=#{item.id}
 		</foreach>

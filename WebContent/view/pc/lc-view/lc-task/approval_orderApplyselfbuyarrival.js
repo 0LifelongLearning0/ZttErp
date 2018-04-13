@@ -77,38 +77,49 @@ function approveZttOrderApply(taskid,status,obj){
 	var url="../zttOrderController/approvalOrderApply";
 	var remark="purchase_arrival"
 	var params;
-	params = {task_id:taskid,task_status:status,remark:remark};
-	$.ajax({ 
-		   url: url, 
-		   async:false, 
-           type:'POST',
-           data: params,
-           success: function (result) { 
-        	   var index = parent.layer.getFrameIndex(window.name);
-				parent.layer.close(index);
-				datatables.ajax.reload();
-            }
-        });
+	var contract_attachment=document.getElementById("contract_attachment").value;
+	
+	var supplier_name=$('#supplyer_name').val();
+	
+	var flag=0;
+	if(supplier_name==""){
+		layer.alert("请选择供应商");
+		flag=1;
+	}
+	if(contract_attachment==""){
+		layer.alert("请上传合同文件");
+		flag=1;
+	}
+	if(flag==0){
+		params = {task_id:taskid,task_status:status,remark:remark,contract_attachment:contract_attachment,supplier_name:supplier_name};
+		$.ajax({ 
+			   url: url, 
+			   async:false, 
+	           type:'POST',
+	           data: params,
+	           success: function (result) { 
+	        	   var index = parent.layer.getFrameIndex(window.name);
+					parent.layer.close(index);
+					datatables.ajax.reload();
+	            }
+	        });
+	}
+	
+	
 	
 }
 //上传
 //保存
 function uploadattachment(){
+	var upid="contract_attachment";
 	layer.open({
 		title: '上传附件',
 		type: 2, 
 		area: ['800px', '500px'],
 		btn: ['确定', '取消'],
-	  content: "../zttOrderController/uploadattachment",
+		content: "../zttOrderController/uploadattachment?upid="+upid,
 	 
 	}); 
-	/*var inputObj=document.createElement('input')
-    inputObj.setAttribute('id','_ef');
-    inputObj.setAttribute('type','file');
-    inputObj.setAttribute("style",'visibility:hidden');
-    document.body.appendChild(inputObj);
-    inputObj.click();
-    inputObj.value */
 }
 
 $(function() {
@@ -123,3 +134,13 @@ $(function() {
 	});
 	
 });
+function selectsupplyer(){
+	layer.open({
+		title: '上传附件',
+		type: 2, 
+		area: ['800px', '500px'],
+		btn: ['关闭'],
+		content: "../zttOrderController/selectsuppler"
+	 
+	}); 
+}

@@ -636,7 +636,7 @@ public class MxUtils {
             		String excuteStr=null;
             		//javaclass类型
             		if(null != cell[1] && !"".equals(cell[1]) && "javaclass".equals(cell[1])){
-            			excuteStr = "class='"+cell[0]+"'";
+            			excuteStr = " expression='"+cell[0]+"'";
             		}
             		//express类型
             		if(null != cell[1] && !"".equals(cell[1]) && "express".equals(cell[1])){
@@ -650,9 +650,11 @@ public class MxUtils {
             			for(int j = 0; j < field.length; j++){
             				if(!StringUtil.isEmpty(field[j])){
             					String[] fieldV = field[j].split("&",-1);
-                				eventListenerNode += "<activiti:field name='"+fieldV[0]+"'>";
-                				eventListenerNode += "<activiti:string><![CDATA["+fieldV[2]+"]]></activiti:string>";
-                				eventListenerNode += "</activiti:field>";
+            					if(null != fieldV&& fieldV.length == 3){
+            					 	            						eventListenerNode += "<activiti:field name='"+fieldV[0]+"'>";
+            					 	                    				eventListenerNode += "<activiti:string><![CDATA["+fieldV[2]+"]]></activiti:string>";
+            					 	                    				eventListenerNode += "</activiti:field>";
+            					 	            					}
             				}
             			}
             		}

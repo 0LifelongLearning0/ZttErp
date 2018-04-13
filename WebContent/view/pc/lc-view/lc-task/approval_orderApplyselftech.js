@@ -83,18 +83,9 @@ function approveZttOrderApply(taskid, status, obj) {
 		type : 'POST',
 		data : params,
 		success : function(result) {
-			if (typeof (result.success) != "undefined") {
-				if (result.success) {
 					var index = parent.layer.getFrameIndex(window.name);
 					parent.layer.close(index);
 					datatables.ajax.reload();
-				} else {
-					// 失败还在原位置页面
-					window.parent.toastrBoot(4, "出现错误,无法通过");
-				}
-			}else{
-				window.parent.toastrBoot(4, "出现错误,无法通过");
-			}
 
 		}
 	});

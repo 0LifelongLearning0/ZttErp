@@ -54,10 +54,11 @@ td {
 									<td colspan="2"><label id="hope_end_data" /></td>
 								</tr>
 								<tr>
-									<td class="amount">供应商</td>
-									<td colspan="2"><input id="supply_name" name="supply_name"/></td>
-									<td class="text-center">单价</td>
-									<td colspan="2"><input id="single_price" name="single_price" /></td>
+									<td class="text-center">合同文件</td>
+									<td colspan="2"><button class="btn btn-primary"
+											data-toggle="button" onclick="uploadattachment()">上传</button>
+										<input class="form-control" type="hidden" maxlength="255"
+										name="contract_attachment" id="contract_attachment"></td>
 								</tr>
 							</tbody>
 						</table>

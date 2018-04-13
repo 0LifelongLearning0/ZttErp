@@ -37,11 +37,16 @@ function event_task_grid(cell,flag){
 		  fields:['value', 'name'],
 	      data:[["start","start"],["end","end"]]
 		});
-	}else{
+	}else if(flag == 3){
 		events_Store = new Ext.data.SimpleStore({
 		  fields:['value', 'name'],
-	      data:[["create","create"],["assignment","assignment"],["complete","complete"],["All","All"]]
+		  data:[["take","take"]]
 		});
+	}else{
+	 			events_Store = new Ext.data.SimpleStore({
+	 				  fields:['value', 'name'],
+	 			      data:[["create","create"],["assignment","assignment"],["complete","complete"],["all","all"]]
+	 				});
 	}
 	var event_typeStore = new Ext.data.SimpleStore({
 	  fields:['value', 'name'],
@@ -200,9 +205,10 @@ function event_task_grid(cell,flag){
 }
 
 //点击确定按钮设置mxgraph中cell属性
-var event_node_value;
+
 function event_setvalue(cell){
 	//验证操作
+	var event_node_value;
 	for(var i=0;i<event_grid.getStore().getCount();i++){
 		var event_type = event_grid.store.getAt(i).data.event_type;
 		var javaclass_express = event_grid.store.getAt(i).data.javaclass_express;
@@ -248,8 +254,10 @@ function event_setvalue(cell){
 	//赋值
 	if(null != event_node_value && "" != event_node_value){
 		cell.event_node_value = event_node_value;
-		event_node_value="";
-	}
+	}else{
+	 			cell.event_node_value ="";
+	 	}
+	 event_node_value="";
 }
 
 

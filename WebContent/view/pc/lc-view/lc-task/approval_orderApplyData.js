@@ -64,11 +64,9 @@ function approveZttOrderApply(taskid,status,obj){
 		flag=1;
 	}
 	if(flag==0){
-		var url="../zxGoodsApplyController/approvalOrderApply";
+		var url="../zttOrderController/approvalOrderApply";
 		var remark=erp_number;
 		var params = {task_id:taskid,task_status:status,remark:remark};
-		var approvalFormWin = parent.Ext.getCmp('approvalFormWin');  
-		ajaxBReq('../zttOrderController/approvalOrderApply',params);
 		$.ajax({ 
 			   url: url, 
 			   async:false, 

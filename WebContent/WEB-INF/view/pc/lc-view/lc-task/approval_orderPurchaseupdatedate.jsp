@@ -57,6 +57,9 @@ td {
 									<td class="amount">修改日期</td>
 									<td colspan="2"><input type="text" name="end_data_manual" id="end_data_manual"
 										class="form_datetime form-control" placeholder="请输入您的日期"></td>
+										<td class="text-center">退回原因</td>
+									        <td colspan="2"><label id="not_satisfy_reason" />
+											</td>
 								</tr>
 							</tbody>
 						</table>

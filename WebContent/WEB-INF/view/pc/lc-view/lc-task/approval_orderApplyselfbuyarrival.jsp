@@ -76,13 +76,18 @@ td {
 										style="display: none;"></label>
 										<button class="btn btn-primary" data-toggle="button"
 											onclick="downloadattachment('${taskData.businessKey }')">查看附件</button></td>
-									<td class="text-center">供应商信息</td>
-									<td colspan="2"><label id="end_data" /></td>
+									<td class="text-center">合同文件</td>
+									<td colspan="2"><button class="btn btn-primary"
+											data-toggle="button" onclick="uploadattachment()">上传</button>
+										<input class="form-control" type="hidden" maxlength="255"
+										name="contract_attachment" id="contract_attachment"></td>
 								</tr>
 									<tr>
-									
-									<td class="text-center">供应商价格</td>
-									<td colspan="2"><label id="end_data" /></td>
+									<td class="text-center">供应商</td>
+									<td colspan="2"><input class="form-control" type="text" maxlength="255"
+										name="supplyer_name" id="supplyer_name">
+										<button class="btn btn-primary" data-toggle="button"
+											onclick="selectsupplyer()">选择供应商</button></td>
 								</tr>
 							</tbody>
 						</table>

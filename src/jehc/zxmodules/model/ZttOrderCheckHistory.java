@@ -22,6 +22,7 @@ public class ZttOrderCheckHistory extends BaseEntity implements Serializable{
 	private String product_check_dep_comment;	
 	private String product_check_dep_time;	
 	private String state;
+	
 	public String getId() {
 		return id;
 	}

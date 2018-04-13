@@ -33,6 +33,7 @@ $(document).ready(function(){
 	document.getElementById("single_price").innerText=ajaxobj.single_price;
 	document.getElementById("end_data").innerText=ajaxobj.end_data;
 	document.getElementById("attachment").innerText=ajaxobj.attachment;
+	document.getElementById("not_satisfy_reason").innerText=ajaxobj.not_satisfy_reason;
          /*  var counter = 0;
                 t.row.add([
                     i+1,

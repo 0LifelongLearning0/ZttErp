@@ -56,11 +56,10 @@ function approveZttOrderApply(taskid,status,obj){
 	var url="../zttPurchaseController/approvalOrderpurchaseApply";
 	var remark;
 	var params;
-	var supply_name=document.getElementById("supply_name").value;
-	var single_price=document.getElementById("single_price").value;
+	var contract_attachment=document.getElementById("contract_attachment").value;
 	if(status=="yes"){
 		remark="arrival";
-		params = {task_id:taskid,task_status:status,remark:remark,supply_name:supply_name,single_price:single_price};
+		params = {task_id:taskid,task_status:status,remark:remark,contract_attachment:contract_attachment};
 	}
 	
 	$.ajax({ 
@@ -79,21 +78,15 @@ function approveZttOrderApply(taskid,status,obj){
 //上传
 //保存
 function uploadattachment(){
+	var upid="contract_attachment";
 	layer.open({
 		title: '上传附件',
 		type: 2, 
 		area: ['800px', '500px'],
 		btn: ['确定', '取消'],
-	  content: "../zttOrderController/uploadattachment",
+		content: "../zttOrderController/uploadattachment?upid="+upid,
 	 
 	}); 
-	/*var inputObj=document.createElement('input')
-    inputObj.setAttribute('id','_ef');
-    inputObj.setAttribute('type','file');
-    inputObj.setAttribute("style",'visibility:hidden');
-    document.body.appendChild(inputObj);
-    inputObj.click();
-    inputObj.value */
 }
 
 $(function() {

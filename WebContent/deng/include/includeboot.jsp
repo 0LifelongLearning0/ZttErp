@@ -91,6 +91,7 @@
         <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
         <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js" type="text/javascript"></script>
         <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js" type="text/javascript"></script>
+        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/table2excel/jquery.table2excel.js" type="text/javascript"></script>
         <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
         <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/clockface/js/clockface.js" type="text/javascript"></script>
         <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" type="text/javascript"></script>

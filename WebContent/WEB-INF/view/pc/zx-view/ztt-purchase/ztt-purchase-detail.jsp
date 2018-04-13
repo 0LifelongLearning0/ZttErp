@@ -21,7 +21,7 @@
 			<div class="form-group">
 				<label class="col-lg-3 control-label">工令号</label>
 				<div class="col-lg-6">
-					<input class="form-control" type="text" maxlength="32"  name="Product_order_number" placeholder="请输入工令号" value="${zttPurchase.Product_order_number }">
+					<input class="form-control" type="text" maxlength="32"  name="Product_order_number" placeholder="请输入工令号" value="${zttPurchase.product_order_number }">
 				</div>
 			</div>
 			<div class="form-group">
@@ -61,51 +61,21 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-lg-3 control-label">发起人id</label>
+				<label class="col-lg-3 control-label">供应商</label>
 				<div class="col-lg-6">
-					<input class="form-control" type="text" maxlength="32"  name="apply_id" placeholder="请输入发起人id" value="${zttPurchase.apply_id }">
+					<input class="form-control" type="text" maxlength="32"  name="supply_name" placeholder="供应商" value="${zttPurchase.supply_name }">
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-lg-3 control-label">采购人id</label>
+				<label class="col-lg-3 control-label">采购单价</label>
 				<div class="col-lg-6">
-					<input class="form-control" type="text" maxlength="20"  name="Product_id" placeholder="请输入采购人id" value="${zttPurchase.Product_id }">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-lg-3 control-label">单价</label>
-				<div class="col-lg-6">
-					<input class="form-control" type="text" maxlength="20"  name="single_price" placeholder="请输入单价" value="${zttPurchase.single_price }">
+					<input class="form-control" type="text" maxlength="20"  name="single_price" placeholder="采购单价" value="${zttPurchase.single_price }">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-lg-3 control-label">总价</label>
 				<div class="col-lg-6">
 					<input class="form-control" type="text" maxlength="20"  name="sum_price" placeholder="请输入总价" value="${zttPurchase.sum_price }">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-lg-3 control-label">检验员id</label>
-				<div class="col-lg-6">
-					<input class="form-control" type="text" maxlength="32"  name="qualified_id" placeholder="请输入检验员id" value="${zttPurchase.qualified_id }">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-lg-3 control-label">合格件数</label>
-				<div class="col-lg-6">
-					<input class="form-control" type="text" maxlength="32"  name="qualified_number" placeholder="请输入合格件数" value="${zttPurchase.qualified_number }">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-lg-3 control-label">检验员日期</label>
-				<div class="col-lg-6">
-					<input class="form-control" type="text" maxlength="32"  name="qualified_date" placeholder="请输入检验员日期" value="${zttPurchase.qualified_date }">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-lg-3 control-label">检验文件</label>
-				<div class="col-lg-6">
-					<input class="form-control" type="text" maxlength="255"  name="check_attachment" placeholder="请输入检验文件" value="${zttPurchase.check_attachment }">
 				</div>
 			</div>
 			<div class="form-group">

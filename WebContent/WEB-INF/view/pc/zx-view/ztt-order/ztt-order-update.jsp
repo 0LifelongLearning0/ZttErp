@@ -7,32 +7,139 @@
 <title>添加合同号</title>
 </head>
 <body>
-	<div class="panel-body">
-		<div class="page-header">
-			<h4>编辑业务人员下单表</h4>
-		</div>
-		<form class="form-horizontal" id="defaultForm" method="post">
-			<div class="form-group" style="display:none;">
-				<label class="col-lg-3 control-label">序列号</label>
-				<div class="col-lg-6">
-					<input class="form-control" type="hidden" name="id"  placeholder="请输入序列号" value="${zttOrder.id }">
+
+	<div class="panel panel-default padding-10 no-margin">
+		<legend>
+			<div class="btn-group pull-right" style="margin-right: 20px;">
+				<button type="button" onclick="goback()" class="btn btn-default">
+					<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>返回
+				</button>
+			</div>
+			业务人员下单表
+		</legend>
+		<fieldset id="printAll${zttOrder.id }">
+			<div class="container-fluid  col-md-8 col-md-offset-2">
+				<div class="row">
+					<form class="form-horizontal" id="defaultForm" method="post">
+						<input class="form-control" type="text" maxlength="255" name="id"
+							id="id" value='${zttOrder.id }'>
+						<table class="table table-bordered">
+							<caption class="text-center h3 no-margin bold">业务人员下单表</caption>
+							<tbody>
+								<tr>
+									<td class="col-md-1 text-center">申&ensp;请&ensp;人</td>
+									<td class="col-md-3">${applyUser.xt_userinfo_realName }</td>
+									<td class="col-md-1 text-center">部&emsp;&emsp;门</td>
+									<td class="col-md-2">${applyUser.xt_departinfo_name }</td>
+									<td class="col-md-1 text-center">申请日期</td>
+									<td class="col-md-3">${zttOrder.zttordertime }</td>
+								</tr>
+								<tr>
+									<td class="text-center">订单号/申请号</td>
+									<td>${zttOrder.order_number }</td>
+									<td class="text-center">合同号</td>
+									<td colspan="3"><input class="form-control" type="text"
+										maxlength="255" name="contract_number"
+										value="${zttOrder.contract_number}"></td>
+								</tr>
+								<tr>
+									<td class="text-center">客户</td>
+									<td colspan="2">${zttOrder.client }</td>
+									<td class="text-center">联系人</td>
+									<td colspan="2">${zttOrder.linkman }</td>
+								</tr>
+								<tr>
+									<td class="text-center">产品名称</td>
+									<td colspan="2">${zttOrder.product_name }</td>
+									<td class="text-center">规格</td>
+									<td colspan="2">${zttOrder.stardard }</td>
+								</tr>
+								<tr>
+									<td>单位</td>
+									<td>${zttOrder.unit }</td>
+									<td>数量</td>
+									<td>${zttOrder.amount }<input class="form-control"
+										type="hidden" maxlength="255" id="amount" name="amount"
+										value="${zttOrder.amount }">
+									</td>
+									<td>单价</td>
+									<td><input class="form-control" type="text"
+										maxlength="255" name="single_price"
+										value="${zttOrder.single_price }"></td>
+
+								</tr>
+								<tr>
+									<td class="col-md-1 text-center">总价</td>
+									<td class="col-md-3">${zttOrder.sum_price } <input
+										class="form-control" type="hidden" maxlength="255"
+										id="sum_price" name="sum_price" value="${zttOrder.sum_price }">
+									</td>
+									<td class="col-md-1 text-center">交货日期</td>
+									<td class="col-md-2">${zttOrder.end_data }</td>
+									<td class="col-md-1 text-center">附件</td>
+									<td class="col-md-3"><input class="form-control"
+										type="hidden" maxlength="255" name="attachment"
+										id="attachment" value='${zttOrder.attachment }'>
+										<button class="btn btn-primary" data-toggle="button"
+											onclick="downloadattachment('${zttOrder.id}')">查看附件</button>
+								</tr>
+								<tr>
+									<td class="col-md-1 text-center">erp号</td>
+									<td class="col-md-3">${zttOrder.erp_number }</td>
+									<td class="col-md-1 text-center">成本单价</td>
+									<td class="col-md-3"><input class="form-control"
+										type="text" maxlength="255" name="cost_single_price"
+										id="cost_single_price" value='${zttOrder.cost_single_price }'>
+									</td>
+									<td class="col-md-1 text-center">成本总价</td>
+									<td class="col-md-3">${zttOrder.cost_sum_price } <input
+										class="form-control" type="hidden" maxlength="255"
+										name="cost_sum_price" id="cost_sum_price"
+										value='${zttOrder.cost_sum_price }'>
+									</td>
+								</tr>
+								<td class="col-md-1 text-center">供应商开票日期</td>
+								<td class="col-md-3"><input class="form_datetime form-control"
+									type="text" maxlength="255" name="supplier_bill_date" id="supplier_bill_date" value='${zttOrder.supplier_bill_date }'></td>
+
+
+								<td class="col-md-1 text-center">供应商开票金额</td>
+								<td class="col-md-3"><input class="form-control"
+									type="text" maxlength="255" name="supplier_bill_price"
+									id="supplier_bill_price"
+									value='${zttOrder.supplier_bill_price }'></td>
+								<td class="col-md-1 text-center">发货数量</td>
+								<td class="col-md-3"><input class="form-control"
+									type="text" maxlength="255" name="send_amount" id="send_amount" value='${zttOrder.send_amount }'></td>
+								</tr>
+								<td class="col-md-1 text-center">开票日期</td>
+								<td class="col-md-3"><input type="text"
+									class="form_datetime form-control" maxlength="32"
+									name="bill_date_open" id="bill_date_open" value='${zttOrder.bill_date_open }'></td>
+								<td class="col-md-1 text-center" id="erp1">开票金额</td>
+								<td class="col-md-3"><input class="form-control"
+									type="text" maxlength="255" name="bill_price" id="bill_price"
+									value='${zttOrder.bill_price }'></td>
+								<td class="col-md-1 text-center" id="erp1">成本分摊</td>
+								<td class="col-md-3" id="erp2"><input class="form-control"
+									type="text" maxlength="255" name="cost_share" id="cost_share"
+									value='${zttOrder.cost_share }'></td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="text-center">
+							<button type="button" class="btn btn-success"
+								onclick="updateZttOrder()">
+								<span class="glyphicon glyphicon-saved" aria-hidden="true"></span>保存
+							</button>
+						</div>
+					</form>
+
 				</div>
 			</div>
-			<div class="form-group">
-				<label class="col-lg-3 control-label">合同号</label>
-				<div class="col-lg-6">
-					<input class="form-control" type="text" maxlength="255"  name="contract_number" placeholder="请输入合同号" value="${zttOrder.contract_number }">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-lg-3 control-label"></label>
-				<div class="col-lg-6">
-					<button type="button" class="btn green" onclick="updateZttOrder()">保存</button>
-					<button type="button" class="btn default" onclick="goback()">返回</button>
-				</div>
-			</div>
-		</form>
+		</fieldset>
 	</div>
 </body>
-<script type="text/javascript" src="../view/pc/zx-view/ztt-order/ztt-order-update.js"></script> 
+<script type="text/javascript"
+	src="../view/pc/zx-view/ztt-order/ztt-order-update.js"></script>
 </html>

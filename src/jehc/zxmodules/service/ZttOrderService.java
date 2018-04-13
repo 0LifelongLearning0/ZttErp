@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.Map;
 import jehc.zxmodules.model.ZttOrder;
 import jehc.zxmodules.model.ZttOrderCheckHistory;
+import jehc.zxmodules.model.ztt_filerecord;
 import jehc.zxmodules.model.ztt_processproduct;
 
 /**
@@ -33,7 +34,10 @@ public interface ZttOrderService{
 	public ZttOrder getprocessingtechnicById(String id);
 	public int updateztt_processproduct(ZttOrder zttOrder);
 	public int addZttOrderCheckHistory(ZttOrderCheckHistory ZttOrderCheckHistory);
+	public int addZttOrderfileRecord(ztt_filerecord ztt_filerecord);
 	public List<ZttOrderCheckHistory> getprocessinghisById(Map<String,Object> condition);
+	public List<ztt_filerecord> getfilerecordById(Map<String,Object> condition);
+	public int delZttOrdnum(Map<String,Object> condition);
 	/**
 	* 修改
 	* @param ztt_order 

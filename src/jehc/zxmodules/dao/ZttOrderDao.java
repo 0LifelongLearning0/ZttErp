@@ -6,6 +6,7 @@ import jehc.zxmodules.model.ZttOrder;
 import jehc.zxmodules.model.ZttOrderCheckHistory;
 import jehc.zxmodules.model.ZttOrdernumber;
 import jehc.zxmodules.model.ZttOrdernumber_third;
+import jehc.zxmodules.model.ztt_filerecord;
 import jehc.zxmodules.model.ztt_processproduct;
 
 /**
@@ -34,6 +35,9 @@ public interface ZttOrderDao{
 	public int updateztt_processproductBySelective(ztt_processproduct ztt_processproduct);
 	public int addZttOrderCheckHistory(ZttOrderCheckHistory zttOrderCheckHistory);
 	public List<ZttOrderCheckHistory> getZttOrderhisById(Map<String,Object> condition);
+	public List<ztt_filerecord> getfilerecordById(Map<String,Object> condition);
+	public int addZttOrderfileRecord(ztt_filerecord ztt_filerecord);
+	public int delZttOrdnum(Map<String,Object> condition);
 	/**
 	* 添加
 	* @param ztt_order 

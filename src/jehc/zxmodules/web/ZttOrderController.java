@@ -57,10 +57,13 @@ import jehc.zxmodules.model.ZttOrderbyself;
 import jehc.zxmodules.model.ZttPurchase;
 import jehc.zxmodules.model.ZxGoodsApply;
 import jehc.zxmodules.model.ZxPurchaseApply;
+import jehc.zxmodules.model.ztt_filerecord;
 import jehc.zxmodules.model.ztt_processproduct;
 import jehc.zxmodules.service.ZttOrderService;
 import jehc.zxmodules.service.ZttOrderbybuyService;
 import jehc.zxmodules.service.ZttOrderbyselfService;
+import jehc.zxmodules.service.ZttPurchaseService;
+import jehc.zxmodules.service.Ztt_sqlserver_user_Service;
 import net.sf.json.JSONObject;
 
 /**
@@ -69,6 +72,8 @@ import net.sf.json.JSONObject;
 @Controller
 @RequestMapping("/zttOrderController")
 public class ZttOrderController extends BaseAction {
+	@Autowired
+	private ZttPurchaseService zttPurchaseService;
 	@Autowired
 	private ZttOrderService zttOrderService;
 	@Autowired
@@ -88,7 +93,7 @@ public class ZttOrderController extends BaseAction {
 	@Autowired
 	private ZttOrderbyselfService zttOrderbyselfService;
 	@Autowired
-	private ZttOrderbybuyService zttOrderbybuyService;
+	private Ztt_sqlserver_user_Service getsqlserver_user_Service;
 
 	/**
 	 * 载入初始化页面
@@ -112,12 +117,13 @@ public class ZttOrderController extends BaseAction {
 	@RequestMapping(value = "/getZttOrderListByCondition", method = { RequestMethod.POST, RequestMethod.GET })
 	public String getZttOrderListByCondition(BaseSearch baseSearch, HttpServletRequest request) {
 		Map<String, Object> condition = baseSearch.convert();
+		getsqlserver_user_Service.getsendmyReport();
 		condition.put("apply_id", getXtU().getXt_userinfo_id());
 		condition.put("xt_post_id", getXtU().getXt_post_id());
 		List<XtPost> xtpost = XtPostService.getXtPostListByCondition(condition);
-		if (xtpost.get(0).getXt_post_grade() > 0) {
+		/*if (xtpost.get(0).getXt_post_grade() > 0) {
 			condition.clear();
-		}
+		}*/
 
 		commonHPager(condition, request);
 		List<ZttOrder> zttOrderList = zttOrderService.getZttOrderListByCondition(condition);
@@ -157,6 +163,16 @@ public class ZttOrderController extends BaseAction {
 		commonHPager(condition, request);
 		List<ZttOrderCheckHistory> zttOrderCheckHistory = zttOrderService.getprocessinghisById(condition);
 		PageInfo<ZttOrderCheckHistory> page = new PageInfo<ZttOrderCheckHistory>(zttOrderCheckHistory);
+		return outPageBootStr(page, request);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/getZttOrderfilehistory", method = { RequestMethod.POST, RequestMethod.GET })
+	public String getZttOrderfilehistory(String id, BaseSearch baseSearch, HttpServletRequest request) {
+		Map<String, Object> condition = baseSearch.convert();
+		commonHPager(condition, request);
+		List<ztt_filerecord> ztt_filerecord = zttOrderService.getfilerecordById(condition);
+		PageInfo<ztt_filerecord> page = new PageInfo<ztt_filerecord>(ztt_filerecord);
 		return outPageBootStr(page, request);
 	}
 
@@ -228,7 +244,7 @@ public class ZttOrderController extends BaseAction {
 	public String updateZttOrder(ZttOrder zttOrder, HttpServletRequest request) {
 		int i = 0;
 		if (null != zttOrder && !"".equals(zttOrder)) {
-			i = zttOrderService.updateZttOrder(zttOrder);
+			i = zttOrderService.updateZttOrderBySelective(zttOrder);
 		}
 		if (i > 0) {
 			return outAudStr(true);
@@ -238,19 +254,22 @@ public class ZttOrderController extends BaseAction {
 	}
 
 	/**
-	 * 删除
+	 * 删除1
 	 * 
 	 * @param id
 	 * @param request
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/delZttOrder", method = { RequestMethod.POST, RequestMethod.GET })
-	public String delZttOrder(String id, HttpServletRequest request) {
+	@RequestMapping(value = "/delZttOrderf", method = { RequestMethod.POST, RequestMethod.GET })
+	public String delZttOrderf(String id, HttpServletRequest request) {
 		int i = 0;
 		if (null != id && !"".equals(id)) {
 			Map<String, Object> condition = new HashMap<String, Object>();
 			condition.put("id", id.split(","));
+			Map<String, Object> condition1 = new HashMap<String, Object>();
+			condition1.put("order_id", id.split(","));
 			i = zttOrderService.delZttOrder(condition);
+			i = zttOrderService.delZttOrdnum(condition1);
 		}
 		if (i > 0) {
 			return outAudStr(true);
@@ -475,10 +494,30 @@ public class ZttOrderController extends BaseAction {
 	 */
 	@RequestMapping(value = "/uploadattachment", method = { RequestMethod.POST, RequestMethod.GET })
 	public ModelAndView uploadattachment(String id, String upid, HttpServletRequest request, Model model) {
+		if(upid.equals("purchase")){
+			
+			return new ModelAndView("pc/zx-view/ztt-purchase/ztt-purchase-listall");
+		}
+		if(upid.equals("order")){
+			return new ModelAndView("pc/zx-view/ztt-order/newzttorderall");
+		}
+		else{
+			ZttOrder zttOrder = zttOrderService.getZttOrderById(id);
+			model.addAttribute("upid", upid);
+			model.addAttribute("zttOrder", zttOrder);
+			return new ModelAndView("pc/zx-view/ztt-order/uploadattachment");
+		}
+		
+		
+		
+	}
+
+	@RequestMapping(value = "/selectsuppler", method = { RequestMethod.POST, RequestMethod.GET })
+	public ModelAndView selectsuppler(String id, String upid, HttpServletRequest request, Model model) {
 		ZttOrder zttOrder = zttOrderService.getZttOrderById(id);
 		model.addAttribute("upid", upid);
 		model.addAttribute("zttOrder", zttOrder);
-		return new ModelAndView("pc/zx-view/ztt-order/uploadattachment");
+		return new ModelAndView("pc/zx-view/ztt-order/selectsupplyer");
 	}
 
 	/**
@@ -505,6 +544,29 @@ public class ZttOrderController extends BaseAction {
 		model.addAttribute("upid", upid);
 		model.addAttribute("zttOrder", zttOrder);
 		return new ModelAndView("pc/zx-view/ztt-order/downloadattachmenttech");
+	}
+
+	/**
+	 * 发送至历史下载页面
+	 * 
+	 * @param request
+	 */
+	@RequestMapping(value = "/DownloadHisattachment", method = { RequestMethod.POST, RequestMethod.GET })
+	public ModelAndView DownloadHisattachment(String attachment, String type, BaseSearch baseSearch,
+			HttpServletRequest request, Model model) {
+		Map<String, Object> condition = baseSearch.convert();
+		condition.put("id", attachment);
+		commonHPager(condition, request);
+		if (type.equals("file")) {
+			List<ztt_filerecord> ztt_filerecordlist = zttOrderService.getfilerecordById(condition);
+			ztt_filerecord ztt_filerecord = ztt_filerecordlist.get(0);
+			model.addAttribute("attachment", ztt_filerecord.getProduct_check_self_attachment());
+		} else {
+			List<ZttOrderCheckHistory> zttOrderCheckHistory = zttOrderService.getprocessinghisById(condition);
+			ZttOrderCheckHistory ZttOrderCheckHistory = zttOrderCheckHistory.get(0);
+			model.addAttribute("attachment", ZttOrderCheckHistory.getProduct_check_attachment());
+		}
+		return new ModelAndView("pc/zx-view/ztt-order/downloadattachmenthis");
 	}
 
 	/**
@@ -651,7 +713,8 @@ public class ZttOrderController extends BaseAction {
 	@RequestMapping(value = "/approvalOrderApply", method = { RequestMethod.POST, RequestMethod.GET })
 	public String approvalOrderApply(String task_id, String task_status, String remark, String path,
 			String machine_part, String machine_part_number, String material_id, String checkcomment, String end_date,
-			HttpServletRequest request) {
+			String supplier_name, String supplier_price, String end_data_manual, String not_satisfy_reason,
+			String delivery_note, String contract_attachment, String send_time, HttpServletRequest request) {
 		int i = 0;
 		if (task_status == null) {
 			task_status = "";
@@ -661,8 +724,13 @@ public class ZttOrderController extends BaseAction {
 			Variable variables = new Variable();
 			ZttOrder zttOrder = zttOrderService.getZttOrderById(taskData.get("businessKey").toString());
 			ZttOrderCheckHistory zttOrderCheckHistory = new ZttOrderCheckHistory();
+			ztt_filerecord ztt_filerecord = new ztt_filerecord();
 			zttOrderCheckHistory.setOrder_id(zttOrder.getId());
+			ztt_filerecord.setOrder_id(zttOrder.getId());
+			ztt_filerecord.setId(UUID.toUUID());
+			ztt_filerecord.setApproval_time(DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
 			String vals = task_status + "," + zttOrder.getApply_id() + ",";
+			String businessKey = (String) taskData.get("businessKey");
 			variables.setKeys("status,owner,applyType");
 			variables.setTypes("S,S,S");
 			if (remark.equals("warehouse") || remark.equals("PD") || remark.equals("others")) {
@@ -693,14 +761,16 @@ public class ZttOrderController extends BaseAction {
 				lc_approval.setLc_approval_time(CommonUtils.getDate());
 				lc_approval.setLc_status_id(task_status);
 				if (task_status.equals("yes")) {
-					lc_approval.setLc_status_name("主管审批通过");
 					if (remark.equals("outside")) {
 						String erpnumber = remark;
-						lc_approval.setLc_status_name("外协单,带数据分析师通过");
+						ztt_filerecord.setState("主管审批通过");
+						ztt_filerecord.setApproval_time(DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
 						zttOrder.setErp_number(erpnumber);
+						zttOrder.setCato_type(remark);
 						zttOrder.setState("2");
 					} else if (remark.equals("madebyself")) {
 						lc_approval.setLc_status_name("自制单,待工艺设计");
+						zttOrder.setCato_type(remark);
 						zttOrder.setState("4");
 					} else if (remark.equals("others")) {
 						lc_approval.setLc_status_name("流程结束");
@@ -715,6 +785,7 @@ public class ZttOrderController extends BaseAction {
 						zttOrderCheckHistory
 								.setProduct_check_time(DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
 						zttOrderCheckHistory.setProduct_check_attachment(path);
+						zttOrderCheckHistory.setState("51");
 						zttOrderCheckHistory.setProduct_check_comment(checkcomment);
 						zttOrderService.addZttOrderCheckHistory(zttOrderCheckHistory);
 					} else if (remark.equals("deptcheckself")) {
@@ -723,14 +794,36 @@ public class ZttOrderController extends BaseAction {
 						zttOrder.setChecker_id(getXtUid());
 						zttOrder.setCheck_end_time(DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
 						zttOrder.setState("9");
+						zttOrderCheckHistory.setId(UUID.toUUID());
+						zttOrderCheckHistory
+								.setProduct_check_time(DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
+						zttOrderCheckHistory.setProduct_check_attachment(path);
+						zttOrderCheckHistory.setState("55");
+						zttOrderCheckHistory.setProduct_check_comment(checkcomment);
+						zttOrderService.addZttOrderCheckHistory(zttOrderCheckHistory);
 					} else if (remark.equals("warehouse")) {
 						lc_approval.setLc_status_name("仓库");
-						zttOrder.setState("13");
+						zttOrder.setDelivery_note(delivery_note);
+						zttOrder.setState("41");
+						ztt_filerecord.setProduct_check_self_attachment(delivery_note);
+						ztt_filerecord.setStatus_name("仓库确认");
+						ztt_filerecord.setProduct_check_comment("客户送货信息");
+						zttOrderService.addZttOrderfileRecord(ztt_filerecord);
 					} else if (remark.equals("PD")) {
 						lc_approval.setLc_status_name("生产部");
+						zttOrder.setCato_type(remark);
 						zttOrder.setState("14");
+					} else if (remark.equals("send")) {
+						lc_approval.setLc_status_name("已发货");
+						zttOrder.setState("42");
+						ztt_filerecord.setProduct_check_self_attachment(checkcomment);
+						String send_data = "发货时间" + send_time;
+						ztt_filerecord.setStatus_name(send_data);
+						ztt_filerecord.setProduct_check_comment("已发货");
+						zttOrderService.addZttOrderfileRecord(ztt_filerecord);
 					} else if (remark.equals("others")) {
 						lc_approval.setLc_status_name("其他");
+						zttOrder.setCato_type(remark);
 						zttOrder.setState("15");
 					} else if (remark.equals("updatedate")) {
 						lc_approval.setLc_status_name("业务人员日期修改");
@@ -738,13 +831,26 @@ public class ZttOrderController extends BaseAction {
 						zttOrder.setState("17");
 					} else if (remark.equals("buydata")) {
 						lc_approval.setLc_status_name("外协日期可以满足");
+						ztt_filerecord.setStatus_name("外协日期可以满足");
 						zttOrder.setState("16");
+						zttOrderService.addZttOrderfileRecord(ztt_filerecord);
 					} else if (remark.equals("startbuy")) {
 						lc_approval.setLc_status_name("日期同意,开始采购");
+						ztt_filerecord.setStatus_name("日期同意,开始采购");
+						zttOrderService.addZttOrderfileRecord(ztt_filerecord);
 						zttOrder.setState("18");
 					} else if (remark.equals("purchase_arrival")) {
 						lc_approval.setLc_status_name("确认到货,进入质检");
 						zttOrder.setPurchase_arrival_date(DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
+						zttOrder.setState("19");
+						zttOrder.setSupplier_name(supplier_name);
+						ztt_filerecord.setProduct_check_comment("合同文件");
+						ztt_filerecord.setProduct_check_self_attachment(contract_attachment);
+						ztt_filerecord.setStatus_name("确认到货,进入质检");
+						zttOrderService.addZttOrderfileRecord(ztt_filerecord);
+					} else if (remark.equals("delivery_note")) {
+						lc_approval.setLc_status_name("外协仓库确认");
+						zttOrder.setSupplier_name(supplier_name);
 						zttOrder.setState("19");
 					} else if (remark.equals("checkbuy")) {
 						lc_approval.setLc_status_name("外协单,检验合格,待质检部质检");
@@ -781,10 +887,18 @@ public class ZttOrderController extends BaseAction {
 						zttOrder.setDept_check_attachment(path);
 						zttOrder.setDept_check_id(getXtUid());
 						zttOrder.setDept_check_end_time(DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
-						zttOrder.setState("12");
+						zttOrderCheckHistory.setState("54");
+						zttOrderCheckHistory.setId(UUID.toUUID());
+						zttOrderCheckHistory.setProduct_check_attachment(path);
+						zttOrderCheckHistory
+								.setProduct_check_time(DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
+						zttOrderCheckHistory.setProduct_check_comment(checkcomment);
+						zttOrderCheckHistory.setBussinessid(businessKey);
+						zttOrderService.addZttOrderCheckHistory(zttOrderCheckHistory);
 					} else if (remark.equals("buydata")) {
 						lc_approval.setLc_status_name("外协日期不能满足");
-						zttOrder.setEnd_data(end_date);
+						zttOrder.setNot_satisfy_reason(not_satisfy_reason);
+						zttOrder.setEnd_data(end_data_manual);
 						zttOrder.setState("17");
 					} else if (remark.equals("checkbuy")) {
 						lc_approval.setLc_status_name("外协单,检验不合格,退回采购");
@@ -828,12 +942,13 @@ public class ZttOrderController extends BaseAction {
 					zttOrderService.updateZttOrderBySelective(zttOrder);
 					zttOrderCheckHistory.setId(UUID.toUUID());
 					zttOrderCheckHistory.setState("0");
-					zttOrderCheckHistory.setProduct_check_self_attachment(path);
+					zttOrderCheckHistory.setProduct_check_attachment(path);
 					zttOrderCheckHistory
-							.setProduct_check_self_time(DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
+							.setProduct_check_time(DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
 					zttOrderService.addZttOrderCheckHistory(zttOrderCheckHistory);
 
 				}
+
 				lc_approval.setTaskId(task_id);
 				lc_approval.setXt_userinfo_id(CommonUtils.getXtUid());
 				lc_ApprovalService.addLcApproval(lc_approval);
@@ -849,7 +964,6 @@ public class ZttOrderController extends BaseAction {
 			return outAudStr(false);
 		}
 	}
-	
 
 	/**
 	 * 质检审批
@@ -859,17 +973,20 @@ public class ZttOrderController extends BaseAction {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/approvalOrderCheckApply", method = { RequestMethod.POST, RequestMethod.GET })
-	public String approvalOrderCheckApply(String task_id,String businessid, String task_status, String remark, String path,
-			String checkcomment, HttpServletRequest request) {
+	public String approvalOrderCheckApply(String task_id, String businessid, String task_status, String remark,
+			String path, String checkcomment, String send_time,HttpServletRequest request) {
 		int i = 0;
 		if (task_status == null) {
 			task_status = "";
 		}
 		if (null != task_id && !"".equals(task_id)) {
 			Map<String, Object> taskData = activitiUtil.getTask(task_id);
+			Map<String, Object> taskVariables = (Map<String, Object>) taskData.get("taskVariables");
+			String taskkind = (String) taskVariables.get("taskkind");
+			String businessKey = (String) taskData.get("businessKey");
 			Variable variables = new Variable();
 			ZttOrderCheckHistory zttOrderCheckHistory = new ZttOrderCheckHistory();
-			
+
 			String vals = task_status;
 			variables.setKeys("status");
 			variables.setTypes("S");
@@ -889,6 +1006,7 @@ public class ZttOrderController extends BaseAction {
 				lc_approval.setLc_approval_time(CommonUtils.getDate());
 				lc_approval.setLc_status_id(task_status);
 				zttOrderCheckHistory.setId(UUID.toUUID());
+				zttOrderCheckHistory.setOrder_id(businessKey);
 				zttOrderCheckHistory.setProduct_check_attachment(path);
 				zttOrderCheckHistory.setProduct_check_time(DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
 				zttOrderCheckHistory.setProduct_check_comment(checkcomment);
@@ -896,16 +1014,45 @@ public class ZttOrderController extends BaseAction {
 				if (task_status.equals("yes")) {
 					if (remark.equals("check")) {
 						lc_approval.setLc_status_name("质检通过,进入质检部");
-						zttOrderCheckHistory.setState("1");
-					}else if(remark.equals("checkdept")){
-						zttOrderCheckHistory.setState("2");
+						zttOrderCheckHistory.setState("51");
+					} else if (remark.equals("checkdept")) {
+						zttOrderCheckHistory.setState("52");
+						lc_approval.setLc_status_name("质检部通过");
+						if (taskkind.equals("ztt_purchase")) {
+							ZttPurchase zttPurchase = new ZttPurchase();
+							zttPurchase.setId(businessKey);
+							zttPurchase.setState("54");
+							zttPurchaseService.updateZttPurchaseBySelective(zttPurchase);
+						} else if (taskkind.equals("ztt_sales")) {
+							ZttOrder zttOrder = new ZttOrder();
+							zttOrder.setId(businessKey);
+							zttOrder.setState("54");
+							zttOrderService.updateZttOrderBySelective(zttOrder);
+						}
+					} else if (remark.equals("send")) {
+						ZttPurchase zttPurchase = new ZttPurchase();
+						zttPurchase.setId(businessKey);
+						zttPurchase.setState("57");
+						zttPurchaseService.updateZttPurchaseBySelective(zttPurchase);
 					}
 				} else if (task_status.equals("no")) {
 					if (remark.equals("check")) {
 						lc_approval.setLc_status_name("质检不通过,流程结束");
-						zttOrderCheckHistory.setState("3");
-					}else if (remark.equals("checkdept")) {
-						zttOrderCheckHistory.setState("4");
+						zttOrderCheckHistory.setState("53");
+						if (taskkind.equals("ztt_purchase")) {
+							ZttPurchase zttPurchase = new ZttPurchase();
+							zttPurchase.setId(businessKey);
+							zttPurchase.setState("53");
+							zttPurchaseService.updateZttPurchaseBySelective(zttPurchase);
+						} else if (taskkind.equals("ztt_sales")) {
+							ZttOrder zttOrder = new ZttOrder();
+							zttOrder.setId(businessKey);
+							zttOrder.setState("53");
+							zttOrderService.updateZttOrderBySelective(zttOrder);
+						}
+					} else if (remark.equals("checkdept")) {
+						lc_approval.setLc_status_name("质检部不通过,退回质检");
+						zttOrderCheckHistory.setState("54");
 					}
 				}
 				zttOrderService.addZttOrderCheckHistory(zttOrderCheckHistory);
@@ -924,5 +1071,85 @@ public class ZttOrderController extends BaseAction {
 			return outAudStr(false);
 		}
 	}
+
+	/**
+	 * 质检申请
+	 * 
+	 * @param zx_goods_apply
+	 * @param request
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/toApplycheck", method = { RequestMethod.POST, RequestMethod.GET })
+	public String toApplycheck(String apply_id, HttpServletRequest request, Model model) {
+		int i = 0;
+		if (null != apply_id && !"".equals(apply_id)) {
+			String dep_user_id = null;
+			Map<String, Object> conditionr = new HashMap<String, Object>();
+			conditionr.put("flag", 1);
+			List<XtUserinfo> xtUserinfoList = xtURService.getXtURListByCondition(conditionr);
+			ZttOrder zttOrder = zttOrderService.getZttOrderById(apply_id);
+			XtConstant Xt_Constant = getXtConstantCache("ztt_quality_check");
+			Map<String, Object> condition = new HashMap<String, Object>();
+			condition.put("xt_constant_id", Xt_Constant.getXt_constant_id());
+			String lc_his_id = lc_Deployment_HisService.getLcDeploymentHisNewUnique(condition).getId();
+			LcApply lc_Apply = new LcApply();
+			Map<String, Object> variables = new HashMap<String, Object>();
+			variables.put("taskType", "质检流程");
+			variables.put("owner", zttOrder.getApply_id());
+			variables.put("taskkind", "ztt_sales");
+			lc_Apply.setLc_apply_title(getXtU().getXt_userinfo_realName() + "于" + getSimpleDateFormat() + "，提交了一条质检流程");
+			lc_Apply.setLc_apply_model_biz_id(zttOrder.getId());
+			if (activitiUtil.addApply(lc_his_id, zttOrder.getId(), variables, lc_Apply)) {
+				zttOrder.setState("50");
+				i = zttOrderService.updateZttOrderBySelective(zttOrder);
+
+			}
+		}
+		if (i > 0) {
+			return outAudStr(true);
+		} else {
+			return outAudStr(false);
+		}
+	}
 	
-}
+	/**
+	 * 质检申请
+	 * 
+	 * @param zx_goods_apply
+	 * @param request
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/toApplysendcage", method = { RequestMethod.POST, RequestMethod.GET })
+	public String toApplysendcage(String apply_id, HttpServletRequest request, Model model) {
+		int i = 0;
+		if (null != apply_id && !"".equals(apply_id)) {
+			String dep_user_id = null;
+			Map<String, Object> conditionr = new HashMap<String, Object>();
+			conditionr.put("flag", 1);
+			List<XtUserinfo> xtUserinfoList = xtURService.getXtURListByCondition(conditionr);
+			ZttOrder zttOrder = zttOrderService.getZttOrderById(apply_id);
+			XtConstant Xt_Constant = getXtConstantCache("ztt_send_cago");
+			Map<String, Object> condition = new HashMap<String, Object>();
+			condition.put("xt_constant_id", Xt_Constant.getXt_constant_id());
+			String lc_his_id = lc_Deployment_HisService.getLcDeploymentHisNewUnique(condition).getId();
+			LcApply lc_Apply = new LcApply();
+			Map<String, Object> variables = new HashMap<String, Object>();
+			variables.put("taskType", "质检流程");
+			variables.put("owner", zttOrder.getApply_id());
+			variables.put("taskkind", "ztt_sales");
+			lc_Apply.setLc_apply_title(getXtU().getXt_userinfo_realName() + "于" + getSimpleDateFormat() + "，提交了一条质检流程");
+			lc_Apply.setLc_apply_model_biz_id(zttOrder.getId());
+			if (activitiUtil.addApply(lc_his_id, zttOrder.getId(), variables, lc_Apply)) {
+				zttOrder.setState("51");
+				i = zttOrderService.updateZttOrderBySelective(zttOrder);
+
+			}
+		}
+		if (i > 0) {
+			return outAudStr(true);
+		} else {
+			return outAudStr(false);
+		}
+	}
+	}
+

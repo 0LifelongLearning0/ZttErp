@@ -5,26 +5,50 @@
 	<!--初始化分页-->
 	<select id="getZttPurchaseListByCondition" resultType="jehc.zxmodules.model.ZttPurchase" parameterType="map">
 		SELECT
-			id,
-			Product_order_number,
-			purchase_name,
-			purchase_stardard,
-			material,
-			unit,
-			amount,
-			hope_end_data,
-			apply_id,
-			Product_id,
-			single_price,
-			sum_price,
-			qualified_id,
-			qualified_number,
-			qualified_date,
-			check_attachment,
-			state
+			a.id,
+			a.Product_order_number,
+			a.purchase_name,
+			a.purchase_stardard,
+			a.material,
+			a.unit,
+			a.amount,
+			a.hope_end_data,
+			a.apply_id,
+			a.apply_time,
+			a.Product_id,
+			a.single_price,
+			a.sum_price,
+			a.qualified_id,
+			a.qualified_number,
+			a.qualified_date,
+			a.check_attachment,
+			a.state,
+			a.supply_name,
+			a.not_satisfy_reason,
+			a.erp_number,
+			a.cost_single_price,
+			a.cost_sum_price,
+			a.supplier_bill_date,
+			a.supplier_bill_price,
+			a.end_data,
+			b.xt_userinfo_realName as personname
 		FROM 
-			ztt_purchase
-		WHERE 1=1
+			ztt_purchase a,xt_userinfo b
+			WHERE 1=1 and
+		a.apply_id=b.xt_userinfo_id and a.state!='20'
+		<if test="null != purchase_name">
+			AND instr(purchase_name,#{purchase_name})
+		</if>
+		<if test="null != apply_time_et">
+			AND apply_time&lt;#{apply_time_et}
+		</if>
+		<if test="null != apply_time_st">
+			AND apply_time&gt;#{apply_time_st}
+		</if>
+		<if test="null == orderby">
+			ORDER BY apply_time desc
+		</if>
+		
 	</select>
 
 	<!--查询对象-->
@@ -39,6 +63,7 @@
 			amount,
 			hope_end_data,
 			apply_id,
+			apply_time,
 			Product_id,
 			single_price,
 			sum_price,
@@ -46,7 +71,15 @@
 			qualified_number,
 			qualified_date,
 			check_attachment,
-			state
+			state,
+			supply_name,
+			not_satisfy_reason,
+			erp_number,
+			cost_single_price,
+			cost_sum_price,
+			supplier_bill_date,
+			supplier_bill_price,
+			end_data
 		FROM 
 			ztt_purchase
 		WHERE id=#{id}
@@ -66,6 +99,7 @@
 			amount,
 			hope_end_data,
 			apply_id,
+			apply_time,
 			Product_id,
 			single_price,
 			sum_price,
@@ -86,6 +120,7 @@
 			#{amount},
 			#{hope_end_data},
 			#{apply_id},
+			#{apply_time},
 			#{Product_id},
 			#{single_price},
 			#{sum_price},
@@ -175,6 +210,27 @@
 			</if>
 			<if test="supply_name != null">
 				supply_name = #{supply_name},
+			</if>
+			<if test="not_satisfy_reason != null">
+				not_satisfy_reason = #{not_satisfy_reason},
+			</if>
+			<if test="erp_number != null">
+				erp_number = #{erp_number},
+			</if>
+			<if test="cost_single_price != null">
+				cost_single_price = #{cost_single_price},
+			</if>
+			<if test="cost_sum_price != null">
+				cost_sum_price = #{cost_sum_price},
+			</if>
+			<if test="supplier_bill_date != null">
+				supplier_bill_date = #{supplier_bill_date},
+			</if>
+			<if test="supplier_bill_price != null">
+				supplier_bill_price = #{supplier_bill_price},
+			</if>
+			<if test="end_data != null">
+				end_data = #{end_data},
 			</if>
 		</set>
 		WHERE id=#{id}

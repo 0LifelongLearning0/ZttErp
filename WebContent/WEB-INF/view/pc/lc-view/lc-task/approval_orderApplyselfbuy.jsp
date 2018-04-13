@@ -80,8 +80,10 @@ td {
 										checked="checked" />日期可以满足
 										<p>
 											<input type="radio" name="identity" value="no" />日期不能满足</td>
-									<td><input type="hidden" name="end_data_manual" id="end_data_manual"
+									<td colspan="2"><input type="hidden" name="end_data_manual" id="end_data_manual"
 										class="form_datetime form-control" placeholder="请输入您的日期">
+										<input type="hidden" name="not_satisfy_reason" id="not_satisfy_reason"
+										class="form-control" placeholder="请输入不能满足原因">
 									</td>
 								</tr>
 							</tbody>

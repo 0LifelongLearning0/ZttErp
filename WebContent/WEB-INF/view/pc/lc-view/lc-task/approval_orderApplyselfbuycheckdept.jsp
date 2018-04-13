@@ -17,7 +17,6 @@ text-align:center;
     var id = "${taskData.businessKey }"; 
 </script>
 <body>
-外协
 	<div class="panel panel-default padding-10 no-margin">
 		<fieldset id="printAll${zxCarApply.id }">
 			<div class="container-fluid  col-md-10 col-md-offset-1">

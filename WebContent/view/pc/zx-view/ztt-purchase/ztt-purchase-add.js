@@ -7,7 +7,29 @@ $('#defaultForm').bootstrapValidator({
 });
 //保存
 function addZttPurchase(){
+	var flag = 0;
+	var Product_order_number = $('#Product_order_number').val();
+	var single_price = $('#single_price').val();
+	if ($('#Product_order_number').val() == "") {
+		layer.alert('工令号不能为空');
+		flag = 1;
+	}
+	if ($('#purchase_name').val() == "") {
+		layer.alert('名称不能为空');
+		flag = 1;
+	}
+	if ($('#amount').val() == "") {
+		layer.alert('数量不能为空');
+		flag = 1;
+	}
+	if ($('#hope_end_data').val() == "") {
+		layer.alert('交期不能为空');
+		flag = 1;
+	}
+	if (flag == 0) {
 	submitBForm('defaultForm','../zttPurchaseController/addZttPurchase','../zttPurchaseController/loadZttPurchase');
+	}
+	
 }
 
 //发起提交表单

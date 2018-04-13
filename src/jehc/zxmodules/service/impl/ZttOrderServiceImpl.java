@@ -20,6 +20,7 @@ import jehc.zxmodules.model.ZttOrdernumber_third;
 import jehc.zxmodules.model.ZxGoodsApply;
 import jehc.zxmodules.model.ZxGoodsApplyDetail;
 import jehc.zxmodules.model.ZxUserAndDepartment;
+import jehc.zxmodules.model.ztt_filerecord;
 import jehc.zxmodules.model.ztt_processproduct;
 
 /**
@@ -90,11 +91,31 @@ public class ZttOrderServiceImpl extends BaseService implements ZttOrderService{
 			throw new ExceptionUtil(e.getMessage(),e.getCause());
 		}
 	}
+	public List<ztt_filerecord> getfilerecordById(Map<String,Object> condition){
+		try{
+			List<ztt_filerecord> list = zttOrderDao.getfilerecordById(condition);
+			return list;
+		} catch (Exception e) {
+			/**捕捉异常并回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+	}
 	/**
 	* 添加
 	* @param ztt_order 
 	* @return
 	*/
+	public int addZttOrderfileRecord(ztt_filerecord ztt_filerecord){
+		int i = 0;
+		try {
+			i = zttOrderDao.addZttOrderfileRecord(ztt_filerecord);
+		} catch (Exception e) {
+			i = 0;
+			/**捕捉异常并回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+		return i;
+	}
 	public int addZttOrderCheckHistory(ZttOrderCheckHistory ZttOrderCheckHistory){
 		int i = 0;
 		try {
@@ -193,6 +214,13 @@ public class ZttOrderServiceImpl extends BaseService implements ZttOrderService{
 	public int updateZttOrderBySelective(ZttOrder zttOrder){
 		int i = 0;
 		try {
+			double amount=zttOrder.getAmount();
+			double Cost_single_price=zttOrder.getCost_single_price();
+			double Single_price=zttOrder.getSingle_price();
+			double sum_price=Single_price*amount;
+			double cost_sum_price=amount*Cost_single_price;
+			zttOrder.setCost_sum_price(cost_sum_price);
+			zttOrder.setSum_price(sum_price);
 			i = zttOrderDao.updateZttOrderBySelective(zttOrder);
 		} catch (Exception e) {
 			i = 0;
@@ -243,6 +271,22 @@ public class ZttOrderServiceImpl extends BaseService implements ZttOrderService{
 		int i = 0;
 		try {
 			i = zttOrderDao.delZttOrder(condition);
+		} catch (Exception e) {
+			i = 0;
+			/**捕捉异常并回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+		return i;
+	}
+	/**
+	* 删除
+	* @param condition 
+	* @return
+	*/
+	public int delZttOrdnum(Map<String,Object> condition){
+		int i = 0;
+		try {
+			i = zttOrderDao.delZttOrdnum(condition);
 		} catch (Exception e) {
 			i = 0;
 			/**捕捉异常并回滚**/

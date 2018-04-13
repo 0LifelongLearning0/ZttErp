@@ -8,8 +8,8 @@ $(document).ready(function(){
 	document.getElementById("order_number").innerText=ajaxobj.order_number;
 	document.getElementById("product_order_number").innerText=ajaxobj.product_order_number;
 	document.getElementById("contract_number").innerText=ajaxobj.contract_number; 
-	document.getElementById("linkman").innerText=ajaxobj.linkman;
-	document.getElementById("product_name").innerText=ajaxobj.product_name;
+	document.getElementById("purchase_name").innerText=ajaxobj.purchase_name;
+	document.getElementById("purchase_stardard").innerText=ajaxobj.purchase_stardard;
 	document.getElementById("stardard").innerText=ajaxobj.stardard;
 	document.getElementById("unit").innerText=ajaxobj.unit;
 	document.getElementById("amount").innerText=ajaxobj.amount;
@@ -21,13 +21,6 @@ $(document).ready(function(){
 });
 
 
-//返回r
-function goback(){
-	tlocation("../zxGoodsApplyController/loadZxGoodsApply");
-}
-$('#defaultForm').bootstrapValidator({
-	message:'此值不是有效的'
-});
 
 /*根据id得到*/
 function getbyapplyid(id){
@@ -48,7 +41,7 @@ function getbyapplyid(id){
 }
 //保存
 function approveZttOrderApply(taskid,status,obj){
-	var url="../zxGoodsApplyController/approvalOrderApply";
+	var url="../zttOrderController/approvalOrderApply";
 	var datatables = parent.$('#datatables').DataTable();
 	var flag=0;
 	var approvalFormWin = parent.Ext.getCmp('approvalFormWin'); 
@@ -60,7 +53,6 @@ function approveZttOrderApply(taskid,status,obj){
 	var selectvalue=document.getElementById("select").options[selectindex].value;
 	var params = {task_id:taskid,task_status:status,remark:selectvalue};
 	if(flag==0){
-	ajaxBReq('../zttOrderController/approvalOrderApply',params);
 	$.ajax({ 
 		   url: url, 
 		   async:false, 
@@ -70,7 +62,6 @@ function approveZttOrderApply(taskid,status,obj){
         	   var index = parent.layer.getFrameIndex(window.name);
         	   parent.layer.close(index);
         	   datatables.ajax.reload();
-        	   tlocation("../lcTaskController/loadAssigneeLcTask");
             }
         });
 	}

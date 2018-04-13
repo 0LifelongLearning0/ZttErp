@@ -9,6 +9,7 @@ import jehc.zxmodules.model.ZttOrderCheckHistory;
 import jehc.zxmodules.model.ZttOrdernumber;
 import jehc.zxmodules.model.ZttOrdernumber_third;
 import jehc.zxmodules.model.ZxGoodsApplyDetail;
+import jehc.zxmodules.model.ztt_filerecord;
 import jehc.zxmodules.model.ztt_processproduct;
 
 /**
@@ -69,6 +70,9 @@ public class ZttOrderDaoImpl  extends BaseDaoImpl implements ZttOrderDao{
 	public List<ZttOrderCheckHistory> getZttOrderhisById(Map<String,Object> condition){
 		return (List<ZttOrderCheckHistory>)this.getList("getprocessinghisById", condition);
 	}
+	public List<ztt_filerecord> getfilerecordById(Map<String,Object> condition){
+		return (List<ztt_filerecord>)this.getList("getfilerecordById", condition);
+	}
 	/**
 	* 添加
 	* @param ztt_order 
@@ -84,6 +88,9 @@ public class ZttOrderDaoImpl  extends BaseDaoImpl implements ZttOrderDao{
 	*/
 	public int addZttOrder(ZttOrder zttOrder){
 		return this.add("addZttOrder", zttOrder);
+	}
+	public int addZttOrderfileRecord(ztt_filerecord ztt_filerecord){
+		return this.add("addZttOrderfileRecord", ztt_filerecord);
 	}
 	public int addZttOrderCheckHistory(ZttOrderCheckHistory zttOrderCheckHistory){
 		return this.add("addZttOrderCheckHistory", zttOrderCheckHistory);
@@ -127,6 +134,9 @@ public class ZttOrderDaoImpl  extends BaseDaoImpl implements ZttOrderDao{
 	*/
 	public int delZttOrder(Map<String,Object> condition){
 		return this.del("delZttOrder", condition);
+	}
+	public int delZttOrdnum(Map<String,Object> condition){
+		return this.del("delZttOrdnum", condition);
 	}
 	/**
 	* 批量添加

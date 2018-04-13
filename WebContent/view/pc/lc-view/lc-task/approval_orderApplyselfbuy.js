@@ -14,8 +14,10 @@ $(document).ready(function(){
 	$(":radio").click(function(){
 		  if($(this).val()=="no"){
 			  $("#end_data_manual").attr("type" , "text");
+			  $("#not_satisfy_reason").attr("type" , "text");
 		  }else{
 			  $("#end_data_manual").attr("type" , "hidden");
+			  $("#not_satisfy_reason").attr("type" , "hidden");
 		  }
 		  });
 	var ajaxobj=eval("("+getbyapplyid(id)+")").data;
@@ -74,32 +76,46 @@ function getbyapplyid(id){
 //保存
 function approveZttOrderApply(taskid,status,obj){
 	var status=$('input:radio:checked').val();
-	
-	var datatables = parent.$('#datatables').DataTable();
-	var url="../zttOrderController/approvalOrderApply";
-	var remark;
-	var params;
-	if(status=="yes"){
-		remark="startbuy";
-		params = {task_id:taskid,task_status:status,remark:remark};
-	}
-	
+	var flag=0;
 	if(status=="no"){
-		var end_date=document.getElementById("end_data_manual").value;
-		remark="buydata";
-		params = {task_id:taskid,task_status:status,remark:remark,end_date:end_date};
+		var end_data_manual=$('#end_data_manual').val();
+		var not_satisfy_reason=$('#not_satisfy_reason').val();
+		if(end_data_manual==""){
+			layer.alert("请输入日期");
+			flag=1;
+		}
+		if(not_satisfy_reason==""){
+			layer.alert("请输入日期不满足原因");
+			flag=1;
+		}
 	}
-	$.ajax({ 
-		   url: url, 
-		   async:false, 
-           type:'POST',
-           data: params,
-           success: function (result) { 
-        	   var index = parent.layer.getFrameIndex(window.name);
-				parent.layer.close(index);
-				datatables.ajax.reload();
-            }
-        });
+	if(flag==0){
+		var datatables = parent.$('#datatables').DataTable();
+		var url="../zttOrderController/approvalOrderApply";
+		var remark;
+		var params;
+		if(status=="yes"){
+			remark="startbuy";
+			params = {task_id:taskid,task_status:status,remark:remark,end_data_manual:end_data_manual,not_satisfy_reason:not_satisfy_reason};
+		}
+		
+		if(status=="no"){
+			remark="buydata";
+			params = {task_id:taskid,task_status:status,remark:remark,end_data_manual:end_data_manual,not_satisfy_reason:not_satisfy_reason};
+		}
+		$.ajax({ 
+			   url: url, 
+			   async:false, 
+	           type:'POST',
+	           data: params,
+	           success: function (result) { 
+	        	   var index = parent.layer.getFrameIndex(window.name);
+					parent.layer.close(index);
+					datatables.ajax.reload();
+	            }
+	        });
+	}
+
 	
 }
 //上传

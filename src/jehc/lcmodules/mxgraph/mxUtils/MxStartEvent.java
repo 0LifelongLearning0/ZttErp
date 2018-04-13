@@ -178,7 +178,7 @@ public class MxStartEvent {
             		}
             		//express类型
             		if(null != cell[1] && !"".equals(cell[1]) && "express".equals(cell[1])){
-            			excuteStr = " expression='Expression'";
+            			excuteStr = " expression='"+cell[0]+"'";
             		}
             		start_node += "<activiti:executionListener event='"+cell[2]+"' "+excuteStr+">";
                     //1-1字段开始 子循环操作

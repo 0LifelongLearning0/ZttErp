@@ -84,6 +84,9 @@ public class ZttPurchaseServiceImpl extends BaseService implements ZttPurchaseSe
 	public int updateZttPurchaseBySelective(ZttPurchase zttPurchase){
 		int i = 0;
 		try {
+			double cost_single_price=zttPurchase.getCost_single_price();
+			double amount=zttPurchase.getAmount();
+			zttPurchase.setCost_sum_price(cost_single_price*amount);
 			i = zttPurchaseDao.updateZttPurchaseBySelective(zttPurchase);
 		} catch (Exception e) {
 			i = 0;

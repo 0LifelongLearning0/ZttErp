@@ -6,6 +6,8 @@ $(function () {
     var params = {xt_attachment_id:$('#user_img').val(),field_name:'user_img'};
     ajaxBFilePathBackRequest('../xtCommonController/getAttachmentPathPP',params);
     /**配置附件回显方法结束**/
+    timelyFun();
+  /*  window.setInterval("timelyFun()",30000);*/
 })
 
 function indexHome(){
@@ -398,4 +400,41 @@ function loadinfo(text,dt1,dt2){
         error:function(){
         }
     })
+}
+function timelyFun(){
+	Notification.requestPermission(function(status) {  
+	});  
+	showmessage();
+	if (Notification.permission === 'granted') { 
+		window.setInterval("showmessage()",500000);
+	}  
+	
+	
+}
+function showmessage(){
+	var url="../lcAgencyController/getAssigneeTaskPageList";
+	var params = {};
+	$.ajax({ 
+		   url: url, 
+		   async:false, 
+           type:'POST',
+           data: params,
+           success: function (result) { 
+                num= eval('(' + result + ')').total;
+                if(num!=0){
+                	var options = {
+               			 body: '请尽快处理',
+               			 icon:'../deng/images/default/add_d.png',
+               			 tag: 'renotify',
+               			  renotify: true
+               			}
+                	var str="你有"+num+"条待处理事项";
+               	var n = new Notification(str,options);
+                }
+            }
+            });
+            
+	
+	 
+	
 }

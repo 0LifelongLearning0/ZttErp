@@ -78,6 +78,11 @@ text-align:center;
 									<button class="btn btn-primary"
 											data-toggle="button"
 											onclick="downloadattachment('${taskData.businessKey }')">查看附件</button></td>
+											<td class="text-center">退回原因</td>
+									        <td colspan="2"><label id="not_satisfy_reason" />
+											</td>
+								</tr>
+								<tr>
 											<td class="text-center">确认交货日期</td>
 									        <td colspan="2"><input type="text"  class="form_datetime form-control"  maxlength="32"  name="buy_end_data" id="buy_end_data" placeholder="请输入交货日期">
 											</td>

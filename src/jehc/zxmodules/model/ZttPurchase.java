@@ -18,6 +18,7 @@ public class ZttPurchase extends BaseEntity implements Serializable{
 	private double amount;/**数量**/
 	private String hope_end_data;/**交期**/
 	private String apply_id;/**发起人id**/
+	private String apply_time;/**发起人id**/
 	private double Product_id;/**采购人id**/
 	private double single_price;/**单价**/
 	private double sum_price;/**总价**/
@@ -25,8 +26,53 @@ public class ZttPurchase extends BaseEntity implements Serializable{
 	private String qualified_number;/**合格件数**/
 	private String qualified_date;/**检验员日期**/
 	private String check_attachment;/**检验文件**/
+	private String personname;
 	private String state;
 	private String supply_name;
+	private String erp_number;
+	private String not_satisfy_reason;
+	private double cost_single_price;
+	private double cost_sum_price;
+	private String supplier_bill_date;
+	private String supplier_bill_price;
+	private String end_data;
+	public String getNot_satisfy_reason() {
+		return not_satisfy_reason;
+	}
+	public void setNot_satisfy_reason(String not_satisfy_reason) {
+		this.not_satisfy_reason = not_satisfy_reason;
+	}
+	
+	public double getCost_single_price() {
+		return cost_single_price;
+	}
+	public void setCost_single_price(double cost_single_price) {
+		this.cost_single_price = cost_single_price;
+	}
+	public double getCost_sum_price() {
+		return cost_sum_price;
+	}
+	public void setCost_sum_price(double cost_sum_price) {
+		this.cost_sum_price = cost_sum_price;
+	}
+	public String getSupplier_bill_date() {
+		return supplier_bill_date;
+	}
+	public void setSupplier_bill_date(String supplier_bill_date) {
+		this.supplier_bill_date = supplier_bill_date;
+	}
+	public String getSupplier_bill_price() {
+		return supplier_bill_price;
+	}
+	public void setSupplier_bill_price(String supplier_bill_price) {
+		this.supplier_bill_price = supplier_bill_price;
+	}
+	public String getEnd_data() {
+		return end_data;
+	}
+	public void setEnd_data(String end_data) {
+		this.end_data = end_data;
+	}
 	public void setId(String id){
 		this.id=id;
 	}
@@ -34,6 +80,18 @@ public class ZttPurchase extends BaseEntity implements Serializable{
 		return id;
 	}
 	
+	public String getPersonname() {
+		return personname;
+	}
+	public void setPersonname(String personname) {
+		this.personname = personname;
+	}
+	public String getApply_time() {
+		return apply_time;
+	}
+	public void setApply_time(String apply_time) {
+		this.apply_time = apply_time;
+	}
 	public String getSupply_name() {
 		return supply_name;
 	}
@@ -135,6 +193,12 @@ public class ZttPurchase extends BaseEntity implements Serializable{
 	}
 	public void setState(String state) {
 		this.state = state;
+	}
+	public String getErp_number() {
+		return erp_number;
+	}
+	public void setErp_number(String erp_number) {
+		this.erp_number = erp_number;
 	}
 	
 }

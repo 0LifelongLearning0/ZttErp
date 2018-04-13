@@ -31,7 +31,16 @@ $(document).ready(function() {
 				data : 'id'
 			},
 			{
+				data:'apply_time'
+			},
+			{
+				data:'erp_number'
+			},
+			{
 				data:'product_order_number'
+			},
+			{
+				data:'personname'
 			},
 			{
 				data:'purchase_name'
@@ -40,19 +49,39 @@ $(document).ready(function() {
 				data:'purchase_stardard'
 			},
 			{
-				data:'material'
-			},
-			{
 				data:'unit'
 			},
 			{
 				data:'amount'
 			},
 			{
+				data:'supply_name'
+			},
+			{
+				data:'cost_single_price'
+			},
+			{
+				data:'cost_sum_price'
+			},
+			{
+				data:'supplier_bill_date'
+			},
+			{
+				data:'supplier_bill_price'
+			},
+			{
 				data:'hope_end_data'
 			},
 			{
-				data:'state'
+				data:'end_data'
+			},
+			{
+				data:'state',
+				render : function(data, type, row,
+						meta) {
+					return InitBDataCallFnByKey(
+							"ztt_purchase", data);
+				}
 			},
 			{
 				data:"id",
@@ -73,19 +102,30 @@ $(document).ready(function() {
 								+ data
 								+ "')\"><span class='glyphicon glyphicon-transfer text-danger' title='申请审批'></span></a>&emsp;";
 					} else {
-						opt= "<a href=\"javascript:approval('"
+						opt= "<a href=\"javascript:approvalfilehistory('"
+								+ data
+								+ "')\"><span class='glyphicon glyphicon-list-alt text-warning' title='审批记录'></span></a>&emsp;";
+					}
+					return opt;
+				}
+			},
+			{
+				data : "id",
+				width : "150px",
+				render : function(data, type, row,
+						meta) {
+					
+					var opt;
+					if (row.state == '53'||row.state == '5') {
+						opt= "<a href=\"javascript:toApplycheck('"
+								+ data
+								+ "')\"><span class='glyphicon glyphicon-transfer text-danger' title='申请审批'></span></a>&emsp;";
+					} else {
+						opt= "<a href=\"javascript:approvalcheckhistory('"
 								+ data
 								+ "')\"><span class='glyphicon glyphicon-list-alt text-warning' title='审批记录'></span></a>&emsp;";
 					}
 					
-					opt+="<a href=\"javascript:showLcProcessInstance('"
-					+ data
-						+"')\"><span class='glyphicon glyphicon-tag text-warning' title='查看流程图'></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-					if (row.state == '4'){
-						opt+="<a href=\"javascript:ZttPurchasedeptcheck('"
-							+ data
-								+"')\"><span class='glyphicon glyphicon-transfer text-danger' title='进入质检部审批'></span>";
-					}
 					return opt;
 				}
 			}
@@ -96,9 +136,14 @@ $(document).ready(function() {
 	docheckboxall('checkall','checkchild');
 	//实现单击行选中
 	clickrowselected('datatables');
-	var n = new Notification("sir, you got a message", {  
-		icon: 'img/icon.png',
-	    body: 'you will have a meeting 5 minutes later.'  
+	$(".form_datetime").datepicker({
+		format : "yyyy-mm-dd",
+		autoclose : true,
+		todayBtn : true,
+		todayHighlight : true,
+		showMeridian : true,
+		pickerPosition : "bottom-left",
+		language : 'zh-CN',// 中文，需要引用zh-CN.js包
 	});
 });
 //新增
@@ -158,4 +203,59 @@ function toApply(id) {
 		};
 		ajaxBReq('../zttPurchaseController/toApply', params, [ 'datatables' ]);
 	})
+}
+
+//申请
+function toApplycheck(id) {
+	var str = $(".checkchild:checked").val();
+	var strs = str.split(",");
+	var id = strs[0];
+	var status = strs[1];
+	msgTishCallFnBoot("确定要申请审批吗？", function() {
+		var params = {
+			apply_id : id
+		};
+		ajaxBReq('../zttPurchaseController/toApplycheck', params, [ 'datatables' ]);
+	})
+}
+
+function approvalcheckhistory(id){
+	var state="7";
+	layer.open({
+		title: '检验记录',
+		type: 2, 
+		area: ['800px', '700px'],
+		btn: ['关闭'],
+	  content: "../zttPurchaseController/toZttpurchasecheck_history?id="+id+"&state="+state
+	}); 
+}
+
+function approvalfilehistory(id){
+	var state="8";
+	layer.open({
+		title: '文件记录',
+		type: 2, 
+		area: ['800px', '700px'],
+		btn: ['关闭'],
+	  content: "../zttPurchaseController/toZttpurchasecheck_history?id="+id+"&state="+state
+	}); 
+}
+function export1(){
+	/* $("#datatables").table2excel({
+        // 不被导出的表格行的CSS class类
+        exclude: ".noExl",
+        // 导出的Excel文档的名称，（没看到作用）
+        name: "Excel Document Name",
+        // Excel文件的名称
+        filename: "采购表"
+    });*/
+	var upid="purchase";
+	layer.open({
+		title : '上传附件',
+		type : 2,
+		area : [ '1500px', '700px' ],
+		btn : [ '关闭'],
+		content : "../zttOrderController/uploadattachment?upid="+upid,
+
+	});
 }

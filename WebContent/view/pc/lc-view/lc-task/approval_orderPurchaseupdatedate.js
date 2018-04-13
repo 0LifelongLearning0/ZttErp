@@ -19,6 +19,7 @@ $(document).ready(function(){
 	document.getElementById("unit").innerText=ajaxobj.unit;
 	document.getElementById("amount").innerText=ajaxobj.amount;
 	document.getElementById("hope_end_data").innerText=ajaxobj.hope_end_data;
+	document.getElementById("not_satisfy_reason").innerText=ajaxobj.not_satisfy_reason;
                 
 	
 });
