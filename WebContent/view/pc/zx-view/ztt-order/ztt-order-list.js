@@ -1,12 +1,290 @@
 
-var flag=0;
+var grid;
 $(document)
 		.ready(
 				function() {
 					// ///////////jehc扩展属性目的可方便使用（boot.js文件datatablesCallBack方法使用）
 					// 如弹窗分页查找根据条件
 					// 可能此时的form发生变化 此时 可以解决该类问题
-					show();
+					var grid;
+					
+					var opt = {
+							searchformId : 'searchForm'
+						};
+					var columnDefs="[{'targets': [ 1 ],'visible': false, 'searchable': false}]";
+					var options = DataTablesPaging
+							.pagingOptions({
+								ajax : function(data, callback, settings) {
+									datatablesCallBack(
+											data,
+											callback,
+											settings,
+											'../zttOrderController/getZttOrderListByCondition',
+											opt);
+								},// 渲染数据
+								// 在第一位置追加序列号
+								fnRowCallback : function(nRow, aData,
+										iDisplayIndex) {
+									jQuery('td:eq(1)', nRow).html(
+											iDisplayIndex + 1);
+									return nRow;
+								},
+								order : [],// 取消默认排序查询,否则复选框一列会出现小箭头
+								"columnDefs":columnDefs ,
+								// 列表表头字段
+								
+								colums : [
+										{
+											sClass : "text-center",
+											width : "50px",
+											data : "id",
+											render : function(data, type,
+													full, meta) {
+												return '<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" name="checkId" class="checkchild " value="'
+														+ data
+														+ ","
+														+ full.state
+														+ '" /><span></span></label>';
+											},
+											bSortable : false
+										},
+
+										{
+											data : 'id'
+										},
+										{
+											data : 'zttordertime'
+										},
+										{
+											data : 'product_order_number',
+											render : function(data, type,
+													row, meta) {
+												if (row.product_order_number == '') {
+													return "无工令号";
+												} else {
+													return row.product_order_number;
+												}
+
+											}
+
+										},
+										{
+											data : 'client'
+										},
+
+										{
+											data : 'product_name'
+										},
+										{
+											data : 'stardard'
+										},
+										{
+											data : 'amount'
+										},
+										
+
+										{
+											data : 'personname'
+										},
+										{
+											data : 'erp_number'
+										},
+										{
+											data : 'order_number'
+										},
+										{
+											data : 'contract_number'
+										},
+										{
+											data : 'cato_type',
+											render : function(data, type,
+													row, meta) {
+												if (data == "outside") {
+													return "外协"
+												} else if (data == "madebyself") {
+													return "自制"
+												} else if (data == "warehouse") {
+													return "仓库"
+												} else if (data == "PD") {
+													return "生产部"
+												} else if (data == "others") {
+													return "其他"
+												} else {
+													return data;
+												}
+											}
+										},
+										{
+											data : 'supplier_name'
+										},
+										{
+											data : 'cost_single_price'
+										},
+										{
+											data : 'cost_sum_price'
+										},
+										{
+											data : 'supplier_bill_date'
+										},
+										{
+											data : 'supplier_bill_price'
+										},
+										{
+											data : 'unit'
+										},
+										{
+											data : 'single_price'
+										},
+										{
+											data : 'sum_price'
+										},
+										{
+											data : 'end_data'
+										},
+										{
+											data : 'send_time'
+										},
+										{
+											data : 'send_amount'
+										},
+										{
+											data : 'bill_date_open'
+										},
+										{
+											data : 'bill_price'
+										},
+										{
+											data : 'cost_share'
+										},
+										{
+											data : 'state',
+											render : function(data, type,
+													row, meta) {
+												return InitBDataCallFnByKey(
+														"ZttOrder", data);
+											}
+										},
+										{
+											data : "id",
+											width : "150px",
+											render : function(data, type,
+													row, meta) {
+
+												var opt = "<a href=\"javascript:toZttOrderDetail('"
+														+ data
+														+ "','"
+														+ row.state
+														+ "')\"><span class='glyphicon glyphicon-eye-open' title='详情'></span></a>&emsp;";
+												return opt;
+											}
+										},
+										{
+											data : "id",
+											width : "150px",
+											render : function(data, type,
+													row, meta) {
+
+												var opt;
+												if (row.state == '0') {
+													opt = "<a href=\"javascript:toApply('"
+															+ data
+															+ "')\"><span class='glyphicon glyphicon-transfer text-danger' title='申请审批'></span></a>&emsp;";
+												} else {
+													opt = "<a href=\"javascript:approvalfilehistory('"
+															+ data
+															+ "')\"><span class='glyphicon glyphicon-list-alt text-warning' title='审批记录'></span></a>&emsp;";
+												}
+												return opt;
+											}
+										},
+										{
+											data : "id",
+											width : "150px",
+											render : function(data, type,
+													row, meta) {
+
+												var opt;
+												if (row.state == '19'
+														|| row.state == '53') {
+													opt = "<a href=\"javascript:toApplycheck('"
+															+ data
+															+ "')\"><span class='glyphicon glyphicon-transfer text-danger' title='申请审批'></span></a>&emsp;";
+												} else {
+													opt = "<a href=\"javascript:approvalcheckhistory('"
+															+ data
+															+ "')\"><span class='glyphicon glyphicon-list-alt text-warning' title='审批记录'></span></a>&emsp;";
+												}
+
+												return opt;
+											}
+										},
+										{
+											data : "id",
+											width : "150px",
+											render : function(data, type,
+													row, meta) {
+
+												var opt;
+												if (row.state == '54') {
+													opt = "<a href=\"javascript:toApplysendcage('"
+															+ data
+															+ "')\"><span class='glyphicon glyphicon-transfer text-danger' title='申请审批'></span></a>&emsp;";
+												} else {
+													opt = "<a href=\"javascript:approvalfilehistory('"
+															+ data
+															+ "')\"><span class='glyphicon glyphicon-list-alt text-warning' title='审批记录'></span></a>&emsp;";
+												}
+
+												return opt;
+											}
+										} 
+										]
+							});
+					grid = $('#datatables').DataTable(options);
+					// 实现全选反选
+					docheckboxall('checkall', 'checkchild');
+					// 实现单击行选中
+					clickrowselected('datatables');
+					InitBDataCombo("ZttOrder", "state");
+					InitBDataCombo("cato_type", "cato_type");
+					var apply_id=document.getElementById("apply_id").value;
+				
+				$(".form_datetime").datepicker({
+					format : "yyyy-mm-dd",
+					autoclose : true,
+					todayBtn : true,
+					todayHighlight : true,
+					showMeridian : true,
+					pickerPosition : "bottom-left",
+					language : 'zh-CN',// 中文，需要引用zh-CN.js包
+				});
+				if(apply_id=="3FDCD32960F147BFA6DCD0EC38EF9317"||apply_id=="89FE89C29E1E4E50A3BE44C4D330E0E4"||apply_id=="E10DCC044F40463F99FD663A8B2337EF"||apply_id=="7DA3010BC6F649F880C6838F27AF3B10"||apply_id=="D459A283DF5F4BE889304E985C668518"){
+					/*var column = grid.column( $(this).attr('data-column') );*/
+					var column = grid.column(14);
+					var column1 = grid.column(15);
+					var column2 = grid.column(16);
+					var column3 = grid.column(17);
+					var column4 = grid.column(19);
+					var column5 = grid.column(20);
+					var column6 = grid.column(25);
+					
+					column.visible( false);
+					column1.visible( false);
+					column2.visible( false);
+					column3.visible( false);
+					column4.visible( false);
+					column5.visible( false);
+					column6.visible( false);
+				}
+				if(apply_id=="B161C7E4F6E84D7B81D88BD3E9ED234F"){
+					var column4 = grid.column(19);
+					var column5 = grid.column(20);
+					var column6 = grid.column(25);
+					
+					column4.visible( false);
+					column5.visible( false);
+					column6.visible( false);
+				}
 				});
 // 新增
 function toZttOrderAdd() {
@@ -140,31 +418,6 @@ function approval_record(id) {
 	});
 	approval_grid = $('#datatables_approval').dataTable(options);
 }
-function showLcProcessInstance(id) {
-	$
-			.ajax({
-
-				type : 'POST',
-				url : "../zttOrderController/getZttOrderInstanceById",
-				data : {
-					id : id
-				},
-				success : function(data) {
-					var id = data;
-					layer
-							.open({
-								title : '查看流程图',
-								type : 2,
-								area : [ '1500px', '600px' ],
-								btn : [ '关闭' ],
-								content : "../lcProcessController/loadLcProcessInstanceImg?processInstanceId="
-										+ id
-
-							})
-				}
-			});
-
-}
 
 // 申请
 function toApplycheck(id) {
@@ -219,267 +472,39 @@ function approvalfilehistory(id) {
 }
 function show(){
 	
-		if (flag == 0) {
-			var grid;
-			var opt = {
-					searchformId : 'searchForm'
-				};
-			var options = DataTablesPaging
-					.pagingOptions({
-						ajax : function(data, callback, settings) {
-							datatablesCallBack(
-									data,
-									callback,
-									settings,
-									'../zttOrderController/getZttOrderListByCondition',
-									opt);
-						},// 渲染数据
-						// 在第一位置追加序列号
-						fnRowCallback : function(nRow, aData,
-								iDisplayIndex) {
-							jQuery('td:eq(1)', nRow).html(
-									iDisplayIndex + 1);
-							return nRow;
-						},
-						order : [],// 取消默认排序查询,否则复选框一列会出现小箭头
-						// 列表表头字段
-						colums : [
-								{
-									sClass : "text-center",
-									width : "50px",
-									data : "id",
-									render : function(data, type,
-											full, meta) {
-										return '<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" name="checkId" class="checkchild " value="'
-												+ data
-												+ ","
-												+ full.state
-												+ '" /><span></span></label>';
-									},
-									bSortable : false
-								},
-
-								{
-									data : 'id'
-								},
-								{
-									data : 'zttordertime'
-								},
-								{
-									data : 'product_order_number',
-									render : function(data, type,
-											row, meta) {
-										if (row.product_order_number == '') {
-											return "无工令号";
-										} else {
-											return row.product_order_number;
-										}
-
-									}
-
-								},
-								{
-									data : 'client'
-								},
-
-								{
-									data : 'product_name'
-								},
-								{
-									data : 'amount'
-								},
-
-								{
-									data : 'personname'
-								},
-								{
-									data : 'erp_number'
-								},
-								{
-									data : 'order_number'
-								},
-								{
-									data : 'contract_number'
-								},
-								{
-									data : 'cato_type',
-									render : function(data, type,
-											row, meta) {
-										if (data == "outside") {
-											return "外协"
-										} else if (data == "madebyself") {
-											return "自制"
-										} else if (data == "warehouse") {
-											return "仓库"
-										} else if (data == "PD") {
-											return "生产部"
-										} else if (data == "others") {
-											return "其他"
-										} else {
-											return data;
-										}
-									}
-								},
-								{
-									data : 'supplier_name'
-								},
-								{
-									data : 'cost_single_price'
-								},
-								{
-									data : 'cost_sum_price'
-								},
-								{
-									data : 'supplier_bill_date'
-								},
-								{
-									data : 'supplier_bill_price'
-								},
-								{
-									data : 'unit'
-								},
-								{
-									data : 'single_price'
-								},
-								{
-									data : 'sum_price'
-								},
-								{
-									data : 'end_data'
-								},
-								{
-									data : 'send_time'
-								},
-								{
-									data : 'send_amount'
-								},
-								{
-									data : 'bill_date_open'
-								},
-								{
-									data : 'bill_price'
-								},
-								{
-									data : 'cost_share'
-								},
-								{
-									data : 'state',
-									render : function(data, type,
-											row, meta) {
-										return InitBDataCallFnByKey(
-												"ZttOrder", data);
-									}
-								},
-								{
-									data : "id",
-									width : "150px",
-									render : function(data, type,
-											row, meta) {
-
-										var opt = "<a href=\"javascript:toZttOrderDetail('"
-												+ data
-												+ "','"
-												+ row.state
-												+ "')\"><span class='glyphicon glyphicon-eye-open' title='详情'></span></a>&emsp;";
-										return opt;
-									}
-								},
-								{
-									data : "id",
-									width : "150px",
-									render : function(data, type,
-											row, meta) {
-
-										var opt;
-										if (row.state == '0') {
-											opt = "<a href=\"javascript:toApply('"
-													+ data
-													+ "')\"><span class='glyphicon glyphicon-transfer text-danger' title='申请审批'></span></a>&emsp;";
-										} else {
-											opt = "<a href=\"javascript:approvalfilehistory('"
-													+ data
-													+ "')\"><span class='glyphicon glyphicon-list-alt text-warning' title='审批记录'></span></a>&emsp;";
-										}
-										return opt;
-									}
-								},
-								{
-									data : "id",
-									width : "150px",
-									render : function(data, type,
-											row, meta) {
-
-										var opt;
-										if (row.state == '19'
-												|| row.state == '53') {
-											opt = "<a href=\"javascript:toApplycheck('"
-													+ data
-													+ "')\"><span class='glyphicon glyphicon-transfer text-danger' title='申请审批'></span></a>&emsp;";
-										} else {
-											opt = "<a href=\"javascript:approvalcheckhistory('"
-													+ data
-													+ "')\"><span class='glyphicon glyphicon-list-alt text-warning' title='审批记录'></span></a>&emsp;";
-										}
-
-										return opt;
-									}
-								},
-								{
-									data : "id",
-									width : "150px",
-									render : function(data, type,
-											row, meta) {
-
-										var opt;
-										if (row.state == '54') {
-											opt = "<a href=\"javascript:toApplysendcage('"
-													+ data
-													+ "')\"><span class='glyphicon glyphicon-transfer text-danger' title='申请审批'></span></a>&emsp;";
-										} else {
-											opt = "<a href=\"javascript:approvalfilehistory('"
-													+ data
-													+ "')\"><span class='glyphicon glyphicon-list-alt text-warning' title='审批记录'></span></a>&emsp;";
-										}
-
-										return opt;
-									}
-								} ]
-					});
-			grid = $('#datatables').dataTable(options);
-			// 实现全选反选
-			docheckboxall('checkall', 'checkchild');
-			// 实现单击行选中
-			clickrowselected('datatables');
-			InitBDataCombo("ZttOrder", "state");
-			InitBDataCombo("cato_type", "cato_type");
-		}else{
 			
-		}
-
-		
-		$(".form_datetime").datepicker({
-			format : "yyyy-mm-dd",
-			autoclose : true,
-			todayBtn : true,
-			todayHighlight : true,
-			showMeridian : true,
-			pickerPosition : "bottom-left",
-			language : 'zh-CN',// 中文，需要引用zh-CN.js包
-		});
 }
 function export1() {
-	/*
-	 * $("#datatables").table2excel({ // 不被导出的表格行的CSS class类 exclude: ".noExl", //
-	 * 导出的Excel文档的名称，（没看到作用） name: "Excel Document Name", // Excel文件的名称
-	 * filename: "业务人员下单表" });
-	 */
 	var upid="order";
 	layer.open({
-		title : '上传附件',
+		title : '导出',
 		type : 2,
 		area : [ '1500px', '700px' ],
 		btn : [ '关闭'],
-		content : "../zttOrderController/uploadattachment?upid"+upid
+		content : "../zttOrderController/uploadattachment?upid="+upid
 
 	});
+}
+function selectsupplyer(){
+	var upid="suppler";
+	layer.open({
+		title: '选择供应商',
+		type: 2, 
+		area: ['800px', '500px'],
+		btn: ['关闭'],
+		content: "../zttOrderController/selectsuppler?upid="+upid
+	 
+	}); 
+}
+
+function selectclient(){
+	var upid="client";
+	layer.open({
+		title: '选择客户',
+		type: 2, 
+		area: ['800px', '500px'],
+		btn: ['关闭'],
+		content: "../zttOrderController/selectsuppler?upid="+upid
+	 
+	}); 
 }

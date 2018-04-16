@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZttClient">
+	<!--初始化分页-->
+	<select id="getZttClientListByCondition" resultType="jehc.zxmodules.model.ZttClient" parameterType="map">
+		SELECT
+			id,
+			name,
+			classify,
+			num,
+			address,
+			contact_person,
+			title,
+			fax,
+			phone,
+			qq,
+			web,
+			email,
+			pay_type,
+			bank_id,
+			bank_account,
+			operation_status,
+			type,
+			is_connect,
+			yc_num,
+			yc_status,
+			yc_grade,
+			is_judge,
+			judge_date,
+			judge_cycle,
+			judge_grade,
+			state,
+			create_date
+		FROM 
+			ztt_client
+		WHERE 1=1
+	</select>
+
+	<!--查询对象-->
+	<select id="getZttClientById" resultType="jehc.zxmodules.model.ZttClient" parameterType="string">
+		SELECT
+			id,
+			name,
+			classify,
+			num,
+			address,
+			contact_person,
+			title,
+			fax,
+			phone,
+			qq,
+			web,
+			email,
+			pay_type,
+			bank_id,
+			bank_account,
+			operation_status,
+			type,
+			is_connect,
+			yc_num,
+			yc_status,
+			yc_grade,
+			is_judge,
+			judge_date,
+			judge_cycle,
+			judge_grade,
+			state,
+			create_date
+		FROM 
+			ztt_client
+		WHERE id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addZttClient" parameterType="jehc.zxmodules.model.ZttClient">
+		INSERT INTO
+			ztt_client
+			(
+			id,
+			name,
+			classify,
+			num,
+			address,
+			contact_person,
+			title,
+			fax,
+			phone,
+			qq,
+			web,
+			email,
+			pay_type,
+			bank_id,
+			bank_account,
+			operation_status,
+			type,
+			is_connect,
+			yc_num,
+			yc_status,
+			yc_grade,
+			is_judge,
+			judge_date,
+			judge_cycle,
+			judge_grade,
+			state,
+			create_date
+			)
+			VALUES
+			(
+			#{id},
+			#{name},
+			#{classify},
+			#{num},
+			#{address},
+			#{contact_person},
+			#{title},
+			#{fax},
+			#{phone},
+			#{qq},
+			#{web},
+			#{email},
+			#{pay_type},
+			#{bank_id},
+			#{bank_account},
+			#{operation_status},
+			#{type},
+			#{is_connect},
+			#{yc_num},
+			#{yc_status},
+			#{yc_grade},
+			#{is_judge},
+			#{judge_date},
+			#{judge_cycle},
+			#{judge_grade},
+			#{state},
+			#{create_date}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZttClient" parameterType="jehc.zxmodules.model.ZttClient">
+		UPDATE
+			ztt_client
+		SET
+			name = #{name},
+			classify = #{classify},
+			num = #{num},
+			address = #{address},
+			contact_person = #{contact_person},
+			title = #{title},
+			fax = #{fax},
+			phone = #{phone},
+			qq = #{qq},
+			web = #{web},
+			email = #{email},
+			pay_type = #{pay_type},
+			bank_id = #{bank_id},
+			bank_account = #{bank_account},
+			operation_status = #{operation_status},
+			type = #{type},
+			is_connect = #{is_connect},
+			yc_num = #{yc_num},
+			yc_status = #{yc_status},
+			yc_grade = #{yc_grade},
+			is_judge = #{is_judge},
+			judge_date = #{judge_date},
+			judge_cycle = #{judge_cycle},
+			judge_grade = #{judge_grade},
+			state = #{state},
+			create_date = #{create_date}
+		WHERE id=#{id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZttClientBySelective" parameterType="jehc.zxmodules.model.ZttClient">
+		UPDATE
+			ztt_client
+		<set>
+			<if test="name != null">
+				name = #{name},
+			</if>
+			<if test="classify != null">
+				classify = #{classify},
+			</if>
+			<if test="num != null">
+				num = #{num},
+			</if>
+			<if test="address != null">
+				address = #{address},
+			</if>
+			<if test="contact_person != null">
+				contact_person = #{contact_person},
+			</if>
+			<if test="title != null">
+				title = #{title},
+			</if>
+			<if test="fax != null">
+				fax = #{fax},
+			</if>
+			<if test="phone != null">
+				phone = #{phone},
+			</if>
+			<if test="qq != null">
+				qq = #{qq},
+			</if>
+			<if test="web != null">
+				web = #{web},
+			</if>
+			<if test="email != null">
+				email = #{email},
+			</if>
+			<if test="pay_type != null">
+				pay_type = #{pay_type},
+			</if>
+			<if test="bank_id != null">
+				bank_id = #{bank_id},
+			</if>
+			<if test="bank_account != null">
+				bank_account = #{bank_account},
+			</if>
+			<if test="operation_status != null">
+				operation_status = #{operation_status},
+			</if>
+			<if test="type != null">
+				type = #{type},
+			</if>
+			<if test="is_connect != null">
+				is_connect = #{is_connect},
+			</if>
+			<if test="yc_num != null">
+				yc_num = #{yc_num},
+			</if>
+			<if test="yc_status != null">
+				yc_status = #{yc_status},
+			</if>
+			<if test="yc_grade != null">
+				yc_grade = #{yc_grade},
+			</if>
+			<if test="is_judge != null">
+				is_judge = #{is_judge},
+			</if>
+			<if test="judge_date != null">
+				judge_date = #{judge_date},
+			</if>
+			<if test="judge_cycle != null">
+				judge_cycle = #{judge_cycle},
+			</if>
+			<if test="judge_grade != null">
+				judge_grade = #{judge_grade},
+			</if>
+			<if test="state != null">
+				state = #{state},
+			</if>
+			<if test="create_date != null">
+				create_date = #{create_date},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZttClient" parameterType="map">
+		DELETE FROM ztt_client WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZttClient" parameterType="list">
+		INSERT INTO
+			ztt_client
+			(
+			id,
+			name,
+			classify,
+			num,
+			address,
+			contact_person,
+			title,
+			fax,
+			phone,
+			qq,
+			web,
+			email,
+			pay_type,
+			bank_id,
+			bank_account,
+			operation_status,
+			type,
+			is_connect,
+			yc_num,
+			yc_status,
+			yc_grade,
+			is_judge,
+			judge_date,
+			judge_cycle,
+			judge_grade,
+			state,
+			create_date
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.name},
+			#{item.classify},
+			#{item.num},
+			#{item.address},
+			#{item.contact_person},
+			#{item.title},
+			#{item.fax},
+			#{item.phone},
+			#{item.qq},
+			#{item.web},
+			#{item.email},
+			#{item.pay_type},
+			#{item.bank_id},
+			#{item.bank_account},
+			#{item.operation_status},
+			#{item.type},
+			#{item.is_connect},
+			#{item.yc_num},
+			#{item.yc_status},
+			#{item.yc_grade},
+			#{item.is_judge},
+			#{item.judge_date},
+			#{item.judge_cycle},
+			#{item.judge_grade},
+			#{item.state},
+			#{item.create_date}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZttClient" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				ztt_client
+			SET
+				name = #{item.name},
+				classify = #{item.classify},
+				num = #{item.num},
+				address = #{item.address},
+				contact_person = #{item.contact_person},
+				title = #{item.title},
+				fax = #{item.fax},
+				phone = #{item.phone},
+				qq = #{item.qq},
+				web = #{item.web},
+				email = #{item.email},
+				pay_type = #{item.pay_type},
+				bank_id = #{item.bank_id},
+				bank_account = #{item.bank_account},
+				operation_status = #{item.operation_status},
+				type = #{item.type},
+				is_connect = #{item.is_connect},
+				yc_num = #{item.yc_num},
+				yc_status = #{item.yc_status},
+				yc_grade = #{item.yc_grade},
+				is_judge = #{item.is_judge},
+				judge_date = #{item.judge_date},
+				judge_cycle = #{item.judge_cycle},
+				judge_grade = #{item.judge_grade},
+				state = #{item.state},
+				create_date = #{item.create_date}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZttClientBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				ztt_client
+			<set>
+				<if test="item.name != null">
+					name = #{item.name},
+				</if>
+				<if test="item.classify != null">
+					classify = #{item.classify},
+				</if>
+				<if test="item.num != null">
+					num = #{item.num},
+				</if>
+				<if test="item.address != null">
+					address = #{item.address},
+				</if>
+				<if test="item.contact_person != null">
+					contact_person = #{item.contact_person},
+				</if>
+				<if test="item.title != null">
+					title = #{item.title},
+				</if>
+				<if test="item.fax != null">
+					fax = #{item.fax},
+				</if>
+				<if test="item.phone != null">
+					phone = #{item.phone},
+				</if>
+				<if test="item.qq != null">
+					qq = #{item.qq},
+				</if>
+				<if test="item.web != null">
+					web = #{item.web},
+				</if>
+				<if test="item.email != null">
+					email = #{item.email},
+				</if>
+				<if test="item.pay_type != null">
+					pay_type = #{item.pay_type},
+				</if>
+				<if test="item.bank_id != null">
+					bank_id = #{item.bank_id},
+				</if>
+				<if test="item.bank_account != null">
+					bank_account = #{item.bank_account},
+				</if>
+				<if test="item.operation_status != null">
+					operation_status = #{item.operation_status},
+				</if>
+				<if test="item.type != null">
+					type = #{item.type},
+				</if>
+				<if test="item.is_connect != null">
+					is_connect = #{item.is_connect},
+				</if>
+				<if test="item.yc_num != null">
+					yc_num = #{item.yc_num},
+				</if>
+				<if test="item.yc_status != null">
+					yc_status = #{item.yc_status},
+				</if>
+				<if test="item.yc_grade != null">
+					yc_grade = #{item.yc_grade},
+				</if>
+				<if test="item.is_judge != null">
+					is_judge = #{item.is_judge},
+				</if>
+				<if test="item.judge_date != null">
+					judge_date = #{item.judge_date},
+				</if>
+				<if test="item.judge_cycle != null">
+					judge_cycle = #{item.judge_cycle},
+				</if>
+				<if test="item.judge_grade != null">
+					judge_grade = #{item.judge_grade},
+				</if>
+				<if test="item.state != null">
+					state = #{item.state},
+				</if>
+				<if test="item.create_date != null">
+					create_date = #{item.create_date},
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+</mapper>

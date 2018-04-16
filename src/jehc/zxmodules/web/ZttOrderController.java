@@ -103,7 +103,9 @@ public class ZttOrderController extends BaseAction {
 	 * @return
 	 */
 	@RequestMapping(value = "/loadZttOrder", method = { RequestMethod.POST, RequestMethod.GET })
-	public ModelAndView loadZttOrder(ZttOrder zttOrder, HttpServletRequest request) {
+	public ModelAndView loadZttOrder(ZttOrder zttOrder, HttpServletRequest request,Model model) {
+		XtUserinfo applyUser = xtUserinfoService.getXtUserinfoById(getXtUid());
+		model.addAttribute("applyUser", applyUser);
 		return new ModelAndView("pc/zx-view/ztt-order/ztt-order-list");
 	}
 
@@ -383,6 +385,8 @@ public class ZttOrderController extends BaseAction {
 	public ModelAndView toZttOrderUpdate(String id, HttpServletRequest request, Model model) {
 		String orderid = id.split(",")[0];
 		ZttOrder zttOrder = zttOrderService.getZttOrderById(orderid);
+		XtUserinfo applyUser = xtUserinfoService.getXtUserinfoById(getXtUid());
+		model.addAttribute("applyUser", applyUser);
 		model.addAttribute("zttOrder", zttOrder);
 		return new ModelAndView("pc/zx-view/ztt-order/ztt-order-update");
 	}
@@ -517,7 +521,12 @@ public class ZttOrderController extends BaseAction {
 		ZttOrder zttOrder = zttOrderService.getZttOrderById(id);
 		model.addAttribute("upid", upid);
 		model.addAttribute("zttOrder", zttOrder);
-		return new ModelAndView("pc/zx-view/ztt-order/selectsupplyer");
+		if(upid.equals("client")){
+			return new ModelAndView("pc/zx-view/ztt-order/selectclient");
+		}else{
+			return new ModelAndView("pc/zx-view/ztt-order/selectsupplyer");
+		}
+		
 	}
 
 	/**
@@ -680,6 +689,7 @@ public class ZttOrderController extends BaseAction {
 			Map<String, Object> variables = new HashMap<String, Object>();
 			variables.put("taskType", "业务人员下单流程");
 			variables.put("owner", zttOrder.getApply_id());
+			variables.put("taskkind", "ztt_sales");
 			lc_Apply.setLc_apply_title(
 					getXtU().getXt_userinfo_realName() + "于" + getSimpleDateFormat() + "，提交了一条部门申请申请流程");
 			lc_Apply.setLc_apply_model_biz_id(zttOrder.getId());
@@ -816,6 +826,7 @@ public class ZttOrderController extends BaseAction {
 					} else if (remark.equals("send")) {
 						lc_approval.setLc_status_name("已发货");
 						zttOrder.setState("42");
+						zttOrder.setSend_time(send_time);
 						ztt_filerecord.setProduct_check_self_attachment(checkcomment);
 						String send_data = "发货时间" + send_time;
 						ztt_filerecord.setStatus_name(send_data);

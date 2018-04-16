@@ -251,11 +251,23 @@ function export1(){
     });*/
 	var upid="purchase";
 	layer.open({
-		title : '上传附件',
+		title : '导出',
 		type : 2,
 		area : [ '1500px', '700px' ],
 		btn : [ '关闭'],
 		content : "../zttOrderController/uploadattachment?upid="+upid,
 
 	});
+}
+
+function selectsupplyer(){
+	var upid="suppler";
+	layer.open({
+		title: '选择供应商',
+		type: 2, 
+		area: ['800px', '500px'],
+		btn: ['关闭'],
+		content: "../zttOrderController/selectsuppler?upid="+upid
+	 
+	}); 
 }

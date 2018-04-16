@@ -1,20 +1,19 @@
 //返回r
 function goback(){
-	tlocation("../zxSupplierController/loadZxSupplier");
+	tlocation("../zttClientController/loadZttClient");
 }
 $('#defaultForm').bootstrapValidator({
 	message:'此值不是有效的'
 });
 //保存
-function editZxSupplier(){
-	submitBForm('defaultForm','../zxSupplierController/updateZxSupplier','../zxSupplierController/loadZxSupplier');
+function updateZttClient(){
+	submitBForm('defaultForm','../zttClientController/updateZttClient','../zttClientController/loadZttClient');
 }
-
 //初始化日期选择器
 $(document).ready(function(){
-/*	datetimeInit();
-	InitMyDataCombo("zx_zhiwu","title","title_");*/
-   /* $("#classify").append("<option value=''>请选择</option><option value='A'>A</option><option value='B'>B</option><option value='C'>C</option><option value='D'>D</option>");
+	datetimeInit();
+	InitMyDataCombo("zx_zhiwu","title","title_");
+    $("#classify").append("<option value=''>请选择</option><option value='A'>A</option><option value='B'>B</option><option value='C'>C</option><option value='D'>D</option>");
     $("#type").append("<option value=''>请选择</option><option value='1'>供应商</option><option value='2'>加工商</option>");
     $("#pay_type").append("<option value=''>请选择</option><option value='1'>全款</option><option value='2'>货到付款</option><option value='3'>预付款</option>");
     $("#is_connect").append("<option value=''>请选择</option><option value='1'>是</option><option value='0'>否</option>");
@@ -24,10 +23,10 @@ $(document).ready(function(){
     $("#type").val($("#type_").val());
     $("#pay_type").val($("#pay_type_").val());
     $("#is_connect").val($("#is_connect_").val());
-    $("#judge_cycle").val($("#judge_cycle_").val());*/
+    $("#judge_cycle").val($("#judge_cycle_").val());
 });
 
-/*function InitMyDataCombo(ckey,id,value_id){
+function InitMyDataCombo(ckey,id,value_id){
 	var str = "<option value=''>请选择</option>";
 	$.ajax({
 	   type:"GET",
@@ -49,4 +48,4 @@ $(document).ready(function(){
 		   }
 	   }
 	});
-}*/
+}

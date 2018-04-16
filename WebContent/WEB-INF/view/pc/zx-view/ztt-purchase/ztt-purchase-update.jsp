@@ -12,6 +12,7 @@
 			<h4>编辑采购台账</h4>
 		</div>
 		<form class="form-horizontal" id="defaultForm" method="post">
+		
 			<div class="form-group" style="display:none;">
 				<label class="col-lg-3 control-label">序列号</label>
 				<div class="col-lg-6">
@@ -21,35 +22,47 @@
 			<div class="form-group">
 				<label class="col-lg-3 control-label">工令号</label>
 				<div class="col-lg-6">
-					<input class="form-control" type="text" maxlength="32"  name="product_order_number" placeholder="请输入工令号" value="${zttPurchase.product_order_number }">
+					<input class="form-control" type="text" maxlength="32"  name="product_order_number"   id="product_order_number" placeholder="请输入工令号" value="${zttPurchase.product_order_number }">
 				</div>
 			</div>
-			<div class="form-group">
+			<div class="form-group" >
 				<label class="col-lg-3 control-label">erp号</label>
 				<div class="col-lg-6">
-					<input class="form-control" type="text" maxlength="255"  name="erp_number"  value="${zttPurchase.erp_number }">
+					<input class="form-control" type="text" maxlength="255"  name="erp_number"  id="erp_number" value="${zttPurchase.erp_number }">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-lg-3 control-label">数量</label>
 				<div class="col-lg-6">
-					<input class="form-control" type="text" maxlength="20"  name="amount" placeholder="请输入数量" value="${zttPurchase.amount }">
+					<input class="form-control" type="text" maxlength="20"  name="amount" id="amount" placeholder="请输入数量" value="${zttPurchase.amount }">
 				</div>
 			</div>
-			<div class="form-group">
+			<div class="form-group" id="supply">
+				<label class="col-lg-3 control-label">供应商</label>
+				<div class="col-lg-6">
+					<input type="text" class="form-control" name="supply_name" id="supplyer_name" placeholder="请选择供应商" value="${zttPurchase.supply_name }" readOnly="true">
+					<button type="button" class="btn btn-success"
+								onclick="selectsupplyer()" id="buttonsave">
+								<span class="glyphicon glyphicon-saved" aria-hidden="true"></span>选择
+							</button>
+				</div>
+				
+				
+			</div>
+			<div class="form-group" id="cost_single_price">
 				<label class="col-lg-3 control-label">成本单价</label>
 				<div class="col-lg-6">
 					<input class="form-control" type="text" maxlength="20"  name="cost_single_price" placeholder="请输入单价" value="${zttPurchase.cost_single_price }">
 				</div>
 			</div>
-			<div class="form-group">
+			<div class="form-group" id="supplier_bill_date">
 				<label class="col-lg-3 control-label">供应商开票日期</label>
 				<div class="col-lg-6">
 				<input class="form_datetime form-control"
 									type="text" maxlength="255" name="supplier_bill_date" id="supplier_bill_date" value='${zttPurchase.supplier_bill_date }'>
 				</div>
 			</div>
-			<div class="form-group">
+			<div class="form-group" id="supplier_bill_price">
 				<label class="col-lg-3 control-label">供应商开票金额</label>
 				<div class="col-lg-6">
 					<input class="form-control" type="text" maxlength="20"  name=supplier_bill_price  value="${zttPurchase.supplier_bill_price }">
@@ -59,6 +72,8 @@
 				<label class="col-lg-3 control-label">实际到货日期</label>
 				<div class="col-lg-6">
 					<input class="form_datetime form-control" type="text" maxlength="20"  name="end_data"  value="${zttPurchase.end_data }">
+					<input class="form-control"
+									type="hidden" maxlength="255" name="apply_id" id="apply_id" value='${applyUser.xt_userinfo_id }'>
 				</div>
 			</div>
 			<div class="form-group">

@@ -28,8 +28,33 @@ white-space: nowrap;
 						<span class="input-group-addon">至</span>
 						<input type="text" class="form_datetime form-control" placeholder="结束时间" name="apply_time_et" />
 					</div>
-					
+				</div>	
+				</br>
+				<div class="form-group">
+					<label>供应商</label>
+					<input type="text" class="form-control" name="supply_name" id="supplyer_name" placeholder="请选择供应商">
+					<button type="button" class="btn btn-success"
+								onclick="selectsupplyer()" id="buttonsave">
+								<span class="glyphicon glyphicon-saved" aria-hidden="true"></span>选择
+							</button>
+				</div>
+				<div class="form-group">
+					<label>供应商开票日期</label>
+					<div class="input-group">
+						<input type="text" class="form_datetime form-control" placeholder="起始时间" name="apply_time_st_supplier_bill_date" />
+						<span class="input-group-addon">至</span>
+						<input type="text" class="form_datetime form-control" placeholder="结束时间" name="apply_time_et_supplier_bill_date" />
+					</div>
+				</div>
 				
+				<div class="form-group">
+					<label>交货日期</label>
+					<div class="input-group">
+						<input type="text" class="form_datetime form-control" placeholder="起始时间" name="apply_time_st_End_data" />
+						<span class="input-group-addon">至</span>
+						<input type="text" class="form_datetime form-control" placeholder="结束时间" name="apply_time_et_End_data" />
+					</div>
+				</div>
 			<div class="form-group" style="margin-left: 35px;">
 				<button class="btn btn-primary" type="button" onclick="search('datatables')">
 					<i class="glyphicon glyphicon-search"></i>&nbsp;检索

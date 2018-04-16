@@ -1,5 +1,4 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@ include file="/deng/include/include.jsp"%>
 <%@ include file="/deng/include/includeboot.jsp"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -30,9 +29,10 @@ td {
 									<td class="col-md-2 text-center">部&emsp;&emsp;门</td>
 									<td class="col-md-2">${applyUser.xt_departinfo_name }</td>
 									<td class="col-md-2 text-center">申请日期</td>
-									<td class="col-md-2"><label id="zttordertime" />
-									<input class="form-control" type="hidden" maxlength="255"  name="taskkind" id="taskkind" value='${taskData.taskVariables.taskkind }'>
-									</td>
+									<td class="col-md-2"><label id="zttordertime" /> <input
+										class="form-control" type="hidden" maxlength="255"
+										name="taskkind" id="taskkind"
+										value='${taskData.taskVariables.taskkind }'></td>
 								</tr>
 								<tr>
 									<td class="text-center">工令号</td>
@@ -46,8 +46,10 @@ td {
 										<input class="form-control" type="hidden" maxlength="255"
 										name="checker_attachment" id="checker_attachment"></td>
 									<td class="text-center">发货时间</td>
-									<td colspan="2"><input type="text" name="send_time" id="send_time"
-										class="form_datetime form-control" placeholder="请输入发货时间"></td>
+									<td colspan="2">
+									<input type="text" name="send_time"
+										id="send_time" class="form_datetime form-control"
+										placeholder="请输入发货时间"></td>
 								</tr>
 							</tbody>
 						</table>

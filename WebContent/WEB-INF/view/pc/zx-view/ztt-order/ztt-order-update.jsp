@@ -21,12 +21,14 @@
 			<div class="container-fluid  col-md-8 col-md-offset-2">
 				<div class="row">
 					<form class="form-horizontal" id="defaultForm" method="post">
-						<input class="form-control" type="text" maxlength="255" name="id"
+						<input class="form-control" type="hidden" maxlength="255" name="id"
 							id="id" value='${zttOrder.id }'>
 						<table class="table table-bordered">
 							<caption class="text-center h3 no-margin bold">业务人员下单表</caption>
 							<tbody>
 								<tr>
+								<input class="form-control"
+									type="hidden" maxlength="255" name="apply_id" id="apply_id" value='${applyUser.xt_userinfo_id }'>
 									<td class="col-md-1 text-center">申&ensp;请&ensp;人</td>
 									<td class="col-md-3">${applyUser.xt_userinfo_realName }</td>
 									<td class="col-md-1 text-center">部&emsp;&emsp;门</td>
@@ -39,7 +41,7 @@
 									<td>${zttOrder.order_number }</td>
 									<td class="text-center">合同号</td>
 									<td colspan="3"><input class="form-control" type="text"
-										maxlength="255" name="contract_number"
+										maxlength="255" name="contract_number" id="contract_number"
 										value="${zttOrder.contract_number}"></td>
 								</tr>
 								<tr>
@@ -52,7 +54,10 @@
 									<td class="text-center">产品名称</td>
 									<td colspan="2">${zttOrder.product_name }</td>
 									<td class="text-center">规格</td>
-									<td colspan="2">${zttOrder.stardard }</td>
+									<td colspan="2">
+									<input class="form-control"
+									type="text" maxlength="255" name="stardard" id="stardard" value='${zttOrder.stardard }'>
+									</td>
 								</tr>
 								<tr>
 									<td>单位</td>
@@ -64,7 +69,7 @@
 									</td>
 									<td>单价</td>
 									<td><input class="form-control" type="text"
-										maxlength="255" name="single_price"
+										maxlength="255" name="single_price" id="single_price"
 										value="${zttOrder.single_price }"></td>
 
 								</tr>
@@ -85,7 +90,11 @@
 								</tr>
 								<tr>
 									<td class="col-md-1 text-center">erp号</td>
-									<td class="col-md-3">${zttOrder.erp_number }</td>
+									<td class="col-md-3">
+									<input class="form-control"
+										type="text" maxlength="255" name="erp_number"
+										id="erp_number" value='${zttOrder.erp_number }'>
+									</td>
 									<td class="col-md-1 text-center">成本单价</td>
 									<td class="col-md-3"><input class="form-control"
 										type="text" maxlength="255" name="cost_single_price"
@@ -112,11 +121,12 @@
 								<td class="col-md-3"><input class="form-control"
 									type="text" maxlength="255" name="send_amount" id="send_amount" value='${zttOrder.send_amount }'></td>
 								</tr>
-								<td class="col-md-1 text-center">开票日期</td>
+								<tr id="sales">
+								<td class="col-md-1 text-center">销售开票日期</td>
 								<td class="col-md-3"><input type="text"
 									class="form_datetime form-control" maxlength="32"
 									name="bill_date_open" id="bill_date_open" value='${zttOrder.bill_date_open }'></td>
-								<td class="col-md-1 text-center" id="erp1">开票金额</td>
+								<td class="col-md-1 text-center" id="erp1">销售开票金额</td>
 								<td class="col-md-3"><input class="form-control"
 									type="text" maxlength="255" name="bill_price" id="bill_price"
 									value='${zttOrder.bill_price }'></td>

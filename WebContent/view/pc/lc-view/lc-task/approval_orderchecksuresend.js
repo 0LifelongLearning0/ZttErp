@@ -1,14 +1,21 @@
 var numbers = -1;
 var t;
 var counter;
-$(document)
-		.ready(
-				function() {
+$(document).ready(function() {
 					var ajaxobj = eval("(" + getbyapplyid(id) + ")").data;
 					document.getElementById("product_order_number").innerText = ajaxobj.product_order_number;
+					$(".form_datetime").datepicker({
+						format : "yyyy-mm-dd",
+						autoclose : true,
+						todayBtn : true,
+						todayHighlight : true,
+						showMeridian : true,
+						pickerPosition : "bottom-left",
+						language : 'zh-CN',// 中文，需要引用zh-CN.js包
+					});
 				});
 
-// 返回r
+
 function goback() {
 	tlocation("../zxGoodsApplyController/loadZxGoodsApply");
 }
@@ -24,9 +31,9 @@ function getbyapplyid(id) {
 	};
 	var taskkind = document.getElementById("taskkind").value;
 	var url;
-	if(taskkind=="ztt_sales"){
+	if (taskkind == "ztt_sales") {
 		url = "../zttOrderController/getZttOrderById";
-	}else if(taskkind=="ztt_purchase"){
+	} else if (taskkind == "ztt_purchase") {
 		url = "../zttPurchaseController/getZttPurchaseById";
 	}
 	$.ajax({
@@ -51,13 +58,12 @@ function approveZttOrderApply(taskid, status, obj) {
 	if (checkcomment == "") {
 		layer.alert("请上传文件");
 		return;
-	} 
-	if(send_time==""){
+	}
+	if (send_time == "") {
 		layer.alert("请输入发货时间");
 		return;
-	}
-	else {
-		
+	} else {
+
 		var params = {
 			task_id : taskid,
 			task_status : status,
@@ -147,15 +153,3 @@ function downloadselfattachmenttech(id) {
 	})
 };
 
-$(function() {
-	$(".form_datetime").datepicker({
-		 format:"yyyy-mm-dd",
-		 autoclose:true,
-		 todayBtn:true,
-		 todayHighlight:true,
-		 showMeridian:true,
-		 pickerPosition:"bottom-left",
-		 language:'zh-CN',//中文，需要引用zh-CN.js包
-	});
-	
-});

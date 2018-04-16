@@ -325,3 +325,14 @@ function search(datatablesid){
 	var datatables = $('#'+datatablesid).DataTable();
 	datatables.ajax.reload();
 }
+function selectsupplyer(){
+	var upid="suppler";
+	layer.open({
+		title: '选择供应商',
+		type: 2, 
+		area: ['800px', '500px'],
+		btn: ['关闭'],
+		content: "../zttOrderController/selectsuppler?upid="+upid
+	 
+	}); 
+}

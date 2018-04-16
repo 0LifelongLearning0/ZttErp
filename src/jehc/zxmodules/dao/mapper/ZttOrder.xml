@@ -47,6 +47,18 @@
 		<if test="null != state">
 			AND instr(state,#{state})
 		</if>
+		<if test="null != client">
+			AND instr(client,#{client})
+		</if>
+		<if test="null != product_order_number">
+			AND instr(product_order_number,#{product_order_number})
+		</if>
+		<if test="null != erp_number">
+			AND instr(erp_number,#{erp_number})
+		</if>
+		<if test="null != supplier_name">
+			AND instr(supplier_name,#{supplier_name})
+		</if>
 		<if test="null != product_name">
 			AND instr(product_name,#{product_name})
 		</if>
@@ -58,6 +70,18 @@
 		</if>
 		<if test="null != apply_time_st">
 			AND zttordertime&gt;#{apply_time_st}
+		</if>
+		<if test="null != apply_time_st_supplier_bill_date">
+			AND supplier_bill_date&gt;#{apply_time_st_supplier_bill_date}
+		</if>
+		<if test="null != apply_time_et_supplier_bill_date">
+			AND supplier_bill_date&lt;#{apply_time_et_supplier_bill_date}
+		</if>
+		<if test="null != apply_time_st_End_data">
+			AND End_data&gt;#{apply_time_st_End_data}
+		</if>
+		<if test="null != apply_time_et_End_data">
+			AND End_data&lt;#{apply_time_et_End_data}
 		</if>
 		<if test="null == orderby">
 			ORDER BY zttordertime desc

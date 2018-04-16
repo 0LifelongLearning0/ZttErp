@@ -74,3 +74,14 @@ $(function() {
 	});
 
 });
+function selectsupplyer(){
+	var upid="client";
+	layer.open({
+		title: '选择客户',
+		type: 2, 
+		area: ['800px', '500px'],
+		btn: ['关闭'],
+		content: "../zttOrderController/selectsuppler?upid="+upid
+	 
+	}); 
+}

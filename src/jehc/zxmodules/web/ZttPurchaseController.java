@@ -238,6 +238,8 @@ public class ZttPurchaseController extends BaseAction {
 	@RequestMapping(value = "/toZttPurchaseUpdate", method = { RequestMethod.POST, RequestMethod.GET })
 	public ModelAndView toZttPurchaseUpdate(String id, HttpServletRequest request, Model model) {
 		ZttPurchase zttPurchase = zttPurchaseService.getZttPurchaseById(id.split(",")[0]);
+		XtUserinfo applyUser = xtUserinfoService.getXtUserinfoById(getXtUid());
+		model.addAttribute("applyUser", applyUser);
 		model.addAttribute("zttPurchase", zttPurchase);
 		return new ModelAndView("pc/zx-view/ztt-purchase/ztt-purchase-update");
 	}
@@ -301,6 +303,7 @@ public class ZttPurchaseController extends BaseAction {
 			Map<String, Object> variables = new HashMap<String, Object>();
 			variables.put("taskType", "采购流程");
 			variables.put("owner", zttPurchase.getApply_id());
+			variables.put("taskkind", "ztt_purchase");
 			lc_Apply.setLc_apply_title(getXtU().getXt_userinfo_realName() + "于" + getSimpleDateFormat() + "，提交了一条采购流程");
 			lc_Apply.setLc_apply_model_biz_id(zttPurchase.getId());
 			if (activitiUtil.addApply(lc_his_id, zttPurchase.getId(), variables, lc_Apply)) {
