@@ -50,7 +50,7 @@ function toZxSupplierAdd(){
 		layer.alert("只能选择一条数据");
 		return;
 	}
-	msgTishCallFnBoot("确定要选择此供应商？",function(){
+	msgTishCallFnBoot("确定要选择此客户？",function(){
 		parent.$('#client').val($(".checkchild:checked").val());
 		var index = parent.layer.getFrameIndex(window.name);
 		parent.layer.close(index);

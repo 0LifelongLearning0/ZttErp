@@ -491,7 +491,6 @@ function selectsupplyer(){
 		title: '选择供应商',
 		type: 2, 
 		area: ['800px', '500px'],
-		btn: ['关闭'],
 		content: "../zttOrderController/selectsuppler?upid="+upid
 	 
 	}); 
@@ -503,7 +502,6 @@ function selectclient(){
 		title: '选择客户',
 		type: 2, 
 		area: ['800px', '500px'],
-		btn: ['关闭'],
 		content: "../zttOrderController/selectsuppler?upid="+upid
 	 
 	}); 

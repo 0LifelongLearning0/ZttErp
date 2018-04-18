@@ -252,11 +252,7 @@
 	</insert>
 	<!--删除 -->
 	<delete id="delZttOrdnum" parameterType="map">
-		DELETE FROM ztt_ordernumber_third WHERE order_id IN
-		<foreach item="item" index="index" collection="order_id" open="("
-			separator="," close=")">
-			#{item}
-		</foreach>
+		DELETE FROM ztt_ordernumber_third WHERE order_id=#{order_id};
 	</delete>
 
 	<!--添加 -->

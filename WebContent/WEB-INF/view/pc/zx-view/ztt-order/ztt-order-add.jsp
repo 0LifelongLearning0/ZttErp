@@ -114,7 +114,8 @@
 									<td colspan="2"><input type="text"
 										class="form_datetime form-control" maxlength="32"
 										name="End_data" id="end_data" placeholder="请输入交货日期"></td>
-									<td class="text-center">附件</td>
+									<td class="text-center">附件<span
+										class="font-color-meta-light">（如果有图纸,则必须上传图纸）</span></td>
 									<td colspan="2"><button class="btn btn-primary"
 											data-toggle="button" onclick="uploadattachment()">请上传附件</button>
 										<input class="form-control" type="hidden" maxlength="255"

@@ -31,17 +31,18 @@
 							name="apply_time_et" />
 					</div>
 				</div>
+				<span style="background-color: #FFFFFF"> &nbsp;&nbsp;&nbsp;</span>
 				<div class="form-group">
 					<label>类型</label> <select class="form-control" name="cato_type"
 						id="cato_type" placeholder="请选择"></select>
 				</div>
-
+				<span style="background-color: #FFFFFF"> &nbsp;&nbsp;&nbsp;</span>
 				<div class="form-group">
 					<label>工令号</label> <input type="text" class="form-control"
 						name="product_order_number" id="product_order_number"
 						placeholder="请输入工令号">
 				</div>
-
+				<span style="background-color: #FFFFFF"> &nbsp;&nbsp;&nbsp;</span>
 				<div class="form-group">
 					<label>erp号</label> <input type="text" class="form-control"
 						name="erp_number" id="erp_number" placeholder="请输入erp号">
@@ -55,7 +56,7 @@
 						<span class="glyphicon glyphicon-saved" aria-hidden="true"></span>选择
 					</button>
 				</div>
-				<span style="background-color: #FFFFFF">    &nbsp;&nbsp;&nbsp;</span>
+				<span style="background-color: #FFFFFF"> &nbsp;&nbsp;&nbsp;</span>
 				<div class="form-group">
 					<label>客户</label> <input type="text" class="form-control"
 						name="client" id="client" placeholder="请选择客户">

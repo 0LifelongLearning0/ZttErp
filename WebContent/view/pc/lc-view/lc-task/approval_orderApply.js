@@ -46,10 +46,13 @@ function approveZttOrderApply(taskid,status,obj){
 	var flag=0;
 	var approvalFormWin = parent.Ext.getCmp('approvalFormWin'); 
 	var selectindex=document.getElementById("select").selectedIndex;
-	if(selectindex==0){
-		layer.alert('请选择产品类型');
-		flag=1;
+	if(status=="yes"){
+		if(selectindex==0){
+			layer.alert('请选择产品类型');
+			flag=1;
+		}
 	}
+	
 	var selectvalue=document.getElementById("select").options[selectindex].value;
 	var params = {task_id:taskid,task_status:status,remark:selectvalue};
 	if(flag==0){

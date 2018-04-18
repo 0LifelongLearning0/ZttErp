@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZttCodeversion">
+	<!--初始化分页-->
+	<select id="getZttCodeversionListByCondition" resultType="jehc.zxmodules.model.ZttCodeversion" parameterType="map">
+		SELECT
+			id,
+			name,
+			codeversion,
+			updatetime,
+			svn,
+			searchname,
+			person
+		FROM 
+			ztt_codeversion
+		WHERE 1=1
+	</select>
+
+	<!--查询对象-->
+	<select id="getZttCodeversionById" resultType="jehc.zxmodules.model.ZttCodeversion" parameterType="string">
+		SELECT
+			id,
+			name,
+			codeversion,
+			updatetime,
+			svn,
+			searchname,
+			person
+		FROM 
+			ztt_codeversion
+		WHERE id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addZttCodeversion" parameterType="jehc.zxmodules.model.ZttCodeversion">
+		INSERT INTO
+			ztt_codeversion
+			(
+			id,
+			name,
+			codeversion,
+			updatetime,
+			svn,
+			searchname,
+			person
+			)
+			VALUES
+			(
+			#{id},
+			#{name},
+			#{codeversion},
+			#{updatetime},
+			#{svn},
+			#{searchname},
+			#{person}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZttCodeversion" parameterType="jehc.zxmodules.model.ZttCodeversion">
+		UPDATE
+			ztt_codeversion
+		SET
+			name = #{name},
+			codeversion = #{codeversion},
+			updatetime = #{updatetime},
+			svn = #{svn},
+			searchname = #{searchname},
+			person = #{person}
+		WHERE id=#{id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZttCodeversionBySelective" parameterType="jehc.zxmodules.model.ZttCodeversion">
+		UPDATE
+			ztt_codeversion
+		<set>
+			<if test="name != null">
+				name = #{name},
+			</if>
+			<if test="codeversion != null">
+				codeversion = #{codeversion},
+			</if>
+			<if test="updatetime != null">
+				updatetime = #{updatetime},
+			</if>
+			<if test="svn != null">
+				svn = #{svn},
+			</if>
+			<if test="searchname != null">
+				searchname = #{searchname},
+			</if>
+			<if test="person != null">
+				person = #{person},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZttCodeversion" parameterType="map">
+		DELETE FROM ztt_codeversion WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZttCodeversion" parameterType="list">
+		INSERT INTO
+			ztt_codeversion
+			(
+			id,
+			name,
+			codeversion,
+			updatetime,
+			svn,
+			searchname,
+			person
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.name},
+			#{item.codeversion},
+			#{item.updatetime},
+			#{item.svn},
+			#{item.searchname},
+			#{item.person}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZttCodeversion" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				ztt_codeversion
+			SET
+				name = #{item.name},
+				codeversion = #{item.codeversion},
+				updatetime = #{item.updatetime},
+				svn = #{item.svn},
+				searchname = #{item.searchname},
+				person = #{item.person}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZttCodeversionBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				ztt_codeversion
+			<set>
+				<if test="item.name != null">
+					name = #{item.name},
+				</if>
+				<if test="item.codeversion != null">
+					codeversion = #{item.codeversion},
+				</if>
+				<if test="item.updatetime != null">
+					updatetime = #{item.updatetime},
+				</if>
+				<if test="item.svn != null">
+					svn = #{item.svn},
+				</if>
+				<if test="item.searchname != null">
+					searchname = #{item.searchname},
+				</if>
+				<if test="item.person != null">
+					person = #{item.person},
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+</mapper>

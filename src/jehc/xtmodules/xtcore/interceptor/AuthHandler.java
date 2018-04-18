@@ -45,6 +45,8 @@ public class AuthHandler extends Logback4jUtil implements HandlerInterceptor {
 		long beginTime = System.currentTimeMillis();
 		//线程绑定变量（该数据只有当前请求的线程可见） 
         startTimeThreadLocal.set(beginTime);
+       /* System.out.println(handler.getClass().getName());*/
+        
         ///////////////////拦截IP黑户开始（优先级最高）///////////////////////
 		if(!validateIP(request)) {  
 			if(!bDownLoad(request, response)){

@@ -269,9 +269,9 @@ public class ZttOrderController extends BaseAction {
 			Map<String, Object> condition = new HashMap<String, Object>();
 			condition.put("id", id.split(","));
 			Map<String, Object> condition1 = new HashMap<String, Object>();
-			condition1.put("order_id", id.split(","));
+			condition1.put("order_id", id.split(",")[0]);
 			i = zttOrderService.delZttOrder(condition);
-			i = zttOrderService.delZttOrdnum(condition1);
+			zttOrderService.delZttOrdnum(condition1);
 		}
 		if (i > 0) {
 			return outAudStr(true);
@@ -926,6 +926,10 @@ public class ZttOrderController extends BaseAction {
 						zttOrderService.addZttOrderCheckHistory(zttOrderCheckHistory);
 					} else {
 						zttOrder.setState("10");
+						Map<String, Object> condition2 = new HashMap<String, Object>();
+						condition2.put("order_id",zttOrder.getId());
+						zttOrderService.delZttOrdnum(condition2);
+						
 					}
 					zttOrderService.updateZttOrderBySelective(zttOrder);
 				} else if (task_status.equals("erp")) {
