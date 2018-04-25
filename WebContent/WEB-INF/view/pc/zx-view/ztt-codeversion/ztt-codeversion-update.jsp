@@ -31,12 +31,6 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-lg-3 control-label">修改时间</label>
-				<div class="col-lg-6">
-					<input class="form-control" type="text" maxlength="32"  name="updatetime" placeholder="请输入修改时间" value="${zttCodeversion.updatetime }">
-				</div>
-			</div>
-			<div class="form-group">
 				<label class="col-lg-3 control-label">svn路径</label>
 				<div class="col-lg-6">
 					<input class="form-control" type="text" maxlength="32"  name="svn" placeholder="请输入svn路径" value="${zttCodeversion.svn }">
@@ -52,6 +46,14 @@
 				<label class="col-lg-3 control-label">负责人</label>
 				<div class="col-lg-6">
 					<input class="form-control" type="text" maxlength="32"  name="person" placeholder="请输入负责人" value="${zttCodeversion.person }">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-3 control-label">文件路径</label>
+				<div class="col-lg-6">
+					<input class="form-control" type="text" maxlength="32"  name="attachment" id="attachment"  value='${zttCodeversion.attachment }' readonly="true"/>
+					<button class="btn btn-primary"
+											data-toggle="button" onclick="uploadattachment()">请上传文件</button>
 				</div>
 			</div>
 			<div class="form-group">

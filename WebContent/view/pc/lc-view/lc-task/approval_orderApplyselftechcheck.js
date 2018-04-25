@@ -88,12 +88,13 @@ function uploadattachment(){
 function progressupload(id){
 	var index = parent.layer.getFrameIndex(window.name); 
 	var state="7";
+	var flag="task";
 	parent.layer.open({
 		title: '机械加工工艺过程卡片',
 		type: 2, 
 		area: ['1500px', '700px'],
 		btn: ['关闭'],
-	  content: "../zttOrderController/toZttprocessingtechnicDetail?id="+id+"&state="+state
+	  content: "../zttOrderController/toZttprocessingtechnicDetail?id="+id+"&state="+state+"&flag="+flag
 	}); 
 }
 //保存

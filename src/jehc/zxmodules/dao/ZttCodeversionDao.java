@@ -32,6 +32,7 @@ public interface ZttCodeversionDao{
 	* @return
 	*/
 	public int updateZttCodeversion(ZttCodeversion zttCodeversion);
+	public ZttCodeversion getZttCodeversionByName(String searchname);
 	/**
 	* 修改（根据动态条件）
 	* @param ztt_codeversion 

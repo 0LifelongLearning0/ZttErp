@@ -57,4 +57,5 @@ public interface LcApplyService{
 	 * @return
 	 */
 	public List<LcApply> getLcApplyList(Map<String,Object> condition);
+	public LcApply getLcApplyByBussinessId(String bussiness_id);
 }

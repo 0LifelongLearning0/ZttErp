@@ -11,7 +11,8 @@
 			updatetime,
 			svn,
 			searchname,
-			person
+			person,
+			attachment
 		FROM 
 			ztt_codeversion
 		WHERE 1=1
@@ -26,12 +27,18 @@
 			updatetime,
 			svn,
 			searchname,
-			person
+			person,
+			attachment
 		FROM 
 			ztt_codeversion
 		WHERE id=#{id}
 	</select>
-
+  <select id="getZttCodeversionByName" resultType="jehc.zxmodules.model.ZttCodeversion" parameterType="string" >
+    select 
+    *
+    from ztt_codeversion
+    where searchname = #{searchname}
+  </select>
 	<!--添加-->
 	<insert id="addZttCodeversion" parameterType="jehc.zxmodules.model.ZttCodeversion">
 		INSERT INTO
@@ -67,7 +74,8 @@
 			updatetime = #{updatetime},
 			svn = #{svn},
 			searchname = #{searchname},
-			person = #{person}
+			person = #{person},
+			attachment = #{attachment}
 		WHERE id=#{id}
 	</update>
 
@@ -93,6 +101,9 @@
 			</if>
 			<if test="person != null">
 				person = #{person},
+			</if>
+			<if test="attachment != null">
+				attachment = #{attachment},
 			</if>
 		</set>
 		WHERE id=#{id}

@@ -27,6 +27,7 @@ text-align:center;
 							<input class="form-control" type="hidden" maxlength="255"  name="machine_part" id="machine_part">
 							<input class="form-control" type="hidden" maxlength="255"  name="machine_part_number" id="machine_part_number">
 							<input class="form-control" type="hidden" maxlength="255"  name="material_id" id="material_id">
+							<input class="form-control" type="hidden" maxlength="255"  name="order_id" id="order_id">
 							<tbody>
 								<tr>
 									<td class="col-md-2 text-center">申&ensp;请&ensp;人</td>

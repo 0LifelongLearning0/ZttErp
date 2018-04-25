@@ -16,7 +16,7 @@ public class DB {
                 + "loginTimeout=30;";*/
 		String connectionString =  
                 "jdbc:sqlserver://10.15.1.252;"  
-                + "database=db_office;"  
+                + "database=db_xiangmuguanli;"  
                 + "user=sa;"  
                 + "password=zttZTT123;" 
                 + "trustServerCertificate=false;"  

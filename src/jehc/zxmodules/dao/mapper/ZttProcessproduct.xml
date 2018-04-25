@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZttProcessproduct">
+	<!--初始化分页-->
+	<select id="getZttProcessproductListByCondition" resultType="jehc.zxmodules.model.ZttProcessproduct" parameterType="map">
+		SELECT
+			id,
+			order_id,
+			parentId,
+			Processname,
+			Processcontent,
+			equipment,
+			tooling,
+			single_price,
+			sum_price,
+			product_person_id,
+			product_date,
+			qualified_number,
+			qualified_date
+		FROM 
+			ztt_processproduct
+		WHERE 1=1
+		<if test = "null != parentId">
+			AND parentId = #{parentId}
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getZttProcessproductById" resultType="jehc.zxmodules.model.ZttProcessproduct" parameterType="string">
+		SELECT
+			id,
+			order_id,
+			parentId,
+			Processname,
+			Processcontent,
+			equipment,
+			tooling,
+			single_price,
+			sum_price,
+			product_person_id,
+			product_date,
+			qualified_number,
+			qualified_date
+		FROM 
+			ztt_processproduct
+		WHERE id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addZttProcessproduct" parameterType="jehc.zxmodules.model.ZttProcessproduct">
+		INSERT INTO
+			ztt_processproduct
+			(
+			id,
+			order_id,
+			parentId,
+			Processname,
+			Processcontent,
+			equipment,
+			tooling,
+			single_price,
+			sum_price,
+			product_person_id,
+			product_date,
+			qualified_number,
+			qualified_date
+			)
+			VALUES
+			(
+			#{id},
+			#{order_id},
+			#{parentId},
+			#{Processname},
+			#{Processcontent},
+			#{equipment},
+			#{tooling},
+			#{single_price},
+			#{sum_price},
+			#{product_person_id},
+			#{product_date},
+			#{qualified_number},
+			#{qualified_date}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZttProcessproduct" parameterType="jehc.zxmodules.model.ZttProcessproduct">
+		UPDATE
+			ztt_processproduct
+		SET
+			order_id = #{order_id},
+			parentId = #{parentId},
+			Processname = #{Processname},
+			Processcontent = #{Processcontent},
+			equipment = #{equipment},
+			tooling = #{tooling},
+			single_price = #{single_price},
+			sum_price = #{sum_price},
+			product_person_id = #{product_person_id},
+			product_date = #{product_date},
+			qualified_number = #{qualified_number},
+			qualified_date = #{qualified_date}
+		WHERE id=#{id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZttProcessproductBySelective" parameterType="jehc.zxmodules.model.ZttProcessproduct">
+		UPDATE
+			ztt_processproduct
+		<set>
+			<if test="order_id != null">
+				order_id = #{order_id},
+			</if>
+			<if test="parentId != null">
+				parentId = #{parentId},
+			</if>
+			<if test="Processname != null">
+				Processname = #{Processname},
+			</if>
+			<if test="Processcontent != null">
+				Processcontent = #{Processcontent},
+			</if>
+			<if test="equipment != null">
+				equipment = #{equipment},
+			</if>
+			<if test="tooling != null">
+				tooling = #{tooling},
+			</if>
+			<if test="single_price != null">
+				single_price = #{single_price},
+			</if>
+			<if test="sum_price != null">
+				sum_price = #{sum_price},
+			</if>
+			<if test="product_person_id != null">
+				product_person_id = #{product_person_id},
+			</if>
+			<if test="product_date != null">
+				product_date = #{product_date},
+			</if>
+			<if test="qualified_number != null">
+				qualified_number = #{qualified_number},
+			</if>
+			<if test="qualified_date != null">
+				qualified_date = #{qualified_date},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZttProcessproduct" parameterType="map">
+		DELETE FROM ztt_processproduct WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZttProcessproduct" parameterType="list">
+		INSERT INTO
+			ztt_processproduct
+			(
+			id,
+			order_id,
+			parentId,
+			Processname,
+			Processcontent,
+			equipment,
+			tooling,
+			single_price,
+			sum_price,
+			product_person_id,
+			product_date,
+			qualified_number,
+			qualified_date
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.order_id},
+			#{item.parentId},
+			#{item.Processname},
+			#{item.Processcontent},
+			#{item.equipment},
+			#{item.tooling},
+			#{item.single_price},
+			#{item.sum_price},
+			#{item.product_person_id},
+			#{item.product_date},
+			#{item.qualified_number},
+			#{item.qualified_date}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZttProcessproduct" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				ztt_processproduct
+			SET
+				order_id = #{item.order_id},
+				parentId = #{item.parentId},
+				Processname = #{item.Processname},
+				Processcontent = #{item.Processcontent},
+				equipment = #{item.equipment},
+				tooling = #{item.tooling},
+				single_price = #{item.single_price},
+				sum_price = #{item.sum_price},
+				product_person_id = #{item.product_person_id},
+				product_date = #{item.product_date},
+				qualified_number = #{item.qualified_number},
+				qualified_date = #{item.qualified_date}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZttProcessproductBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				ztt_processproduct
+			<set>
+				<if test="item.order_id != null">
+					order_id = #{item.order_id},
+				</if>
+				<if test="item.parentId != null">
+					parentId = #{item.parentId},
+				</if>
+				<if test="item.Processname != null">
+					Processname = #{item.Processname},
+				</if>
+				<if test="item.Processcontent != null">
+					Processcontent = #{item.Processcontent},
+				</if>
+				<if test="item.equipment != null">
+					equipment = #{item.equipment},
+				</if>
+				<if test="item.tooling != null">
+					tooling = #{item.tooling},
+				</if>
+				<if test="item.single_price != null">
+					single_price = #{item.single_price},
+				</if>
+				<if test="item.sum_price != null">
+					sum_price = #{item.sum_price},
+				</if>
+				<if test="item.product_person_id != null">
+					product_person_id = #{item.product_person_id},
+				</if>
+				<if test="item.product_date != null">
+					product_date = #{item.product_date},
+				</if>
+				<if test="item.qualified_number != null">
+					qualified_number = #{item.qualified_number},
+				</if>
+				<if test="item.qualified_date != null">
+					qualified_date = #{item.qualified_date},
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--根据外键删除-->
+	<delete id="delZttProcessproductByForeignKey" parameterType="string">
+		DELETE FROM ztt_processproduct WHERE parentId = #{parentId}
+	</delete>
+</mapper>

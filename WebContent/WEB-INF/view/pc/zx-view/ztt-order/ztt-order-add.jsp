@@ -50,8 +50,17 @@
 									</td>
 								</tr>
 								<tr>
-									<td class="text-center">订单号/申请号 <span
-										class="font-color-meta-light">（必填项）</span>
+								<td class="text-center">工令号
+									</td>
+									<td class="text-gray"><input class="form-control"
+										type="text" maxlength="255" name="product_order_number"
+										id="product_order_number" placeholder="默认递增" readonly=true>
+										<button type="button" class="btn btn-success"
+											onclick="edit_contract_number()" id="buttonsave">
+											<span class="glyphicon glyphicon-saved" aria-hidden="true"></span>编辑
+										</button>
+										</td>
+									<td class="text-center">订单号/申请号 
 									</td>
 									<td class="text-gray"><input class="form-control"
 										type="text" maxlength="255" name="order_number"

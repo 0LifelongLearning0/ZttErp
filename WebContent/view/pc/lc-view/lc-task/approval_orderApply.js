@@ -8,8 +8,7 @@ $(document).ready(function(){
 	document.getElementById("order_number").innerText=ajaxobj.order_number;
 	document.getElementById("product_order_number").innerText=ajaxobj.product_order_number;
 	document.getElementById("contract_number").innerText=ajaxobj.contract_number; 
-	document.getElementById("purchase_name").innerText=ajaxobj.purchase_name;
-	document.getElementById("purchase_stardard").innerText=ajaxobj.purchase_stardard;
+	document.getElementById("product_name").innerText=ajaxobj.product_name;
 	document.getElementById("stardard").innerText=ajaxobj.stardard;
 	document.getElementById("unit").innerText=ajaxobj.unit;
 	document.getElementById("amount").innerText=ajaxobj.amount;

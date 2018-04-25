@@ -26,6 +26,7 @@ public interface ZttCodeversionService{
 	* @return
 	*/
 	public int addZttCodeversion(ZttCodeversion zttCodeversion);
+	public ZttCodeversion getZttCodeversionByName(String searchname);
 	/**
 	* 修改
 	* @param ztt_codeversion 

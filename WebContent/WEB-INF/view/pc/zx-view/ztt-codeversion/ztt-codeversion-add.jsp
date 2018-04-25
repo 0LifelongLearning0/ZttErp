@@ -25,12 +25,6 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-lg-3 control-label">修改时间</label>
-				<div class="col-lg-6">
-					<input class="form-control" type="text" maxlength="32"  name="updatetime" placeholder="请输入修改时间">
-				</div>
-			</div>
-			<div class="form-group">
 				<label class="col-lg-3 control-label">svn路径</label>
 				<div class="col-lg-6">
 					<input class="form-control" type="text" maxlength="32"  name="svn" placeholder="请输入svn路径">
@@ -46,6 +40,8 @@
 				<label class="col-lg-3 control-label">负责人</label>
 				<div class="col-lg-6">
 					<input class="form-control" type="text" maxlength="32"  name="person" placeholder="请输入负责人">
+					<button class="btn btn-primary"
+											data-toggle="button" onclick="uploadattachment()">请上传附件</button>
 				</div>
 			</div>
 			<div class="form-group">

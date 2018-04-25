@@ -1,11 +1,22 @@
 package jehc.zxmodules.web;
 import java.util.List;
+import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.ui.Model;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +32,7 @@ import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.zxmodules.model.ZttCodeversion;
 import jehc.zxmodules.service.ZttCodeversionService;
+import net.sf.json.JSONObject;
 
 /**
 * 代码版本控制 
@@ -63,13 +75,35 @@ public class ZttCodeversionController extends BaseAction{
 	* @param request 
 	*/
 	@AuthUneedLogin
-	@ResponseBody
 	@RequestMapping(value = "/getZttCodeversion", method = RequestMethod.GET,produces="text/html; charset=UTF-8")
-	public String getZttCodeversion(@RequestBody String data){
-		String result = data;
-		String version=result.split("=")[1];
-        	
-		return result;
+	public ResponseEntity<byte[]> getZttCodeversion(String fileName, HttpServletRequest request, HttpServletResponse response){
+		
+		ZttCodeversion ZttCodeversion = zttCodeversionService.getZttCodeversionByName(fileName);
+		String path1=ZttCodeversion.getAttachment(); 
+		 JSONObject jsons = JSONObject.fromObject(path1); 
+		 String path=(String) jsons.get("path");
+	        File file=new File(path);  
+	        
+	        ResponseEntity<byte[]> a = null;
+	        HttpHeaders headers = new HttpHeaders();    
+	        try {
+	        	String downfilename=path;
+				fileName=new String(downfilename.getBytes("UTF-8"),"iso-8859-1");
+	        headers.setContentDispositionFormData("attachment", fileName);   
+	        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);   
+	        a=new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file), headers, HttpStatus.CREATED);}
+	        catch (IOException e) {
+				e.printStackTrace();
+			}
+	        return a;
+	}
+	@AuthUneedLogin
+	@RequestMapping(value = "/getversion",method = RequestMethod.POST)
+	@ResponseBody
+	public String getversion(HttpServletRequest request){
+		String param =request.getParameter("param");
+		ZttCodeversion ZttCodeversion = zttCodeversionService.getZttCodeversionByName(param);
+		return ZttCodeversion.getCodeversion();
 	}
 	/**
 	* 获取对象
@@ -93,6 +127,7 @@ public class ZttCodeversionController extends BaseAction{
 		int i = 0;
 		if(null != zttCodeversion && !"".equals(zttCodeversion)){
 			zttCodeversion.setId(UUID.toUUID());
+			zttCodeversion.setUpdatetime(DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
 			i=zttCodeversionService.addZttCodeversion(zttCodeversion);
 		}
 		if(i>0){
@@ -111,6 +146,7 @@ public class ZttCodeversionController extends BaseAction{
 	public String updateZttCodeversion(ZttCodeversion zttCodeversion,HttpServletRequest request){
 		int i = 0;
 		if(null != zttCodeversion && !"".equals(zttCodeversion)){
+			zttCodeversion.setUpdatetime(DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
 			i=zttCodeversionService.updateZttCodeversion(zttCodeversion);
 		}
 		if(i>0){

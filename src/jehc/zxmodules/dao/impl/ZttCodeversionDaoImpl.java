@@ -29,6 +29,9 @@ public class ZttCodeversionDaoImpl  extends BaseDaoImpl implements ZttCodeversio
 	public ZttCodeversion getZttCodeversionById(String id){
 		return (ZttCodeversion)this.get("getZttCodeversionById", id);
 	}
+	public ZttCodeversion getZttCodeversionByName(String searchname){
+		return (ZttCodeversion)this.get("getZttCodeversionByName", searchname);
+	}
 	/**
 	* 添加
 	* @param ztt_codeversion 

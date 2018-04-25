@@ -118,6 +118,8 @@
 				<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>导出
 			</button>
 		</div>
+		<input class="form-control"
+									type="hidden" maxlength="255" name="apply_id" id="apply_id" value='${applyUser.xt_userinfo_id }'>
 		<table id="datatables"
 			class="table table-bordered table-striped table-hover">
 			<thead>

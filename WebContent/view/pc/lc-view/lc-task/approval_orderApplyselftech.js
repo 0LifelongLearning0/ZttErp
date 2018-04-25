@@ -19,6 +19,7 @@ $(document)
 					document.getElementById("single_price").innerText = ajaxobj.single_price;
 					document.getElementById("end_data").innerText = ajaxobj.end_data;
 					document.getElementById("attachment").value = ajaxobj.attachment;
+					document.getElementById("order_id").value = ajaxobj.id;
 					/*
 					 * var counter = 0; t.row.add([ i+1,
 					 * document.getElementById("zxGoodsApplyDetail["+i+"].office_name").value,
@@ -115,13 +116,20 @@ function uploadattachmenttech() {
 // 保存
 function progressupload(id) {
 	var index = parent.layer.getFrameIndex(window.name);
+	var order_id=document.getElementById("order_id").value;
 	parent.layer.open({
 		title : '机械加工工艺过程卡片',
 		type : 2,
 		area : [ '1500px', '700px' ],
 		btn : [ '关闭' ],
-		content : "../zttOrderController/processingtechnic?id=" + id
-				+ "&index=" + index
+		content : "../zttProcessproductParentController/loadZttProcessproductParent?id=" + id
+				+ "&index=" + index+"&order_id=" + order_id,
+				success: function (layero, index) {
+	            	 //巧妙的地方在这里哦
+					parent.layer.getChildFrame('body',index).contents().find("#order_id").val(order_id)
+	            	
+
+	            }
 	});
 }
 // 下载
@@ -137,3 +145,6 @@ function downloadattachment(id) {
 
 	})
 };
+function getlay() {  //利用这个方法向子页面传递layer的index
+    return document.getElementById("order_id").value;
+}

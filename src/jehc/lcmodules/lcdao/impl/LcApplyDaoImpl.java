@@ -47,6 +47,9 @@ public class LcApplyDaoImpl  extends BaseDaoImpl implements LcApplyDao{
 	public int updateLcApply(LcApply lc_Apply){
 		return this.update("updateLcApply", lc_Apply);
 	}
+	public int update_act_ru_task(LcApply lc_Apply){
+		return this.update("update_act_ru_task", lc_Apply);
+	}
 	/**
 	* 删除
 	* @param condition 
@@ -79,5 +82,14 @@ public class LcApplyDaoImpl  extends BaseDaoImpl implements LcApplyDao{
 	@SuppressWarnings("unchecked")
 	public List<LcApply> getLcApplyList(Map<String,Object> condition){
 		return (List<LcApply>)this.getList("getLcApplyList", condition);
+	}
+	/**
+	 * 根据busniss_id查找集合
+	 * @param condition
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public LcApply getLcApplyByBussinessId(String lc_apply_model_id){
+		return (LcApply) this.get("getLcApplyByBussinessId", lc_apply_model_id);
 	}
 }

@@ -35,7 +35,7 @@ $('#easyContainer').easyUpload({
 	  formParam: {
 	    token: $.cookie('token_cookie')//不需要验证token时可以去掉
 	  },//文件filename以外的配置参数，格式：{key1:value1,key2:value2}
-	  timeout: 30000,//请求超时时间
+	  timeout: 3000000,//请求超时时间
 	  successFunc: function(res) {
 		/*  var data=eval('(' + res.success[0] + ')').path;
 		  var attachment=parent.$('#attachment').val();

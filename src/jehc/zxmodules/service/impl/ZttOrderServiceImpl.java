@@ -4,6 +4,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import jehc.lcmodules.lcdao.LcApplyDao;
+import jehc.lcmodules.lcmodel.LcApply;
+import jehc.lcmodules.lcservice.LcApplyService;
 import jehc.xtmodules.xtcore.base.BaseService;
 import jehc.xtmodules.xtcore.util.ExceptionUtil;
 import jehc.xtmodules.xtcore.util.UUID;
@@ -31,6 +35,8 @@ import jehc.zxmodules.model.ztt_processproduct;
 public class ZttOrderServiceImpl extends BaseService implements ZttOrderService{
 	@Autowired
 	private ZttOrderDao zttOrderDao;
+	@Autowired
+	private LcApplyDao lcApplyDao;
 	
 	
 	/**
@@ -271,6 +277,24 @@ public class ZttOrderServiceImpl extends BaseService implements ZttOrderService{
 		int i = 0;
 		try {
 			i = zttOrderDao.delZttOrder(condition);
+		} catch (Exception e) {
+			i = 0;
+			/**捕捉异常并回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+		return i;
+	}
+	/**
+	* 删除
+	* @param condition 
+	* @return
+	*/
+	public int delZttOrderTask(String bussiness_id){
+		int i = 0;
+		LcApply LcApply=lcApplyDao.getLcApplyByBussinessId(bussiness_id.split(",")[0]);
+		lcApplyDao.update_act_ru_task(LcApply);
+		System.out.println(LcApply.getProcessInstance_id());
+		try {
 		} catch (Exception e) {
 			i = 0;
 			/**捕捉异常并回滚**/

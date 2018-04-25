@@ -23,6 +23,7 @@ public interface ZttOrderService{
 	* @return
 	*/
 	public ZttOrder getZttOrderById(String id);
+	public int delZttOrderTask(String bussiness_id);
 	/**
 	* 添加
 	* @param ztt_order 

@@ -133,4 +133,7 @@ public class LcApplyServiceImpl extends BaseService implements LcApplyService{
 	public List<LcApply> getLcApplyList(Map<String,Object> condition){
 		return lcApplyDao.getLcApplyList(condition);
 	}
+	public LcApply getLcApplyByBussinessId(String bussiness_id){
+		return lcApplyDao.getLcApplyByBussinessId(bussiness_id);
+	}
 }

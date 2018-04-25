@@ -188,6 +188,8 @@ $(document)
 												if (row.state == '0') {
 													opt = "<a href=\"javascript:toApply('"
 															+ data
+															+ "','"
+															+ row.product_order_number
 															+ "')\"><span class='glyphicon glyphicon-transfer text-danger' title='申请审批'></span></a>&emsp;";
 												} else {
 													opt = "<a href=\"javascript:approvalfilehistory('"
@@ -306,6 +308,7 @@ function toZttOrderDetail(id, state) {
 }
 // 删除
 function delZttOrder() {
+	var apply_id=document.getElementById("apply_id").value;
 	if (returncheckedLength('checkchild') <= 0) {
 		toastrBoot(4, "请选择要删除的数据");
 		return;
@@ -314,9 +317,13 @@ function delZttOrder() {
 	var strs = str.split(",");
 	var id = strs[0];
 	var status = strs[1];
-	/*
-	 * if (status != 0) { toastrBoot(4, "只有待申请状态的数据可以删除"); return; }
-	 */
+	if(apply_id!="B75750C01CAB4D0A88BD95A964D3BA2C"){
+		if(status!=0){
+			toastrBoot(4,"只有待申请状态的数据可以删除");
+			return;
+		}
+	}
+	
 	msgTishCallFnBoot("确定要删除所选择的数据？",
 			function() {
 				var id = returncheckIds('checkId').join(",");
@@ -328,10 +335,11 @@ function delZttOrder() {
 			})
 }
 // 申请
-function toApply(id) {
+function toApply(id,product_order_number) {
 	var str = $(".checkchild:checked").val();
 	var strs = str.split(",");
 	var id = strs[0];
+	var product_order_number=product_order_number;
 	var status = strs[1];
 	if (status != 0) {
 		toastrBoot(4, "只有待申请状态的数据可以申请");
@@ -339,7 +347,8 @@ function toApply(id) {
 	}
 	msgTishCallFnBoot("确定要申请审批吗？", function() {
 		var params = {
-			apply_id : id
+			apply_id : id,
+			product_order_number:product_order_number
 		};
 		ajaxBReq('../zttOrderController/toApply', params, [ 'datatables' ]);
 	})

@@ -44,6 +44,15 @@ public class ZttCodeversionServiceImpl extends BaseService implements ZttCodever
 			throw new ExceptionUtil(e.getMessage(),e.getCause());
 		}
 	}
+	public ZttCodeversion getZttCodeversionByName(String searchname){
+		try{
+			ZttCodeversion zttCodeversion = zttCodeversionDao.getZttCodeversionByName(searchname);
+			return zttCodeversion;
+		} catch (Exception e) {
+			/**捕捉异常并回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+	}
 	/**
 	* 添加
 	* @param ztt_codeversion 

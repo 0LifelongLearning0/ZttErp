@@ -14,10 +14,6 @@ function addZttOrder() {
 		layer.alert('输入数量不合法')
 		flag = 1;
 	}
-	if ($('#order_number').val() == "") {
-		layer.alert('订单号不能为空');
-		flag = 1;
-	}
 	if ($('#client').val() == "") {
 		layer.alert('客户不能为空');
 		flag = 1;
@@ -83,4 +79,9 @@ function selectsupplyer(){
 		content: "../zttOrderController/selectsuppler?upid="+upid
 	 
 	}); 
+}
+
+function edit_contract_number(){
+	document.getElementById("product_order_number").readOnly = false;
+	document.getElementById("product_order_number").placeholder = "输入的工令号不得超过当前最大工令号";
 }

@@ -32,6 +32,7 @@ public interface LcApplyDao{
 	* @param lc_apply 
 	* @return
 	*/
+	public int update_act_ru_task(LcApply lc_Apply);
 	public int updateLcApply(LcApply lc_Apply);
 	/**
 	* 删除
@@ -57,4 +58,5 @@ public interface LcApplyDao{
 	 * @return
 	 */
 	public List<LcApply> getLcApplyList(Map<String,Object> condition);
+	public LcApply getLcApplyByBussinessId(String lc_apply_model_id);
 }

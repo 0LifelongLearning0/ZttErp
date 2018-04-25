@@ -4,8 +4,9 @@ $(document).ready(function() {
 	var opt = {
 		searchformId:'searchForm'
 	};
+	
 	var options = DataTablesPaging.pagingOptions({
-		ajax:function (data, callback, settings){datatablesCallBack(data, callback, settings,'../zttCodeversionController/getZttCodeversionListByCondition',opt);},//渲染数据
+		ajax:function (data, callback, settings){datatablesCallBack(data, callback, settings,'../zttProcessproductParentController/getZttProcessproductParentListByCondition',opt);},//渲染数据
 			//在第一位置追加序列号
 			fnRowCallback:function(nRow, aData, iDisplayIndex){
 				jQuery('td:eq(1)', nRow).html(iDisplayIndex +1);  
@@ -28,28 +29,22 @@ $(document).ready(function() {
 				width:"150px"
 			},
 			{
-				data:'name'
+				data:'date'
 			},
 			{
-				data:'codeversion'
+				data:'machine_part'
 			},
 			{
-				data:'updatetime'
+				data:'machine_part_number'
 			},
 			{
-				data:'svn'
-			},
-			{
-				data:'searchname'
-			},
-			{
-				data:'person'
+				data:'material_id'
 			},
 			{
 				data:"id",
 				width:"150px",
 				render:function(data, type, row, meta) {
-					return "<a href=\"javascript:toZttCodeversionDetail('"+ data +"')\"><span class='glyphicon glyphicon-eye-open'></span></a>";
+					return "<a href=\"javascript:toZttProcessproductParentDetail('"+ data +"')\"><span class='glyphicon glyphicon-eye-open'></span></a>";
 				}
 			}
 		]
@@ -61,24 +56,43 @@ $(document).ready(function() {
 	clickrowselected('datatables');
 });
 //新增
-function toZttCodeversionAdd(){
-	tlocation('../zttCodeversionController/toZttCodeversionAdd');
+function toZttProcessproductParentAdd(){
+	var order_id=document.getElementById("order_id").value;
+	parent.layer.open({
+		title : false,
+		type : 2,
+		area : [ '1500px', '650px' ],
+		btn : [ '关闭' ],
+		content : "../zttProcessproductParentController/toZttProcessproductParentAdd",
+			   success: function (layero, index) {
+		           	 //巧妙的地方在这里哦
+						parent.layer.getChildFrame('body',index).contents().find("#order_id").val(order_id)
+		           	
+
+		           }
+	})
 }
 //修改
-function toZttCodeversionUpdate(){
+function toZttProcessproductParentUpdate(){
 	if($(".checkchild:checked").length != 1){
 		toastrBoot(4,"选择数据非法");
 		return;
 	}
 	var id = $(".checkchild:checked").val();
-	tlocation("../zttCodeversionController/toZttCodeversionUpdate?id="+id);
+	tlocation("../zttProcessproductParentController/toZttProcessproductParentUpdate?id="+id);
 }
 //详情
-function toZttCodeversionDetail(id){
-	tlocation("../zttCodeversionController/toZttCodeversionDetail?id="+id);
+function toZttProcessproductParentDetail(id){
+	parent.layer.open({
+		title : false,
+		type : 2,
+		area : [ '1500px', '650px' ],
+		btn : [ '关闭' ],
+		content : "../zttProcessproductParentController/toZttProcessproductParentDetail?id="+id
+	})
 }
 //删除
-function delZttCodeversion(){
+function delZttProcessproductParent(){
 	if(returncheckedLength('checkchild') <= 0){
 		toastrBoot(4,"请选择要删除的数据");
 		return;
@@ -86,6 +100,6 @@ function delZttCodeversion(){
 	msgTishCallFnBoot("确定要删除所选择的数据？",function(){
 		var id = returncheckIds('checkId').join(",");
 		var params = {id:id};
-		ajaxBReq('../zttCodeversionController/delZttCodeversion',params,['datatables']);
+		ajaxBReq('../zttProcessproductParentController/delZttProcessproductParent',params,['datatables']);
 	})
 }

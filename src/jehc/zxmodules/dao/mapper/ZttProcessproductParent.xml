@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZttProcessproductParent">
+	<!--初始化分页-->
+	<select id="getZttProcessproductParentListByCondition" resultType="jehc.zxmodules.model.ZttProcessproductParent" parameterType="map">
+		SELECT
+			id,
+			order_id,
+			date,
+			product_person_id,
+			machine_part,
+			machine_part_number,
+			material_id
+		FROM 
+			ztt_processproduct_parent
+		WHERE 1=1
+		<if test="null != order_id">
+			AND instr(order_id,#{order_id})
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getZttProcessproductParentById" resultType="jehc.zxmodules.model.ZttProcessproductParent" parameterType="string">
+		SELECT
+			id,
+			order_id,
+			date,
+			product_person_id,
+			machine_part,
+			machine_part_number,
+			material_id
+		FROM 
+			ztt_processproduct_parent
+		WHERE id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addZttProcessproductParent" parameterType="jehc.zxmodules.model.ZttProcessproductParent">
+		INSERT INTO
+			ztt_processproduct_parent
+			(
+			id,
+			order_id,
+			date,
+			product_person_id,
+			machine_part,
+			machine_part_number,
+			material_id
+			)
+			VALUES
+			(
+			#{id},
+			#{order_id},
+			#{date},
+			#{product_person_id},
+			#{machine_part},
+			#{machine_part_number},
+			#{material_id}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZttProcessproductParent" parameterType="jehc.zxmodules.model.ZttProcessproductParent">
+		UPDATE
+			ztt_processproduct_parent
+		SET
+			order_id = #{order_id},
+			date = #{date},
+			product_person_id = #{product_person_id},
+			machine_part = #{machine_part},
+			machine_part_number = #{machine_part_number},
+			material_id = #{material_id}
+		WHERE id=#{id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZttProcessproductParentBySelective" parameterType="jehc.zxmodules.model.ZttProcessproductParent">
+		UPDATE
+			ztt_processproduct_parent
+		<set>
+			<if test="order_id != null">
+				order_id = #{order_id},
+			</if>
+			<if test="date != null">
+				date = #{date},
+			</if>
+			<if test="product_person_id != null">
+				product_person_id = #{product_person_id},
+			</if>
+			<if test="machine_part != null">
+				machine_part = #{machine_part},
+			</if>
+			<if test="machine_part_number != null">
+				machine_part_number = #{machine_part_number},
+			</if>
+			<if test="material_id != null">
+				material_id = #{material_id},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZttProcessproductParent" parameterType="map">
+		DELETE FROM ztt_processproduct_parent WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZttProcessproductParent" parameterType="list">
+		INSERT INTO
+			ztt_processproduct_parent
+			(
+			id,
+			order_id,
+			date,
+			product_person_id,
+			machine_part,
+			machine_part_number,
+			material_id
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.order_id},
+			#{item.date},
+			#{item.product_person_id},
+			#{item.machine_part},
+			#{item.machine_part_number},
+			#{item.material_id}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZttProcessproductParent" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				ztt_processproduct_parent
+			SET
+				order_id = #{item.order_id},
+				date = #{item.date},
+				product_person_id = #{item.product_person_id},
+				machine_part = #{item.machine_part},
+				machine_part_number = #{item.machine_part_number},
+				material_id = #{item.material_id}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZttProcessproductParentBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				ztt_processproduct_parent
+			<set>
+				<if test="item.order_id != null">
+					order_id = #{item.order_id},
+				</if>
+				<if test="item.date != null">
+					date = #{item.date},
+				</if>
+				<if test="item.product_person_id != null">
+					product_person_id = #{item.product_person_id},
+				</if>
+				<if test="item.machine_part != null">
+					machine_part = #{item.machine_part},
+				</if>
+				<if test="item.machine_part_number != null">
+					machine_part_number = #{item.machine_part_number},
+				</if>
+				<if test="item.material_id != null">
+					material_id = #{item.material_id},
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+</mapper>

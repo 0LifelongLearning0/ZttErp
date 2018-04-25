@@ -63,7 +63,6 @@ import jehc.zxmodules.service.ZttOrderService;
 import jehc.zxmodules.service.ZttOrderbybuyService;
 import jehc.zxmodules.service.ZttOrderbyselfService;
 import jehc.zxmodules.service.ZttPurchaseService;
-import jehc.zxmodules.service.Ztt_sqlserver_user_Service;
 import net.sf.json.JSONObject;
 
 /**
@@ -93,7 +92,7 @@ public class ZttOrderController extends BaseAction {
 	@Autowired
 	private ZttOrderbyselfService zttOrderbyselfService;
 	@Autowired
-	private Ztt_sqlserver_user_Service getsqlserver_user_Service;
+	private HttpServletRequest request;
 
 	/**
 	 * 载入初始化页面
@@ -119,7 +118,6 @@ public class ZttOrderController extends BaseAction {
 	@RequestMapping(value = "/getZttOrderListByCondition", method = { RequestMethod.POST, RequestMethod.GET })
 	public String getZttOrderListByCondition(BaseSearch baseSearch, HttpServletRequest request) {
 		Map<String, Object> condition = baseSearch.convert();
-		getsqlserver_user_Service.getsendmyReport();
 		condition.put("apply_id", getXtU().getXt_userinfo_id());
 		condition.put("xt_post_id", getXtU().getXt_post_id());
 		List<XtPost> xtpost = XtPostService.getXtPostListByCondition(condition);
@@ -222,11 +220,12 @@ public class ZttOrderController extends BaseAction {
 		XtUserinfo applyUser = xtUserinfoService.getXtUserinfoById(getXtUid());
 		if (null != zttOrder && !"".equals(zttOrder)) {
 			zttOrder.setId(UUID.toUUID());
-			zttOrder.setZttordertime(DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
+			zttOrder.setZttordertime(DateFormatUtils.format(new Date(), "yyyy-MM-dd"));
 			;
 			zttOrder.setState("0");
 			zttOrder.setApply_id(applyUser.getXt_userinfo_id());
 			i = zttOrderService.addZttOrder(zttOrder);
+			
 		}
 		if (i > 0) {
 			return outAudStr(true);
@@ -271,6 +270,7 @@ public class ZttOrderController extends BaseAction {
 			Map<String, Object> condition1 = new HashMap<String, Object>();
 			condition1.put("order_id", id.split(",")[0]);
 			i = zttOrderService.delZttOrder(condition);
+			zttOrderService.delZttOrderTask(id);
 			zttOrderService.delZttOrdnum(condition1);
 		}
 		if (i > 0) {
@@ -539,7 +539,8 @@ public class ZttOrderController extends BaseAction {
 		ZttOrder zttOrder = zttOrderService.getZttOrderById(id);
 		model.addAttribute("zttOrder", zttOrder);
 		model.addAttribute("index", index);
-		return new ModelAndView("pc/zx-view/ztt-order/processingtechnic");
+		/*return new ModelAndView("pc/zx-view/ztt-order/processingtechnic");*/
+		return new ModelAndView("pc/zx-view/ztt-order/processingtechSet");
 	}
 
 	/**
@@ -583,7 +584,7 @@ public class ZttOrderController extends BaseAction {
 	 * 
 	 * @param request
 	 */
-	@RequestMapping(value = "/uploadfile", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
+	/*@RequestMapping(value = "/uploadfile", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
 	public @ResponseBody String jqueryUploadFile(HttpServletResponse response, HttpServletRequest request,
 			@RequestParam(value = "file", required = false) MultipartFile file) {
 		long startTime = System.currentTimeMillis();
@@ -609,6 +610,27 @@ public class ZttOrderController extends BaseAction {
 		}
 		long endTime = System.currentTimeMillis();
 		System.out.println("方法一的运行时间：" + String.valueOf(endTime - startTime) + "ms");
+		JSONObject jsonObject = JSONObject.fromObject(result);
+		return jsonObject.toString();
+	}*/
+	
+	@RequestMapping(value = "/uploadfile", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
+	public @ResponseBody String jqueryUploadFile(@RequestParam("file") MultipartFile file) {
+		Map<String, String> result = new HashMap<String, String>();
+		if (!file.isEmpty()) { 
+		      try { 
+		        // 文件保存路径 
+		        String filePath = "E:/upload/" + "date--" + new Date().getTime() + "-----" + file.getOriginalFilename();
+		        
+		        // 转存文件 
+		        file.transferTo(new File(filePath)); 
+		        result.put("path", filePath);
+				result.put("flag", "true");
+		      } catch (Exception e) { 
+		        e.printStackTrace(); 
+		      } 
+		    } 
+		    // 重定向 
 		JSONObject jsonObject = JSONObject.fromObject(result);
 		return jsonObject.toString();
 	}
@@ -672,7 +694,7 @@ public class ZttOrderController extends BaseAction {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/toApply", method = { RequestMethod.POST, RequestMethod.GET })
-	public String toApply(String apply_id, HttpServletRequest request, Model model) {
+	public String toApply(String apply_id,String product_order_number, HttpServletRequest request, Model model) {
 		int i = 0;
 		if (null != apply_id && !"".equals(apply_id)) {
 			String dep_user_id = null;
@@ -680,7 +702,13 @@ public class ZttOrderController extends BaseAction {
 			conditionr.put("flag", 1);
 			List<XtUserinfo> xtUserinfoList = xtURService.getXtURListByCondition(conditionr);
 			ZttOrder zttOrder = zttOrderService.getZttOrderById(apply_id);
-			String order_number = zttOrderService.add_ordernumber(zttOrder);
+			String order_number=null;
+			if(product_order_number.equals("")){
+				order_number = zttOrderService.add_ordernumber(zttOrder);
+			}else{
+				order_number=product_order_number;
+			}
+			
 			XtConstant Xt_Constant = getXtConstantCache("ZttOrderApply");
 			Map<String, Object> condition = new HashMap<String, Object>();
 			condition.put("xt_constant_id", Xt_Constant.getXt_constant_id());
@@ -775,7 +803,6 @@ public class ZttOrderController extends BaseAction {
 						String erpnumber = remark;
 						ztt_filerecord.setState("主管审批通过");
 						ztt_filerecord.setApproval_time(DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
-						zttOrder.setErp_number(erpnumber);
 						zttOrder.setCato_type(remark);
 						zttOrder.setState("2");
 					} else if (remark.equals("madebyself")) {
@@ -1135,7 +1162,7 @@ public class ZttOrderController extends BaseAction {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/toApplysendcage", method = { RequestMethod.POST, RequestMethod.GET })
-	public String toApplysendcage(String apply_id, HttpServletRequest request, Model model) {
+	public String toApplysendcage(String apply_id,String product_order_number, HttpServletRequest request, Model model) {
 		int i = 0;
 		if (null != apply_id && !"".equals(apply_id)) {
 			String dep_user_id = null;

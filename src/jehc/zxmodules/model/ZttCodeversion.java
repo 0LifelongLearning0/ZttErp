@@ -16,6 +16,7 @@ public class ZttCodeversion extends BaseEntity implements Serializable{
 	private String svn;/**svn路径**/
 	private String searchname;/**搜索名**/
 	private String person;/**负责人**/
+	private String attachment;
 	public void setId(String id){
 		this.id=id;
 	}
@@ -58,4 +59,11 @@ public class ZttCodeversion extends BaseEntity implements Serializable{
 	public String getPerson(){
 		return person;
 	}
+	public String getAttachment() {
+		return attachment;
+	}
+	public void setAttachment(String attachment) {
+		this.attachment = attachment;
+	}
+	
 }
