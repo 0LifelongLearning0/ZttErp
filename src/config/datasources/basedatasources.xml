@@ -96,7 +96,7 @@
 	<!--事务增强--> 
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		 <!--事务属性定义-->
-		<tx:attributes>
+		<!-- <tx:attributes>
 			<tx:method name="*Poulators" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception" />
 			<tx:method name="recover*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception" />
 			<tx:method name="add*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception" />
@@ -106,7 +106,7 @@
 			<tx:method name="get*" propagation="REQUIRED" isolation="DEFAULT" read-only="true" timeout="-1" />  
 			<tx:method name="put*" propagation="REQUIRED" isolation="DEFAULT" read-only="false"/> 
 			<tx:method name="*"  propagation="REQUIRED" isolation="DEFAULT" read-only="true" timeout="-1" />
-		</tx:attributes>
+		</tx:attributes> -->
 	</tx:advice>
 	<!-- 定义切换至从库方法条件 -->
 	<bean id="dataSourceAdvice" class="jehc.xtmodules.xtcore.base.readwritedata.DataSourceAdvice">

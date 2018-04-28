@@ -5,17 +5,32 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
+import jehc.lcmodules.activitiutil.ActivitiUtil;
 import jehc.lcmodules.lcdao.LcApplyDao;
 import jehc.lcmodules.lcmodel.LcApply;
 import jehc.lcmodules.lcservice.LcApplyService;
+import jehc.lcmodules.lcservice.LcApprovalService;
+import jehc.lcmodules.lcservice.LcDeploymentHisService;
+import jehc.xtmodules.xtcore.base.BaseAction;
 import jehc.xtmodules.xtcore.base.BaseService;
 import jehc.xtmodules.xtcore.util.ExceptionUtil;
 import jehc.xtmodules.xtcore.util.UUID;
+import jehc.xtmodules.xtmodel.XtConstant;
+import jehc.xtmodules.xtmodel.XtUserinfo;
+import jehc.xtmodules.xtservice.XtPostService;
+import jehc.xtmodules.xtservice.XtURService;
+import jehc.xtmodules.xtservice.XtUserinfoService;
 
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+
 import jehc.zxmodules.service.ZttOrderService;
+import jehc.zxmodules.service.ZttOrderbyselfService;
+import jehc.zxmodules.service.ZttPurchaseService;
 import jehc.zxmodules.dao.ZttOrderDao;
 import jehc.zxmodules.model.ZttOrder;
 import jehc.zxmodules.model.ZttOrderCheckHistory;
@@ -37,6 +52,20 @@ public class ZttOrderServiceImpl extends BaseService implements ZttOrderService{
 	private ZttOrderDao zttOrderDao;
 	@Autowired
 	private LcApplyDao lcApplyDao;
+	@Autowired
+	private XtUserinfoService xtUserinfoService;
+	@Autowired
+	private XtURService xtURService;
+	@Autowired
+	private LcDeploymentHisService lc_Deployment_HisService;
+	@Autowired
+	private ActivitiUtil activitiUtil;
+	@Autowired
+	private LcApplyService lcApplyService;
+	@Autowired
+	private LcApprovalService lc_ApprovalService;
+	@Autowired
+	private XtPostService XtPostService;
 	
 	
 	/**
@@ -89,6 +118,20 @@ public class ZttOrderServiceImpl extends BaseService implements ZttOrderService{
 	* @return
 	*/
 	public List<ZttOrderCheckHistory> getprocessinghisById(Map<String,Object> condition){
+		try{
+			List<ZttOrderCheckHistory> list = zttOrderDao.getZttOrderhisById(condition);
+			return list;
+		} catch (Exception e) {
+			/**捕捉异常并回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+	}
+	/**
+	* 查询未申请对象
+	* @param id 
+	* @return
+	*/
+	public List<ZttOrderCheckHistory> getZttOrderNotApply(Map<String,Object> condition){
 		try{
 			List<ZttOrderCheckHistory> list = zttOrderDao.getZttOrderhisById(condition);
 			return list;
@@ -235,7 +278,51 @@ public class ZttOrderServiceImpl extends BaseService implements ZttOrderService{
 		}
 		return i;
 	}
-	
+	//得到当前最大工令号
+	public String selectmax_id(ZttOrder zttOrder){
+		int max_Ordernumber_third=zttOrderDao.selectmax_id(zttOrder.getId()).getOrdernumber_third();
+		String third=(max_Ordernumber_third+1)+"";
+		ZttOrdernumber zttOrdernumber = zttOrderDao.getZttOrdernumberbyId("1");
+		String first = zttOrdernumber.getOrdernumber_first();
+		String second=zttOrdernumber.getOrdernumber_second();
+		return first+"-"+second+"-"+third;
+		
+	}
+	public int selectmax_id_int(ZttOrder zttOrder){
+		int max_Ordernumber_third=zttOrderDao.selectmax_id(zttOrder.getId()).getOrdernumber_third();
+		return max_Ordernumber_third;
+		
+	}
+	public int toApply(String apply_id,String id,String product_order_number){
+		int i = 0;
+		if (null != apply_id && !"".equals(apply_id)) {
+			String dep_user_id = null;
+			Map<String, Object> conditionr = new HashMap<String, Object>();
+			conditionr.put("flag", 1);
+			List<XtUserinfo> xtUserinfoList = xtURService.getXtURListByCondition(conditionr);
+			ZttOrder zttOrder =getZttOrderById(id);
+			String order_number=null;
+			XtConstant Xt_Constant = getXtConstantCache("ZttOrderApply");
+			Map<String, Object> condition = new HashMap<String, Object>();
+			condition.put("xt_constant_id", Xt_Constant.getXt_constant_id());
+			String lc_his_id = lc_Deployment_HisService.getLcDeploymentHisNewUnique(condition).getId();
+			LcApply lc_Apply = new LcApply();
+			Map<String, Object> variables = new HashMap<String, Object>();
+			variables.put("taskType", "业务人员下单流程");
+			variables.put("owner", apply_id);
+			variables.put("taskkind", "ztt_sales");
+			lc_Apply.setLc_apply_title(
+					getXtU().getXt_userinfo_realName() + "于" + getSimpleDateFormat() + "，提交了一条部门申请申请流程");
+			lc_Apply.setLc_apply_model_biz_id(zttOrder.getId());
+			if (activitiUtil.addApply(lc_his_id, zttOrder.getId(), variables, lc_Apply)) {
+				zttOrder.setState("1");
+				zttOrder.setProduct_order_number(order_number);
+				i =updateZttOrderBySelective(zttOrder);
+
+			}
+		}
+		return i;
+	}
 	/**
 	* 生成工令号
 	* @param ztt_order 
@@ -246,8 +333,13 @@ public class ZttOrderServiceImpl extends BaseService implements ZttOrderService{
 		String first;
 		String insert = null;
 		try {
-			
-			zttOrdernumber = zttOrderDao.getZttOrdernumberbyId("1");
+			String Product_order_number=zttOrder.getProduct_order_number();
+			int Product_order_number_int=Integer.parseInt(Product_order_number.substring(6, Product_order_number.length()));
+			ZttOrdernumber_third zttOrdernumber_thirdadd=new ZttOrdernumber_third();
+			zttOrdernumber_thirdadd.setOrder_id(zttOrder.getId());
+			zttOrdernumber_thirdadd.setOrdernumber_third(Product_order_number_int);
+			zttOrderDao.addZttOrdnum(zttOrdernumber_thirdadd);
+			/*zttOrdernumber = zttOrderDao.getZttOrdernumberbyId("1");
 			first = zttOrdernumber.getOrdernumber_first();
 			String second=zttOrdernumber.getOrdernumber_second();
 			ZttOrdernumber_third zttOrdernumber_third=zttOrderDao.getzttordernumberthirdbyId(zttOrder.getId());
@@ -261,7 +353,7 @@ public class ZttOrderServiceImpl extends BaseService implements ZttOrderService{
 				zttOrdernumber_thirdadd.setOrder_id(zttOrder.getId());
 				zttOrderDao.addZttOrdnum(zttOrdernumber_thirdadd);
 				insert = first+"-"+second+"-"+thirdnow+"";
-			}
+			}*/
 		} catch (Exception e) {
 			/**捕捉异常并回滚**/
 			throw new ExceptionUtil(e.getMessage(),e.getCause());

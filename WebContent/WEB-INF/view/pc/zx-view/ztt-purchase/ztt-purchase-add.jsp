@@ -18,7 +18,7 @@
 		</div>
 		<form class="form-horizontal" id="defaultForm" method="post">
 			<div class="form-group">
-				<label class="col-lg-3 control-label">工令号 <span class="font-color-meta-light">（必填项）</label>
+				<label class="col-lg-3 control-label">工令号 </label>
 				<div class="col-lg-6">
 					<input class="form-control" type="text" maxlength="32"  name="Product_order_number" id="Product_order_number" placeholder="请输入工令号">
 				</div>
@@ -57,6 +57,15 @@
 				<label class="col-lg-3 control-label">交期 <span class="font-color-meta-light">（必填项）</label>
 				<div class="col-lg-6">
 					<input class="form_datetime form-control" type="text" maxlength="32"  id="hope_end_data" name="hope_end_data" placeholder="请输入交期">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-3 control-label">附件 <span class="font-color-meta-light">（如果有附件则必须上传附件）</label>
+				<div class="col-lg-6">
+					<button class="btn btn-primary"
+											data-toggle="button" onclick="uploadattachment()">请上传附件</button>
+										<input class="form-control" type="hidden" maxlength="255"
+										name="attachment" id="attachment">
 				</div>
 			</div>
 			<div class="form-group">

@@ -54,7 +54,7 @@
 									</td>
 									<td class="text-gray"><input class="form-control"
 										type="text" maxlength="255" name="product_order_number"
-										id="product_order_number" placeholder="默认递增" readonly=true>
+										id="product_order_number" placeholder="默认递增" readonly=true value="${product_order_number}">
 										<button type="button" class="btn btn-success"
 											onclick="edit_contract_number()" id="buttonsave">
 											<span class="glyphicon glyphicon-saved" aria-hidden="true"></span>编辑

@@ -10,10 +10,6 @@ function addZttPurchase(){
 	var flag = 0;
 	var Product_order_number = $('#Product_order_number').val();
 	var single_price = $('#single_price').val();
-	if ($('#Product_order_number').val() == "") {
-		layer.alert('工令号不能为空');
-		flag = 1;
-	}
 	if ($('#purchase_name').val() == "") {
 		layer.alert('名称不能为空');
 		flag = 1;
@@ -94,3 +90,14 @@ $(function() {
 		language : 'zh-CN',// 中文，需要引用zh-CN.js包
 	});
 });
+function uploadattachment() {
+	var upid="attachment";
+	layer.open({
+		title : '上传附件',
+		type : 2,
+		area : [ '800px', '500px' ],
+		btn : [ '确定', '取消' ],
+		content : "../zttOrderController/uploadattachment?upid="+upid
+
+	});
+}

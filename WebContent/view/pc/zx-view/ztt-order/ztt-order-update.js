@@ -74,6 +74,12 @@ $(function() {
 		document.getElementById("stardard").readOnly = true;
 		document.getElementById("single_price").readOnly = true;
 	}
+	if(apply_id=="B75750C01CAB4D0A88BD95A964D3BA2C"){
+		document.getElementById("amount").readOnly = false;
+		document.getElementById("product_name").readOnly = false;
+		document.getElementById("linkman").readOnly = false;
+		document.getElementById("end_data").disabled = false;
+	}
 	$(".form_datetime").datepicker({
 		format : "yyyy-mm-dd",
 		autoclose : true,
@@ -96,3 +102,8 @@ function downloadattachment(id){
 	  content: "../zttOrderController/Downloadattachment?id="+id+"&upid="+upid
 	 
 	})}; 
+	
+	function updateZttOrderbatch() {
+		submitBForm('defaultForm', '../zttOrderController/updateZttOrderbatch',
+				'../zttOrderController/loadZttOrder');
+	}

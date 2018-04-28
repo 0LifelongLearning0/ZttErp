@@ -70,6 +70,10 @@ public class ZttOrderDaoImpl  extends BaseDaoImpl implements ZttOrderDao{
 	public List<ZttOrderCheckHistory> getZttOrderhisById(Map<String,Object> condition){
 		return (List<ZttOrderCheckHistory>)this.getList("getprocessinghisById", condition);
 	}
+	public List<ZttOrderCheckHistory> getZttOrderNotApply(Map<String,Object> condition){
+		return (List<ZttOrderCheckHistory>)this.getList("getZttOrderNotApply", condition);
+	}
+	
 	public List<ztt_filerecord> getfilerecordById(Map<String,Object> condition){
 		return (List<ztt_filerecord>)this.getList("getfilerecordById", condition);
 	}

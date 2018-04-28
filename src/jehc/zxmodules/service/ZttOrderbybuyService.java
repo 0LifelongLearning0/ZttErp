@@ -1,6 +1,8 @@
 package jehc.zxmodules.service;
 import java.util.List;
 import java.util.Map;
+
+import jehc.zxmodules.model.ZttOrder;
 import jehc.zxmodules.model.ZttOrderbybuy;
 
 /**
@@ -20,6 +22,7 @@ public interface ZttOrderbybuyService{
 	* @return
 	*/
 	public ZttOrderbybuy getZttOrderbybuyById(String id);
+	
 	/**
 	* 添加
 	* @param ztt_orderbybuy 

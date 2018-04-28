@@ -306,6 +306,23 @@ function toZttOrderDetail(id, state) {
 	tlocation("../zttOrderController/toZttOrderDetail?id=" + id + "&state="
 			+ state);
 }
+//批量修改
+function batchapply() {
+	var id = returncheckIds('checkId').join(",");
+	var params = {
+		id : id
+	};
+	layer.open({
+		title : '批量修改',
+		type : 2,
+		area : [ '500px', '500px' ],
+		btn : [ '关闭' ],
+		content : "../zttOrderController/batchapply?id=" + id
+
+	})
+	/*ajaxBReq('../zttOrderController/batchapply', params,
+			[ 'datatables' ]);*/
+}
 // 删除
 function delZttOrder() {
 	var apply_id=document.getElementById("apply_id").value;
@@ -334,6 +351,7 @@ function delZttOrder() {
 						[ 'datatables' ]);
 			})
 }
+
 // 申请
 function toApply(id,product_order_number) {
 	var str = $(".checkchild:checked").val();

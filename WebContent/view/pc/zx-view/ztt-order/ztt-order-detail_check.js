@@ -63,17 +63,21 @@ function uploadattachment(){
 	}); 
 }
 
-//上传
-//保存
-function progressupload(id){
-	var state=document.getElementById("state").value;
+function progressupload() {
+	var id=document.getElementById("id").value;
 	layer.open({
-		title: '机械加工工艺过程卡片',
-		type: 2, 
-		area: ['1500px', '700px'],
-		btn: ['关闭'],
-	  content: "../zttOrderController/toZttprocessingtechnicDetail?id="+id+"&state="+state
-	}); 
+		title : '机械加工工艺过程卡片',
+		type : 2,
+		area : [ '1500px', '700px' ],
+		btn : [ '关闭' ],
+		content : "../zttProcessproductParentController/loadZttProcessproductParent?id=" + id+"&order_id=" + id,
+		 success: function (layero, index) {
+				layer.getChildFrame('body',index).contents().find("#order_id").val(id);
+				layer.getChildFrame('body',index).contents().find("#flag").val("list")
+           	
+
+           }
+	});
 }
 //保存
 function downloadattachment(id){

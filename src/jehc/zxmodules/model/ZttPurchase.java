@@ -27,6 +27,7 @@ public class ZttPurchase extends BaseEntity implements Serializable{
 	private String qualified_date;/**检验员日期**/
 	private String check_attachment;/**检验文件**/
 	private String personname;
+	private String delivery_note;
 	private String state;
 	private String supply_name;
 	private String erp_number;
@@ -36,6 +37,7 @@ public class ZttPurchase extends BaseEntity implements Serializable{
 	private String supplier_bill_date;
 	private String supplier_bill_price;
 	private String end_data;
+	private String attachment;
 	public String getNot_satisfy_reason() {
 		return not_satisfy_reason;
 	}
@@ -43,6 +45,12 @@ public class ZttPurchase extends BaseEntity implements Serializable{
 		this.not_satisfy_reason = not_satisfy_reason;
 	}
 	
+	public String getDelivery_note() {
+		return delivery_note;
+	}
+	public void setDelivery_note(String delivery_note) {
+		this.delivery_note = delivery_note;
+	}
 	public double getCost_single_price() {
 		return cost_single_price;
 	}
@@ -199,6 +207,12 @@ public class ZttPurchase extends BaseEntity implements Serializable{
 	}
 	public void setErp_number(String erp_number) {
 		this.erp_number = erp_number;
+	}
+	public String getAttachment() {
+		return attachment;
+	}
+	public void setAttachment(String attachment) {
+		this.attachment = attachment;
 	}
 	
 }

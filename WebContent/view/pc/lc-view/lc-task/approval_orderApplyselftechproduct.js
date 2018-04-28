@@ -22,6 +22,7 @@ $(document)
 					document.getElementById("techmanager_attachment").value = ajaxobj.techmanager_attachment;
 					document.getElementById("checker_attachment").value = ajaxobj.checker_attachment;
 					document.getElementById("state").value = ajaxobj.state;
+					document.getElementById("order_id").value = ajaxobj.id;
 					if (ajaxobj.state == "8") {
 						document.getElementById("caption").innerText = "业务人员下单表--检验不通过,退回"
 						document.getElementById("checkreport").style.display = "";
@@ -70,7 +71,7 @@ function getbyapplyid(id) {
 // 保存
 function approveZttOrderApply(taskid, status, obj) {
 	var datatables = parent.$('#datatables').DataTable();
-	var url = "../zttOrderController/approvalOrderCheckApply";
+	var url = "../zttOrderController/approvalOrderApply";
 	status = "selfwaitcheck";
 	remark = "1";
 	var path = document.getElementById("producter_selfcheck_attachment").value;
@@ -112,18 +113,22 @@ function uploadself_checkattachment() {
 	});
 }
 
-// 上传
-// 保存
 function progressupload(id) {
-	var state = document.getElementById("state").value;
 	var index = parent.layer.getFrameIndex(window.name);
+	var order_id=document.getElementById("order_id").value;
 	parent.layer.open({
 		title : '机械加工工艺过程卡片',
 		type : 2,
 		area : [ '1500px', '700px' ],
 		btn : [ '关闭' ],
-		content : "../zttOrderController/toZttprocessingtechnicDetail?id=" + id
-				+ "&index=" + index + "&state=" + state
+		content : "../zttProcessproductParentController/loadZttProcessproductParent?id=" + id
+				+ "&index=" + index+"&order_id=" + order_id,
+				success: function (layero, index) {
+	            	 //巧妙的地方在这里哦
+					parent.layer.getChildFrame('body',index).contents().find("#order_id").val(order_id)
+	            	
+
+	            }
 	});
 }
 // 保存

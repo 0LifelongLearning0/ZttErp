@@ -85,7 +85,7 @@
 								<td class="text-center">机械加工工艺过程</td>
 								<td colspan="2"><button class="btn btn-primary"
 										data-toggle="button"
-										onclick="progressupload('${zttOrder.id}')">查看</button> <label
+										onclick="progressupload()">查看</button> <label
 									id="id"></label></td>
 
 							</tr>

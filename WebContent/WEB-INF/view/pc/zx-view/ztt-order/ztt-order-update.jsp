@@ -38,7 +38,10 @@
 								</tr>
 								<tr>
 									<td class="text-center">订单号/申请号</td>
-									<td>${zttOrder.order_number }</td>
+									<td>
+									<input class="form-control"
+									type="text" maxlength="255" name="stardard" id="stardard" value='${zttOrder.order_number }'>
+									</td>
 									<td class="text-center">合同号</td>
 									<td colspan="3"><input class="form-control" type="text"
 										maxlength="255" name="contract_number" id="contract_number"
@@ -48,11 +51,17 @@
 									<td class="text-center">客户</td>
 									<td colspan="2">${zttOrder.client }</td>
 									<td class="text-center">联系人</td>
-									<td colspan="2">${zttOrder.linkman }</td>
+									<td colspan="2">
+									<input class="form-control"
+									type="text" maxlength="255" name="linkman" id="linkman" value='${zttOrder.linkman }' readonly=false>
+									</td>
 								</tr>
 								<tr>
-									<td class="text-center">产品名称</td>
-									<td colspan="2">${zttOrder.product_name }</td>
+									<td class="text-center">产品名称
+									</td>
+									<td colspan="2">
+									<input class="form-control"
+									type="text" maxlength="255" name="product_name" id="product_name" value='${zttOrder.product_name }' readonly=false></td>
 									<td class="text-center">规格</td>
 									<td colspan="2">
 									<input class="form-control"
@@ -63,9 +72,9 @@
 									<td>单位</td>
 									<td>${zttOrder.unit }</td>
 									<td>数量</td>
-									<td>${zttOrder.amount }<input class="form-control"
-										type="hidden" maxlength="255" id="amount" name="amount"
-										value="${zttOrder.amount }">
+									<td><input class="form-control"
+										type="text" maxlength="255" id="amount" name="amount"
+										value="${zttOrder.amount }" readonly=false>
 									</td>
 									<td>单价</td>
 									<td><input class="form-control" type="text"
@@ -80,7 +89,10 @@
 										id="sum_price" name="sum_price" value="${zttOrder.sum_price }">
 									</td>
 									<td class="col-md-1 text-center">交货日期</td>
-									<td class="col-md-2">${zttOrder.end_data }</td>
+									<td class="col-md-2">
+									<input class="form_datetime form-control"
+									type="text" maxlength="255" name="end_data" id="end_data" value='${zttOrder.end_data }' disabled="true">
+									</td>
 									<td class="col-md-1 text-center">附件</td>
 									<td class="col-md-3"><input class="form-control"
 										type="hidden" maxlength="255" name="attachment"

@@ -41,6 +41,12 @@ text-align:center;
 									<td class="text-center">规格</td>
 									<td colspan="3"><label id="purchase_stardard" /></td>
 								</tr>
+								<tr>
+								<td class="text-center">数量</td>
+									<td><label id="amount" /></td>
+									<td class="text-center">交期</td>
+									<td><label id="hope_end_data" /></td>
+								</tr>
 							</tbody>
 						</table>
 						<div class="col-lg-6" style="text-align:center">

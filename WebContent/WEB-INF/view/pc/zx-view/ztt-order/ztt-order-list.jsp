@@ -102,6 +102,9 @@
 	</div>
 	<div class="panel-body">
 		<div class="btn-group pull-right" style="margin-right: 20px;">
+		<button class="btn btn-default" onclick="batchapply()">
+				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>批量修改
+			</button>
 			<button class="btn btn-default" onclick="toZttOrderAdd()">
 				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
 			</button>

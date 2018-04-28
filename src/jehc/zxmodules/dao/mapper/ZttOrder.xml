@@ -84,7 +84,7 @@
 			AND End_data&lt;#{apply_time_et_End_data}
 		</if>
 		<if test="null == orderby">
-			ORDER BY zttordertime desc
+			ORDER BY product_order_number desc
 		</if>
 		
 
@@ -96,6 +96,24 @@
 		*
 		FROM
 		ztt_checkrecord
+		WHERE 1=1
+		<if test="null != order_id">
+			AND instr(order_id,#{order_id})
+		</if>
+		<if test="null != id">
+			AND instr(id,#{id})
+		</if>
+		<if test="null == orderby">
+			ORDER BY product_check_time desc
+		</if>
+	</select>
+	<!--查询历史对象 -->
+	<select id="getZttOrderNotApply" resultType="jehc.zxmodules.model.ZttOrder"
+		parameterType="map">
+		SELECT
+		*
+		FROM
+		ztt_order
 		WHERE 1=1
 		<if test="null != order_id">
 			AND instr(order_id,#{order_id})
@@ -615,12 +633,9 @@
 	</update>
 
 	<!--删除 -->
-	<delete id="delZttOrder" parameterType="map">
-		DELETE FROM ztt_order WHERE id IN
-		<foreach item="item" index="index" collection="id" open="("
-			separator="," close=")">
-			#{item}
-		</foreach>
+	<delete id="delZttOrder" parameterType="string">
+		DELETE FROM ztt_order WHERE id=
+			#{id}
 	</delete>
 
 	<!--批量添加 -->

@@ -21,7 +21,7 @@ td {
 				<div class="row">
 					<form class="form-horizontal" id="defaultForm" method="post">
 						<table class="table table-bordered">
-							<caption class="text-center h3 no-margin bold">质检部检验单</caption>
+							<caption class="text-center h3 no-margin bold">送货单</caption>
 							<tbody>
 								<tr>
 									<td class="col-md-2 text-center">申&ensp;请&ensp;人</td>

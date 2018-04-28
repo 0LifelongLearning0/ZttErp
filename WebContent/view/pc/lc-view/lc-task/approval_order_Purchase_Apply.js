@@ -7,6 +7,8 @@ $(document).ready(function(){
 	document.getElementById("Product_order_number").innerText=ajaxobj.product_order_number;
 	document.getElementById("purchase_stardard").innerText=ajaxobj.purchase_stardard;
 	document.getElementById("purchase_name").innerText=ajaxobj.purchase_name;
+	document.getElementById("amount").innerText=ajaxobj.amount;
+	document.getElementById("hope_end_data").innerText=ajaxobj.hope_end_data;
 	
 });
 

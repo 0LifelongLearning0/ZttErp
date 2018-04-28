@@ -79,6 +79,13 @@
 				</div>
 			</div>
 			<div class="form-group">
+				<label class="col-lg-3 control-label">附件</label>
+				<div class="col-lg-6">
+					<input class="form-control" type="hidden" maxlength="255"  name="attachment" id="attachment" value='${zttPurchase.attachment }'>
+		                        <button class="btn btn-primary" data-toggle="button" onclick="downloadattachment('${zttPurchase.id}')">查看附件</button>
+				</div>
+			</div>
+			<div class="form-group">
 				<label class="col-lg-3 control-label"></label>
 				<div class="col-lg-6">
 					<button type="button" class="btn default" onclick="goback()">返回</button>

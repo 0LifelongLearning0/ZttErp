@@ -24,6 +24,8 @@ public interface ZttOrderService{
 	*/
 	public ZttOrder getZttOrderById(String id);
 	public int delZttOrderTask(String bussiness_id);
+	public String selectmax_id(ZttOrder zttOrder);
+	public int toApply(String apply_id,String id,String product_order_number);
 	/**
 	* 添加
 	* @param ztt_order 
@@ -39,6 +41,7 @@ public interface ZttOrderService{
 	public List<ZttOrderCheckHistory> getprocessinghisById(Map<String,Object> condition);
 	public List<ztt_filerecord> getfilerecordById(Map<String,Object> condition);
 	public int delZttOrdnum(Map<String,Object> condition);
+	public int selectmax_id_int(ZttOrder zttOrder);
 	/**
 	* 修改
 	* @param ztt_order 

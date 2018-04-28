@@ -25,6 +25,7 @@ text-align:center;
 						<table class="table table-bordered">
 							<caption class="text-center h3 no-margin bold" id="caption">业务人员下单表</caption>
 							<input class="form-control" type="hidden" maxlength="255"  name="state" id="state">
+							<input class="form-control" type="hidden" maxlength="255"  name="order_id" id="order_id">
 							<tbody>
 								<tr>
 									<td class="col-md-2 text-center">申&ensp;请&ensp;人</td>
@@ -92,7 +93,7 @@ text-align:center;
 									<td class="text-center">机械加工工艺过程</td>
 									<td colspan="2"><button class="btn btn-primary"
 											data-toggle="button"
-											onclick="progressupload('${taskData.businessKey }')">查看</button>
+											onclick="progressupload()">查看</button>
 											<label id="id"></label>
 											</td>
 									<td class="text-center" id="selfcheckreport">自检报告</td>

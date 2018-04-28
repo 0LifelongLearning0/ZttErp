@@ -20,6 +20,7 @@ $(document).ready(function(){
 	document.getElementById("techmanager_attachment").value=ajaxobj.techmanager_attachment;
 	document.getElementById("checker_attachment").value=ajaxobj.checker_attachment;
 	document.getElementById("selfchecker_attachment").value=ajaxobj.checker_attachment;
+	document.getElementById("order_id").value = ajaxobj.id;
 });
 
 
@@ -83,19 +84,23 @@ function uploadattachment(){
 	}); 
 }
 
-//上传
-//保存
-function progressupload(id){
-	var index = parent.layer.getFrameIndex(window.name); 
-	var state="7";
-	var flag="task";
+function progressupload(id) {
+	var index = parent.layer.getFrameIndex(window.name);
+	var order_id=document.getElementById("order_id").value;
 	parent.layer.open({
-		title: '机械加工工艺过程卡片',
-		type: 2, 
-		area: ['1500px', '700px'],
-		btn: ['关闭'],
-	  content: "../zttOrderController/toZttprocessingtechnicDetail?id="+id+"&state="+state+"&flag="+flag
-	}); 
+		title : '机械加工工艺过程卡片',
+		type : 2,
+		area : [ '1500px', '700px' ],
+		btn : [ '关闭' ],
+		content : "../zttProcessproductParentController/loadZttProcessproductParent?id=" + id
+				+ "&index=" + index+"&order_id=" + order_id,
+				success: function (layero, index) {
+	            	 //巧妙的地方在这里哦
+					parent.layer.getChildFrame('body',index).contents().find("#order_id").val(order_id)
+	            	
+
+	            }
+	});
 }
 //保存
 function downloadattachment(id){

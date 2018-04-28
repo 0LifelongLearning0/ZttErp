@@ -57,22 +57,28 @@ function approveZttOrderApply(taskid,status,obj){
 	var remark;
 	var params;
 	var contract_attachment=document.getElementById("contract_attachment").value;
-	if(status=="yes"){
-		remark="arrival";
-		params = {task_id:taskid,task_status:status,remark:remark,contract_attachment:contract_attachment};
+	var supplier_name=$('#supplyer_name').val();
+	var flag=0;
+	if(supplier_name==""){
+		layer.alert("请选择供应商");
+		flag=1;
+	}
+	if(flag==0){
+		remark="begin_purchase";
+		params = {task_id:taskid,task_status:status,remark:remark,contract_attachment:contract_attachment,supplier_name:supplier_name};
+		$.ajax({ 
+			   url: url, 
+			   async:false, 
+	           type:'POST',
+	           data: params,
+	           success: function (result) { 
+	        	   var index = parent.layer.getFrameIndex(window.name);
+					parent.layer.close(index);
+					datatables.ajax.reload();
+	            }
+	        });
 	}
 	
-	$.ajax({ 
-		   url: url, 
-		   async:false, 
-           type:'POST',
-           data: params,
-           success: function (result) { 
-        	   var index = parent.layer.getFrameIndex(window.name);
-				parent.layer.close(index);
-				datatables.ajax.reload();
-            }
-        });
 	
 }
 //上传

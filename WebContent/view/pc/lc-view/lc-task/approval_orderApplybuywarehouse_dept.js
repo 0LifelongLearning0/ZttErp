@@ -19,7 +19,7 @@ $(document).ready(function(){
 		  }
 		  });
 	var ajaxobj=eval("("+getbyapplyid(id)+")").data;
-	document.getElementById("client").innerText=ajaxobj.client;  
+	/*document.getElementById("client").innerText=ajaxobj.client;  
 	document.getElementById("zttordertime").innerText=ajaxobj.zttordertime;
 	document.getElementById("order_number").innerText=ajaxobj.order_number;
 	document.getElementById("product_order_number").innerText=ajaxobj.product_order_number;
@@ -32,7 +32,12 @@ $(document).ready(function(){
 	document.getElementById("sum_price").innerText=ajaxobj.sum_price;
 	document.getElementById("single_price").innerText=ajaxobj.single_price;
 	document.getElementById("end_data").innerText=ajaxobj.end_data;
-	document.getElementById("attachment").innerText=ajaxobj.attachment;
+	document.getElementById("attachment").innerText=ajaxobj.attachment;*/
+	document.getElementById("Product_order_number").innerText=ajaxobj.Product_order_number; 
+	document.getElementById("purchase_name").innerText=ajaxobj.purchase_name; 
+	document.getElementById("purchase_stardard").innerText=ajaxobj.purchase_stardard; 
+	document.getElementById("amount").innerText=ajaxobj.amount; 
+	document.getElementById("hope_end_data").innerText=ajaxobj.hope_end_data; 
          /*  var counter = 0;
                 t.row.add([
                     i+1,
@@ -58,7 +63,7 @@ $('#defaultForm').bootstrapValidator({
 function getbyapplyid(id){
 	var obj="";
 	var params = {id:id};
-	var url="../zttOrderController/getZttOrderById";
+	var url="../zttPurchaseController/getZttPurchaseById";
 	$.ajax({ 
 		   url: url, 
 		   async:false, 
@@ -74,7 +79,7 @@ function getbyapplyid(id){
 //保存
 function approveZttOrderApply(taskid,status,obj){
 	var datatables = parent.$('#datatables').DataTable();
-	var url="../zttOrderController/approvalOrderApply";
+	var url="../zttPurchaseController/approvalOrderpurchaseApply";
 	var remark="arrival"
 	var params;
 	var delivery_note=document.getElementById("delivery_note").value;
@@ -90,6 +95,7 @@ function approveZttOrderApply(taskid,status,obj){
 				datatables.ajax.reload();
             }
         });
+	
 	
 }
 //上传

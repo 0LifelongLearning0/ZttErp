@@ -225,6 +225,13 @@ public class ZttOrderController extends BaseAction {
 			zttOrder.setState("0");
 			zttOrder.setApply_id(applyUser.getXt_userinfo_id());
 			i = zttOrderService.addZttOrder(zttOrder);
+			int max_order_number=zttOrderService.selectmax_id_int(zttOrder);
+			int order_number=Integer.parseInt(zttOrder.getProduct_order_number().substring(6, zttOrder.getProduct_order_number().length()));
+			if(order_number<=max_order_number){
+			}else{
+			zttOrderService.add_ordernumber(zttOrder);
+			}
+			i=zttOrderService.toApply(zttOrder.getApply_id(),zttOrder.getId(), zttOrder.getProduct_order_number());
 			
 		}
 		if (i > 0) {
@@ -253,7 +260,6 @@ public class ZttOrderController extends BaseAction {
 			return outAudStr(false);
 		}
 	}
-
 	/**
 	 * 删除1
 	 * 
@@ -266,7 +272,7 @@ public class ZttOrderController extends BaseAction {
 		int i = 0;
 		if (null != id && !"".equals(id)) {
 			Map<String, Object> condition = new HashMap<String, Object>();
-			condition.put("id", id.split(","));
+			condition.put("id", id.split(",")[0]);
 			Map<String, Object> condition1 = new HashMap<String, Object>();
 			condition1.put("order_id", id.split(",")[0]);
 			i = zttOrderService.delZttOrder(condition);
@@ -363,7 +369,51 @@ public class ZttOrderController extends BaseAction {
 		ExportExcel exportExcel = new ExportExcel();
 		exportExcel.exportExcel(excleData, excleHeader, excleText, response);
 	}
-
+	/**
+	 * 批量修改
+	 * 
+	 * @param excleData
+	 * @param excleHeader
+	 * @param excleText
+	 * @param request
+	 * @param request
+	 */
+	@RequestMapping(value = "/batchapply", method = { RequestMethod.POST, RequestMethod.GET })
+	public ModelAndView batchapply(String id, String params,HttpServletRequest request, Model model) {
+		model.addAttribute("id", id);
+		return new ModelAndView("pc/zx-view/ztt-order/ztt-order-update-batch");
+	}
+	/**
+	 * 批量修改页面
+	 * 
+	 * @param excleData
+	 * @param excleHeader
+	 * @param excleText
+	 * @param request
+	 * @param request
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/updateZttOrderbatch", method = { RequestMethod.POST, RequestMethod.GET })
+	public String updateZttOrderbatch(ZttOrder zttOrder, HttpServletRequest request) {
+		int i = 0;
+		String[] stra= zttOrder.getId().split(",");
+		String a=null;
+		for(int j=0;j<stra.length;j++){
+			
+			a=stra[j];
+			zttOrder.setId(a);
+			j=j+1;
+			if (null != zttOrder && !"".equals(zttOrder)) {
+				i = zttOrderService.updateZttOrderBySelective(zttOrder);
+			}
+		}
+		
+		if (i > 0) {
+			return outAudStr(true);
+		} else {
+			return outAudStr(false);
+		}
+	}
 	/**
 	 * 发送至新增页面
 	 * 
@@ -371,7 +421,10 @@ public class ZttOrderController extends BaseAction {
 	 */
 	@RequestMapping(value = "/toZttOrderAdd", method = { RequestMethod.POST, RequestMethod.GET })
 	public ModelAndView toZttOrderAdd(ZttOrder zttOrder, HttpServletRequest request, Model model) {
+		ZttOrder ZttOrder=new ZttOrder();
+		String product_order_number=zttOrderService.selectmax_id(ZttOrder);
 		XtUserinfo applyUser = xtUserinfoService.getXtUserinfoById(getXtUid());
+		model.addAttribute("product_order_number", product_order_number);
 		model.addAttribute("applyUser", applyUser);
 		return new ModelAndView("pc/zx-view/ztt-order/ztt-order-add");
 	}
@@ -694,44 +747,13 @@ public class ZttOrderController extends BaseAction {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/toApply", method = { RequestMethod.POST, RequestMethod.GET })
-	public String toApply(String apply_id,String product_order_number, HttpServletRequest request, Model model) {
-		int i = 0;
-		if (null != apply_id && !"".equals(apply_id)) {
-			String dep_user_id = null;
-			Map<String, Object> conditionr = new HashMap<String, Object>();
-			conditionr.put("flag", 1);
-			List<XtUserinfo> xtUserinfoList = xtURService.getXtURListByCondition(conditionr);
-			ZttOrder zttOrder = zttOrderService.getZttOrderById(apply_id);
-			String order_number=null;
-			if(product_order_number.equals("")){
-				order_number = zttOrderService.add_ordernumber(zttOrder);
-			}else{
-				order_number=product_order_number;
-			}
-			
-			XtConstant Xt_Constant = getXtConstantCache("ZttOrderApply");
-			Map<String, Object> condition = new HashMap<String, Object>();
-			condition.put("xt_constant_id", Xt_Constant.getXt_constant_id());
-			String lc_his_id = lc_Deployment_HisService.getLcDeploymentHisNewUnique(condition).getId();
-			LcApply lc_Apply = new LcApply();
-			Map<String, Object> variables = new HashMap<String, Object>();
-			variables.put("taskType", "业务人员下单流程");
-			variables.put("owner", zttOrder.getApply_id());
-			variables.put("taskkind", "ztt_sales");
-			lc_Apply.setLc_apply_title(
-					getXtU().getXt_userinfo_realName() + "于" + getSimpleDateFormat() + "，提交了一条部门申请申请流程");
-			lc_Apply.setLc_apply_model_biz_id(zttOrder.getId());
-			if (activitiUtil.addApply(lc_his_id, zttOrder.getId(), variables, lc_Apply)) {
-				zttOrder.setState("1");
-				zttOrder.setProduct_order_number(order_number);
-				i = zttOrderService.updateZttOrderBySelective(zttOrder);
-
-			}
-		}
+	public String toApply(String apply_id,String id,String product_order_number, HttpServletRequest request, Model model) {
+		int i=zttOrderService.toApply(apply_id, id,product_order_number);
 		if (i > 0) {
 			return outAudStr(true);
 		} else {
 			return outAudStr(false);
+	
 		}
 	}
 

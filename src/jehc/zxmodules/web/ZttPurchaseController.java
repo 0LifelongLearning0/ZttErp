@@ -369,7 +369,7 @@ public class ZttPurchaseController extends BaseAction {
 	@RequestMapping(value = "/approvalOrderpurchaseApply", method = { RequestMethod.POST, RequestMethod.GET })
 	public String approvalOrderpurchaseApply(String task_id, String task_status, String remark, String path,
 			String supply_name, String single_price, String end_date, String not_satisfy_reason,
-			String contract_attachment, HttpServletRequest request) {
+			String contract_attachment,String delivery_note, HttpServletRequest request) {
 		int i = 0;
 		if (task_status == null) {
 			task_status = "";
@@ -415,6 +415,7 @@ public class ZttPurchaseController extends BaseAction {
 						lc_approval.setLc_status_name("流程结束");
 						zttPurchase.setState("5");
 						ztt_filerecord.setStatus_name("确认到货,进入质检");
+						zttPurchase.setDelivery_note(delivery_note);
 						zttOrderService.addZttOrderfileRecord(ztt_filerecord);
 					} else if (remark.equals("manager")) {
 						lc_approval.setLc_status_name("主管同意");
@@ -428,6 +429,13 @@ public class ZttPurchaseController extends BaseAction {
 						zttPurchase.setErp_number(path);
 						ztt_filerecord.setProduct_check_comment("数据分析师通过");
 						ztt_filerecord.setStatus_name("数据分析师通过");
+						zttOrderService.addZttOrderfileRecord(ztt_filerecord);
+					}else if (remark.equals("begin_purchase")) {
+						lc_approval.setLc_status_name("开始采购,等待到货");
+						zttPurchase.setState("14");
+						zttPurchase.setErp_number(path);
+						ztt_filerecord.setProduct_check_comment("开始采购,等待到货");
+						ztt_filerecord.setStatus_name("开始采购,等待到货");
 						zttOrderService.addZttOrderfileRecord(ztt_filerecord);
 					}
 					zttPurchaseService.updateZttPurchaseBySelective(zttPurchase);

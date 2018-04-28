@@ -50,12 +50,6 @@ function uploadattachment() {
 		content : "../zttOrderController/uploadattachment?upid="+upid
 
 	});
-	/*
-	 * var inputObj=document.createElement('input')
-	 * inputObj.setAttribute('id','_ef'); inputObj.setAttribute('type','file');
-	 * inputObj.setAttribute("style",'visibility:hidden');
-	 * document.body.appendChild(inputObj); inputObj.click(); inputObj.value
-	 */
 }
 
 $(function() {
