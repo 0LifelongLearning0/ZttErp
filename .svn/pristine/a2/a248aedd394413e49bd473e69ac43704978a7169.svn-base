@@ -24,7 +24,7 @@ import jehc.xtmodules.xtcore.util.UUID;
 
 /**
 * 全文检索多实例配置 
-* 2015-12-15 13:07:24  邓纯杰
+* 2015-12-15 13:07:24  
 */
 @Service("solrCoreService")
 public class SolrCoreServiceImpl extends BaseService implements SolrCoreService{

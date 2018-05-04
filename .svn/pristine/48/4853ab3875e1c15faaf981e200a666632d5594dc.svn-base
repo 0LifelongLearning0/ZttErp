@@ -11,7 +11,7 @@ import jehc.xtmodules.xtmodel.XtUserinfo;
 
 /**
 * 用户角色分配表; InnoDB free: 6144 kB 
-* 2015-08-04 16:25:07  邓纯杰
+* 2015-08-04 16:25:07  
 */
 @Repository("xtURDao")
 public class XtURDaoImpl  extends BaseDaoImpl implements XtURDao{

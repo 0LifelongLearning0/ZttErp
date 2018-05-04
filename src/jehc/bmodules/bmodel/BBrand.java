@@ -6,7 +6,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
 * b_brand 基础-品牌 
-* 2016-01-05 12:46:23  邓纯杰
+* 2016-01-05 12:46:23  
 */
 public class BBrand extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

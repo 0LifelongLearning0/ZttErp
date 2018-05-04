@@ -129,7 +129,7 @@
                                                     <span class="photo">
                                                         <img src="${syspath}/deng/images/default/user.png" class="img-circle" alt=""> </span>
                                                     <span class="subject">
-                                                        <span class="from"> 邓纯杰 </span>
+                                                        <span class="from">  </span>
                                                         <span class="time">刚刚 </span>
                                                     </span>
                                                     <span class="message">今天心情不错...</span>

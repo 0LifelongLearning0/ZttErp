@@ -7,7 +7,7 @@ import org.dom4j.Element;
 
 /**
  * 连线坐标
- * @author邓纯杰
+ * @author
  *
  */
 public class CoordinateUtils {

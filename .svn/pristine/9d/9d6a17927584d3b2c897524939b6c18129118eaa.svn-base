@@ -10,7 +10,7 @@ import jehc.xtmodules.xtcore.base.impl.BaseDaoImpl;
 
 /**
 * 基础-品牌 
-* 2016-01-05 12:46:23  邓纯杰
+* 2016-01-05 12:46:23  
 */
 @Repository("bBrandDao")
 public class BBrandDaoImpl  extends BaseDaoImpl implements BBrandDao{

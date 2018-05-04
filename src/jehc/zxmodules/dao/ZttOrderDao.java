@@ -38,6 +38,8 @@ public interface ZttOrderDao{
 	public List<ztt_filerecord> getfilerecordById(Map<String,Object> condition);
 	public int addZttOrderfileRecord(ztt_filerecord ztt_filerecord);
 	public int delZttOrdnum(Map<String,Object> condition);
+	public String ZttOrdernumber_max(String order_id);
+	public String ZttOrdernumber_max_purchase(String order_id);
 	/**
 	* 添加
 	* @param ztt_order 

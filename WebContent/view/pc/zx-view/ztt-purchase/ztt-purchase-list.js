@@ -76,6 +76,9 @@ $(document).ready(function() {
 				data:'end_data'
 			},
 			{
+				data:'send_amount'
+			},
+			{
 				data:'state',
 				render : function(data, type, row,
 						meta) {
@@ -156,8 +159,17 @@ function toZttPurchaseUpdate(){
 		toastrBoot(4,"选择数据非法");
 		return;
 	}
+	/*var id = $(".checkchild:checked").val();
+	tlocation("../zttPurchaseController/toZttPurchaseUpdate?id="+id);*/
 	var id = $(".checkchild:checked").val();
-	tlocation("../zttPurchaseController/toZttPurchaseUpdate?id="+id);
+	layer.open({
+		title : '修改界面',
+		type : 2,
+		area : [ '1200px', '600px' ],
+		btn : [ '关闭' ],
+		content : "../zttPurchaseController/toZttPurchaseUpdate?id=" + id
+
+	})
 }
 //详情
 function toZttPurchaseDetail(id){
@@ -253,7 +265,7 @@ function export1(){
 	layer.open({
 		title : '导出',
 		type : 2,
-		area : [ '1500px', '700px' ],
+		area : [ '1200px', '700px' ],
 		btn : [ '关闭'],
 		content : "../zttOrderController/uploadattachment?upid="+upid,
 

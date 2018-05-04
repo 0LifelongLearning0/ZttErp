@@ -9,7 +9,7 @@ import jehc.lcmodules.mxgraph.mxUtils.communal.MxUtils;
 
 /**
  * 信号启动事件
- * @author 邓纯杰
+ * @author 
  *
  */
 public class MxSignalStartEvent {

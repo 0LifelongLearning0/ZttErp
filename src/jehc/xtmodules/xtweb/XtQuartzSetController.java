@@ -37,7 +37,7 @@ import jehc.xtmodules.xtservice.XtQuartzService;
 
 /**
  * 定时任务配置
- * @author邓纯杰
+ * @author
  *
  */
 @Controller

@@ -6,7 +6,7 @@ import jehc.bmodules.bmodel.BProductPrice;
 
 /**
 * 基础商品价格 
-* 2016-03-18 20:18:13  邓纯杰
+* 2016-03-18 20:18:13  
 */
 public interface BProductPriceService{
 	/**

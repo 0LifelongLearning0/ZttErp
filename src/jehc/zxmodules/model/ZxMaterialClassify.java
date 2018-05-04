@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
 * zx_material_classify 物料分类 
-* 2017-08-30 08:30:12  邓纯杰
+* 2017-08-30 08:30:12  
 */
 public class ZxMaterialClassify extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

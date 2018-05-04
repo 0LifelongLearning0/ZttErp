@@ -6,7 +6,7 @@ import jehc.xtmodules.xtmodel.XtAppkeyAppsecret;
 
 /**
 * xt_appkey_appsecret 
-* 2016-08-28 14:37:16  邓纯杰
+* 2016-08-28 14:37:16  
 */
 public interface XtAppkeyAppsecretDao{
 	/**

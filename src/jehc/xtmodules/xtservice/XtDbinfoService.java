@@ -6,7 +6,7 @@ import jehc.xtmodules.xtmodel.XtDbinfo;
 
 /**
 * 数据库信息表 
-* 2015-05-24 08:13:15  邓纯杰
+* 2015-05-24 08:13:15  
 */
 public interface XtDbinfoService{
 	/**

@@ -1,7 +1,7 @@
 package jehc.xtmodules.xtmodel;
 /**
  * 查询字段封装
- * @author 邓纯杰
+ * @author 
  *
  */
 public class XtGeneratorSearchFiled {

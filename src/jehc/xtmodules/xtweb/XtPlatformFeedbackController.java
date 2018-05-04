@@ -21,7 +21,7 @@ import jehc.xtmodules.xtservice.XtPlatformFeedbackService;
 
 /**
 * 平台反馈意见 
-* 2017-11-13 15:15:38  邓纯杰
+* 2017-11-13 15:15:38  
 */
 @Controller
 @RequestMapping("/xtPlatformFeedbackController")

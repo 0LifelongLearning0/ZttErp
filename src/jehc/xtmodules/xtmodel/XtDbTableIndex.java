@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * 表索引
- * @author 邓纯杰
+ * @author 
  */
 public class XtDbTableIndex  implements Serializable{
 	private static final long serialVersionUID = 1L;

@@ -9,7 +9,7 @@ import jehc.lcmodules.mxgraph.mxUtils.communal.MxUtils;
 
 /**
  * 事件子流程
- * @author 邓纯杰
+ * @author 
  *
  */
 public class MxEventSubProcess {

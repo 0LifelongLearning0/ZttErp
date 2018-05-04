@@ -13,7 +13,7 @@ import jehc.xtmodules.xtservice.XtFunctioninfoRightService;
 
 /**
 * 功能分配表 
-* 2016-10-08 17:38:19  邓纯杰
+* 2016-10-08 17:38:19  
 */
 @Service("xtFunctioninfoRightService")
 public class XtFunctioninfoRightServiceImpl extends BaseService implements XtFunctioninfoRightService{

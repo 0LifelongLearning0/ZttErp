@@ -13,7 +13,7 @@ import jehc.xtmodules.xtcore.util.ExceptionUtil;
 
 /**
 * 索引更多属性 
-* 2016-07-10 22:19:49  邓纯杰
+* 2016-07-10 22:19:49  
 */
 @Service("solrIndexAttributeService")
 public class SolrIndexAttributeServiceImpl extends BaseService implements SolrIndexAttributeService{

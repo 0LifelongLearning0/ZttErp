@@ -7,7 +7,7 @@ import jehc.xtmodules.xtcore.util.constant.PathConstant;
 
 /**
  * 读取JDBC配置文件
- * @author 邓纯杰
+ * @author 
  *
  */
 public class ReadJDBCProperties {

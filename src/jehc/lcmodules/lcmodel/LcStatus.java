@@ -5,7 +5,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
 * lc_status 流程状态 
-* 2016-05-04 14:13:34  邓纯杰
+* 2016-05-04 14:13:34  
 */
 public class LcStatus extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

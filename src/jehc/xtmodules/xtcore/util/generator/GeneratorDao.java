@@ -19,7 +19,7 @@ import jehc.xtmodules.xtmodel.XtGeneratorTableColumn;
 
 /**
  * 生成数据层代码(包括接口Dao,实现类DaoImpl,Mybatis等代码)
- * @author邓纯杰
+ * @author
  *
  */
 public class GeneratorDao extends GeneratorUtil{

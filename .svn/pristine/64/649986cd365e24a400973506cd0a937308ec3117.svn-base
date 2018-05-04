@@ -14,7 +14,7 @@ import jehc.xtmodules.xtcore.util.constant.PathConstant;
 
 /**
  * Logback日志
- * @author邓纯杰
+ * @author
  *
  */
 @Controller

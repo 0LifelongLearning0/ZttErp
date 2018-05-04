@@ -19,7 +19,7 @@ import jehc.xtmodules.xtmodel.XtGeneratorTableColumn;
 
 /**
  * 代码生成支持类
- * @author邓纯杰
+ * @author
  *
  */
 public class GeneratorModel extends GeneratorUtil{
@@ -65,7 +65,7 @@ public class GeneratorModel extends GeneratorUtil{
         //注释部分
         sb.append("/**\r\n");
         sb.append("* "+xt_Generator.getXt_generator_tbname()+" "+xt_Generator.getXt_generator_tbcomment()+" \r\n");
-        sb.append("* "+sdf.format(new Date())+"  邓纯杰\r\n");
+        sb.append("* "+sdf.format(new Date())+"  \r\n");
         sb.append("*/");
         //sb.append("*/ \r\n");
         //实体部分

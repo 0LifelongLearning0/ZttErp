@@ -6,7 +6,7 @@ import jehc.xtmodules.xtmodel.XtOperateLogs;
 
 /**
 * 操作日志表 
-* 2015-05-24 08:30:58  邓纯杰
+* 2015-05-24 08:30:58  
 */
 public interface XtOperateLogsService{
 	/**

@@ -10,7 +10,7 @@ import jehc.xtmodules.xtcore.base.impl.BaseDaoImpl;
 
 /**
 * 基础购物车 
-* 2016-01-27 13:36:04  邓纯杰
+* 2016-01-27 13:36:04  
 */
 @Repository("bCartDao")
 public class BCartDaoImpl  extends BaseDaoImpl implements BCartDao{

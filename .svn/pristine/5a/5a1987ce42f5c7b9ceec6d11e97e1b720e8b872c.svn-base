@@ -9,7 +9,7 @@ import jehc.xtmodules.xtcore.base.impl.BaseDaoImpl;
 
 /**
 * solr文档 
-* 2015-12-23 09:38:59  邓纯杰
+* 2015-12-23 09:38:59  
 */
 @Repository("solrDocumentDao")
 public class SolrDocumentDaoImpl  extends BaseDaoImpl implements SolrDocumentDao{

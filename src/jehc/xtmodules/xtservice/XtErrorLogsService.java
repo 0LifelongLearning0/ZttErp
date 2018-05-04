@@ -6,7 +6,7 @@ import jehc.xtmodules.xtmodel.XtErrorLogs;
 
 /**
 * 异常日志表 
-* 2015-05-24 08:33:40  邓纯杰
+* 2015-05-24 08:33:40  
 */
 public interface XtErrorLogsService{
 	/**

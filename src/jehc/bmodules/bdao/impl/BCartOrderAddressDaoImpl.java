@@ -10,7 +10,7 @@ import jehc.xtmodules.xtcore.base.impl.BaseDaoImpl;
 
 /**
 * 基础购物车订单常用配送地址 
-* 2016-02-22 21:17:24  邓纯杰
+* 2016-02-22 21:17:24  
 */
 @Repository("bCartOrderAddressDao")
 public class BCartOrderAddressDaoImpl  extends BaseDaoImpl implements BCartOrderAddressDao{

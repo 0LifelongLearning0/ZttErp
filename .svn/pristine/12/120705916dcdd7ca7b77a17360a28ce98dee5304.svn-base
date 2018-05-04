@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * 函数
- * @author 邓纯杰
+ * @author 
  *
  */
 public class XtDbFun  implements Serializable{

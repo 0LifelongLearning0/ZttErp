@@ -6,7 +6,7 @@ import jehc.xtmodules.xtmodel.XtMonitorMem;
 
 /**
 * 服务器内存 
-* 2016-03-04 12:52:52  邓纯杰
+* 2016-03-04 12:52:52  
 */
 public interface XtMonitorMemService{
 	/**

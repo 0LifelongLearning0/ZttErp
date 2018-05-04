@@ -12,7 +12,7 @@ import org.apache.solr.util.FileUtils;
 /**
  * 创建多个Solr Core
  * 
- * @author 邓纯杰
+ * @author 
  * 
  */
 public class CreateCoreAdminRequest {

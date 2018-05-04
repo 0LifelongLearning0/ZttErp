@@ -25,7 +25,7 @@ import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
 
 /**
 * 基础卖家登陆账号 
-* 2016-02-18 17:17:12  邓纯杰
+* 2016-02-18 17:17:12  
 */
 @Controller
 @RequestMapping("/bSellerLoginController")

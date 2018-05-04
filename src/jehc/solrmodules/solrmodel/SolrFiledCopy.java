@@ -6,7 +6,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
 * solr_filed_copy Solr字段拷贝配置 
-* 2016-11-14 22:20:39  邓纯杰
+* 2016-11-14 22:20:39  
 */
 public class SolrFiledCopy extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

@@ -13,7 +13,7 @@ import jehc.xtmodules.xtservice.XtQuartzLogService;
 
 /**
 * 调度器日志 
-* 2016-05-25 20:16:23  邓纯杰
+* 2016-05-25 20:16:23  
 */
 @Service("xtQuartzLogService")
 public class XtQuartzLogServiceImpl extends BaseService implements XtQuartzLogService{

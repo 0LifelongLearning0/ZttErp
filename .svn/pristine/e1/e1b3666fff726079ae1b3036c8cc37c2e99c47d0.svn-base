@@ -13,7 +13,7 @@ import jehc.xtmodules.xtcore.util.ExceptionUtil;
 
 /**
 * solr schema 模板 
-* 2016-07-01 13:14:46  邓纯杰
+* 2016-07-01 13:14:46  
 */
 @Service("solrSchemaTempletService")
 public class SolrSchemaTempletServiceImpl extends BaseService implements SolrSchemaTempletService{

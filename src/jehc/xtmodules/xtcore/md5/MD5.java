@@ -1,7 +1,7 @@
 package jehc.xtmodules.xtcore.md5;
 /**
  * MD5加密类
- * @author 邓纯杰 
+ * @author  
  *
  */
 public class MD5 {

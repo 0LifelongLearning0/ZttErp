@@ -24,7 +24,7 @@ import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
 
 /**
 * 基础专有账户 
-* 2016-03-24 20:33:38  邓纯杰
+* 2016-03-24 20:33:38  
 */
 @Controller
 @RequestMapping("/bMemberAccountProprietaryController")

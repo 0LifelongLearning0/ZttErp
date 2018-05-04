@@ -9,7 +9,7 @@ import jehc.lcmodules.mxgraph.mxUtils.communal.MxUtils;
 
 /**
  * 错误边界
- * @author邓纯杰
+ * @author
  *
  */
 public class MxErrorBoundaryEvent {

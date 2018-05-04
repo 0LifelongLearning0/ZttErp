@@ -25,7 +25,7 @@ import jehc.xtmodules.xtservice.XtDbinfoService;
 
 /**
 * 数据库信息表; InnoDB free: 4096 kB 
-* 2015-09-30 16:37:40  邓纯杰
+* 2015-09-30 16:37:40  
 */
 @Controller
 @RequestMapping("/xtDbinfoController")

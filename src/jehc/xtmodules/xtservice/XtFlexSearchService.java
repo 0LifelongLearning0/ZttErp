@@ -12,7 +12,7 @@ import jehc.xtmodules.xtmodel.XtDbView;
 
 /**
  * 查询工具
- * @author 邓纯杰
+ * @author 
  *
  */
 public interface XtFlexSearchService {

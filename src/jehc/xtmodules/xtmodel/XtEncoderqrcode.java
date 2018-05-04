@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
 * xt_encoderqrcode 平台二维码 
-* 2016-04-05 20:58:53  邓纯杰
+* 2016-04-05 20:58:53  
 */
 public class XtEncoderqrcode extends XtAttachment implements Serializable{
 	private static final long serialVersionUID = 1L;

@@ -9,7 +9,7 @@ import jehc.xtmodules.xtmodel.XtFunctioninfo;
 
 /**
 * 功能表 
-* 2015-06-01 20:41:56  邓纯杰
+* 2015-06-01 20:41:56  
 */
 @Repository("xtFunctioninfoDao")
 public class XtFunctioninfoDaoImpl  extends BaseDaoImpl implements XtFunctioninfoDao{

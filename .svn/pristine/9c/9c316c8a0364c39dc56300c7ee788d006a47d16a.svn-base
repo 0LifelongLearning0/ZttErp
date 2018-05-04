@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
 * xt_data_authority_post 数据权限按岗位设置 
-* 2017-06-20 14:37:16  邓纯杰
+* 2017-06-20 14:37:16  
 */
 public class XtDataAuthorityPost extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

@@ -2,7 +2,7 @@ package jehc.xtmodules.xtcore.util;
 
 /**
  * log4j日志工具类
- * @author 邓纯杰
+ * @author 
  *
  */
 public class Log4jUtil extends CommonUtils{

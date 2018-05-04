@@ -5,7 +5,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
 * xt_attachment 附件管理 
-* 2016-01-11 15:39:16  邓纯杰
+* 2016-01-11 15:39:16  
 */
 public class XtAttachment extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

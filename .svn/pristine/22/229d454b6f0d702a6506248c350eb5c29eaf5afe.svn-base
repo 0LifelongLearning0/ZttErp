@@ -6,7 +6,7 @@ import jehc.xtmodules.xtmodel.XtDbtableStrategy;
 
 /**
 * 分表策略表 
-* 2017-02-14 16:23:48  邓纯杰
+* 2017-02-14 16:23:48  
 */
 public interface XtDbtableStrategyDao{
 	/**

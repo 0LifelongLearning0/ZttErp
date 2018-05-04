@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
 * zx_staff_record 员工档案 
-* 2018-01-04 15:58:11  邓纯杰
+* 2018-01-04 15:58:11  
 */
 public class ZxStaffRecord extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

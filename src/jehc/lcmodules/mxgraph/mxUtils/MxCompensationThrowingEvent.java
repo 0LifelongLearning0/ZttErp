@@ -9,7 +9,7 @@ import jehc.lcmodules.mxgraph.mxUtils.communal.MxUtils;
 
 /**
  * 补偿抛出事件
- * @author 邓纯杰
+ * @author 
  *
  */
 public class MxCompensationThrowingEvent {

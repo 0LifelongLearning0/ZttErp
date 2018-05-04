@@ -19,7 +19,7 @@ import jehc.xtmodules.xtmodel.XtGeneratorTableColumn;
 import jehc.xtmodules.xtservice.XtGeneratorService;
 /**
  * 代码生成器
- * @author邓纯杰
+ * @author
  *
  */
 @Service("xtGeneratorService")

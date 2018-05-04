@@ -61,7 +61,7 @@ import net.sf.json.JSONObject;
 
 /**
  * Dao父类支持
- * @author邓纯杰
+ * @author
  *
  */
 public class BaseService extends UUID{

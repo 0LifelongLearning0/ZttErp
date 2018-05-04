@@ -13,7 +13,7 @@ import jehc.xtmodules.xtcore.util.ExceptionUtil;
 
 /**
 * 基础购物车订单常用配送地址 
-* 2016-02-22 21:17:25  邓纯杰
+* 2016-02-22 21:17:25  
 */
 @Service("bCartOrderAddressService")
 public class BCartOrderAddressServiceImpl extends BaseService implements BCartOrderAddressService{

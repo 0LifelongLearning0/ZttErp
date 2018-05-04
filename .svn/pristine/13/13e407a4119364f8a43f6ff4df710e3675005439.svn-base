@@ -6,7 +6,7 @@ import jehc.solrmodules.solrmodel.SolrSort;
 
 /**
 * solr排序 
-* 2016-07-08 23:49:58  邓纯杰
+* 2016-07-08 23:49:58  
 */
 public interface SolrSortService{
 	/**

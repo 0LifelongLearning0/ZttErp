@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
 * ztt_processproduct_parent 机械加工工艺过程母表 
-* 2018-04-24 14:27:01  邓纯杰
+* 2018-04-24 14:27:01  
 */
 public class ZttProcessproductParent extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

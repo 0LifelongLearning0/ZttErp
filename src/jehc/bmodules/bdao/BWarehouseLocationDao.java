@@ -6,7 +6,7 @@ import jehc.bmodules.bmodel.BWarehouseLocation;
 
 /**
 * 基础仓库库位 
-* 2016-01-27 14:25:28  邓纯杰
+* 2016-01-27 14:25:28  
 */
 public interface BWarehouseLocationDao{
 	/**

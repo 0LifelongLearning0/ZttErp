@@ -9,6 +9,9 @@
 #datatables {
 	white-space: nowrap;
 }
+.table tr.row_selected td {
+background-color: yellow;
+}
 </style>
 </head>
 <body>
@@ -47,6 +50,10 @@
 					<label>erp号</label> <input type="text" class="form-control"
 						name="erp_number" id="erp_number" placeholder="请输入erp号">
 				</div>
+				<div class="form-group">
+					<label>数量</label> <input type="text" class="form-control"
+						name="amount" id="amount" placeholder="请输入数量">
+				</div>
 				</br>
 				<div class="form-group">
 					<label>供应商</label> <input type="text" class="form-control"
@@ -66,6 +73,14 @@
 					</button>
 				</div>
 				<div class="form-group">
+					<label>合同号</label> <input type="text" class="form-control"
+						name="contract_number" id="contract_number" placeholder="请输入合同号">
+				</div>
+				<div class="form-group">
+					<label>订单号</label> <input type="text" class="form-control"
+						name="order_number" id="order_number" placeholder="请输入订单号">
+				</div>
+				<div class="form-group">
 					<label>供应商开票日期</label>
 					<div class="input-group">
 						<input type="text" class="form_datetime form-control"
@@ -74,6 +89,7 @@
 							class="form_datetime form-control" placeholder="结束时间"
 							name="apply_time_et_supplier_bill_date" />
 					</div>
+					
 				</div>
 
 				<div class="form-group">
@@ -86,7 +102,30 @@
 							name="apply_time_et_End_data" />
 					</div>
 				</div>
-
+				  <div class="form-group">
+					<label>实际交货日期</label>
+					<div class="input-group">
+						<input type="text" class="form_datetime form-control"
+							placeholder="起始时间" name="apply_time_st_send_time" /> <span
+							class="input-group-addon">至</span> <input type="text"
+							class="form_datetime form-control" placeholder="结束时间"
+							name="apply_time_et_send_time" />
+					</div>
+					为空
+					<input type="checkbox" name="send_time" id="send_time"/>
+				</div>
+                   <div class="form-group">
+					<label>销售开票日期</label>
+					<div class="input-group">
+						<input type="text" class="form_datetime form-control"
+							placeholder="起始时间" name="apply_time_st_bill_date_open" /> <span
+							class="input-group-addon">至</span> <input type="text"
+							class="form_datetime form-control" placeholder="结束时间"
+							name="apply_time_et_bill_date_open" />
+					</div>
+					为空
+					<input type="checkbox" name="bill_date_open" id="bill_date_open"/>
+				</div>
 
 				<div class="form-group" style="margin-left: 35px;">
 					<button class="btn btn-primary" type="button"
@@ -102,9 +141,6 @@
 	</div>
 	<div class="panel-body">
 		<div class="btn-group pull-right" style="margin-right: 20px;">
-		<button class="btn btn-default" onclick="batchapply()">
-				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>批量修改
-			</button>
 			<button class="btn btn-default" onclick="toZttOrderAdd()">
 				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
 			</button>

@@ -9,7 +9,7 @@ import jehc.xtmodules.xtmodel.XtEncoderqrcode;
 
 /**
 * 平台二维码 
-* 2016-04-05 20:58:53  邓纯杰
+* 2016-04-05 20:58:53  
 */
 @Repository("xtEncoderqrcodeDao")
 public class XtEncoderqrcodeDaoImpl  extends BaseDaoImpl implements XtEncoderqrcodeDao{

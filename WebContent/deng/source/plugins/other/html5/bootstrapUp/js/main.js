@@ -263,7 +263,7 @@ $(function () {
               URL.revokeObjectURL(blobURL); // Revoke when load complete
             }).cropper('reset', true).cropper('replace', blobURL);
 			console.info('------------'+$inputImage.val());
-			/**邓纯杰注释
+			/**注释
             $inputImage.val('');
 			**/
           } else {

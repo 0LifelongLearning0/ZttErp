@@ -9,7 +9,7 @@ import jehc.xtmodules.xtmodel.XtDbinfo;
 
 /**
 * 数据库信息表 
-* 2015-05-24 08:13:15  邓纯杰
+* 2015-05-24 08:13:15  
 */
 @Repository("xtDbinfoDao")
 public class XtDbinfoDaoImpl  extends BaseDaoImpl implements XtDbinfoDao{

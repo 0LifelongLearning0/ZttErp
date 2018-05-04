@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
 * b_order 基础订单 
-* 2016-01-27 13:55:11  邓纯杰
+* 2016-01-27 13:55:11  
 */
 public class BOrder extends BInvoice implements Serializable{
 	private static final long serialVersionUID = 1L;

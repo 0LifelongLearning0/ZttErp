@@ -9,7 +9,7 @@ import jehc.xtmodules.xtmodel.XtMR;
 
 /**
 * 资源角色; InnoDB free: 6144 kB 
-* 2015-08-04 16:27:46  邓纯杰
+* 2015-08-04 16:27:46  
 */
 @Repository("xtMRDao")
 public class XtMRDaoImpl  extends BaseDaoImpl implements XtMRDao{

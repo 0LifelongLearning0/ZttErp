@@ -25,7 +25,7 @@ import jehc.xtmodules.xtservice.XtOperateBusinessLogsService;
 
 /**
 * 平台业务操作日志表 
-* 2016-09-16 16:39:20  邓纯杰
+* 2016-09-16 16:39:20  
 */
 @Controller
 @RequestMapping("/xtOperateBusinessLogsController")

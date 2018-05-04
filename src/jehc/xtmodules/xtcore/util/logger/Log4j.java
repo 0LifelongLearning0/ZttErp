@@ -3,7 +3,7 @@ package jehc.xtmodules.xtcore.util.logger;
 import org.apache.log4j.PropertyConfigurator;
 /**
  * Log4j动态修改配置文件并生效
- * @author 邓纯杰
+ * @author 
  *
  */
 public class Log4j {

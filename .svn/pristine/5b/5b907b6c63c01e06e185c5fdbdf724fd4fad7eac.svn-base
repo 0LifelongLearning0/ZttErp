@@ -24,7 +24,7 @@ import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
 
 /**
 * 索引字段表 
-* 2015-12-23 09:32:01  邓纯杰
+* 2015-12-23 09:32:01  
 */
 @Controller
 @RequestMapping("/solrIndexController")

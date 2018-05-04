@@ -26,7 +26,7 @@ import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
 
 /**
 * 基础商品默认颜色 
-* 2016-01-19 15:38:05  邓纯杰
+* 2016-01-19 15:38:05  
 */
 @Controller
 @RequestMapping("/bProductColorDefaultController")

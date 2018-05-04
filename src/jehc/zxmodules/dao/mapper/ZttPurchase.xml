@@ -33,6 +33,7 @@
 			a.delivery_note,
 			a.end_data,
 			a.attachment,
+			a.send_amount,
 			b.xt_userinfo_realName as personname
 		FROM 
 			ztt_purchase a,xt_userinfo b
@@ -103,7 +104,8 @@
 			supplier_bill_date,
 			supplier_bill_price,
 			attachment,
-			end_data
+			end_data,
+			send_amount
 		FROM 
 			ztt_purchase
 		WHERE id=#{id}
@@ -132,7 +134,8 @@
 			qualified_date,
 			check_attachment,
 			state,
-			attachment
+			attachment,
+			send_amount
 			)
 			VALUES
 			(
@@ -154,7 +157,8 @@
 			#{qualified_date},
 			#{check_attachment},
 			#{state},
-			#{attachment}
+			#{attachment},
+			#{send_amount}
 			)
 	</insert>
 
@@ -178,7 +182,8 @@
 			qualified_number = #{qualified_number},
 			qualified_date = #{qualified_date},
 			check_attachment = #{check_attachment},
-			attachment = #{attachment}
+			attachment = #{attachment},
+			send_amount = #{send_amount}
 		WHERE id=#{id}
 	</update>
 
@@ -264,6 +269,9 @@
 			</if>
 			<if test="delivery_note != null">
 				delivery_note = #{delivery_note},
+			</if>
+			<if test="send_amount != null">
+				send_amount = #{send_amount},
 			</if>
 		</set>
 		WHERE id=#{id}
@@ -397,6 +405,9 @@
 				</if>
 				<if test="item.check_attachment != null">
 					check_attachment = #{item.check_attachment},
+				</if>
+				<if test="item.send_amount != null">
+					send_amount = #{item.send_amount},
 				</if>
 			</set>
 			WHERE id=#{item.id}

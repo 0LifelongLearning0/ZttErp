@@ -49,7 +49,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 /**
  * 公用类获取平台信息方法如获取登录用户信息,当前用户部门,当前用户岗位等一系列信息
  * 
- * @author邓纯杰
+ * @author
  * 
  */
 public class CommonUtils extends UUID{

@@ -5,7 +5,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
 * b_warehouse_location 基础仓库库位 
-* 2016-01-27 14:25:28  邓纯杰
+* 2016-01-27 14:25:28  
 */
 public class BWarehouseLocation extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

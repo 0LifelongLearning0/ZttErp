@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
 * xt_concordat 合同管理 
-* 2015-05-24 08:39:49  邓纯杰
+* 2015-05-24 08:39:49  
 */
 public class XtConcordat implements Serializable{
 	private static final long serialVersionUID = 1L;

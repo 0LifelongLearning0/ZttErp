@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
 * zx_out_apply 外协加工申请表 
-* 2017-11-01 16:31:32  邓纯杰
+* 2017-11-01 16:31:32  
 */
 public class ZxOutApply extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

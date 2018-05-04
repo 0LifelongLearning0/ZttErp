@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * 生成业务层代码(包括Service,ServiceImpl)
- * @author邓纯杰
+ * @author
  *
  */
 public class GeneratorService extends GeneratorUtil{

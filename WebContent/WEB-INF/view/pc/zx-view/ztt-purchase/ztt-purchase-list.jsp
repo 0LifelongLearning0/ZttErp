@@ -10,6 +10,9 @@
 {
 white-space: nowrap;
 }
+.table tr.row_selected td {
+background-color: yellow;
+}
 </style>
 </head>
 <body>
@@ -114,7 +117,8 @@ white-space: nowrap;
 					<th>供应商开票日期</th>
 					<th>供应商开票金额</th>
 					<th>交期</th>
-					<th>实际交期</th>
+					<th>到货日期</th>
+					<th>到货数量</th>
 					<th>状态</th>
 					<th>详情</th>
 					<th>审批</th>

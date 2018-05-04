@@ -5,7 +5,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
 * b_cart_detail 基础购物车明细 
-* 2016-01-27 13:52:21  邓纯杰
+* 2016-01-27 13:52:21  
 */
 public class BCartDetail extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

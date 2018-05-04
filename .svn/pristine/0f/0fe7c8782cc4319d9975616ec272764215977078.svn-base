@@ -6,7 +6,7 @@ import jehc.xtmodules.xtmodel.XtOperateBusinessLogs;
 
 /**
 * 平台业务操作日志表 
-* 2016-09-19 23:24:17  邓纯杰
+* 2016-09-19 23:24:17  
 */
 public interface XtOperateBusinessLogsService{
 	/**

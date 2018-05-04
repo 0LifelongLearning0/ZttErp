@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
 * zx_project 项目管理表 
-* 2017-08-28 14:15:35  邓纯杰
+* 2017-08-28 14:15:35  
 */
 public class ZxProject extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

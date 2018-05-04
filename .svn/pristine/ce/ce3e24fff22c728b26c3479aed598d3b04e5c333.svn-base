@@ -21,7 +21,7 @@ import jehc.oamodules.oaservice.OaNoticeService;
 
 /**
 * 公告 
-* 2017-11-16 13:23:07  邓纯杰
+* 2017-11-16 13:23:07  
 */
 @Controller
 @RequestMapping("/oaNoticeController")

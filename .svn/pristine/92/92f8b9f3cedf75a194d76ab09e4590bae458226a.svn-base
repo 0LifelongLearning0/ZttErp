@@ -9,7 +9,7 @@ import jehc.xtmodules.xtmodel.XtDbtableStrategy;
 
 /**
 * 分表策略表 
-* 2017-02-14 16:23:48  邓纯杰
+* 2017-02-14 16:23:48  
 */
 @Repository("xtDbtableStrategyDao")
 public class XtDbtableStrategyDaoImpl  extends BaseDaoImpl implements XtDbtableStrategyDao{

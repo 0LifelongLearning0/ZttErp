@@ -6,7 +6,7 @@ import jehc.xtmodules.xtmodel.XtAttachment;
 
 /**
 * 附件管理 
-* 2015-05-24 08:36:53  邓纯杰
+* 2015-05-24 08:36:53  
 */
 public interface XtAttachmentService{
 	/**

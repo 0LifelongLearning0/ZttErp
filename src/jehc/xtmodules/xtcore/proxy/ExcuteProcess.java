@@ -2,7 +2,7 @@ package jehc.xtmodules.xtcore.proxy;
 
 /**
  * 接口实现执行业务
- * @author 邓纯杰
+ * @author 
  *
  */
 public interface ExcuteProcess {

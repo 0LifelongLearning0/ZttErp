@@ -27,7 +27,7 @@ import jehc.xtmodules.xtservice.XtNoticeService;
 
 /**
 * 平台公告 
-* 2016-06-18 15:45:40  邓纯杰
+* 2016-06-18 15:45:40  
 */
 @Controller
 @RequestMapping("/xtNoticeController")

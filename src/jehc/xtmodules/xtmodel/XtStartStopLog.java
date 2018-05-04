@@ -5,7 +5,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
 * xt_start_stop_log 服务器启动与关闭日志; InnoDB free: 9216 kB; InnoDB free: 9216 kB 
-* 2015-10-31 21:28:14  邓纯杰
+* 2015-10-31 21:28:14  
 */
 public class XtStartStopLog extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

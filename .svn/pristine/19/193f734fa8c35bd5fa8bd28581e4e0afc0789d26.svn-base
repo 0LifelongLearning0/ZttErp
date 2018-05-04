@@ -13,7 +13,7 @@ import jehc.xtmodules.xtservice.XtPathService;
 
 /**
 * 文件路径设置 
-* 2015-05-15 14:55:22  邓纯杰
+* 2015-05-15 14:55:22  
 */
 @Service("xtPathService")
 public class XtPathServiceImpl extends BaseService implements XtPathService{

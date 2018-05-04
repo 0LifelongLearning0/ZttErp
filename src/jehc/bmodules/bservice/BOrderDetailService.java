@@ -6,7 +6,7 @@ import jehc.bmodules.bmodel.BOrderDetail;
 
 /**
 * 基础订单详细 
-* 2016-01-27 13:59:04  邓纯杰
+* 2016-01-27 13:59:04  
 */
 public interface BOrderDetailService{
 	/**

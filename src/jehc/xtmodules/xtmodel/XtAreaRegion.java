@@ -5,7 +5,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
 * xt_area_region 行政区划表 
-* 2017-05-04 14:54:34  邓纯杰
+* 2017-05-04 14:54:34  
 */
 public class XtAreaRegion extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

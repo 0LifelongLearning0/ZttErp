@@ -27,7 +27,7 @@ import jehc.xtmodules.xtservice.XtFlexSearchService;
 import jehc.xtmodules.xtservice.impl.XtFlexSearchServiceImpl;
 /**
  * 查询工具
- * @author 邓纯杰
+ * @author 
  *
  */
 @Controller

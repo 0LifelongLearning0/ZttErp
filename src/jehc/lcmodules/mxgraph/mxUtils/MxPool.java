@@ -9,7 +9,7 @@ import jehc.lcmodules.mxgraph.mxUtils.communal.MxUtils;
 
 /**
  * 泳道池
- * @author邓纯杰
+ * @author
  *
  */
 public class MxPool {

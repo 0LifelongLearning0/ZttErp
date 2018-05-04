@@ -22,7 +22,7 @@ import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
 
 /**
 * solr排序 
-* 2016-07-08 23:49:58  邓纯杰
+* 2016-07-08 23:49:58  
 */
 @Controller
 @RequestMapping("/solrSortController")

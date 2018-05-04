@@ -6,7 +6,7 @@ import jehc.xtmodules.xtmodel.XtStartStopLog;
 
 /**
 * 服务器启动与关闭日志; InnoDB free: 9216 kB; InnoDB free: 9216 kB 
-* 2015-10-31 21:28:14  邓纯杰
+* 2015-10-31 21:28:14  
 */
 public interface XtStartStopLogDao{
 	/**

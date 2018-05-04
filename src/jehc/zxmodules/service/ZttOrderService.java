@@ -42,6 +42,7 @@ public interface ZttOrderService{
 	public List<ztt_filerecord> getfilerecordById(Map<String,Object> condition);
 	public int delZttOrdnum(Map<String,Object> condition);
 	public int selectmax_id_int(ZttOrder zttOrder);
+	public String getmaxerp(String id);
 	/**
 	* 修改
 	* @param ztt_order 

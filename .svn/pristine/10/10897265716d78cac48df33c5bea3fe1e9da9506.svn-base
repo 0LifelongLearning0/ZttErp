@@ -6,7 +6,7 @@ import java.util.Random;
 
 /**
  * 产生单号
- * @author 邓纯杰
+ * @author 
  * 
  */
 public class GeneratorNum {

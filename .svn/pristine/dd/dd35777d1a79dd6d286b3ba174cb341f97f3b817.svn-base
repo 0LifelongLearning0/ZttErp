@@ -13,7 +13,7 @@ import jehc.xtmodules.xtcore.util.ExceptionUtil;
 
 /**
 * 基础商品默认图片 
-* 2016-01-09 09:06:38  邓纯杰
+* 2016-01-09 09:06:38  
 */
 @Service("bProductImgDefaultService")
 public class BProductImgDefaultServiceImpl extends BaseService implements BProductImgDefaultService{

@@ -5,7 +5,7 @@ import java.util.Date;
 
 /**
 * ztt_orderbybuy 外协单表 
-* 2018-03-21 10:45:03  邓纯杰
+* 2018-03-21 10:45:03  
 */
 public class ZttOrderbybuy extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

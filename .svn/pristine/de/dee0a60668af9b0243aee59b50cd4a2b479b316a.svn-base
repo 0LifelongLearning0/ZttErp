@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
 * zx_project_node 项目节点控制表 
-* 2017-09-07 23:52:08  邓纯杰
+* 2017-09-07 23:52:08  
 */
 public class ZxProjectNode extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

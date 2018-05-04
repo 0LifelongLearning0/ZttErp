@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
 * zx_train_apply 员工培训申请表 
-* 2017-12-15 11:34:23  邓纯杰
+* 2017-12-15 11:34:23  
 */
 public class ZxTrainApply extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

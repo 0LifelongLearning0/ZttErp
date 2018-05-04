@@ -9,7 +9,7 @@ import org.dom4j.Element;
 
 /**
  * dom4j工具类
- * @author 邓纯杰
+ * @author 
  *
  */
 public class Dom4jUtils {

@@ -9,7 +9,7 @@ import jehc.lcmodules.mxgraph.mxUtils.communal.MxUtils;
 
 /**
  * 脚本任务
- * @author邓纯杰
+ * @author
  *
  */
 public class MxScriptTask {

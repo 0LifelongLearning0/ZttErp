@@ -7,7 +7,7 @@ import jehc.xtmodules.xtmodel.XtGenerator;
 
 /**
  * 代码生成器
- * @author邓纯杰
+ * @author
  *
  */
 public interface XtGeneratorDao {

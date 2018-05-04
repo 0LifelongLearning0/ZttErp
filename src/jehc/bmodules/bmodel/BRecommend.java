@@ -6,7 +6,7 @@ import jehc.xtmodules.xtmodel.XtAttachment;
 
 /**
 * b_recommend 基础推荐 
-* 2016-01-10 11:24:05  邓纯杰
+* 2016-01-10 11:24:05  
 */
 public class BRecommend extends XtAttachment implements Serializable{
 	private static final long serialVersionUID = 1L;

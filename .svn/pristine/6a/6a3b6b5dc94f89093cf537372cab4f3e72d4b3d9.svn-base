@@ -45,7 +45,7 @@ import net.sourceforge.pinyin4j.PinyinHelper;
 
 /**
  * 工具类
- * @author 邓纯杰
+ * @author 
  * @version 1.0
  */
 public class AllUtils {

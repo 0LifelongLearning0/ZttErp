@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  * 验证码 
- * @author 邓纯杰
+ * @author 
  *
  */
 @SuppressWarnings("serial")

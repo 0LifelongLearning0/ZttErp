@@ -33,10 +33,8 @@ $(document).ready(function(){
 	document.getElementById("single_price").innerText=ajaxobj.single_price;
 	document.getElementById("end_data").innerText=ajaxobj.end_data;
 	document.getElementById("attachment").innerText=ajaxobj.attachment;*/
-	document.getElementById("Product_order_number").innerText=ajaxobj.Product_order_number; 
-	document.getElementById("purchase_name").innerText=ajaxobj.purchase_name; 
-	document.getElementById("purchase_stardard").innerText=ajaxobj.purchase_stardard; 
-	document.getElementById("amount").innerText=ajaxobj.amount; 
+	document.getElementById("Product_order_number").innerText=ajaxobj.product_order_number; 
+	document.getElementById("erp_number").innerText=ajaxobj.erp_number; 
 	document.getElementById("hope_end_data").innerText=ajaxobj.hope_end_data; 
          /*  var counter = 0;
                 t.row.add([
@@ -112,15 +110,3 @@ function uploadattachment(){
 	}); 
 }
 
-$(function() {
-	$(".form_datetime").datepicker({
-		 format:"yyyy-mm-dd",
-		 autoclose:true,
-		 todayBtn:true,
-		 todayHighlight:true,
-		 showMeridian:true,
-		 pickerPosition:"bottom-left",
-		 language:'zh-CN',//中文，需要引用zh-CN.js包
-	});
-	
-});

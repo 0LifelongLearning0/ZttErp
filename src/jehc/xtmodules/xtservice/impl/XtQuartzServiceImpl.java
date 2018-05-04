@@ -25,7 +25,7 @@ import org.springframework.stereotype.Service;
 
 /**
 * 任务调度配置信息表 
-* 2015-10-29 16:50:03  邓纯杰
+* 2015-10-29 16:50:03  
 */
 @Service("xtQuartzService")
 public class XtQuartzServiceImpl extends BaseService implements XtQuartzService{

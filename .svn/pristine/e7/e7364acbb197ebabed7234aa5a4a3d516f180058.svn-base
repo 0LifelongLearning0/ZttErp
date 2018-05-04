@@ -5,7 +5,7 @@ import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.WebApplicationContext;
 /**
  * 获取Bean工具类
- * @author 邓纯杰
+ * @author 
  *
  */
 public class SpringUtil {

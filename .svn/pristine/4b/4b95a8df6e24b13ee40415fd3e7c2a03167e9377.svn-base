@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 /**
  * 处理异常页面
- * @author邓纯杰
+ * @author
  *
  */
 public class XtErrorPageController {

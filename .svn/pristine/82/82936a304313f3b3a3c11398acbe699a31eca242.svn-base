@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 
 /**
  * 通过反射执行类方法
- * @author 邓纯杰
+ * @author 
  * 
  */
 public class CallMethod {

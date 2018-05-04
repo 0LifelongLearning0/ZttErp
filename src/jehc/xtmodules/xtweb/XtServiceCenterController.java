@@ -24,7 +24,7 @@ import jehc.xtmodules.xtservice.XtServiceCenterParameterService;
 
 /**
 * 服务中心 
-* 2017-03-27 12:32:04  邓纯杰
+* 2017-03-27 12:32:04  
 */
 @Controller
 @RequestMapping("/xtServiceCenterController")

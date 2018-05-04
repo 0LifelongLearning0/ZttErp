@@ -5,7 +5,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
 * xt_kwords 关键词（敏感词） 
-* 2016-10-08 15:03:41  邓纯杰
+* 2016-10-08 15:03:41  
 */
 public class XtKwords extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

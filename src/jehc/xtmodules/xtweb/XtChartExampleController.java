@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import jehc.xtmodules.xtcore.base.BaseAction;
 /**
 * 报表案例
-* 2015-05-24 08:36:53  邓纯杰
+* 2015-05-24 08:36:53  
 */
 @Controller
 @RequestMapping("/xtChartExampleController")

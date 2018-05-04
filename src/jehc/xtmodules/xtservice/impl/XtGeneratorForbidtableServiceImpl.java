@@ -13,7 +13,7 @@ import jehc.xtmodules.xtservice.XtGeneratorForbidtableService;
 
 /**
 * 禁止使用代码生成器生成的表信息 
-* 2016-09-26 10:55:48  邓纯杰
+* 2016-09-26 10:55:48  
 */
 @Service("xtGeneratorForbidtableService")
 public class XtGeneratorForbidtableServiceImpl extends BaseService implements XtGeneratorForbidtableService{

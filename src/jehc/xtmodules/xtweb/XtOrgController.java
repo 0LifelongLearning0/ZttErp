@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * 平台组织机构
- * @author邓纯杰
+ * @author
  *
  */
 @Controller

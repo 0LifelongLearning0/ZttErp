@@ -24,7 +24,7 @@ import jehc.xtmodules.xtcore.util.UUID;
 
 /**
 * 基础购物车 
-* 2016-01-27 13:36:04  邓纯杰
+* 2016-01-27 13:36:04  
 */
 @Service("bCartService")
 public class BCartServiceImpl extends BaseService implements BCartService{

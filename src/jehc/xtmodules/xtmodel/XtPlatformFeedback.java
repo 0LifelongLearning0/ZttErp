@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
 * xt_platform_feedback 平台反馈意见 
-* 2017-11-13 15:15:38  邓纯杰
+* 2017-11-13 15:15:38  
 */
 public class XtPlatformFeedback extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

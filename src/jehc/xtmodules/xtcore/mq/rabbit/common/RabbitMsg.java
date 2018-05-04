@@ -1,7 +1,7 @@
 package jehc.xtmodules.xtcore.mq.rabbit.common;
 /**
  * 消息实体
- * @author 邓纯杰
+ * @author 
  */
 public class RabbitMsg {
 	private String content;

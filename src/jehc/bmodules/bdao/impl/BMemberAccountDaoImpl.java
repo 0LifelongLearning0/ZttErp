@@ -10,7 +10,7 @@ import jehc.xtmodules.xtcore.base.impl.BaseDaoImpl;
 
 /**
 * 基础会员余额账户 
-* 2016-03-24 20:30:14  邓纯杰
+* 2016-03-24 20:30:14  
 */
 @Repository("bMemberAccountDao")
 public class BMemberAccountDaoImpl  extends BaseDaoImpl implements BMemberAccountDao{

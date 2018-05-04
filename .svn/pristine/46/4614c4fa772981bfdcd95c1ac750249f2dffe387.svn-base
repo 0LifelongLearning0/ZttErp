@@ -6,7 +6,7 @@ import jehc.xtmodules.xtmodel.XtKwords;
 
 /**
 * 关键词（敏感词） 
-* 2016-10-08 15:03:41  邓纯杰
+* 2016-10-08 15:03:41  
 */
 public interface XtKwordsDao{
 	/**

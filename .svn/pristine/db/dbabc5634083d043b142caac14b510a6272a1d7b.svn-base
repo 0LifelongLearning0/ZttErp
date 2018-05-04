@@ -26,7 +26,7 @@ import com.github.pagehelper.PageInfo;
 
 /**
 * 基础-品牌 
-* 2016-01-05 12:46:23  邓纯杰
+* 2016-01-05 12:46:23  
 */
 @Controller
 @RequestMapping("/bBrandController")

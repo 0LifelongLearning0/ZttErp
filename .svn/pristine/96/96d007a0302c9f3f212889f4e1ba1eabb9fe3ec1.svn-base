@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
 * xt_dbinfo 数据库信息表 
-* 2015-05-24 08:13:15  邓纯杰
+* 2015-05-24 08:13:15  
 */
 public class XtDbinfo implements Serializable{
 	private static final long serialVersionUID = 1L;

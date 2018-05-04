@@ -13,7 +13,7 @@ import jehc.xtmodules.xtservice.XtUnitService;
 
 /**
 * 商品(产品)单位 
-* 2015-05-24 08:43:08  邓纯杰
+* 2015-05-24 08:43:08  
 */
 @Service("xtUnitService")
 public class XtUnitServiceImpl extends BaseService implements XtUnitService{

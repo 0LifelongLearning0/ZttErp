@@ -13,7 +13,7 @@ import jehc.xtmodules.xtservice.XtUserinfoService;
 
 /**
 * 员工信息表 
-* 2015-05-12 11:04:35  邓纯杰
+* 2015-05-12 11:04:35  
 */
 @Service("xtUserinfoService")
 public class XtUserinfoServiceImpl extends BaseService implements XtUserinfoService{

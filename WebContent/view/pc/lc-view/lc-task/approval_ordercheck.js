@@ -3,7 +3,9 @@ var t;
 var counter;
 $(document).ready(function() {
 	 var ajaxobj=eval("("+getbyapplyid(id)+")").data; 
+	 document.getElementById("apply_time").innerText=ajaxobj.apply_time; 
 	 document.getElementById("product_order_number").innerText=ajaxobj.product_order_number; 
+	 document.getElementById("erp_number").innerText=ajaxobj.erp_number; 
 });
 
 // 返回r
@@ -45,11 +47,6 @@ function approveZttOrderApply(taskid, status, obj) {
 	var url = "../zttOrderController/approvalOrderCheckApply";
 	remark = "check";
 	var path = document.getElementById("checker_attachment").value;
-	if (path == "") {
-		layer.alert("请上传文件");
-	}
-	else
-	{
 		var checkcomment = document.getElementById("checkcomment").value;
 		var params = {
 			task_id : taskid,
@@ -69,7 +66,6 @@ function approveZttOrderApply(taskid, status, obj) {
 				datatables.ajax.reload();
 			}
 		});
-	}
 
 }
 // 上传

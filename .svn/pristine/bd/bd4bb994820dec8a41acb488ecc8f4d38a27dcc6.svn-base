@@ -13,7 +13,7 @@ import jehc.xtmodules.xtcore.util.ExceptionUtil;
 
 /**
 * 基础友情链接 
-* 2016-01-10 12:35:06  邓纯杰
+* 2016-01-10 12:35:06  
 */
 @Service("bFriendshipLinkService")
 public class BFriendshipLinkServiceImpl extends BaseService implements BFriendshipLinkService{

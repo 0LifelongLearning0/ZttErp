@@ -25,7 +25,7 @@ import jehc.xtmodules.xtservice.XtSmsService;
 
 /**
 * 短信配置表; InnoDB free: 4096 kB 
-* 2015-09-30 16:15:49  邓纯杰
+* 2015-09-30 16:15:49  
 */
 @Controller
 @RequestMapping("/xtSmsController")

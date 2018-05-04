@@ -189,7 +189,7 @@ MainPanel = function(graph, history){
     this.filename = null;
     this.modified = false;
 	var updateTitle = mxUtils.bind(this, function(){
-		//邓纯杰注释
+		//注释
 	});
 	var changeHandler = mxUtils.bind(this, function(sender, evt){
 		this.modified = true;
@@ -236,7 +236,7 @@ MainPanel = function(graph, history){
     	}
     };
     
-    /**邓纯杰重写了在下面
+    /**重写了在下面
     this.openDiagram = function(name)
     {
     	if (!this.modified ||
@@ -269,7 +269,7 @@ MainPanel = function(graph, history){
 			Ext.MessageBox.alert(xml.length);
 		}
     };
-    /**邓纯杰注释
+    /**注释
     this.newDiagram = function()
     {
     	if (!this.modified ||
@@ -285,11 +285,11 @@ MainPanel = function(graph, history){
                 }
            }))
    		{
-            //邓纯杰把它们放在上面
+            //把它们放在上面
    		}
     };
 	**/
-	//邓纯杰重写上面新建功能
+	//重写上面新建功能
 	this.newProcess = function(){
     	if(!this.modified || Ext.MessageBox.confirm('提示', '流程已经变动是否确定删除清除?', function (btn) {
                if (btn == 'yes') {
@@ -315,7 +315,7 @@ MainPanel = function(graph, history){
 				validatePOOL(graph);
                }
           })){
-            //邓纯杰把它们放在上面
+            //把它们放在上面
    		}
     };
 	graphPanel = new Ext.Panel({

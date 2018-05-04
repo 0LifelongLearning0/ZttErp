@@ -22,7 +22,7 @@ import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
 
 /**
 * 索引更多属性 
-* 2016-07-10 22:19:49  邓纯杰
+* 2016-07-10 22:19:49  
 */
 @Controller
 @RequestMapping("/solrIndexAttributeController")

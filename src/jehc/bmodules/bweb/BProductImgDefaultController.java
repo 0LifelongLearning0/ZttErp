@@ -26,7 +26,7 @@ import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
 
 /**
 * 基础商品默认图片 
-* 2016-01-09 09:06:38  邓纯杰
+* 2016-01-09 09:06:38  
 */
 @Controller
 @RequestMapping("/bProductImgDefaultController")

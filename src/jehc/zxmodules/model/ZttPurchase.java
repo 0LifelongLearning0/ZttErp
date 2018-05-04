@@ -2,10 +2,11 @@ package jehc.zxmodules.model;
 import jehc.xtmodules.xtcore.base.BaseEntity;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
 * ztt_purchase 采购台账 
-* 2018-04-03 12:43:49  邓纯杰
+* 2018-04-03 12:43:49  
 */
 public class ZttPurchase extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -38,6 +39,9 @@ public class ZttPurchase extends BaseEntity implements Serializable{
 	private String supplier_bill_price;
 	private String end_data;
 	private String attachment;
+	private String send_amount;
+	private List<ZttPurchaseSon> zttPurchaseSon;/**采购子台账**/
+	private String zttPurchaseSon_removed_flag;/**采购子台账移除标识**/
 	public String getNot_satisfy_reason() {
 		return not_satisfy_reason;
 	}
@@ -45,6 +49,18 @@ public class ZttPurchase extends BaseEntity implements Serializable{
 		this.not_satisfy_reason = not_satisfy_reason;
 	}
 	
+	public String getSend_amount() {
+		return send_amount;
+	}
+	public void setSend_amount(String send_amount) {
+		this.send_amount = send_amount;
+	}
+	public String getZttPurchaseSon_removed_flag() {
+		return zttPurchaseSon_removed_flag;
+	}
+	public void setZttPurchaseSon_removed_flag(String zttPurchaseSon_removed_flag) {
+		this.zttPurchaseSon_removed_flag = zttPurchaseSon_removed_flag;
+	}
 	public String getDelivery_note() {
 		return delivery_note;
 	}
@@ -214,5 +230,10 @@ public class ZttPurchase extends BaseEntity implements Serializable{
 	public void setAttachment(String attachment) {
 		this.attachment = attachment;
 	}
-	
+	public void setZttPurchaseSon(List<ZttPurchaseSon> zttPurchaseSon){
+		this.zttPurchaseSon=zttPurchaseSon;
+	}
+	public List<ZttPurchaseSon> getZttPurchaseSon(){
+		return zttPurchaseSon;
+	}
 }

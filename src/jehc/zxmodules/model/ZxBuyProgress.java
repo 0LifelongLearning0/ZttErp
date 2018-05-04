@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
 * zx_buy_progress 采购件进度表 
-* 2017-10-28 15:56:49  邓纯杰
+* 2017-10-28 15:56:49  
 */
 public class ZxBuyProgress extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

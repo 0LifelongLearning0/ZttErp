@@ -34,7 +34,7 @@ import jehc.xtmodules.xtservice.XtUserinfoService;
 
 /**
 * 员工信息表; InnoDB free: 6144 kB 
-* 2015-07-30 21:41:20  邓纯杰
+* 2015-07-30 21:41:20  
 */
 @Controller
 @RequestMapping("/xtUserinfoController")

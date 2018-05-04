@@ -24,7 +24,7 @@ import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
 
 /**
 * 基础卖家联系人 
-* 2016-02-18 17:11:48  邓纯杰
+* 2016-02-18 17:11:48  
 */
 @Controller
 @RequestMapping("/bSellerContactsController")

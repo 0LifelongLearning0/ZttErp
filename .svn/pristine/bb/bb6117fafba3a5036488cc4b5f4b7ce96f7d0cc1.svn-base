@@ -5,7 +5,7 @@ import java.util.Date;
 
 /**
 * oa_notice 公告 
-* 2017-11-16 13:23:07  邓纯杰
+* 2017-11-16 13:23:07  
 */
 public class OaNotice extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

@@ -5,7 +5,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
 * b_seller_contacts 基础卖家联系人 
-* 2016-02-18 17:11:48  邓纯杰
+* 2016-02-18 17:11:48  
 */
 public class BSellerContacts extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

@@ -18,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import jehc.xtmodules.xtcore.base.BaseAction;
 /**
  * 监控磁盘
- * @author 邓纯杰
+ * @author 
  *
  */
 @Controller

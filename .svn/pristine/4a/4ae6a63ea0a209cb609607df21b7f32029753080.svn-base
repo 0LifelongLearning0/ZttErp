@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
 * zx_office_classify 办公用品分类 
-* 2017-11-30 08:41:46  邓纯杰
+* 2017-11-30 08:41:46  
 */
 public class ZxGoodsTree extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

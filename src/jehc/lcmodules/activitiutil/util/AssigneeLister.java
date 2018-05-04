@@ -12,7 +12,7 @@ import org.apache.commons.lang.StringUtils;
 
 /**
  * 预设置节点处理人
- * @author 邓纯杰
+ * @author 
  */
 public class AssigneeLister implements TaskListener {
 	private static final long serialVersionUID = 1L;

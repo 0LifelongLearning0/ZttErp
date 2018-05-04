@@ -13,7 +13,7 @@ import jehc.xtmodules.xtservice.XtMonitorMemService;
 
 /**
 * 服务器内存 
-* 2016-03-04 12:52:52  邓纯杰
+* 2016-03-04 12:52:52  
 */
 @Service("xtMonitorMemService")
 public class XtMonitorMemServiceImpl extends BaseService implements XtMonitorMemService{

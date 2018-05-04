@@ -24,7 +24,7 @@ import jehc.xtmodules.xtcore.base.BaseAction;
 import jehc.xtmodules.xtservice.XtUserinfoService;
 /**
  * 代办事项
- * @author 邓纯杰
+ * @author 
  *
  */
 @Controller

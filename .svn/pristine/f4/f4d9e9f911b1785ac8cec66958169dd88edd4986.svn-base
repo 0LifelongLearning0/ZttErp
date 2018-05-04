@@ -12,7 +12,7 @@ import jehc.xtmodules.xtmodel.XtGeneratorTableColumnManyToOne;
 
 /**
  * 代码生成支持类共用
- * @author邓纯杰
+ * @author
  *
  */
 public class GeneratorUtil {

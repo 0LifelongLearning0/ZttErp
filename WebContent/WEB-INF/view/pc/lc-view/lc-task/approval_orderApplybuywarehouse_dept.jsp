@@ -35,16 +35,11 @@ td {
 								<tr>
 								<td class="text-center">工令号</td>
 									<td><label id="Product_order_number" /></td>
-									<td class="text-center">名称</td>
-									<td><label id="purchase_name" /></td>
-									<td class="text-center">规格</td>
-									<td colspan="3"><label id="purchase_stardard" /></td>
+									<td class="text-center">erp号</td>
+									<td><label id="erp_number" /></td>
 								</tr>
 								<tr>
-								<td class="text-center">数量</td>
-									<td><label id="amount" /></td>
-									<td class="text-center">交期</td>
-									<td><label id="hope_end_data" /></td>
+									
 									<td class="text-center">客户送货信息</td>
 									<td colspan="2"><button class="btn btn-primary"
 											data-toggle="button" onclick="uploadattachment()">上传</button>

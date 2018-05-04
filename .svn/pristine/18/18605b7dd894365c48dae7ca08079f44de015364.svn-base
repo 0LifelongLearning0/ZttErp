@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
 * zx_project_woking 项目节点工时记录表 
-* 2017-09-07 23:52:08  邓纯杰
+* 2017-09-07 23:52:08  
 */
 public class ZxProjectWoking extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

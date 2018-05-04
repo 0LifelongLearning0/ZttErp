@@ -11,7 +11,7 @@ import jehc.xtmodules.xtcore.allutils.StringUtil;
 
 /**
  * 开始节点
- * @author邓纯杰
+ * @author
  *
  */
 public class MxStartEvent {

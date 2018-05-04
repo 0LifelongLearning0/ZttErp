@@ -30,13 +30,15 @@ td {
 									<td class="col-md-2 text-center">部&emsp;&emsp;门</td>
 									<td class="col-md-2">${applyUser.xt_departinfo_name }</td>
 									<td class="col-md-2 text-center">申请日期</td>
-									<td class="col-md-2"><label id="zttordertime" />
-									<input class="form-control" type="text" maxlength="255"  name="taskkind" id="taskkind" value='${taskData.taskVariables.taskkind }'>
+									<td class="col-md-2"><label id="apply_time" />
+									<input class="form-control" type="hidden" maxlength="255"  name="taskkind" id="taskkind" value='${taskData.taskVariables.taskkind }'>
 									</td>
 								</tr>
 								<tr>
 									<td class="text-center">工令号</td>
 									<td><label id="product_order_number" /></td>
+									<td class="text-center">erp号</td>
+									<td><label id="erp_number" /></td>
 								</tr>
 								<tr>
 

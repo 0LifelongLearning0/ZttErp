@@ -36,22 +36,15 @@ td {
 								<tr>
 									<td class="text-center">工令号</td>
 									<td><label id="product_order_number" /></td>
-									<td class="text-center">名称</td>
-									<td><label id="purchase_name" /></td>
-									<td class="text-center">规格</td>
-									<td colspan="3"><label id="purchase_stardard" /></td>
-								</tr>
-								<tr>
-									<td class="text-center">材质</td>
-									<td colspan="2"><label id="material" /></td>
-									<td class="text-center">单位</td>
-									<td colspan="2"><label id="unit" /></td>
-								</tr>
-								<tr>
-									<td class="amount">数量</td>
-									<td colspan="2"><label id="amount" /></td>
 									<td class="text-center">交期</td>
 									<td colspan="2"><label id="hope_end_data" /></td>
+										<td class="text-center">采购单详情</td>
+									<td>
+									<button class="btn btn-primary"
+											data-toggle="button"
+											onclick="checkdetail('${taskData.businessKey }')">查看详情</button>
+									
+									</td>
 								</tr>
 								<tr>
 									<td class="text-center">供应商</td>
@@ -59,6 +52,13 @@ td {
 										name="supplyer_name" id="supplyer_name">
 										<button class="btn btn-primary" data-toggle="button"
 											onclick="selectsupplyer()">选择供应商</button></td>
+											
+											<td colspan="2">请根据erp号输入报价</td>
+										<td class="text-center">erp号</td>
+									<td>
+										<label id="erp_number" />
+									
+									</td>	
 								</tr>
 								<tr>
 									<td class="text-center">合同文件</td>

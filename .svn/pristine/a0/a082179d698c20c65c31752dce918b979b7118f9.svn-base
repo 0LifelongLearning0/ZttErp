@@ -14,7 +14,7 @@ import jehc.xtmodules.xtservice.XtMenuinfoService;
 /**
  * 系统菜单表
  * 
- * @author邓纯杰
+ * @author
  * 
  */
 @Service("xtMenuinfoService")

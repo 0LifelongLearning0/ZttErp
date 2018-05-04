@@ -9,7 +9,7 @@ import jehc.xtmodules.xtcore.base.impl.BaseDaoImpl;
 
 /**
 * SQL查询结果返回字段 
-* 2015-12-23 09:44:02  邓纯杰
+* 2015-12-23 09:44:02  
 */
 @Repository("solrIndexSqlFiledDao")
 public class SolrIndexSqlFiledDaoImpl  extends BaseDaoImpl implements SolrIndexSqlFiledDao{

@@ -5,7 +5,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
 * b_seller_account 基础卖家账号 
-* 2016-02-18 17:07:37  邓纯杰
+* 2016-02-18 17:07:37  
 */
 public class BSellerAccount extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
 * xt_roleinfo 用户角色表 
-* 2015-05-29 11:08:55  邓纯杰
+* 2015-05-29 11:08:55  
 */
 public class XtRoleinfo implements Serializable{
 	private static final long serialVersionUID = 1L;

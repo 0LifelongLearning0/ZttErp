@@ -26,7 +26,7 @@ import jehc.xtmodules.xtservice.XtPathService;
 
 /**
 * 文件路径设置; InnoDB free: 4096 kB 
-* 2015-09-30 16:29:00  邓纯杰
+* 2015-09-30 16:29:00  
 */
 @Controller
 @RequestMapping("/xtPathController")

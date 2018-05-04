@@ -11,14 +11,8 @@ $(document).ready(function(){
 		  });
 	var ajaxobj=eval("("+getbyapplyid(id)+")").data;
 	document.getElementById("product_order_number").innerText=ajaxobj.product_order_number;  
-	document.getElementById("purchase_name").innerText=ajaxobj.purchase_name;
-	document.getElementById("purchase_stardard").innerText=ajaxobj.purchase_stardard;
-	document.getElementById("material").innerText=ajaxobj.material;
-	document.getElementById("unit").innerText=ajaxobj.unit; 
-	document.getElementById("purchase_name").innerText=ajaxobj.purchase_name;
-	document.getElementById("unit").innerText=ajaxobj.unit;
-	document.getElementById("amount").innerText=ajaxobj.amount;
 	document.getElementById("hope_end_data").innerText=ajaxobj.hope_end_data;
+	document.getElementById("erp_number").innerText=ajaxobj.erp_number;
                 
 	
 });
@@ -65,7 +59,7 @@ function approveZttOrderApply(taskid,status,obj){
 	}
 	if(flag==0){
 		remark="begin_purchase";
-		params = {task_id:taskid,task_status:status,remark:remark,contract_attachment:contract_attachment,supplier_name:supplier_name};
+		params = {task_id:taskid,task_status:status,remark:remark,contract_attachment:contract_attachment,supply_name:supplier_name};
 		$.ajax({ 
 			   url: url, 
 			   async:false, 
@@ -107,3 +101,20 @@ $(function() {
 	});
 	
 });
+function checkdetail(id){
+	parent.layer.open({
+		title: '采购单详情',
+		type: 2, 
+		area: ['1500px', '700px'],
+		btn: ['关闭'],
+	  content: "../zttPurchaseController/toZttPurchaseDetail?id="+id
+	})}; 
+	
+	function checkdetailprice(id){
+		parent.layer.open({
+			title: '采购单详情',
+			type: 2, 
+			area: ['1500px', '700px'],
+			btn: ['关闭'],
+		  content: "../zttPurchaseController/toZttPurchaseUpdate?id="+id
+		})}; 

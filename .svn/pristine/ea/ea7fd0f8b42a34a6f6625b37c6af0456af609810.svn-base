@@ -9,7 +9,7 @@ import jehc.xtmodules.xtmodel.XtDataAuthority;
 
 /**
 * 数据权限; InnoDB free: 10240 kB 
-* 2015-10-04 14:42:34  邓纯杰
+* 2015-10-04 14:42:34  
 */
 @Repository("xtDataAuthorityDao")
 public class XtDataAuthorityDaoImpl  extends BaseDaoImpl implements XtDataAuthorityDao{

@@ -9,7 +9,7 @@ import jehc.lcmodules.mxgraph.mxUtils.communal.MxUtils;
 
 /**
  * 终止结束事件
- * @author邓纯杰
+ * @author
  *
  */
 public class MxTerminateEndEvent {

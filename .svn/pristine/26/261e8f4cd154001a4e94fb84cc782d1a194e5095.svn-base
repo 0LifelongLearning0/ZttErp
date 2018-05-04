@@ -1,7 +1,7 @@
 package jehc.xtmodules.xtcore.base;
 /**
  * 采用对象返回结果
- * @author 邓纯杰
+ * @author 
  *
  */
 public class BaseResponse {

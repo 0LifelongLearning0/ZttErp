@@ -9,7 +9,7 @@ import org.apache.solr.handler.dataimport.Transformer;
 /**
  * Solr TrimTransformer模板
  * 
- * @author 邓纯杰
+ * @author 
  * 
  */
 public class TrimTransformer extends Transformer {

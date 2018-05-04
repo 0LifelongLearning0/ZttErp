@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * 触发器
- * @author邓纯杰
+ * @author
  *
  */
 public class XtDbTri  implements Serializable{

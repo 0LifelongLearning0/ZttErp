@@ -6,7 +6,7 @@ import jehc.xtmodules.xtmodel.XtUserinfo;
 
 /**
 * 员工信息表 
-* 2015-05-12 11:04:35  邓纯杰
+* 2015-05-12 11:04:35  
 */
 public interface XtUserinfoService{
 	/**

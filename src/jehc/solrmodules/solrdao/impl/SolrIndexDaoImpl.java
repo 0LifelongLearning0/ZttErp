@@ -9,7 +9,7 @@ import jehc.xtmodules.xtcore.base.impl.BaseDaoImpl;
 
 /**
 * 索引字段表 
-* 2015-12-23 09:32:01  邓纯杰
+* 2015-12-23 09:32:01  
 */
 @Repository("solrIndexDao")
 public class SolrIndexDaoImpl  extends BaseDaoImpl implements SolrIndexDao{

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 /**
  * 通用树实体类
- * @author邓纯杰
+ * @author
  *
  */
 public class BaseTreeEntity implements Serializable {

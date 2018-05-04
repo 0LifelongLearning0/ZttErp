@@ -146,7 +146,7 @@ Ext.onReady(function(){
 	    },
 	    defaults:{frame:true,width:clientWidth*0.2,/**height:clientHeight*0.2,**/style:'margin-left:auto;margin-right:10px;margin-top:10px;'},
 	    items:[
-	          {title:'在线用户',html:'1.邓纯杰',rowspan:3,height:clientHeight*0.8},
+	          {title:'在线用户',html:'1.',rowspan:3,height:clientHeight*0.8},
 	          {title:'待办事项',html:'1.16个待办事项未处理', rowspan:2,height:clientHeight*0.6},
 	          {title:'未读邮件',html:'1.10封邮件未读',height:(clientHeight*0.2-10)},
 	          {title:'今日常务',html:'暂无信息',height:(clientHeight*0.2-10)},

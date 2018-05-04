@@ -23,7 +23,7 @@ text-align:center;
 				<div class="row">
 					<form class="form-horizontal" id="defaultForm" method="post">
 						<table class="table table-bordered">
-							<caption class="text-center h3 no-margin bold">业务人员下单表</caption>
+							<caption class="text-center h3 no-margin bold">采购下单表</caption>
 							<tbody>
 								<tr>
 									<td class="col-md-2 text-center">申&ensp;请&ensp;人</td>
@@ -42,8 +42,19 @@ text-align:center;
 									<td colspan="3"><label id="purchase_stardard" /></td>
 								</tr>
 								<tr>
-								<td class="text-center">erp号</td>
+								<td class="text-center">起始erp号</td>
 									<td><input class="form-control" type="text" maxlength="255"  name="erpnumber" id="erpnumber"></td>
+									<td class="text-center">采购单详情</td>
+									<td>
+									<button class="btn btn-primary"
+											data-toggle="button"
+											onclick="checkdetail('${taskData.businessKey }')">查看详情</button>
+									
+									</td>
+										<td class="text-center"></td>
+									<td>
+									
+									</td>
 								</tr>
 							</tbody>
 						</table>

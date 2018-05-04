@@ -5,7 +5,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
 * xt_modify_record 修改记录日志 
-* 2017-04-13 12:50:49  邓纯杰
+* 2017-04-13 12:50:49  
 */
 public class XtModifyRecord extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

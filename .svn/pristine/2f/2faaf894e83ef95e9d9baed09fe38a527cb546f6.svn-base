@@ -16,7 +16,7 @@ import jehc.xtmodules.xtcore.util.springutil.SpringUtil;
 
 /**
  * 全量索引
- * @author 邓纯杰
+ * @author 
  *
  */
 public class Solr_fullimportTask extends Thread{

@@ -16,7 +16,7 @@ import jehc.xtmodules.xtmodel.XtPlatform;
 
 /**
 * 平台信息发布 
-* 2017-11-13 15:15:38  邓纯杰
+* 2017-11-13 15:15:38  
 */
 @Service("xtPlatformService")
 public class XtPlatformServiceImpl extends BaseService implements XtPlatformService{

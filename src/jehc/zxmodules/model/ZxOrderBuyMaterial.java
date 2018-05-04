@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
 * zx_order_buy_material 采购订单物料表 
-* 2017-10-30 11:03:07  邓纯杰
+* 2017-10-30 11:03:07  
 */
 public class ZxOrderBuyMaterial extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

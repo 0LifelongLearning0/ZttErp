@@ -2,7 +2,7 @@ package jehc.xtmodules.xtcore.util.constant;
 
 /**
  * 路径常量
- * @author 邓纯杰
+ * @author 
  *
  */
 public class PathConstant {

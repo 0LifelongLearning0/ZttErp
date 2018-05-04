@@ -23,7 +23,7 @@ import jehc.xtmodules.xtcore.util.ExceptionUtil;
 
 /**
 * Solr字段拷贝配置 
-* 2016-11-14 22:20:39  邓纯杰
+* 2016-11-14 22:20:39  
 */
 @Service("solrFiledCopyService")
 public class SolrFiledCopyServiceImpl extends BaseService implements SolrFiledCopyService{

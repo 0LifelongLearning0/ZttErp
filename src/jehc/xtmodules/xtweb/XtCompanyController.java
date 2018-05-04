@@ -22,7 +22,7 @@ import jehc.xtmodules.xtservice.XtCompanyService;
 
 /**
 * 平台公司信息表 
-* 2015-05-12 22:59:42  邓纯杰
+* 2015-05-12 22:59:42  
 */
 @Controller
 @RequestMapping("/xtCompanyController")

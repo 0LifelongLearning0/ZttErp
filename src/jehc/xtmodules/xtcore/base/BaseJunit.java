@@ -9,7 +9,7 @@ import jehc.xtmodules.xtcore.util.constant.PathConstant;
 
 /**
  * 基础注解测试
- * @author 邓纯杰
+ * @author 
  *
  */
 //@RunWith(SpringJUnit4ClassRunner.class)

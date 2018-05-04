@@ -6,7 +6,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
 * lc_apply 流程申请 
-* 2017-01-08 14:55:10  邓纯杰
+* 2017-01-08 14:55:10  
 */
 public class LcApply extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

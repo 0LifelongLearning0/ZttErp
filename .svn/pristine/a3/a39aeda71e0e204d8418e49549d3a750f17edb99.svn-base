@@ -9,7 +9,7 @@ import jehc.lcmodules.mxgraph.mxUtils.communal.MxUtils;
 
 /**
  * 事件网关
- * @author邓纯杰
+ * @author
  *
  */
 public class MxEventGateway {

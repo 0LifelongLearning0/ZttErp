@@ -68,3 +68,12 @@ function downloadattachment(id){
 	  content: "../zttOrderController/Downloadattachment?id="+id+"&upid="+upid
 	 
 	})}; 
+	
+function checkdetail(id){
+	parent.layer.open({
+		title: '采购单详情',
+		type: 2, 
+		area: ['1500px', '700px'],
+		btn: ['关闭'],
+	  content: "../zttPurchaseController/toZttPurchaseDetail?id="+id
+	})}; 

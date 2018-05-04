@@ -6,7 +6,7 @@ import jehc.solrmodules.solrmodel.SolrIndexSql;
 
 /**
 * 索引SQL查询 
-* 2015-12-23 09:42:26  邓纯杰
+* 2015-12-23 09:42:26  
 */
 public interface SolrIndexSqlService{
 	/**

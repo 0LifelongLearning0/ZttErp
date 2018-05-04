@@ -7,7 +7,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * Entity支持类
- * @author邓纯杰
+ * @author
  */
 public class BaseEntity extends jehc.xtmodules.xtcore.allutils.DateUtil implements Serializable{
 	private Object item;

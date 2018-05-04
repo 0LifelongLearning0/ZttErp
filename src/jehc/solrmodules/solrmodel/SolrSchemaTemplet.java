@@ -6,7 +6,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
 * solr_schema_templet solr schema 模板 
-* 2016-07-01 13:14:46  邓纯杰
+* 2016-07-01 13:14:46  
 */
 public class SolrSchemaTemplet extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

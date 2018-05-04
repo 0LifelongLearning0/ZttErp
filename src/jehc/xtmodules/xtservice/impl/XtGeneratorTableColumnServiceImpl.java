@@ -13,7 +13,7 @@ import jehc.xtmodules.xtmodel.XtGeneratorTableColumn;
 import jehc.xtmodules.xtservice.XtGeneratorTableColumnService;
 /**
  * 代码生成-表字段信息
- * @author邓纯杰
+ * @author
  *
  */
 @Service("xtGeneratorTableColumnService")

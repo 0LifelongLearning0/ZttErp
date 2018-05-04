@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
 * zx_judge_apply 供应商验厂申请单 
-* 2017-09-25 11:27:07  邓纯杰
+* 2017-09-25 11:27:07  
 */
 public class ZxJudgeApply extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

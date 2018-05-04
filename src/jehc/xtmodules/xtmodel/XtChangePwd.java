@@ -5,7 +5,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
 * xt_change_pwd 密码找回中心 
-* 2016-10-21 16:41:55  邓纯杰
+* 2016-10-21 16:41:55  
 */
 public class XtChangePwd extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

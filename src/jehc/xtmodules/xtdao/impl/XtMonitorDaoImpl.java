@@ -9,7 +9,7 @@ import jehc.xtmodules.xtmodel.XtMonitor;
 
 /**
 * 监控主表 
-* 2016-03-04 12:49:59  邓纯杰
+* 2016-03-04 12:49:59  
 */
 @Repository("xtMonitorDao")
 public class XtMonitorDaoImpl  extends BaseDaoImpl implements XtMonitorDao{

@@ -9,7 +9,7 @@ import jehc.lcmodules.mxgraph.mxUtils.communal.MxUtils;
 import jehc.xtmodules.xtcore.allutils.StringUtil;
 /**
  * 邮件任务节点
- * @author邓纯杰
+ * @author
  *
  */
 public class MxMailTask {

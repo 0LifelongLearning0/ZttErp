@@ -10,7 +10,7 @@ import jehc.lcmodules.mxgraph.MxGraphToBPMN;
 
 /**
  * 不存在泳道情况
- * @author 邓纯杰
+ * @author 
  *
  */
 public class MxUnPoolUtils {

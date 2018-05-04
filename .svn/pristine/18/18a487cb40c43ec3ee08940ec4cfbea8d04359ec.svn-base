@@ -9,7 +9,7 @@ import jehc.lcmodules.mxgraph.mxUtils.communal.MxUtils;
 
 /**
  * 定时捕捉事件
- * @author邓纯杰
+ * @author
  *
  */
 public class MxTimerCatchingEvent {

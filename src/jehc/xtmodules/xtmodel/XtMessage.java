@@ -10,7 +10,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
 * xt_message 短消息 
-* 2016-10-20 17:49:40  邓纯杰
+* 2016-10-20 17:49:40  
 */
 public class XtMessage extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

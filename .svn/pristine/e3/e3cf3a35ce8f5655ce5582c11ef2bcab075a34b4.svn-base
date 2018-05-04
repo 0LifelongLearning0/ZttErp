@@ -8,7 +8,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
 * xt_path 文件路径设置 
-* 2015-05-15 15:51:40  邓纯杰
+* 2015-05-15 15:51:40  
 */
 public class XtPath extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = -1466479389299512377L;  

@@ -22,7 +22,7 @@ import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
 
 /**
 * 基础购物车明细 
-* 2016-01-27 13:52:21  邓纯杰
+* 2016-01-27 13:52:21  
 */
 @Controller
 @RequestMapping("/bCartDetailController")

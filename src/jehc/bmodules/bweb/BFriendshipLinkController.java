@@ -25,7 +25,7 @@ import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
 
 /**
 * 基础友情链接 
-* 2016-01-10 12:35:06  邓纯杰
+* 2016-01-10 12:35:06  
 */
 @Controller
 @RequestMapping("/bFriendshipLinkController")

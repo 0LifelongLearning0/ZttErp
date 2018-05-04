@@ -25,7 +25,7 @@ import jehc.xtmodules.xtservice.XtPostService;
 
 /**
  * 平台组织机构
- * @author邓纯杰
+ * @author
  *
  */
 @Controller

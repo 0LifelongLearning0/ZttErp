@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * 表大小
- * @author 邓纯杰
+ * @author 
  */
 public class XtDbTableSize  implements Serializable{
 	private static final long serialVersionUID = 1L;

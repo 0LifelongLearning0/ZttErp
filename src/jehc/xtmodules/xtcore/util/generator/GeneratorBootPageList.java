@@ -20,7 +20,7 @@ import jehc.xtmodules.xtmodel.XtGeneratorTableColumn;
 /**
  * bootstrap风格方式生成列表生成
  * 
- * @author 邓纯杰
+ * @author 
  *
  */
 public class GeneratorBootPageList extends GeneratorUtil {

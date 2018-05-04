@@ -21,7 +21,7 @@ import jehc.xtmodules.xtcore.util.constant.PathConstant;
 
 /**
  * Log4j动态修改 重启服务
- * @author邓纯杰
+ * @author
  *
  */
 @Controller

@@ -6,7 +6,7 @@ import jehc.solrmodules.solrmodel.SolrDocument;
 
 /**
 * solr文档 
-* 2015-12-23 09:38:59  邓纯杰
+* 2015-12-23 09:38:59  
 */
 public interface SolrDocumentDao{
 	/**

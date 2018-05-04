@@ -25,7 +25,7 @@ import jehc.xtmodules.xtcore.util.constant.StatusConstant;
 /**
  * 采用自定义注解做权限
  * 做互联网前端需要该方法（只要在方法名上加@AuthUneedLogin则表示无需登录或不加也表示无需登录，若加@AuthNeedLogin则表示需要登录才可以访问）
- * @author 邓纯杰
+ * @author 
  *
  */
 public class AuthHandler extends Logback4jUtil implements HandlerInterceptor {

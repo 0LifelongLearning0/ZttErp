@@ -20,7 +20,7 @@ import jehc.xtmodules.xtcore.util.constant.SessionConstant;
 /**
  * 自定义标签 按钮显示权限
  * 
- * @author邓纯杰
+ * @author
  *
  */
 public class JehcPermissionTag extends BodyTagSupport {

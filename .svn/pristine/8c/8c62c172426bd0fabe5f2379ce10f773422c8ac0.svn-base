@@ -13,7 +13,7 @@ import jehc.xtmodules.xtcore.util.ExceptionUtil;
 
 /**
 * 基础订单详细 
-* 2016-01-27 13:59:04  邓纯杰
+* 2016-01-27 13:59:04  
 */
 @Service("bOrderDetailService")
 public class BOrderDetailServiceImpl extends BaseService implements BOrderDetailService{

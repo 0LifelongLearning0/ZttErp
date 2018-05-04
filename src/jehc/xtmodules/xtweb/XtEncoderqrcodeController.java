@@ -26,7 +26,7 @@ import jehc.xtmodules.xtservice.XtEncoderqrcodeService;
 
 /**
 * 平台二维码 
-* 2016-04-05 21:06:53  邓纯杰
+* 2016-04-05 21:06:53  
 */
 @Controller
 @RequestMapping("/xtEncoderqrcodeController")

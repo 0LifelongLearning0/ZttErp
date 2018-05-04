@@ -10,7 +10,7 @@ import jehc.xtmodules.xtcore.base.impl.BaseDaoImpl;
 
 /**
 * 基础库存 
-* 2016-01-27 14:28:46  邓纯杰
+* 2016-01-27 14:28:46  
 */
 @Repository("bStockDao")
 public class BStockDaoImpl  extends BaseDaoImpl implements BStockDao{

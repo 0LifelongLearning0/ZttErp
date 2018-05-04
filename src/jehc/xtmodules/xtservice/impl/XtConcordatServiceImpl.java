@@ -13,7 +13,7 @@ import jehc.xtmodules.xtservice.XtConcordatService;
 
 /**
 * 合同管理 
-* 2015-05-24 08:39:49  邓纯杰
+* 2015-05-24 08:39:49  
 */
 @Service("xtConcordatService")
 public class XtConcordatServiceImpl extends BaseService implements XtConcordatService{

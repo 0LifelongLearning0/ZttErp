@@ -4,7 +4,7 @@ function goback(){
 }
 
 function downloadattachment(id){
-	var upid="attachment";
+	var upid="zttPurchaseSon["+id+"].attachment";
 	layer.open({
 		title: '下载附件',
 		type: 2, 
@@ -13,3 +13,8 @@ function downloadattachment(id){
 	  content: "../zttOrderController/Downloadattachment?id="+id+"&upid="+upid
 	 
 	})}; 
+	
+	$(document).ready(function() {
+		
+		
+	});

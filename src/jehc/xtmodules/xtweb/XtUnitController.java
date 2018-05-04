@@ -25,7 +25,7 @@ import jehc.xtmodules.xtservice.XtUnitService;
 
 /**
 * 商品(产品)单位; InnoDB free: 4096 kB 
-* 2015-09-30 14:16:39  邓纯杰
+* 2015-09-30 14:16:39  
 */
 @Controller
 @RequestMapping("/xtUnitController")

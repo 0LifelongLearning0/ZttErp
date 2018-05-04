@@ -9,7 +9,7 @@ import jehc.xtmodules.xtmodel.XtIpFrozen;
 
 /**
 * 平台IP冻结账户 
-* 2016-02-29 10:41:23  邓纯杰
+* 2016-02-29 10:41:23  
 */
 @Repository("xtIpFrozenDao")
 public class XtIpFrozenDaoImpl  extends BaseDaoImpl implements XtIpFrozenDao{

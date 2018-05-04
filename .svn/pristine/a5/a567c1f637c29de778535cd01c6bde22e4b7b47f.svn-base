@@ -26,7 +26,7 @@ import com.github.pagehelper.PageInfo;
 
 /**
 * 工作流批审表 
-* 2017-01-08 17:12:17  邓纯杰
+* 2017-01-08 17:12:17  
 */
 @Controller
 @RequestMapping("/lcApprovalController")

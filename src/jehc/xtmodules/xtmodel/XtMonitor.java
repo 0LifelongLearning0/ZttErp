@@ -6,7 +6,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
 * xt_monitor 监控主表 
-* 2016-03-04 12:49:59  邓纯杰
+* 2016-03-04 12:49:59  
 */
 public class XtMonitor extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

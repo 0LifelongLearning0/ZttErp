@@ -13,7 +13,7 @@ import jehc.xtmodules.xtservice.XtMonitorCpuService;
 
 /**
 * 服务器CPU运行 
-* 2015-05-24 15:04:44  邓纯杰
+* 2015-05-24 15:04:44  
 */
 @Service("xtMonitorCpuService")
 public class XtMonitorCpuServiceImpl extends BaseService implements XtMonitorCpuService{

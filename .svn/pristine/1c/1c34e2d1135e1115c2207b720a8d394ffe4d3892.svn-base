@@ -9,7 +9,7 @@ import jehc.xtmodules.xtcore.base.impl.BaseDaoImpl;
 
 /**
 * 流程状态 
-* 2016-05-04 14:13:34  邓纯杰
+* 2016-05-04 14:13:34  
 */
 @Repository("lcStatusDao")
 public class LcStatusDaoImpl  extends BaseDaoImpl implements LcStatusDao{

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
 * xt_company 系统公司信息表 
-* 2015-05-12 22:59:42  邓纯杰
+* 2015-05-12 22:59:42  
 */
 public class XtCompany implements Serializable{
 	private static final long serialVersionUID = 1L;

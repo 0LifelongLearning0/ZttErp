@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * 表中更多属性
- * @author 邓纯杰
+ * @author 
  */
 public class XtDbTableAttribute  implements Serializable{
 	private static final long serialVersionUID = 1L;

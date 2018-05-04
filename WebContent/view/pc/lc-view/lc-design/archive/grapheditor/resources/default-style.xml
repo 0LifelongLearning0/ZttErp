@@ -9,7 +9,7 @@
 		<add as="fontFamily" value="Verdana"/>
 	</add>
 	<!-- 
-	邓纯杰注释 连线为曲线
+	注释 连线为曲线
 	<add as="defaultEdge" extend="defaultEdge">
 		<add as="labelBackgroundColor" value="white"/>
 		<add as="rounded" value="1"/>
@@ -20,7 +20,7 @@
 		<add as="fontFamily" value="Verdana"/>
 	</add>
 	 -->
-	<!-- 邓纯杰重写连线样式为直线 -->
+	<!-- 重写连线样式为直线 -->
 	<add as="defaultEdge" extend="defaultEdge">
 		<add as="shape" value="connector"/>
 		<add as="labelBackgroundColor" value="white"/>

@@ -3,7 +3,7 @@ package jehc.xtmodules.xtcore.util.quartz.task;
 /**
  * 数据库备份定时任务
  * 
- * @author邓纯杰
+ * @author
  * 
  */
 public class Xt_DbinfoBack_Task {

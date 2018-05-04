@@ -5,7 +5,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
 * b_member_account 基础会员余额账户 
-* 2016-03-24 20:30:14  邓纯杰
+* 2016-03-24 20:30:14  
 */
 public class BMemberAccount extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

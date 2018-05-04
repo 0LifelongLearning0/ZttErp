@@ -10,7 +10,7 @@ import jehc.lcmodules.mxgraph.mxUtils.communal.MxUtils;
 
 /**
  * 结束节点
- * @author邓纯杰
+ * @author
  *
  */
 public class MxEndEvent {

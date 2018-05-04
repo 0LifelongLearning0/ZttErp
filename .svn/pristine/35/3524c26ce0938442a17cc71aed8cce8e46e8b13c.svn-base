@@ -5,7 +5,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
 * b_cart_order_address 基础购物车订单常用配送地址 
-* 2016-02-22 21:17:24  邓纯杰
+* 2016-02-22 21:17:24  
 */
 public class BCartOrderAddress extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
 * xt_data_authority_default 数权限初始化默认设置 
-* 2017-06-20 14:38:52  邓纯杰
+* 2017-06-20 14:38:52  
 */
 public class XtDataAuthorityDefault extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

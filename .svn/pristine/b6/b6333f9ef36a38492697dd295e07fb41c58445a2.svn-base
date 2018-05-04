@@ -5,7 +5,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 /**
  * 字段注解
- * @author 邓纯杰
+ * @author 
  *
  */
 @Retention(RetentionPolicy.RUNTIME)  

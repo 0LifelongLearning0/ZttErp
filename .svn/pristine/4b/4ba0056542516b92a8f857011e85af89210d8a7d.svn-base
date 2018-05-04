@@ -10,7 +10,7 @@ import jehc.xtmodules.xtcore.base.impl.BaseDaoImpl;
 
 /**
 * 基础商品商户所选颜色 
-* 2016-07-02 16:54:11  邓纯杰
+* 2016-07-02 16:54:11  
 */
 @Repository("bProductColorDao")
 public class BProductColorDaoImpl  extends BaseDaoImpl implements BProductColorDao{

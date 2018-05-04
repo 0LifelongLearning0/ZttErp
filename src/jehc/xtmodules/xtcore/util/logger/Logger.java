@@ -4,7 +4,7 @@ import org.apache.commons.logging.LogFactory;
 
 /**
  * Log4j
- * @author邓纯杰
+ * @author
  *
  */
 public class Logger {

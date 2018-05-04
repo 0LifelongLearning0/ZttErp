@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * 代码生成-表字段信息
- * @author邓纯杰
+ * @author
  *
  */
 public class XtGeneratorTableColumnManyToOne implements Serializable{

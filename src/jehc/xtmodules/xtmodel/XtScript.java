@@ -5,7 +5,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
 * xt_script 平台脚本 
-* 2016-06-14 15:08:50  邓纯杰
+* 2016-06-14 15:08:50  
 */
 public class XtScript extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

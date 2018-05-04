@@ -6,7 +6,7 @@ import jehc.xtmodules.xtmodel.XtPost;
 
 /**
 * 用户岗位表(xt_post) 
-* 2015-05-13 16:48:11  邓纯杰
+* 2015-05-13 16:48:11  
 */
 public interface XtPostDao{
 	/**

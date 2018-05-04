@@ -13,7 +13,7 @@ import jehc.xtmodules.xtcore.util.ExceptionUtil;
 
 /**
 * 基础发票 
-* 2016-02-22 14:35:28  邓纯杰
+* 2016-02-22 14:35:28  
 */
 @Service("bInvoiceService")
 public class BInvoiceServiceImpl extends BaseService implements BInvoiceService{

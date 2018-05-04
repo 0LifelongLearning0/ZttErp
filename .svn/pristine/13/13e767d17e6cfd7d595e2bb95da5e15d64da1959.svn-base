@@ -69,7 +69,7 @@ import net.sf.json.JSONArray;
 
 /**
  * 支撑类
- * @author 邓纯杰
+ * @author 
  *
  */
 public class SolrUtil extends BaseService{

@@ -42,7 +42,7 @@ import jehc.xtmodules.xtservice.XtURService;
 
 /**
 * 用户角色表 
-* 2015-05-29 11:08:55  邓纯杰
+* 2015-05-29 11:08:55  
 */
 @Controller
 @RequestMapping("/xtRoleinfoController")

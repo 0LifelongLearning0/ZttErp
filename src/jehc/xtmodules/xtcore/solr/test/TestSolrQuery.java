@@ -29,7 +29,7 @@ import jehc.xtmodules.xtcore.solr.utils.SolrUtils;
 
 /**
  * 测试Query
- * @author 邓纯杰
+ * @author 
  *
  */
 public class TestSolrQuery {

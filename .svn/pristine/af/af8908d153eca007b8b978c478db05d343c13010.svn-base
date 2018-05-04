@@ -6,7 +6,7 @@ import jehc.xtmodules.xtmodel.XtNotice;
 
 /**
 * 平台公告; InnoDB free: 6144 kB 
-* 2015-08-23 17:27:58  邓纯杰
+* 2015-08-23 17:27:58  
 */
 public interface XtNoticeService{
 	/**

@@ -9,7 +9,7 @@ import jehc.xtmodules.xtmodel.XtFunctioninfoCommon;
 
 /**
 * 公共功能 
-* 2016-10-10 13:00:30  邓纯杰
+* 2016-10-10 13:00:30  
 */
 @Repository("xtFunctioninfoCommonDao")
 public class XtFunctioninfoCommonDaoImpl  extends BaseDaoImpl implements XtFunctioninfoCommonDao{

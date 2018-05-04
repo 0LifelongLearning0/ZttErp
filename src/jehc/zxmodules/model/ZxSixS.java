@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
 * zx_six_s 6S待办事项 
-* 2017-11-01 10:30:02  邓纯杰
+* 2017-11-01 10:30:02  
 */
 public class ZxSixS extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

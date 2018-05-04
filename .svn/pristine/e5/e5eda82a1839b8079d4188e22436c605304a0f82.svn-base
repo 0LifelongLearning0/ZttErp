@@ -31,7 +31,7 @@ import com.github.pagehelper.PageInfo;
 /**
  * 系统菜单表
  * 
- * @author邓纯杰
+ * @author
  * 
  */
 @Controller

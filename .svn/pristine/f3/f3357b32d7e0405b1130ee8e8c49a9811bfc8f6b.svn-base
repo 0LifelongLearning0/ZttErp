@@ -3,7 +3,7 @@ package jehc.xtmodules.xtcore.proxy;
 
 /**
  * 此类是真正执行业务类
- * @author邓纯杰
+ * @author
  *
  */
 public class Proxy extends AbstractProxy{

@@ -13,7 +13,7 @@ import jehc.xtmodules.xtservice.XtChangePwdService;
 
 /**
 * 密码找回中心 
-* 2016-10-21 16:41:55  邓纯杰
+* 2016-10-21 16:41:55  
 */
 @Service("xtChangePwdService")
 public class XtChangePwdServiceImpl extends BaseService implements XtChangePwdService{

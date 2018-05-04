@@ -5,7 +5,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
 * xt_version 平台版本 
-* 2017-04-16 20:05:24  邓纯杰
+* 2017-04-16 20:05:24  
 */
 public class XtVersion extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

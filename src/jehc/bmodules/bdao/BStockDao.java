@@ -6,7 +6,7 @@ import jehc.bmodules.bmodel.BStock;
 
 /**
 * 基础库存 
-* 2016-01-27 14:28:46  邓纯杰
+* 2016-01-27 14:28:46  
 */
 public interface BStockDao{
 	/**

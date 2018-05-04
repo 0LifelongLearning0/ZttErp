@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * TreeGrid封装树
- * @author邓纯杰
+ * @author
  *
  */
 public class BaseTreeGridEntity {

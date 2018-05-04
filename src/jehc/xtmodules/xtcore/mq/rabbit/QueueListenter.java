@@ -2,7 +2,7 @@ package jehc.xtmodules.xtcore.mq.rabbit;
 
 /**
  * 队列监听
- * @author 邓纯杰
+ * @author 
  *
  */
 public class QueueListenter{

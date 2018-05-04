@@ -14,7 +14,7 @@ import jehc.xtmodules.xtservice.XtLoadinfoService;
 
 /**
 * 页面加载信息 
-* 2015-05-13 21:20:57  邓纯杰
+* 2015-05-13 21:20:57  
 */
 @Service("xtLoadinfoService")
 public class XtLoadinfoServiceImpl extends BaseService implements XtLoadinfoService{

@@ -19,7 +19,7 @@ import org.apache.pdfbox.pdmodel.PDPage;
 
 /**
  * PDF转图片
- * @author邓纯杰
+ * @author
  * 
  */
 public class PDFToImg {

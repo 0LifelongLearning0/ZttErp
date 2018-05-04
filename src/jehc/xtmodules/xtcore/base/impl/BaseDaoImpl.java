@@ -2,7 +2,7 @@ package jehc.xtmodules.xtcore.base.impl;
 
 /**
  * MyBatis支持类
- * @author邓纯杰
+ * @author
  *
  */
 import java.sql.SQLException;

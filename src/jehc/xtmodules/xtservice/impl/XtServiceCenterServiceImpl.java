@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 /**
 * 服务中心 
-* 2017-03-27 12:32:04  邓纯杰
+* 2017-03-27 12:32:04  
 */
 @Service("xtServiceCenterService")
 public class XtServiceCenterServiceImpl extends BaseService implements XtServiceCenterService{

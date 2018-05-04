@@ -13,7 +13,7 @@ import jehc.xtmodules.xtcore.util.ExceptionUtil;
 
 /**
 * 基础会员 
-* 2016-01-08 22:35:33  邓纯杰
+* 2016-01-08 22:35:33  
 */
 @Service("bMemberService")
 public class BMemberServiceImpl extends BaseService implements BMemberService{

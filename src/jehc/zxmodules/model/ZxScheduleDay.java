@@ -5,7 +5,7 @@ import java.util.Date;
 
 /**
 * zx_schedule_day 单个日程 
-* 2017-11-23 12:41:18  邓纯杰
+* 2017-11-23 12:41:18  
 */
 public class ZxScheduleDay extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

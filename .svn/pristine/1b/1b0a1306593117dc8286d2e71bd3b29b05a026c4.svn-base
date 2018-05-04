@@ -6,7 +6,7 @@ import jehc.bmodules.bmodel.BProductImg;
 
 /**
 * 基础商品图片 
-* 2016-07-07 20:50:43  邓纯杰
+* 2016-07-07 20:50:43  
 */
 public interface BProductImgDao{
 	/**

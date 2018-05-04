@@ -4,7 +4,7 @@ import java.util.Date;
 
 /**
 * b_product_img 基础商品图片 
-* 2016-07-07 20:50:43  邓纯杰
+* 2016-07-07 20:50:43  
 */
 public class BProductImg extends BSeller implements Serializable{
 	private static final long serialVersionUID = 1L;

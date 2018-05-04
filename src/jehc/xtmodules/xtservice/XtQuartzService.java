@@ -6,7 +6,7 @@ import jehc.xtmodules.xtmodel.XtQuartz;
 
 /**
 * 任务调度配置信息表 
-* 2015-10-29 16:50:03  邓纯杰
+* 2015-10-29 16:50:03  
 */
 public interface XtQuartzService{
 	/**

@@ -40,7 +40,7 @@ import nl.bitwalker.useragentutils.OperatingSystem;
 import nl.bitwalker.useragentutils.UserAgent;
 /**
  * 登录
- * @author邓纯杰
+ * @author
  *
  */
 @Controller

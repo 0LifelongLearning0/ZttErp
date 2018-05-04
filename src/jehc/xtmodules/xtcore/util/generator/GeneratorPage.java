@@ -26,7 +26,7 @@ import jehc.xtmodules.xtmodel.XtScript;
 
 /**
  * 生成页面层代码（包括JS，JSP代码）
- * @author邓纯杰
+ * @author
  *
  */
 public class GeneratorPage extends GeneratorUtil{

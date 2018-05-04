@@ -25,7 +25,7 @@ import jehc.xtmodules.xtservice.XtModifyRecordService;
 
 /**
 * 修改记录日志 
-* 2017-04-13 12:50:49  邓纯杰
+* 2017-04-13 12:50:49  
 */
 @Controller
 @RequestMapping("/xtModifyRecordController")

@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * 客户端处理类
- * @author 邓纯杰
+ * @author 
  *
  */
 public class TcpClientHandler extends SimpleChannelInboundHandler<Object> {

@@ -14,13 +14,6 @@ $(document)
 					});
 					var ajaxobj = eval("(" + getbyapplyid(id) + ")").data;
 					document.getElementById("product_order_number").innerText = ajaxobj.product_order_number;
-					document.getElementById("purchase_name").innerText = ajaxobj.purchase_name;
-					document.getElementById("purchase_stardard").innerText = ajaxobj.purchase_stardard;
-					document.getElementById("material").innerText = ajaxobj.material;
-					document.getElementById("unit").innerText = ajaxobj.unit;
-					document.getElementById("purchase_name").innerText = ajaxobj.purchase_name;
-					document.getElementById("unit").innerText = ajaxobj.unit;
-					document.getElementById("amount").innerText = ajaxobj.amount;
 					document.getElementById("hope_end_data").innerText = ajaxobj.hope_end_data;
 					document.getElementById("not_satisfy_reason").innerText = ajaxobj.not_satisfy_reason;
 
@@ -30,9 +23,6 @@ $(document)
 function goback() {
 	tlocation("../zxGoodsApplyController/loadZxGoodsApply");
 }
-$('#defaultForm').bootstrapValidator({
-	message : '此值不是有效的'
-});
 
 /* 根据id得到 */
 function getbyapplyid(id) {
@@ -139,3 +129,11 @@ $(function() {
 	});
 
 });
+function checkdetail(id){
+	parent.layer.open({
+		title: '采购单详情',
+		type: 2, 
+		area: ['1500px', '700px'],
+		btn: ['关闭'],
+	  content: "../zttPurchaseController/toZttPurchaseDetail?id="+id
+	})}; 

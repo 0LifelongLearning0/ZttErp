@@ -13,7 +13,7 @@ import jehc.xtmodules.xtservice.XtConstantService;
 
 /**
 * 台平常量 
-* 2015-05-24 08:47:31  邓纯杰
+* 2015-05-24 08:47:31  
 */
 @Service("xtConstantService")
 public class XtConstantServiceImpl extends BaseService implements XtConstantService{

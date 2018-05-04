@@ -6,7 +6,7 @@ import jehc.bmodules.bmodel.BSellerContacts;
 
 /**
 * 基础卖家联系人 
-* 2016-02-18 17:11:48  邓纯杰
+* 2016-02-18 17:11:48  
 */
 public interface BSellerContactsDao{
 	/**

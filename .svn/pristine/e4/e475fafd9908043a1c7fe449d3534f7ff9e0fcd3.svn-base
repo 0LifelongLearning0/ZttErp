@@ -10,7 +10,7 @@ import jehc.xtmodules.xtcore.base.impl.BaseDaoImpl;
 
 /**
 * 基础友情链接 
-* 2016-01-10 12:35:06  邓纯杰
+* 2016-01-10 12:35:06  
 */
 @Repository("bFriendshipLinkDao")
 public class BFriendshipLinkDaoImpl  extends BaseDaoImpl implements BFriendshipLinkDao{

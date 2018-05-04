@@ -6,7 +6,7 @@ import jehc.bmodules.bmodel.BProductColorDefault;
 
 /**
 * 基础商品默认颜色 
-* 2016-01-19 15:38:05  邓纯杰
+* 2016-01-19 15:38:05  
 */
 public interface BProductColorDefaultDao{
 	/**

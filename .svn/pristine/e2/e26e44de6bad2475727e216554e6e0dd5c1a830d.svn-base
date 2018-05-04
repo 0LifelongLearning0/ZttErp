@@ -5,7 +5,7 @@ import jehc.xtmodules.xtmodel.XtDataAuthorityDefault;
 
 /**
 * 数权限初始化默认设置 
-* 2017-06-20 14:38:52  邓纯杰
+* 2017-06-20 14:38:52  
 */
 public interface XtDataAuthorityDefaultService{
 	/**

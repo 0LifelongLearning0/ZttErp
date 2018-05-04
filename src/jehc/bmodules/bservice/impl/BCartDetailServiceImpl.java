@@ -16,7 +16,7 @@ import jehc.xtmodules.xtcore.util.ExceptionUtil;
 
 /**
 * 基础购物车明细 
-* 2016-01-27 13:52:21  邓纯杰
+* 2016-01-27 13:52:21  
 */
 @Service("bCartDetailService")
 public class BCartDetailServiceImpl extends BaseService implements BCartDetailService{

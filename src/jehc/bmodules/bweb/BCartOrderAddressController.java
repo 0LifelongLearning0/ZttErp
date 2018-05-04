@@ -24,7 +24,7 @@ import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
 
 /**
 * 基础购物车订单常用配送地址 
-* 2016-02-22 21:17:25  邓纯杰
+* 2016-02-22 21:17:25  
 */
 @Controller
 @RequestMapping("/bCartOrderAddressController")

@@ -6,7 +6,7 @@ import jehc.solrmodules.solrmodel.SolrCore;
 
 /**
 * 全文检索多实例配置 
-* 2015-12-15 13:07:24  邓纯杰
+* 2015-12-15 13:07:24  
 */
 public interface SolrCoreDao{
 	/**

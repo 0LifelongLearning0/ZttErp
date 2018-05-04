@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
 * zx_office_inventory 办公用品库存表 
-* 2017-12-06 11:20:49  邓纯杰
+* 2017-12-06 11:20:49  
 */
 public class ZxOfficeInventory extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

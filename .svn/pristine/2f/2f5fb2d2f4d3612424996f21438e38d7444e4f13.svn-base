@@ -10,7 +10,7 @@ import jehc.xtmodules.xtcore.base.impl.BaseDaoImpl;
 
 /**
 * 流程申请 
-* 2017-01-08 14:55:10  邓纯杰
+* 2017-01-08 14:55:10  
 */
 @Repository("lcApplyDao")
 public class LcApplyDaoImpl  extends BaseDaoImpl implements LcApplyDao{

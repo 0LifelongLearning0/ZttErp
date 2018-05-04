@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
 * zx_change_contract 变更合同 
-* 2018-01-17 14:05:05  邓纯杰
+* 2018-01-17 14:05:05  
 */
 public class ZxChangeContract extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

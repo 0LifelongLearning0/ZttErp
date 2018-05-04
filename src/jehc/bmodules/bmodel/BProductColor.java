@@ -4,7 +4,7 @@ import java.util.Date;
 
 /**
 * b_product_color 基础商品商户所选颜色 
-* 2016-07-02 16:54:11  邓纯杰
+* 2016-07-02 16:54:11  
 */
 public class BProductColor extends BSeller implements Serializable{
 	private static final long serialVersionUID = 1L;

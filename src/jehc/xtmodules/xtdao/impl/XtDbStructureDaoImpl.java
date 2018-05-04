@@ -17,7 +17,7 @@ import jehc.xtmodules.xtmodel.XtDbTri;
 import jehc.xtmodules.xtmodel.XtDbView;
 /**
  * 数据库表
- * @author 邓纯杰
+ * @author 
  */
 @Repository("xtDbStructureDao")
 public class XtDbStructureDaoImpl extends BaseDaoImpl implements XtDbStructureDao{

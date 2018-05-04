@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * 让服务器启动或停止时自动执行代码
- * @author 邓纯杰
+ * @author 
  *
  */
 public class InitSetup implements ServletContextListener{

@@ -9,7 +9,7 @@ import jehc.lcmodules.mxgraph.mxUtils.communal.MxUtils;
 
 /**
  * 信号捕捉事件
- * @author邓纯杰
+ * @author
  *
  */
 public class MxSignalCatchingEvent {

@@ -5,7 +5,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
 * xt_functioninfo_right 功能分配表 
-* 2016-10-08 17:38:19  邓纯杰
+* 2016-10-08 17:38:19  
 */
 public class XtFunctioninfoRight extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = -5796313721658973312L;

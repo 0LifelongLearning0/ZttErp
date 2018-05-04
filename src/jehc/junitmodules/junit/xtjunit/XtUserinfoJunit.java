@@ -24,7 +24,7 @@ public class XtUserinfoJunit extends BaseJunit{
 		if(!XtCompanyList.isEmpty()){
 			xt_Company = XtCompanyList.get(0);
 		}
-		xt_Company.setXt_company_ceo("邓纯杰");
+		xt_Company.setXt_company_ceo("");
 		xtCompanyService.updateXtCompany(xt_Company);
 		
 		condition = new HashMap<String, Object>();

@@ -6,7 +6,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
 * lc_process 流程详细信息即流程部署内容,BPMN文件,ZIP路径,IMG路径,MXGraph内容等等（流程表） 
-* 2016-11-22 10:16:39  邓纯杰
+* 2016-11-22 10:16:39  
 */
 public class LcProcess extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

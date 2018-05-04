@@ -6,7 +6,7 @@ import jehc.solrmodules.solrmodel.SolrDataConfig;
 
 /**
 * solr_data_config模板配置 
-* 2016-07-02 10:09:05  邓纯杰
+* 2016-07-02 10:09:05  
 */
 public interface SolrDataConfigService{
 	/**

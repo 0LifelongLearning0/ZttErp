@@ -5,7 +5,7 @@ import javax.servlet.ServletContextListener;
 
 /**
  * 监听BaseController中ThreadLocal变量并销毁
- * @author 邓纯杰
+ * @author 
  *
  */
 public class ServletRequestListener implements ServletContextListener{

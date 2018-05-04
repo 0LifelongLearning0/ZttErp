@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
 * zx_office 办公用品管理 
-* 2017-11-30 08:19:19  邓纯杰
+* 2017-11-30 08:19:19  
 */
 public class ZxUserAndDepartment extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

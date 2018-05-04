@@ -23,7 +23,7 @@ import jehc.xtmodules.xtcore.util.ExceptionUtil;
 import jehc.xtmodules.xtmodel.XtDbinfo;
 /**
  * 做自定义表单使用
- * @author邓纯杰
+ * @author
  *
  */
 public class DBHelper {

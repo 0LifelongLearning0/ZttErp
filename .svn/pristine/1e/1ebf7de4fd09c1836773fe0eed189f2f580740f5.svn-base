@@ -13,7 +13,7 @@ import jehc.xtmodules.xtservice.XtScriptService;
 
 /**
 * 平台脚本 
-* 2016-06-14 15:08:50  邓纯杰
+* 2016-06-14 15:08:50  
 */
 @Service("xtScriptService")
 public class XtScriptServiceImpl extends BaseService implements XtScriptService{

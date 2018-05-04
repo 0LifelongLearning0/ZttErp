@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
 * xt_platform 平台信息发布 
-* 2017-11-13 15:15:38  邓纯杰
+* 2017-11-13 15:15:38  
 */
 public class XtPlatform extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

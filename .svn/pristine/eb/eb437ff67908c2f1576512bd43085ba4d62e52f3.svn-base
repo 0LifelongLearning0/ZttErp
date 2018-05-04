@@ -6,7 +6,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
 * solr_index 索引字段表 
-* 2015-12-23 09:32:01  邓纯杰
+* 2015-12-23 09:32:01  
 */
 public class SolrIndex extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

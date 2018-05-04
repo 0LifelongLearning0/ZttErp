@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
 * zx_car 车辆管理 
-* 2017-09-14 10:21:06  邓纯杰
+* 2017-09-14 10:21:06  
 */
 public class ZxCar extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

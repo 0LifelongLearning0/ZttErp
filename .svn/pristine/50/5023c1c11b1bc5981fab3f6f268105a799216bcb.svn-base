@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
 * zx_office_apply 办公用品申请表 
-* 2017-12-05 15:17:15  邓纯杰
+* 2017-12-05 15:17:15  
 */
 public class ZxOfficeApplyShow extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

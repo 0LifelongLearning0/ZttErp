@@ -8,7 +8,7 @@ import jehc.xtmodules.xtmodel.XtMenuinfo;
 /**
  * 系统菜单表
  * 
- * @author邓纯杰
+ * @author
  * 
  */
 public interface XtMenuinfoDao {

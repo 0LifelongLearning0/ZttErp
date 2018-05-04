@@ -9,6 +9,21 @@
 <body>
 		<input type="hidden" id="permission" value="${permission}"/>
 	<input type="hidden" id="isAdmin" value="${isAdmin}"/>
+	<fieldset>
+			<legend>查询区域</legend>
+			<form method="POST" id="searchForm" class="form-inline">
+			<div class="form-group">
+					<label>名称</label> <input type="text" class="form-control"
+						name="name" id="name" placeholder="请输入供应商">
+				</div>
+			<div class="form-group" style="margin-left: 35px;">
+				<button class="btn btn-primary" type="button" onclick="search('datatables')">
+					<i class="glyphicon glyphicon-search"></i>&nbsp;检索
+				</button>
+				<button class="btn btn-default" type="button" onclick="resetAll();">重置</button>
+			</div>
+			</form>
+		</fieldset>
 	<div class="panel-body">
 		<div class="btn-group pull-right" style="margin-right: 20px;">
 			<button class="btn btn-default" onclick="toZxSupplierAdd()">

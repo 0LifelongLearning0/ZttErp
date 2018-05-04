@@ -42,7 +42,7 @@ Ext.define('Ext.ux.PreviewPlugin', {
 
                     var getAdditionalData = Ext.grid.feature.RowBody.prototype.getAdditionalData,
                         additionalData = {
-                        	//邓纯杰重写
+                        	//重写
                             rowBody: Ext.util.Format.ellipsis(Ext.util.Format.stripTags(data[bodyField]), 500,true),
                             rowBodyCls: grid.getView().previewExpanded ? '' : hideBodyCls
                         };

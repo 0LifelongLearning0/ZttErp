@@ -13,7 +13,7 @@ import jehc.xtmodules.xtcore.util.ExceptionUtil;
 
 /**
 * 基础商品价格 
-* 2016-03-18 20:18:13  邓纯杰
+* 2016-03-18 20:18:13  
 */
 @Service("bProductPriceService")
 public class BProductPriceServiceImpl extends BaseService implements BProductPriceService{

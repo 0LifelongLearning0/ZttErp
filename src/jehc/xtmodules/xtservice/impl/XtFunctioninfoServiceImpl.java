@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 
 /**
 * 功能表 
-* 2015-06-01 20:44:49  邓纯杰
+* 2015-06-01 20:44:49  
 */
 @Service("xtFunctioninfoService")
 public class XtFunctioninfoServiceImpl extends BaseService implements XtFunctioninfoService{

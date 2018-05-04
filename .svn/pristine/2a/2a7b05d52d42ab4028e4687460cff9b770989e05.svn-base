@@ -9,7 +9,7 @@ import jehc.lcmodules.mxgraph.mxUtils.communal.MxUtils;
 
 /**
  * 接收任务节点
- * @author 邓纯杰
+ * @author 
  *
  */
 public class MxReceiveTask {

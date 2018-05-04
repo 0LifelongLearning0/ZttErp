@@ -8,7 +8,7 @@ import jehc.xtmodules.xtmodel.XtDataAuthorityDepart;
 
 /**
 * 数据权限按部门设置 
-* 2017-06-20 14:36:19  邓纯杰
+* 2017-06-20 14:36:19  
 */
 @Repository("xtDataAuthorityDepartDao")
 public class XtDataAuthorityDepartDaoImpl  extends BaseDaoImpl implements XtDataAuthorityDepartDao{

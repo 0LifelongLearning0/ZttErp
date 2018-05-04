@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
 * b_stock 基础库存 
-* 2016-01-27 14:28:46  邓纯杰
+* 2016-01-27 14:28:46  
 */
 public class BStock extends BProductPrice implements Serializable{
 	private static final long serialVersionUID = 1L;

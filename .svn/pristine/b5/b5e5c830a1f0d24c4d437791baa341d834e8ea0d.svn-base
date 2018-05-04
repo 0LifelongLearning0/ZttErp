@@ -13,7 +13,7 @@ import jehc.xtmodules.xtservice.XtDbtableStrategyService;
 
 /**
 * 分表策略表 
-* 2017-02-14 16:23:48  邓纯杰
+* 2017-02-14 16:23:48  
 */
 @Service("xtDbtableStrategyService")
 public class XtDbtableStrategyServiceImpl extends BaseService implements XtDbtableStrategyService{

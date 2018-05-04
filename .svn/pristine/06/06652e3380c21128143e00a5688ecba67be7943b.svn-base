@@ -5,7 +5,7 @@ import java.util.Date;
 
 /**
 * xt_monitor_cpu 服务器CPU运行 
-* 2015-05-24 15:04:44  邓纯杰
+* 2015-05-24 15:04:44  
 */
 public class XtMonitorCpu implements Serializable{
 	private static final long serialVersionUID = 1L;

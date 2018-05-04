@@ -28,7 +28,7 @@
 							<tbody>
 								<tr>
 								<input class="form-control"
-									type="hidden" maxlength="255" name="apply_id" id="apply_id" value='${applyUser.xt_userinfo_id }'>
+									type="hidden" maxlength="255"  id="apply_id" value='${applyUser.xt_userinfo_id }'>
 									<td class="col-md-1 text-center">申&ensp;请&ensp;人</td>
 									<td class="col-md-3">${applyUser.xt_userinfo_realName }</td>
 									<td class="col-md-1 text-center">部&emsp;&emsp;门</td>
@@ -40,28 +40,45 @@
 									<td class="text-center">订单号/申请号</td>
 									<td>
 									<input class="form-control"
-									type="text" maxlength="255" name="stardard" id="stardard" value='${zttOrder.order_number }'>
+									type="text" maxlength="255" name="order_number" id="order_number" value='${zttOrder.order_number }'>
 									</td>
-									<td class="text-center">合同号</td>
-									<td colspan="3"><input class="form-control" type="text"
+									<td class="col-md-1 text-center">合同号</td>
+									<td class="col-md-2"><input class="form-control" type="text"
 										maxlength="255" name="contract_number" id="contract_number"
 										value="${zttOrder.contract_number}"></td>
+										<td lass="col-md-1 text-center">工令号</td>
+									<td colspan="3">${zttOrder.product_order_number}</td>
 								</tr>
 								<tr>
 									<td class="text-center">客户</td>
-									<td colspan="2">${zttOrder.client }</td>
-									<td class="text-center">联系人</td>
-									<td colspan="2">
-									<input class="form-control"
-									type="text" maxlength="255" name="linkman" id="linkman" value='${zttOrder.linkman }' readonly=false>
+									<td>
+									<input type="text" class="form-control"
+						name="client" id="client" value="${zttOrder.client}">
+					<button type="button" class="btn btn-success"
+						onclick="selectclient()" id="buttonsave">
+						<span class="glyphicon glyphicon-saved" aria-hidden="true"></span>选择
+					</button>
 									</td>
+									<td class="col-md-1 text-center">联系人</td>
+									<td class="col-md-2">
+									<input class="form-control"
+									type="text" maxlength="255" name="linkman" id="linkman" value='${zttOrder.linkman }'>
+									</td>
+									<td class="text-center">供应商</td>
+									<td colspan="3">
+									<input type="text" class="form-control"
+						name="supplier_name" id="supplyer_name" placeholder="请选择供应商">
+									<button type="button" class="btn btn-success"
+						onclick="selectsupplyer()" id="buttonsave">
+						<span class="glyphicon glyphicon-saved" aria-hidden="true"></span>选择
+					</button></td>
 								</tr>
 								<tr>
 									<td class="text-center">产品名称
 									</td>
 									<td colspan="2">
 									<input class="form-control"
-									type="text" maxlength="255" name="product_name" id="product_name" value='${zttOrder.product_name }' readonly=false></td>
+									type="text" maxlength="255" name="product_name" id="product_name" value='${zttOrder.product_name }'></td>
 									<td class="text-center">规格</td>
 									<td colspan="2">
 									<input class="form-control"

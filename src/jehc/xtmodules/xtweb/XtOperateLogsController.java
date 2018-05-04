@@ -25,7 +25,7 @@ import jehc.xtmodules.xtservice.XtOperateLogsService;
 
 /**
 * 操作日志表; InnoDB free: 4096 kB 
-* 2015-09-30 16:48:48  邓纯杰
+* 2015-09-30 16:48:48  
 */
 @Controller
 @RequestMapping("/xtOperateLogsController")

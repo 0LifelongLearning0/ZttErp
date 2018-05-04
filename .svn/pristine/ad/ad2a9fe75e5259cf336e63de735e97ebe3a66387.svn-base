@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
 * b_seller_product 卖家商品 
-* 2016-02-18 17:20:35  邓纯杰
+* 2016-02-18 17:20:35  
 */
 public class BSellerProduct extends BProductPrice implements Serializable{
 	private static final long serialVersionUID = 1L;

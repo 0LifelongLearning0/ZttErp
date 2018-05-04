@@ -21,7 +21,7 @@ import jehc.xtmodules.xtmodel.XtDbinfo;
 import jehc.xtmodules.xtservice.XtFlexSearchService;
 /**
  * 查询工具
- * @author 邓纯杰
+ * @author 
  *
  */
 public class XtFlexSearchServiceImpl extends BaseService implements XtFlexSearchService {

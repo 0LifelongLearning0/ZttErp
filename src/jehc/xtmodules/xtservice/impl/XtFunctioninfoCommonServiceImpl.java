@@ -13,7 +13,7 @@ import jehc.xtmodules.xtservice.XtFunctioninfoCommonService;
 
 /**
 * 公共功能 
-* 2016-10-10 13:00:30  邓纯杰
+* 2016-10-10 13:00:30  
 */
 @Service("xtFunctioninfoCommonService")
 public class XtFunctioninfoCommonServiceImpl extends BaseService implements XtFunctioninfoCommonService{

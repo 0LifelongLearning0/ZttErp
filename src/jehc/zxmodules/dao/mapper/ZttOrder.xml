@@ -53,6 +53,9 @@
 		<if test="null != product_order_number">
 			AND instr(product_order_number,#{product_order_number})
 		</if>
+		<if test="null != order_number">
+			AND instr(order_number,#{order_number})
+		</if>
 		<if test="null != erp_number">
 			AND instr(erp_number,#{erp_number})
 		</if>
@@ -62,8 +65,20 @@
 		<if test="null != product_name">
 			AND instr(product_name,#{product_name})
 		</if>
+		<if test="null != contract_number">
+			AND instr(contract_number,#{contract_number})
+		</if>
 		<if test="null != cato_type">
 			AND instr(cato_type,#{cato_type})
+		</if>
+		<if test="null != send_time">
+			AND send_time is null
+		</if>
+		<if test="null != bill_date_open">
+			AND bill_date_open is null
+		</if>
+		<if test="null != amount">
+			AND amount=#{amount}
 		</if>
 		<if test="null != apply_time_et">
 			AND zttordertime&lt;#{apply_time_et}
@@ -82,6 +97,18 @@
 		</if>
 		<if test="null != apply_time_et_End_data">
 			AND End_data&lt;#{apply_time_et_End_data}
+		</if>
+		<if test="null != apply_time_st_send_time">
+			AND send_time&gt;#{apply_time_st_send_time}
+		</if>
+		<if test="null != apply_time_et_send_time">
+			AND send_time&lt;#{apply_time_et_send_time}
+		</if>
+		<if test="null != apply_time_st_bill_date_open">
+			AND bill_date_open&gt;#{apply_time_st_bill_date_open}
+		</if>
+		<if test="null != apply_time_et_bill_date_open">
+			AND bill_date_open&lt;#{apply_time_et_bill_date_open}
 		</if>
 		<if test="null == orderby">
 			ORDER BY product_order_number desc
@@ -253,7 +280,22 @@
 		from
 		ztt_ordernumber_third);
 	</select>
-
+	
+	<select id="ZttOrdernumber_max" resultType="string"
+		parameterType="string">
+		select
+		max(b.erp_number)
+		from
+(select a.erp_number from ztt_order a where  erp_number REGEXP '[0-9]') b
+	</select>
+	
+	<select id="ZttOrdernumber_max_purchase" resultType="string"
+		parameterType="string">
+		select
+		max(b.erp_number)
+		from
+(select a.erp_number from ztt_purchase_son a where  erp_number REGEXP '[0-9]') b
+	</select>
 	<!--添加 -->
 	<insert id="addZttOrdnum" parameterType="jehc.zxmodules.model.ZttOrdernumber_third">
 		INSERT INTO

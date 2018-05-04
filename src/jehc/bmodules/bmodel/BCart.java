@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
 * b_cart 基础购物车 
-* 2016-01-27 13:36:04  邓纯杰
+* 2016-01-27 13:36:04  
 */
 public class BCart extends BInvoice implements Serializable{
 	private static final long serialVersionUID = 1L;

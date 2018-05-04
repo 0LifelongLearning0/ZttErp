@@ -10,7 +10,7 @@ import jehc.xtmodules.xtcore.base.impl.BaseDaoImpl;
 
 /**
 * 基础卖家快递 
-* 2016-02-18 17:14:52  邓纯杰
+* 2016-02-18 17:14:52  
 */
 @Repository("bSellerExpressDao")
 public class BSellerExpressDaoImpl  extends BaseDaoImpl implements BSellerExpressDao{

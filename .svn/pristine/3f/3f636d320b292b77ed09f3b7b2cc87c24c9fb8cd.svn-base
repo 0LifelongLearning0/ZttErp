@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * ftp配置
- * @author邓纯杰
+ * @author
  *
  */
 public class FtpConfig implements Serializable{

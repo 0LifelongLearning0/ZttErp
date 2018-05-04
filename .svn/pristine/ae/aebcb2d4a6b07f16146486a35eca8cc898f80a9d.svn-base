@@ -6,7 +6,7 @@ import jehc.xtmodules.xtmodel.XtMessage;
 
 /**
 * 短消息 
-* 2016-10-20 17:49:40  邓纯杰
+* 2016-10-20 17:49:40  
 */
 public interface XtMessageDao{
 	/**

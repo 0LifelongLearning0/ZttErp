@@ -5,7 +5,7 @@ import org.apache.solr.client.solrj.impl.HttpSolrServer;
 
 /**
  * Solr支持类
- * @author 邓纯杰
+ * @author 
  *
  */
 public class SolrUtils {

@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * UUID生成策略
- * @author邓纯杰
+ * @author
  *
  */
 public class UUID{

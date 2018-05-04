@@ -9,7 +9,7 @@ import org.apache.commons.beanutils.ConvertUtils;
 
 /**
  * 变量类型 键 值等等
- * @author 邓纯杰 
+ * @author  
  *
  */
 public class Variable {

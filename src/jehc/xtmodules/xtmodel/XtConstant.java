@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
 * xt_constant 台平常量 
-* 2015-05-24 08:47:31  邓纯杰
+* 2015-05-24 08:47:31  
 */
 public class XtConstant implements Serializable{
 	private static final long serialVersionUID = 1L;

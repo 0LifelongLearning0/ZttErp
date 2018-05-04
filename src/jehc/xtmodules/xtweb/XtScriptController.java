@@ -25,7 +25,7 @@ import jehc.xtmodules.xtservice.XtScriptService;
 
 /**
 * 平台脚本 
-* 2016-06-15 17:08:31  邓纯杰
+* 2016-06-15 17:08:31  
 */
 @Controller
 @RequestMapping("/xtScriptController")

@@ -9,7 +9,7 @@ import jehc.xtmodules.xtmodel.XtMonitorCpu;
 
 /**
 * 服务器CPU运行 
-* 2015-05-24 15:04:44  邓纯杰
+* 2015-05-24 15:04:44  
 */
 @Repository("xtMonitorCpuDao")
 public class XtMonitorCpuDaoImpl  extends BaseDaoImpl implements XtMonitorCpuDao{

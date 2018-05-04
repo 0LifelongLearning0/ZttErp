@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 /**
 * zx_out_time 外协分批到货管理 
-* 2017-11-03 09:08:36  邓纯杰
+* 2017-11-03 09:08:36  
 */
 public class ZxOutTime extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

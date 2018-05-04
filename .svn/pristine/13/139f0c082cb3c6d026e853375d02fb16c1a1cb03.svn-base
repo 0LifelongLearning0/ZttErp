@@ -12,7 +12,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import jehc.xtmodules.xtcore.base.BaseJunit;
 /**
  * Spring线程池测试
- * @author 邓纯杰
+ * @author 
  *
  */
 public class SpringPool extends BaseJunit{

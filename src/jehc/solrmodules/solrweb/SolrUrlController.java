@@ -29,7 +29,7 @@ import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
 
 /**
 * solr多实例URL配置 
-* 2015-12-15 11:24:06  邓纯杰
+* 2015-12-15 11:24:06  
 */
 @Controller
 @RequestMapping("/solrUrlController")

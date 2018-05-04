@@ -9,7 +9,7 @@ import jehc.xtmodules.xtcore.base.impl.BaseDaoImpl;
 
 /**
 * solr schema 模板 
-* 2016-07-01 13:14:46  邓纯杰
+* 2016-07-01 13:14:46  
 */
 @Repository("solrSchemaTempletDao")
 public class SolrSchemaTempletDaoImpl  extends BaseDaoImpl implements SolrSchemaTempletDao{

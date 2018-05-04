@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
 * xt_departinfo 部门信息表(departInfo) 
-* 2015-05-13 15:46:38  邓纯杰
+* 2015-05-13 15:46:38  
 */
 public class XtDepartinfo implements Serializable{
 	private static final long serialVersionUID = 1L;

@@ -1,7 +1,7 @@
 package jehc.lcmodules.mxgraph;
 /**
  * MxGraphModel到JPDL属性
- * @author邓纯杰
+ * @author
  *
  */
 public class MxGraphModel {

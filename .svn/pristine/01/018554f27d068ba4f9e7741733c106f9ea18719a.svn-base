@@ -13,7 +13,7 @@ import jehc.xtmodules.xtservice.XtRoleinfoService;
 
 /**
 * 用户角色表 
-* 2015-05-29 11:08:55  邓纯杰
+* 2015-05-29 11:08:55  
 */
 @Service("xtRoleinfoService")
 public class XtRoleinfoServiceImpl extends BaseService implements XtRoleinfoService{

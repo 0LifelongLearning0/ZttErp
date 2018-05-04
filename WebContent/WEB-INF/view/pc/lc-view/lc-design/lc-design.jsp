@@ -214,7 +214,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/pc/lc-view/lc-design/archive/grapheditor/css/grapheditor.css" />
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/pc/lc-view/lc-design/archive/grapheditor/css/common.css" />
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/pc/lc-view/lc-design/archive/grapheditor/css/explorer.css" />
-    <!-- 系统属性邓纯杰也重写过!呦西! -->
+    <!-- 系统属性也重写过!呦西! -->
     <script type="text/javascript" src="${pageContext.request.contextPath}/view/pc/lc-view/lc-design/archive/grapheditor/js/eastPanel.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/view/pc/lc-view/lc-design/archive/grapheditor/js/leftPanel.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/view/pc/lc-view/lc-design/archive/grapheditor/js/viewport.js"></script>

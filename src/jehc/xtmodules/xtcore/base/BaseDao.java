@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.ibatis.type.TypeException;
 /**
  * BaseDao接口
- * @author邓纯杰
+ * @author
  *
  */
 public interface BaseDao {

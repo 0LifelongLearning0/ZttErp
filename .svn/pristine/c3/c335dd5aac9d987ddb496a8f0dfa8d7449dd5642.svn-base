@@ -6,7 +6,7 @@ import jehc.bmodules.bmodel.BSeller;
 
 /**
 * 基础卖家 
-* 2016-01-08 22:54:00  邓纯杰
+* 2016-01-08 22:54:00  
 */
 public interface BSellerDao{
 	/**

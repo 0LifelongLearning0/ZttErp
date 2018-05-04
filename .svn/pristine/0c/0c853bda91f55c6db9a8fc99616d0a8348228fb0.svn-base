@@ -5,7 +5,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
 * b_order_pay 基础订单支付 
-* 2016-03-22 16:47:52  邓纯杰
+* 2016-03-22 16:47:52  
 */
 public class BOrderPay extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

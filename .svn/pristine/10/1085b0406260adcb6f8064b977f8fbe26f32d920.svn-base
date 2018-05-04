@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
 * zx_judge_report 供应商评定详情表 
-* 2017-09-22 13:18:03  邓纯杰
+* 2017-09-22 13:18:03  
 */
 public class ZxJudgeReport extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

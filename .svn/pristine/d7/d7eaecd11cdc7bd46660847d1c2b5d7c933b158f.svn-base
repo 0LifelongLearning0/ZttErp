@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * 代码生成-表信息
- * @author 邓纯杰
+ * @author 
  *
  */
 public class XtGeneratorTable implements Serializable{

@@ -1,7 +1,7 @@
 package jehc.xtmodules.xtcore.util.constant;
 /**
  * Session常量
- * @author 邓纯杰
+ * @author 
  *
  */
 public class SessionConstant {

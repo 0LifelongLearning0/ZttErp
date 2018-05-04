@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
 * zx_loan_bill 借款单 
-* 2017-10-10 14:59:11  邓纯杰
+* 2017-10-10 14:59:11  
 */
 public class ZxLoanBill extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

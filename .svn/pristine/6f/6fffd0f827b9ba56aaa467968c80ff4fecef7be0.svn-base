@@ -6,7 +6,7 @@ import jehc.bmodules.bmodel.BSellerAccount;
 
 /**
 * 基础卖家账号 
-* 2016-02-18 17:07:37  邓纯杰
+* 2016-02-18 17:07:37  
 */
 public interface BSellerAccountService{
 	/**

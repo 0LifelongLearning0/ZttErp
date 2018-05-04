@@ -9,7 +9,7 @@ import jehc.lcmodules.mxgraph.mxUtils.communal.MxUtils;
 
 /**
  * 补偿边界
- * @author 邓纯杰
+ * @author 
  *
  */
 public class MxCompensationBoundaryEvent {

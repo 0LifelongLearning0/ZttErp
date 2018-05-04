@@ -1,4 +1,4 @@
-//自定义属性邓纯杰
+//自定义属性
 //选择当前节点编辑属性
 function setNodeAttribute(cell,graph_refresh){
 	var node_type=cell.node_type;

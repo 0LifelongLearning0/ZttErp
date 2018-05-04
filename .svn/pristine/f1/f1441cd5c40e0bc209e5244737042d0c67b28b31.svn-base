@@ -13,7 +13,7 @@ import jehc.xtmodules.xtcore.util.ExceptionUtil;
 
 /**
 * 基础商品商户所选颜色 
-* 2016-07-02 16:54:11  邓纯杰
+* 2016-07-02 16:54:11  
 */
 @Service("bProductColorService")
 public class BProductColorServiceImpl extends BaseService implements BProductColorService{

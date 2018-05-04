@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
 * zx_machine 加工单位 
-* 2017-08-28 17:21:04  邓纯杰
+* 2017-08-28 17:21:04  
 */
 public class ZxMachine extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

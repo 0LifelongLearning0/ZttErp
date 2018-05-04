@@ -5,7 +5,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
 * xt_data_authority 数据权限; InnoDB free: 10240 kB 
-* 2015-10-04 14:42:34  邓纯杰
+* 2015-10-04 14:42:34  
 */
 public class XtDataAuthority extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

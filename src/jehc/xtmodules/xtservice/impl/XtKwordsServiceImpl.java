@@ -13,7 +13,7 @@ import jehc.xtmodules.xtservice.XtKwordsService;
 
 /**
 * 关键词（敏感词） 
-* 2016-10-08 15:03:41  邓纯杰
+* 2016-10-08 15:03:41  
 */
 @Service("xtKwordsService")
 public class XtKwordsServiceImpl extends BaseService implements XtKwordsService{

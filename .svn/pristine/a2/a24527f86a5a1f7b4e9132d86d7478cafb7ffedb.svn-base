@@ -69,7 +69,7 @@ import jehc.xtmodules.xtdao.XtConstantDao;
 import jehc.xtmodules.xtmodel.XtConstant;
 /**
  * activiti核心引擎
- * @author邓纯杰
+ * @author
  *
  */
 @SuppressWarnings("unused")

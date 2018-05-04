@@ -9,7 +9,7 @@ import jehc.lcmodules.mxgraph.mxUtils.communal.MxUtils;
 
 /**
  * 取消结束事件
- * @author 邓纯杰
+ * @author 
  *
  */
 public class MxCancelEndEvent {

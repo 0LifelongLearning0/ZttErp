@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
 * zx_expressdelivery 快递邮寄 
-* 2017-11-24 13:10:10  邓纯杰
+* 2017-11-24 13:10:10  
 */
 public class ZxExpressdelivery extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

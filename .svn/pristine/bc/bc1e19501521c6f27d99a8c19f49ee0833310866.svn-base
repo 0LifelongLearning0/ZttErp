@@ -13,7 +13,7 @@ import jehc.xtmodules.xtservice.XtAttachmentService;
 
 /**
 * 附件管理 
-* 2015-05-24 08:36:53  邓纯杰
+* 2015-05-24 08:36:53  
 */
 @Service("xtAttachmentService")
 public class XtAttachmentServiceImpl extends BaseService implements XtAttachmentService{

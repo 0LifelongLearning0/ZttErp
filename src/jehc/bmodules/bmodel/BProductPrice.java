@@ -5,7 +5,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
 * b_product_price 基础商品价格 
-* 2016-03-18 20:18:13  邓纯杰
+* 2016-03-18 20:18:13  
 */
 public class BProductPrice extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

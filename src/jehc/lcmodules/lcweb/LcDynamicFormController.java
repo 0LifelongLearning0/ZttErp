@@ -21,7 +21,7 @@ import jehc.lcmodules.activitiutil.ActivitiUtil;
 import jehc.xtmodules.xtcore.base.BaseAction;
 /**
  * 流程动态表单
- * @author 邓纯杰
+ * @author 
  *
  */
 @Controller

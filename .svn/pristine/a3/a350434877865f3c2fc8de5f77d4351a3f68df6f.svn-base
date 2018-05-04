@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * 代码生成-一对多表信息
- * @author 邓纯杰
+ * @author 
  *
  */
 public class XtGeneratorTableManyToOne implements Serializable{

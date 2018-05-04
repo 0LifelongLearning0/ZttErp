@@ -13,7 +13,7 @@ import jehc.xtmodules.xtcore.util.ExceptionUtil;
 
 /**
 * solr多实例URL配置 
-* 2015-12-15 11:24:06  邓纯杰
+* 2015-12-15 11:24:06  
 */
 @Service("solrUrlService")
 public class SolrUrlServiceImpl extends BaseService implements SolrUrlService{

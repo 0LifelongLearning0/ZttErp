@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
 * xt_m_r 资源角色; InnoDB free: 6144 kB 
-* 2015-08-04 16:27:46  邓纯杰
+* 2015-08-04 16:27:46  
 */
 public class XtMR implements Serializable{
 	private static final long serialVersionUID = 1L;

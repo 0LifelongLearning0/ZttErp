@@ -10,7 +10,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
 * xt_notice 平台公告 
-* 2016-06-18 15:45:40  邓纯杰
+* 2016-06-18 15:45:40  
 */
 public class XtNotice extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

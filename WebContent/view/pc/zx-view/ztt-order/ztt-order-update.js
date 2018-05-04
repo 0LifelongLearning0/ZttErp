@@ -6,6 +6,7 @@ function goback() {
 function updateZttOrder() {
 	submitBForm('defaultForm', '../zttOrderController/updateZttOrder',
 			'../zttOrderController/loadZttOrder');
+	 
 }
 // 发起提交表单
 function submitBForm(formid, url, callUrl) {
@@ -34,7 +35,8 @@ function submitBForm(formid, url, callUrl) {
 							window.parent.toastrBoot(3, result.msg);
 							if (null != callUrl) {
 								// 默认返回页面
-								tlocation(callUrl);
+								var index = parent.layer.getFrameIndex(window.name);  
+							    parent.layer.close(index); 
 							}
 						} else {
 							// 失败还在原位置页面
@@ -54,6 +56,7 @@ function submitBForm(formid, url, callUrl) {
 $(function() {
 	var apply_id=document.getElementById("apply_id").value;
 	if(apply_id=="3BEDDDB5F4A94C78AEFA53051FAD5468"||apply_id=="6424E51904264B94910A72D62454F5C4"||apply_id=="B89D3CEE77F4485ABFA14ACCEA1E9188"){
+		document.getElementById("linkman").readOnly = false;
 		document.getElementById("cost_single_price").readOnly = true;
 		document.getElementById("erp_number").readOnly = true;
 		document.getElementById("supplier_bill_date").readOnly = true;
@@ -102,8 +105,28 @@ function downloadattachment(id){
 	  content: "../zttOrderController/Downloadattachment?id="+id+"&upid="+upid
 	 
 	})}; 
-	
+	function selectsupplyer(){
+		var upid="suppler";
+		layer.open({
+			title: '选择供应商',
+			type: 2, 
+			area: ['800px', '500px'],
+			content: "../zttOrderController/selectsuppler?upid="+upid
+		 
+		}); 
+	}
 	function updateZttOrderbatch() {
 		submitBForm('defaultForm', '../zttOrderController/updateZttOrderbatch',
 				'../zttOrderController/loadZttOrder');
+	}
+	
+	function selectclient(){
+		var upid="client";
+		layer.open({
+			title: '选择客户',
+			type: 2, 
+			area: ['800px', '500px'],
+			content: "../zttOrderController/selectsuppler?upid="+upid
+		 
+		}); 
 	}

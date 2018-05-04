@@ -25,7 +25,7 @@ import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
 
 /**
 * 基础会员 
-* 2016-01-08 22:35:34  邓纯杰
+* 2016-01-08 22:35:34  
 */
 @Controller
 @RequestMapping("/bMemberController")

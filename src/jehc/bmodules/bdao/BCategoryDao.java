@@ -6,7 +6,7 @@ import jehc.bmodules.bmodel.BCategory;
 
 /**
 * 基础-品类 
-* 2016-01-04 21:24:03  邓纯杰
+* 2016-01-04 21:24:03  
 */
 public interface BCategoryDao{
 	/**

@@ -6,7 +6,7 @@ import jehc.lcmodules.lcmodel.LcApproval;
 
 /**
 * 工作流批审表 
-* 2017-01-08 17:06:33  邓纯杰
+* 2017-01-08 17:06:33  
 */
 public interface LcApprovalDao{
 	/**

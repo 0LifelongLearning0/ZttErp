@@ -18,7 +18,7 @@ import jehc.xtmodules.xtservice.XtEncoderqrcodeService;
 
 /**
 * 平台二维码 
-* 2016-04-05 20:58:53  邓纯杰
+* 2016-04-05 20:58:53  
 */
 @Service("xtEncoderqrcodeService")
 public class XtEncoderqrcodeServiceImpl extends BaseService implements XtEncoderqrcodeService{

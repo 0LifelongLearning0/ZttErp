@@ -13,7 +13,7 @@ import net.sf.json.JSONObject;
 
 /**
  * 
- * @author 邓纯杰
+ * @author 
  *
  */
 public class BaseSearch {

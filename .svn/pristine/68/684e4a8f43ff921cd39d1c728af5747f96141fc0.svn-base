@@ -16,7 +16,7 @@ import jehc.xtmodules.xtservice.XtMRService;
 
 /**
 * 资源角色; InnoDB free: 6144 kB 
-* 2015-08-04 16:27:46  邓纯杰
+* 2015-08-04 16:27:46  
 */
 @Service("xtMRService")
 public class XtMRServiceImpl extends BaseService implements XtMRService{

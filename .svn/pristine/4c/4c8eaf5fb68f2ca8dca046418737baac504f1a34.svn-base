@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
 * zx_meeting_user 会议人员 
-* 2017-10-13 13:21:28  邓纯杰
+* 2017-10-13 13:21:28  
 */
 public class ZxMeetingUser extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

@@ -5,7 +5,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
 * xt_appkey_appsecret xt_appkey_appsecret 
-* 2016-08-28 14:48:17  邓纯杰
+* 2016-08-28 14:48:17  
 */
 public class XtAppkeyAppsecret extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

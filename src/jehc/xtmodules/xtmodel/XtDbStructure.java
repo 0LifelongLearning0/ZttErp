@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * 数据库表
- * @author邓纯杰
+ * @author
  */
 public class XtDbStructure  implements Serializable{
 	private static final long serialVersionUID = 1L;

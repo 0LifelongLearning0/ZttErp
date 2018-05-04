@@ -13,7 +13,7 @@ import jehc.xtmodules.xtservice.XtAppkeyAppsecretService;
 
 /**
 * xt_appkey_appsecret 
-* 2016-08-28 14:37:16  邓纯杰
+* 2016-08-28 14:37:16  
 */
 @Service("xtAppkeyAppsecretService")
 public class XtAppkeyAppsecretServiceImpl extends BaseService implements XtAppkeyAppsecretService{

@@ -20,7 +20,7 @@ import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
 
 /**
 * 流程申请 
-* 2017-01-08 14:55:11  邓纯杰
+* 2017-01-08 14:55:11  
 */
 @Controller
 @RequestMapping("/lcApplyController")

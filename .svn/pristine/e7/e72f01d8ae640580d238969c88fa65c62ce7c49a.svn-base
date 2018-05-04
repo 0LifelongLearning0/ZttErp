@@ -13,7 +13,7 @@ import jehc.xtmodules.xtservice.XtDataDictionaryService;
 
 /**
 * 数据字典 
-* 2015-05-24 08:09:31  邓纯杰
+* 2015-05-24 08:09:31  
 */
 @Service("xtDataDictionaryService")
 public class XtDataDictionaryServiceImpl extends BaseService implements XtDataDictionaryService{

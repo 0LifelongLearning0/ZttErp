@@ -13,7 +13,7 @@ import jehc.xtmodules.xtservice.XtSourcesService;
 
 /**
 * 平台静态资源 
-* 2016-06-16 10:34:06  邓纯杰
+* 2016-06-16 10:34:06  
 */
 @Service("xtSourcesService")
 public class XtSourcesServiceImpl extends BaseService implements XtSourcesService{

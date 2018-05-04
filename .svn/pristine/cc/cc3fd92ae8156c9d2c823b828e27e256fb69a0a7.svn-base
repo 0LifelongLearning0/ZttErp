@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
 * xt_u_r 用户角色分配表; InnoDB free: 6144 kB 
-* 2015-08-04 16:25:07  邓纯杰
+* 2015-08-04 16:25:07  
 */
 public class XtUR implements Serializable{
 	private static final long serialVersionUID = 1L;

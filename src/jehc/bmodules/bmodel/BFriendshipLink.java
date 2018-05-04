@@ -6,7 +6,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
 * b_friendship_link 基础友情链接 
-* 2016-01-10 12:35:06  邓纯杰
+* 2016-01-10 12:35:06  
 */
 public class BFriendshipLink extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

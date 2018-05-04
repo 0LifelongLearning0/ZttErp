@@ -13,7 +13,7 @@ import jehc.xtmodules.xtcore.util.ExceptionUtil;
 
 /**
 * solr文档 
-* 2015-12-23 09:38:59  邓纯杰
+* 2015-12-23 09:38:59  
 */
 @Service("solrDocumentService")
 public class SolrDocumentServiceImpl extends BaseService implements SolrDocumentService{

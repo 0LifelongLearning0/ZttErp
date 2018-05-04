@@ -13,7 +13,7 @@ import jehc.xtmodules.xtservice.XtSmsService;
 
 /**
 * 短信配置表 
-* 2015-06-04 13:35:07  邓纯杰
+* 2015-06-04 13:35:07  
 */
 @Service("xtSmsService")
 public class XtSmsServiceImpl extends BaseService implements XtSmsService{

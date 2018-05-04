@@ -20,7 +20,7 @@ import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
 
 /**
 * Solr字段拷贝配置 
-* 2016-11-15 12:49:27  邓纯杰
+* 2016-11-15 12:49:27  
 */
 @Controller
 @RequestMapping("/solrFiledCopyController")

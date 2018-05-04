@@ -6,7 +6,7 @@ import jehc.xtmodules.xtmodel.XtPath;
 
 /**
 * 文件路径设置 
-* 2015-05-15 14:55:22  邓纯杰
+* 2015-05-15 14:55:22  
 */
 public interface XtPathDao{
 	/**

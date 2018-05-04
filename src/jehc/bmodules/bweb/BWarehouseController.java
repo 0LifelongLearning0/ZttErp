@@ -25,7 +25,7 @@ import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
 
 /**
 * 基础仓库 
-* 2016-01-27 14:21:55  邓纯杰
+* 2016-01-27 14:21:55  
 */
 @Controller
 @RequestMapping("/bWarehouseController")

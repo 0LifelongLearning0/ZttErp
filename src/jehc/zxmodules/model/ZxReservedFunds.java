@@ -7,7 +7,7 @@ import java.util.Date;
 
 /**
 * zx_reserved_funds 公积金台账 
-* 2018-01-18 08:15:15  邓纯杰
+* 2018-01-18 08:15:15  
 */
 public class ZxReservedFunds extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

@@ -1,7 +1,7 @@
 package jehc.xtmodules.xtcore.util.constant;
 /**
  * 缓存变量存放位置
- * @author 邓纯杰
+ * @author 
  *
  */
 public class CacheConstant {

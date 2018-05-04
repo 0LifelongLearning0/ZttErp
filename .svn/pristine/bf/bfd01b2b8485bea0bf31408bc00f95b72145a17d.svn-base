@@ -9,7 +9,7 @@ import org.jdom.output.XMLOutputter;
  
 /**
  * Jdomxml工具类
- * @author邓纯杰
+ * @author
  *
  */
 public class JdomXmlUtil {  

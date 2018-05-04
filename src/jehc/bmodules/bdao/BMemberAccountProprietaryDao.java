@@ -6,7 +6,7 @@ import jehc.bmodules.bmodel.BMemberAccountProprietary;
 
 /**
 * 基础专有账户 
-* 2016-03-24 20:33:37  邓纯杰
+* 2016-03-24 20:33:37  
 */
 public interface BMemberAccountProprietaryDao{
 	/**

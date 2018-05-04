@@ -44,7 +44,7 @@ import jehc.xtmodules.xtservice.XtUserinfoService;
 
 /**
 * 数据权限; InnoDB free: 10240 kB 
-* 2015-10-04 14:42:34  邓纯杰
+* 2015-10-04 14:42:34  
 */
 @Controller
 @RequestMapping("/xtDataAuthorityController")

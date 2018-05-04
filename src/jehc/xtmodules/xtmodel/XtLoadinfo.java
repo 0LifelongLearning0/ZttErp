@@ -6,7 +6,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
 * xt_loadinfo 页面加载信息 
-* 2015-05-14 16:24:20  邓纯杰
+* 2015-05-14 16:24:20  
 */
 public class XtLoadinfo extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

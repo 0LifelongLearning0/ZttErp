@@ -84,7 +84,7 @@ Ext.define('Ext.ux.TreePicker', {
                 columns: me.columns,
                 minHeight: me.minPickerHeight,
                 maxHeight: me.maxPickerHeight,
-                /**邓纯杰重写**/
+                /**重写**/
                 rootVisible:me.rootVisible,
                 manageHeight: false,
                 shadow: false,

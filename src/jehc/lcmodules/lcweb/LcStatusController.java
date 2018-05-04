@@ -26,7 +26,7 @@ import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
 
 /**
 * 流程状态 
-* 2016-05-04 14:13:34  邓纯杰
+* 2016-05-04 14:13:34  
 */
 @Controller
 @RequestMapping("/lcStatusController")

@@ -24,7 +24,7 @@ import org.springframework.stereotype.Service;
 
 /**
 * 流程详细信息即流程部署内容,BPMN文件,ZIP路径,IMG路径,MXGraph内容等等（流程表） 
-* 2016-11-22 10:16:39  邓纯杰
+* 2016-11-22 10:16:39  
 */
 @Service("lcProcessService")
 public class LcProcessServiceImpl extends BaseService implements LcProcessService{

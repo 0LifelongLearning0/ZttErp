@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
 * xt_unit 商品(产品)单位; InnoDB free: 6144 kB 
-* 2015-08-29 11:02:35  邓纯杰
+* 2015-08-29 11:02:35  
 */
 public class XtUnit implements Serializable{
 	private static final long serialVersionUID = 1L;

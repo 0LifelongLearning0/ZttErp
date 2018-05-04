@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import jehc.xtmodules.xtcore.base.BaseAction;
 /**
  * 个人常用菜单即便捷菜单
- * @author 邓纯杰
+ * @author 
  *
  */
 @Controller

@@ -6,7 +6,7 @@ import jehc.bmodules.bmodel.BInvoice;
 
 /**
 * 基础发票 
-* 2016-02-22 14:35:28  邓纯杰
+* 2016-02-22 14:35:28  
 */
 public interface BInvoiceDao{
 	/**

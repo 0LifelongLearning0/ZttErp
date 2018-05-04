@@ -10,7 +10,7 @@ import jehc.xtmodules.xtcore.base.impl.BaseDaoImpl;
 
 /**
 * 基础商品默认图片 
-* 2016-01-09 09:06:38  邓纯杰
+* 2016-01-09 09:06:38  
 */
 @Repository("bProductImgDefaultDao")
 public class BProductImgDefaultDaoImpl  extends BaseDaoImpl implements BProductImgDefaultDao{

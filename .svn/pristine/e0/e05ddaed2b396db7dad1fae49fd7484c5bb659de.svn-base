@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
 * zx_outsource_time 外协分批到货管理 
-* 2017-09-01 09:30:59  邓纯杰
+* 2017-09-01 09:30:59  
 */
 public class ZxOutsourceTime extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

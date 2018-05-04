@@ -6,7 +6,7 @@ import jehc.xtmodules.xtmodel.XtServiceCenterParameter;
 
 /**
 * 服务中心参数 
-* 2017-03-27 12:32:04  邓纯杰
+* 2017-03-27 12:32:04  
 */
 public interface XtServiceCenterParameterDao{
 	/**

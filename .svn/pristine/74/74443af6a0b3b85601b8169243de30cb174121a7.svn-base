@@ -9,7 +9,7 @@ import jehc.lcmodules.mxgraph.mxUtils.communal.MxUtils;
 
 /**
  * 消息边界
- * @author邓纯杰
+ * @author
  *
  */
 public class MxMessageBoundaryEvent {

@@ -5,7 +5,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
 * xt_operate_business_logs 平台业务操作日志表 
-* 2016-09-16 16:39:20  邓纯杰
+* 2016-09-16 16:39:20  
 */
 public class XtOperateBusinessLogs extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

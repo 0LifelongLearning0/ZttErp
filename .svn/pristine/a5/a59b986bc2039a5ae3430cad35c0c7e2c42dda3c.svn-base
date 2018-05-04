@@ -5,7 +5,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
 * xt_dbtable_strategy 分表策略表 
-* 2017-02-14 16:23:48  邓纯杰
+* 2017-02-14 16:23:48  
 */
 public class XtDbtableStrategy extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

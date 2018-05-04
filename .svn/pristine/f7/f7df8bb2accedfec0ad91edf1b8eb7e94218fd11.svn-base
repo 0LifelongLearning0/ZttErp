@@ -29,7 +29,7 @@ import jehc.xtmodules.xtcore.base.BaseAction;
 
 /**
  * 导出图片格式为PNG
- * @author邓纯杰
+ * @author
  * 
  */
 public class MxGraphToPng extends BaseAction{

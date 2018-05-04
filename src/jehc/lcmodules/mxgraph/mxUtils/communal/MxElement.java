@@ -6,7 +6,7 @@ import org.dom4j.Element;
 
 /**
  * 五级节点集合
- * @author邓纯杰
+ * @author
  *
  */
 public class MxElement {

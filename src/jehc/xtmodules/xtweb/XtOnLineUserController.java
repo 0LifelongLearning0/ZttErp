@@ -20,7 +20,7 @@ import jehc.xtmodules.xtmodel.XtUserinfo;
 
 /**
  * 在线用户监控
- * @author 邓纯杰
+ * @author 
  *
  */
 @Controller

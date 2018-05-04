@@ -6,7 +6,7 @@ import jehc.lcmodules.lcmodel.LcApply;
 
 /**
 * 流程申请 
-* 2017-01-08 14:55:11  邓纯杰
+* 2017-01-08 14:55:11  
 */
 public interface LcApplyService{
 	/**

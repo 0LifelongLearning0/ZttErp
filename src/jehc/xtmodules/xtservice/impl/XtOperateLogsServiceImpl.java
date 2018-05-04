@@ -12,7 +12,7 @@ import jehc.xtmodules.xtservice.XtOperateLogsService;
 
 /**
 * 操作日志表 
-* 2015-05-24 08:30:58  邓纯杰
+* 2015-05-24 08:30:58  
 */
 @Service("xtOperateLogsService")
 public class XtOperateLogsServiceImpl implements XtOperateLogsService{

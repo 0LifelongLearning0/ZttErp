@@ -13,7 +13,7 @@ import jehc.xtmodules.xtcore.util.ExceptionUtil;
 
 /**
 * 索引SQL查询 
-* 2015-12-23 09:42:26  邓纯杰
+* 2015-12-23 09:42:26  
 */
 @Service("solrIndexSqlService")
 public class SolrIndexSqlServiceImpl extends BaseService implements SolrIndexSqlService{

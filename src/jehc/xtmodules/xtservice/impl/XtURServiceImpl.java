@@ -14,7 +14,7 @@ import jehc.xtmodules.xtservice.XtURService;
 
 /**
 * 用户角色分配表; InnoDB free: 6144 kB 
-* 2015-08-04 16:25:07  邓纯杰
+* 2015-08-04 16:25:07  
 */
 @Service("xtURService")
 public class XtURServiceImpl extends BaseService implements XtURService{

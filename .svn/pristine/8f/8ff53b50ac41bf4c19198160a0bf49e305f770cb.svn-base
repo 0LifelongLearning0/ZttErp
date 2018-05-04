@@ -6,7 +6,7 @@ import jehc.xtmodules.xtmodel.XtSms;
 
 /**
 * 短信配置表 
-* 2015-06-04 13:35:07  邓纯杰
+* 2015-06-04 13:35:07  
 */
 public interface XtSmsService{
 	/**

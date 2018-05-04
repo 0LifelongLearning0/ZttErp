@@ -26,7 +26,7 @@ import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
 
 /**
 * 卖家商品 
-* 2016-02-18 17:20:35  邓纯杰
+* 2016-02-18 17:20:35  
 */
 @Controller
 @RequestMapping("/bSellerProductController")

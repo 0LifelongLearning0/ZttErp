@@ -5,7 +5,7 @@ import jehc.xtmodules.xtmodel.XtAreaRegion;
 
 /**
 * 行政区划表 
-* 2017-05-04 14:54:34  邓纯杰
+* 2017-05-04 14:54:34  
 */
 public interface XtAreaRegionService{
 	/**

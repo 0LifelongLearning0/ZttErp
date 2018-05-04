@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * 检测线程
- * @author邓纯杰
+ * @author
  *
  */
 public class CheckThread extends Thread{

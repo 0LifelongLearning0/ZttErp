@@ -8,7 +8,7 @@
 		<add as="fontColor" value="#1d258f"/>
 		<add as="fontFamily" value="Verdana"/>
 	</add>
-	<!-- 邓纯杰注释 连线为曲线-->
+	<!-- 注释 连线为曲线-->
 	<add as="defaultEdge" extend="defaultEdge">
 		<add as="labelBackgroundColor" value="white"/>
 		<add as="rounded" value="1"/>

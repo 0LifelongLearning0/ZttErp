@@ -1,7 +1,7 @@
 package jehc.xtmodules.xtcore.base;
 /**
  * 基类JSON
- * @author 邓纯杰
+ * @author 
  *
  */
 public class BaseJson {

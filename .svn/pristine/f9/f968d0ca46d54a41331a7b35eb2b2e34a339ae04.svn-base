@@ -7,7 +7,7 @@ import jehc.xtmodules.xtcore.base.BaseService;
 
 /**
  * 数据权限Job
- * @author 邓纯杰
+ * @author 
  *
  */
 public class Xt_Data_Authority_Task  extends Thread{

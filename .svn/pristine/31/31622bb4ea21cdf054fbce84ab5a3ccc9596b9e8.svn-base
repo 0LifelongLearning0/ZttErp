@@ -6,7 +6,7 @@ import jehc.xtmodules.xtmodel.XtVersion;
 
 /**
 * 平台版本 
-* 2017-04-16 20:05:24  邓纯杰
+* 2017-04-16 20:05:24  
 */
 public interface XtVersionService{
 	/**

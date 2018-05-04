@@ -25,7 +25,7 @@ import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
 
 /**
 * solr schema 模板 
-* 2016-07-01 13:14:46  邓纯杰
+* 2016-07-01 13:14:46  
 */
 @Controller
 @RequestMapping("/solrSchemaTempletController")

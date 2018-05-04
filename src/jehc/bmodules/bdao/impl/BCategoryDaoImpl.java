@@ -10,7 +10,7 @@ import jehc.xtmodules.xtcore.base.impl.BaseDaoImpl;
 
 /**
 * 基础-品类 
-* 2016-01-04 21:24:03  邓纯杰
+* 2016-01-04 21:24:03  
 */
 @Repository("bCategoryDao")
 public class BCategoryDaoImpl  extends BaseDaoImpl implements BCategoryDao{

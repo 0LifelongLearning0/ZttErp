@@ -6,7 +6,7 @@ import jehc.xtmodules.xtmodel.XtAttachment;
 
 /**
 * b_product_color_default 基础商品默认颜色 
-* 2016-01-19 15:38:05  邓纯杰
+* 2016-01-19 15:38:05  
 */
 public class BProductColorDefault  extends XtAttachment implements Serializable{
 	private static final long serialVersionUID = 1L;

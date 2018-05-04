@@ -5,7 +5,7 @@ import java.util.Date;
 
 /**
 * ztt_client 客户管理 
-* 2018-04-13 16:20:35  邓纯杰
+* 2018-04-13 16:20:35  
 */
 public class ZttClient extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

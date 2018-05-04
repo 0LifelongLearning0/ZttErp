@@ -9,7 +9,7 @@ import org.dom4j.Element;
 
 /**
  * 规则任务节点
- * @author邓纯杰
+ * @author
  *
  */
 public class MxBusinessRuleTask {

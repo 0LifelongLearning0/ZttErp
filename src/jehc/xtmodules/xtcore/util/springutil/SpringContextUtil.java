@@ -10,7 +10,7 @@ import org.springframework.context.ApplicationContextAware;
 *    
 * 项目名称：Activiti工作流业务平台
 * 类名称：SpringContextUtils   
-* 创建人：邓纯杰   
+* 创建人：   
 * 创建时间：Sep 13, 2011 9:39:23 AM   
 * 修改人：dengchunjie   
 * 修改时间：Sep 13, 2011 9:39:23 AM   

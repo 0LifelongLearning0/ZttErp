@@ -11,7 +11,7 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.sun.org.apache.xml.internal.security.keys.content.KeyValue;
 /**
  * FastJson工具类(不推荐使用 原因对大写转换有问题)
- * @author 邓纯杰
+ * @author 
  *
  */
 public class FastJsonUtils {

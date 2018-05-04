@@ -20,7 +20,7 @@ import jehc.xtmodules.xtmodel.XtDbView;
 import jehc.xtmodules.xtservice.XtDbStructureService;
 /**
  * 数据库表
- * @author 邓纯杰
+ * @author 
  */
 @Service("xtDbStructureService")
 public class XtDbStructureServiceImpl extends BaseService implements XtDbStructureService{

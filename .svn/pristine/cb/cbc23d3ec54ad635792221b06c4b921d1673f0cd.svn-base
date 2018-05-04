@@ -13,7 +13,7 @@ import jehc.xtmodules.xtcore.util.ExceptionUtil;
 
 /**
 * 基础仓库 
-* 2016-01-27 14:21:55  邓纯杰
+* 2016-01-27 14:21:55  
 */
 @Service("bWarehouseService")
 public class BWarehouseServiceImpl extends BaseService implements BWarehouseService{

@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 实体比较
  * 
- * @author 邓纯杰
+ * @author 
  * 
  */
 public class BeanCompareUtil {

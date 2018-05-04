@@ -110,8 +110,14 @@ public class ZttPurchaseController extends BaseAction {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/getZttPurchaseById", method = { RequestMethod.POST, RequestMethod.GET })
-	public String getZttPurchaseById(String id, HttpServletRequest request) {
+	public String getZttPurchaseById(String id, String isnewerp,HttpServletRequest request) {
 		ZttPurchase zttPurchase = zttPurchaseService.getZttPurchaseById(id);
+		if(isnewerp!=null){
+			if(isnewerp.equals("1")){
+				zttPurchase.setErp_number(zttOrderService.getmaxerp(id));
+			}
+		}
+		
 		return outDataStr(zttPurchase);
 	}
 
@@ -348,7 +354,7 @@ public class ZttPurchaseController extends BaseAction {
 			lc_Apply.setLc_apply_model_biz_id(zttPurchase.getId());
 			if (activitiUtil.addApply(lc_his_id, zttPurchase.getId(), variables, lc_Apply)) {
 				zttPurchase.setState("50");
-				i = zttPurchaseService.updateZttPurchaseBySelective(zttPurchase);
+				i = zttPurchaseService.updateZttPurchaseBySelective1(zttPurchase);
 
 			}
 		}
@@ -433,6 +439,7 @@ public class ZttPurchaseController extends BaseAction {
 					}else if (remark.equals("begin_purchase")) {
 						lc_approval.setLc_status_name("开始采购,等待到货");
 						zttPurchase.setState("14");
+						zttPurchase.setSupply_name(supply_name);
 						zttPurchase.setErp_number(path);
 						ztt_filerecord.setProduct_check_comment("开始采购,等待到货");
 						ztt_filerecord.setStatus_name("开始采购,等待到货");

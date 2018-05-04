@@ -26,7 +26,7 @@ import jehc.xtmodules.xtservice.XtLoginLogsService;
 
 /**
 * 登录日志 
-* 2015-05-24 08:17:40  邓纯杰
+* 2015-05-24 08:17:40  
 */
 @Controller
 @RequestMapping("/xtLoginLogsController")

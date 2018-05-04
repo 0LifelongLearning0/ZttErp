@@ -6,7 +6,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
 * xt_error_logs 异常日志表 
-* 2015-05-24 08:33:40  邓纯杰
+* 2015-05-24 08:33:40  
 */
 public class XtErrorLogs extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

@@ -23,7 +23,7 @@ import jehc.xtmodules.xtservice.XtPlatformService;
 
 /**
 * 平台信息发布 
-* 2017-11-16 09:38:57  邓纯杰
+* 2017-11-16 09:38:57  
 */
 @Controller
 @RequestMapping("/xtPlatformController")

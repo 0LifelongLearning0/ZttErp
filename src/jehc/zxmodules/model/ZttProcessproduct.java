@@ -5,7 +5,7 @@ import java.util.Date;
 
 /**
 * ztt_processproduct 机械加工工艺过程表 
-* 2018-04-24 14:27:01  邓纯杰
+* 2018-04-24 14:27:01  
 */
 public class ZttProcessproduct extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
 * xt_operate_logs 操作日志表; InnoDB free: 6144 kB 
-* 2015-08-28 23:15:51  邓纯杰
+* 2015-08-28 23:15:51  
 */
 public class XtOperateLogs implements Serializable{
 	private static final long serialVersionUID = 1L;

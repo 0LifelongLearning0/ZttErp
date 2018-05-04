@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
 * zx_car_apply 车辆审批表 
-* 2017-09-21 13:46:34  邓纯杰
+* 2017-09-21 13:46:34  
 */
 public class ZxCarApply extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

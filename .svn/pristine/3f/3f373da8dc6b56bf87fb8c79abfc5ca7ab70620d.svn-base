@@ -5,7 +5,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
 * xt_generator_forbidtable 禁止使用代码生成器生成的表信息 
-* 2016-09-26 10:55:48  邓纯杰
+* 2016-09-26 10:55:48  
 */
 public class XtGeneratorForbidtable extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

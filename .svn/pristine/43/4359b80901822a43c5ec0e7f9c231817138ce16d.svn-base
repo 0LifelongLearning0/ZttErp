@@ -14,7 +14,7 @@ import jehc.xtmodules.xtmodel.XtDbView;
 
 /**
  * 数据库表
- * @author 邓纯杰
+ * @author 
  */
 public interface XtDbStructureService {
 	/**

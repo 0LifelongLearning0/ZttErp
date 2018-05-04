@@ -25,7 +25,7 @@ import jehc.xtmodules.xtservice.XtConstantService;
 
 /**
 * 台平常量; InnoDB free: 4096 kB 
-* 2015-09-30 14:36:13  邓纯杰
+* 2015-09-30 14:36:13  
 */
 @Controller
 @RequestMapping("/xtConstantController")

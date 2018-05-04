@@ -28,7 +28,7 @@ import jehc.xtmodules.xtservice.XtLoadinfoService;
 
 /**
 * 页面加载信息; InnoDB free: 4096 kB 
-* 2015-09-30 15:30:38  邓纯杰
+* 2015-09-30 15:30:38  
 */
 @Controller
 @RequestMapping("/xtLoadinfoController")

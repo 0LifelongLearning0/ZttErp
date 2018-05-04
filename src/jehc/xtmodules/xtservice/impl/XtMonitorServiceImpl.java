@@ -13,7 +13,7 @@ import jehc.xtmodules.xtservice.XtMonitorService;
 
 /**
 * 监控主表 
-* 2016-03-04 12:49:59  邓纯杰
+* 2016-03-04 12:49:59  
 */
 @Service("xtMonitorService")
 public class XtMonitorServiceImpl extends BaseService implements XtMonitorService{

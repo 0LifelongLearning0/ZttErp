@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * 代码生成器 信息
- * @author邓纯杰
+ * @author
  *
  */
 public class XtGenerator implements Serializable{

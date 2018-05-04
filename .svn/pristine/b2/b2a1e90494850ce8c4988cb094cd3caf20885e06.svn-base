@@ -10,7 +10,7 @@ import jehc.xtmodules.xtmodel.XtCompany;
 
 /**
 * 系统公司信息表 
-* 2015-05-12 22:59:42  邓纯杰
+* 2015-05-12 22:59:42  
 */
 @Repository("xtCompanyDao")
 public class XtCompanyDaoImpl  extends BaseDaoImpl implements XtCompanyDao{

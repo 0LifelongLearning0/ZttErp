@@ -9,7 +9,7 @@ import jehc.lcmodules.mxgraph.mxUtils.communal.MxUtils;
 
 /**
  * 错误启动事件
- * @author 邓纯杰
+ * @author 
  *
  */
 public class MxErrorStartEvent {

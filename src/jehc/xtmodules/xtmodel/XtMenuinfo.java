@@ -7,7 +7,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 /**
  * 系统菜单表
  * 
- * @author邓纯杰
+ * @author
  * 
  */
 public class XtMenuinfo extends BaseEntity  implements Serializable{

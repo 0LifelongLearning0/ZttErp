@@ -5,7 +5,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
 * xt_userinfo 员工信息表 
-* 2015-11-25 19:34:25  邓纯杰
+* 2015-11-25 19:34:25  
 */
 public class XtUserinfo extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

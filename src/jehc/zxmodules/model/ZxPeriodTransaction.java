@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
 * zx_period_transaction 周期性事务 
-* 2017-11-22 08:15:56  邓纯杰
+* 2017-11-22 08:15:56  
 */
 public class ZxPeriodTransaction extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

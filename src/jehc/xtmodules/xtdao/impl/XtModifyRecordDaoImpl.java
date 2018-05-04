@@ -9,7 +9,7 @@ import jehc.xtmodules.xtmodel.XtModifyRecord;
 
 /**
 * 修改记录日志 
-* 2017-04-13 12:50:49  邓纯杰
+* 2017-04-13 12:50:49  
 */
 @Repository("xtModifyRecordDao")
 public class XtModifyRecordDaoImpl  extends BaseDaoImpl implements XtModifyRecordDao{

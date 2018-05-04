@@ -41,7 +41,7 @@ import jehc.xtmodules.xtservice.XtKnowledgeService;
 
 /**
 * 平台知识内容; InnoDB free: 4096 kB 
-* 2015-09-30 14:49:45  邓纯杰
+* 2015-09-30 14:49:45  
 */
 @Controller
 @RequestMapping("/xtKnowledgeController")

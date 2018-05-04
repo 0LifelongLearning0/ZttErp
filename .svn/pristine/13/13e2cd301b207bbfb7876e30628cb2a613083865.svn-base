@@ -16,7 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 /**
  * 初始化加载调度任务
- * @author 邓纯杰
+ * @author 
  *
  */
 public class QuartzInit extends Thread{

@@ -1,7 +1,7 @@
 package jehc.xtmodules.xtmodel;
 /**
  * Grid列表字段筛选
- * @author 邓纯杰
+ * @author 
  *
  */
 public class XtGeneratorGridColumn {

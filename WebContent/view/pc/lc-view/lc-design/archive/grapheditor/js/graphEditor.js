@@ -24,7 +24,7 @@ function main(){
     //节点不可改变大小
     graph.setCellsResizable(true);
     /**
-      *邓纯杰
+      *
       *创建连线
     **/
     //定义新连接的图标  
@@ -63,7 +63,7 @@ function main(){
     //去锯齿效果   
 	mxRectangleShape.prototype.crisp = true; 
     /**
-      *邓纯杰
+      *
       *节点拖动事件包括移动 拖动 复制 粘贴（注意不包括在节点上生成新的节点）
      **/
     mxGraph.prototype.moveCells = function(cells, dx, dy, clone, target, evt) {

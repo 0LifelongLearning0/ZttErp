@@ -7,7 +7,7 @@ import jehc.xtmodules.xtmodel.XtServiceCenterParameter;
 
 /**
 * xt_service_center 服务中心 
-* 2017-03-27 12:32:04  邓纯杰
+* 2017-03-27 12:32:04  
 */
 public class XtServiceCenter extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * 视图
- * @author邓纯杰
+ * @author
  *
  */
 public class XtDbView  implements Serializable{

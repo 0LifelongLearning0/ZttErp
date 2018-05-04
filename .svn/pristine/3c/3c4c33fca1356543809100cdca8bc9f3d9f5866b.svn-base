@@ -6,7 +6,7 @@ import jehc.bmodules.bmodel.BProduct;
 
 /**
 * 基础_产品 
-* 2016-01-08 21:03:47  邓纯杰
+* 2016-01-08 21:03:47  
 */
 public interface BProductDao{
 	/**

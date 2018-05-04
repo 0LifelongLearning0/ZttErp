@@ -95,6 +95,17 @@ public class ZttOrderServiceImpl extends BaseService implements ZttOrderService{
 			throw new ExceptionUtil(e.getMessage(),e.getCause());
 		}
 	}
+	public String getmaxerp(String id){
+		try{
+			int erp=Integer.parseInt(zttOrderDao.ZttOrdernumber_max(id));
+			int erp1=Integer.parseInt(zttOrderDao.ZttOrdernumber_max_purchase(id));
+			int maxerp=erp>erp1?erp:erp1+1;
+			return maxerp+"";
+		} catch (Exception e) {
+			/**捕捉异常并回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+	}
 	/**
 	* 查询对象
 	* @param id 

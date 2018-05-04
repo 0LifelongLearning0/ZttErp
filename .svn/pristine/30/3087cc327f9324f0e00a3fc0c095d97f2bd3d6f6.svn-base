@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
 * xt_sms 短信配置表 
-* 2015-06-04 13:35:07  邓纯杰
+* 2015-06-04 13:35:07  
 */
 public class XtSms implements Serializable{
 	private static final long serialVersionUID = 1L;

@@ -19,7 +19,7 @@ import jehc.xtmodules.xtmodel.XtConstant;
 
 /**
 * 公告 
-* 2017-11-16 13:23:07  邓纯杰
+* 2017-11-16 13:23:07  
 */
 @Service("oaNoticeService")
 public class OaNoticeServiceImpl extends BaseService implements OaNoticeService{

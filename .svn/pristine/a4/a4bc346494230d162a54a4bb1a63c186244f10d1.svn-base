@@ -5,7 +5,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
 * xt_ip_frozen 平台IP冻结账户 
-* 2016-02-29 10:41:23  邓纯杰
+* 2016-02-29 10:41:23  
 */
 public class XtIpFrozen extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

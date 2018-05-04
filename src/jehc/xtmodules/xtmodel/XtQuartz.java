@@ -5,7 +5,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
 * xt_quartz 任务调度配置信息表 
-* 2015-10-29 16:50:03  邓纯杰
+* 2015-10-29 16:50:03  
 */
 public class XtQuartz extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

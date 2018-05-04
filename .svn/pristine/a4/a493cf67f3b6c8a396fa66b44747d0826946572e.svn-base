@@ -5,7 +5,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
 * zx_judge_standard 供应商评定标准 
-* 2017-09-21 13:16:25  邓纯杰
+* 2017-09-21 13:16:25  
 */
 public class ZxJudgeStandard extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

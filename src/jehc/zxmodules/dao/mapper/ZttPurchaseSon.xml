@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZttPurchaseSon">
+	<!--初始化分页-->
+	<select id="getZttPurchaseSonListByCondition" resultType="jehc.zxmodules.model.ZttPurchaseSon" parameterType="map">
+		SELECT
+			id,
+			parent_id,
+			name,
+			purchase_stardard,
+			material,
+			unit,
+			amount,
+			attachment,
+			single_price,
+			erp_number
+		FROM 
+			ztt_purchase_son
+		WHERE 1=1
+		<if test = "null != parent_id">
+			AND parent_id = #{parent_id}
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getZttPurchaseSonById" resultType="jehc.zxmodules.model.ZttPurchaseSon" parameterType="string">
+		SELECT
+			id,
+			parent_id,
+			name,
+			purchase_stardard,
+			material,
+			unit,
+			amount,
+			attachment,
+			single_price,
+			erp_number
+		FROM 
+			ztt_purchase_son
+		WHERE id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addZttPurchaseSon" parameterType="jehc.zxmodules.model.ZttPurchaseSon">
+		INSERT INTO
+			ztt_purchase_son
+			(
+			id,
+			parent_id,
+			name,
+			purchase_stardard,
+			material,
+			unit,
+			amount,
+			attachment,
+			erp_number
+			)
+			VALUES
+			(
+			#{id},
+			#{parent_id},
+			#{name},
+			#{purchase_stardard},
+			#{material},
+			#{unit},
+			#{amount},
+			#{attachment},
+			#{erp_number}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZttPurchaseSon" parameterType="jehc.zxmodules.model.ZttPurchaseSon">
+		UPDATE
+			ztt_purchase_son
+		SET
+			parent_id = #{parent_id},
+			name = #{name},
+			purchase_stardard = #{purchase_stardard},
+			material = #{material},
+			unit = #{unit},
+			amount = #{amount},
+			attachment = #{attachment},
+			erp_number = #{erp_number}
+		WHERE id=#{id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZttPurchaseSonBySelective" parameterType="jehc.zxmodules.model.ZttPurchaseSon">
+		UPDATE
+			ztt_purchase_son
+		<set>
+			<if test="parent_id != null">
+				parent_id = #{parent_id},
+			</if>
+			<if test="name != null">
+				name = #{name},
+			</if>
+			<if test="purchase_stardard != null">
+				purchase_stardard = #{purchase_stardard},
+			</if>
+			<if test="material != null">
+				material = #{material},
+			</if>
+			<if test="unit != null">
+				unit = #{unit},
+			</if>
+			<if test="amount != null">
+				amount = #{amount},
+			</if>
+			<if test="attachment != null">
+				attachment = #{attachment},
+			</if>
+			<if test="single_price != null">
+				single_price = #{single_price},
+			</if>
+			<if test="erp_number != null">
+				erp_number = #{erp_number},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZttPurchaseSon" parameterType="map">
+		DELETE FROM ztt_purchase_son WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZttPurchaseSon" parameterType="list">
+		INSERT INTO
+			ztt_purchase_son
+			(
+			id,
+			parent_id,
+			name,
+			purchase_stardard,
+			material,
+			unit,
+			amount,
+			attachment,
+			single_price,
+			erp_number
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.parent_id},
+			#{item.name},
+			#{item.purchase_stardard},
+			#{item.material},
+			#{item.unit},
+			#{item.amount},
+			#{item.attachment},
+			#{item.single_price},
+			#{item.erp_number}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZttPurchaseSon" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				ztt_purchase_son
+			SET
+				parent_id = #{item.parent_id},
+				name = #{item.name},
+				purchase_stardard = #{item.purchase_stardard},
+				material = #{item.material},
+				unit = #{item.unit},
+				amount = #{item.amount},
+				attachment = #{item.attachment}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZttPurchaseSonBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				ztt_purchase_son
+			<set>
+				<if test="item.parent_id != null">
+					parent_id = #{item.parent_id},
+				</if>
+				<if test="item.name != null">
+					name = #{item.name},
+				</if>
+				<if test="item.purchase_stardard != null">
+					purchase_stardard = #{item.purchase_stardard},
+				</if>
+				<if test="item.material != null">
+					material = #{item.material},
+				</if>
+				<if test="item.unit != null">
+					unit = #{item.unit},
+				</if>
+				<if test="item.amount != null">
+					amount = #{item.amount},
+				</if>
+				<if test="item.attachment != null">
+					attachment = #{item.attachment},
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--根据外键删除-->
+	<delete id="delZttPurchaseSonByForeignKey" parameterType="string">
+		DELETE FROM ztt_purchase_son WHERE parent_id = #{parent_id}
+	</delete>
+</mapper>

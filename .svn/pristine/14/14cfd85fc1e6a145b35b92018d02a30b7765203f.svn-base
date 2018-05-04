@@ -16,7 +16,7 @@ import jehc.xtmodules.xtmodel.XtGeneratorTableManyToOne;
 
 /**
  * 生成控制层代码
- * @author邓纯杰
+ * @author
  *
  */
 public class GeneratorWeb extends GeneratorUtil{

@@ -11,7 +11,7 @@ import jehc.xtmodules.xtmodel.XtModifyRecord;
 
 /**
  * 统一字段变更记录日志
- * @author 邓纯杰
+ * @author 
  *
  */
 public class BaseXtModifyRecordRun  extends Thread {

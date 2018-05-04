@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 /**
  * 数据库存放信息 用于JDBC取相关信息
- * @author 邓纯杰
+ * @author 
  *
  */
 public class DbInfo {

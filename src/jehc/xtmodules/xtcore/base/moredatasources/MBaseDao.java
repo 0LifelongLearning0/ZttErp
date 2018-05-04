@@ -8,7 +8,7 @@ import org.apache.ibatis.type.TypeException;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 /**
  * 多数据源情况下使用 即继承该BaseMDS即可
- * @author 邓纯杰
+ * @author 
  *
  */
 public class MBaseDao extends SqlSessionDaoSupport{

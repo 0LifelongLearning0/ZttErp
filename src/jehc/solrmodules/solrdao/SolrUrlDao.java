@@ -6,7 +6,7 @@ import jehc.solrmodules.solrmodel.SolrUrl;
 
 /**
 * solr多实例URL配置 
-* 2015-12-15 11:24:06  邓纯杰
+* 2015-12-15 11:24:06  
 */
 public interface SolrUrlDao{
 	/**

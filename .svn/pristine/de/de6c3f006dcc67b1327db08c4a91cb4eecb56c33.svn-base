@@ -6,7 +6,7 @@ import jehc.xtmodules.xtmodel.XtLoadinfo;
 
 /**
 * 页面加载信息 
-* 2015-05-13 21:20:57  邓纯杰
+* 2015-05-13 21:20:57  
 */
 public interface XtLoadinfoDao{
 	/**

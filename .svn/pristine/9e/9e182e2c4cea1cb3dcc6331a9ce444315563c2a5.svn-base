@@ -1,7 +1,7 @@
 package jehc.xtmodules.xtcore.base;
 /**
  * Extjs HTML编辑器插入图片返回的内容
- * @author邓纯杰
+ * @author
  *
  */
 public class BaseHtmlEditorImg {

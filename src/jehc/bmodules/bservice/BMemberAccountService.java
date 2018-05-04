@@ -6,7 +6,7 @@ import jehc.bmodules.bmodel.BMemberAccount;
 
 /**
 * 基础会员余额账户 
-* 2016-03-24 20:30:14  邓纯杰
+* 2016-03-24 20:30:14  
 */
 public interface BMemberAccountService{
 	/**

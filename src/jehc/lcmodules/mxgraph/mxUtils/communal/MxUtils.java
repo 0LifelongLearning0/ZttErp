@@ -56,7 +56,7 @@ import jehc.xtmodules.xtcore.util.ExceptionUtil;
 /**
  * 解析MxGraph设计器XML至BPMN文件
  * BPMN文件为Activiti5.18版本
- * @author 邓纯杰
+ * @author 
  *
  */
 public class MxUtils {

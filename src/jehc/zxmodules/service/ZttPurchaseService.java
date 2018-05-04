@@ -62,4 +62,5 @@ public interface ZttPurchaseService{
 	* @return
 	*/
 	public int updateBatchZttPurchaseBySelective(List<ZttPurchase> zttPurchaseList);
+	public int updateZttPurchaseBySelective1(ZttPurchase zttPurchase);
 }

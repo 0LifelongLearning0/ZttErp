@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
 * zx_out_progress 外协加工进度表 
-* 2017-11-03 09:08:36  邓纯杰
+* 2017-11-03 09:08:36  
 */
 public class ZxOutProgress extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

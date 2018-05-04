@@ -13,7 +13,7 @@ import jehc.xtmodules.xtcore.util.ExceptionUtil;
 
 /**
 * 基础推荐 
-* 2016-01-10 11:24:05  邓纯杰
+* 2016-01-10 11:24:05  
 */
 @Service("bRecommendService")
 public class BRecommendServiceImpl extends BaseService implements BRecommendService{

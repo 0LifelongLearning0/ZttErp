@@ -26,7 +26,7 @@ import jehc.xtmodules.xtservice.XtUserinfoService;
 
 /**
  * 流程任务管理
- * @author 邓纯杰
+ * @author 
  *
  */
 @Controller

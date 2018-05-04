@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
 * zx_concordat 合同管理 
-* 2017-08-31 17:21:48  邓纯杰
+* 2017-08-31 17:21:48  
 */
 public class ZxConcordat extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

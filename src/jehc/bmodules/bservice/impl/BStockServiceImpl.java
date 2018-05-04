@@ -16,7 +16,7 @@ import jehc.xtmodules.xtcore.util.ExceptionUtil;
 
 /**
 * 基础库存 
-* 2016-01-27 14:28:46  邓纯杰
+* 2016-01-27 14:28:46  
 */
 @Service("bStockService")
 public class BStockServiceImpl extends BaseService implements BStockService{

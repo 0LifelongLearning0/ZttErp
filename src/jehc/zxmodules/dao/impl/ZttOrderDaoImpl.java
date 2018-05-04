@@ -52,6 +52,22 @@ public class ZttOrderDaoImpl  extends BaseDaoImpl implements ZttOrderDao{
 		return (ZttOrdernumber_third)this.get("ZttOrdernumber_selectmaxid", order_id);
 	}
 	/**
+	* 得到最大id
+	* @param id 
+	* @return
+	*/
+	public String ZttOrdernumber_max(String order_id){
+		return (String) this.get("ZttOrdernumber_max", order_id);
+	}
+	/**
+	* 得到最大id
+	* @param id 
+	* @return
+	*/
+	public String ZttOrdernumber_max_purchase(String order_id){
+		return (String) this.get("ZttOrdernumber_max_purchase", order_id);
+	}
+	/**
 	* 查询对象
 	* @param id 
 	* @return

@@ -5,7 +5,7 @@ import java.util.Date;
 
 /**
 * zx_office 办公用品管理 
-* 2018-01-11 13:16:08  邓纯杰
+* 2018-01-11 13:16:08  
 */
 public class ZxOffice extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

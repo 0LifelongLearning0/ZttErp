@@ -7,7 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * ZTree
- * @author 邓纯杰
+ * @author 
  *
  */
 public class BaseZTreeEntity {

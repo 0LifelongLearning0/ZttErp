@@ -16,7 +16,7 @@ import org.apache.solr.common.cloud.ClusterState;
 import org.apache.solr.common.cloud.ZkStateReader;
 /**
  * 测试云连接
- * @author 邓纯杰
+ * @author 
  *
  */
 public class TestCloudSolr {
@@ -104,7 +104,7 @@ public class TestCloudSolr {
 	}
 	
 	/**
-	 * 邓纯杰T1
+	 * T1
 	 */
 	public void t1(){
 		final String zkHost = "localhost:8080";

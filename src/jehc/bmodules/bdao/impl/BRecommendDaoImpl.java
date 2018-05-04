@@ -10,7 +10,7 @@ import jehc.xtmodules.xtcore.base.impl.BaseDaoImpl;
 
 /**
 * 基础推荐 
-* 2016-01-10 11:24:05  邓纯杰
+* 2016-01-10 11:24:05  
 */
 @Repository("bRecommendDao")
 public class BRecommendDaoImpl  extends BaseDaoImpl implements BRecommendDao{

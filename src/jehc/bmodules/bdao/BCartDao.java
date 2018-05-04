@@ -6,7 +6,7 @@ import jehc.bmodules.bmodel.BCart;
 
 /**
 * 基础购物车 
-* 2016-01-27 13:36:04  邓纯杰
+* 2016-01-27 13:36:04  
 */
 public interface BCartDao{
 	/**

@@ -13,7 +13,7 @@ import jehc.xtmodules.xtcore.util.ExceptionUtil;
 
 /**
  * 存在泳道情况
- * @author邓纯杰
+ * @author
  *
  */
 public class MxPoolUtils {

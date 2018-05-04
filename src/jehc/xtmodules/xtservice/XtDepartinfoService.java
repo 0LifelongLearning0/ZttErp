@@ -6,7 +6,7 @@ import jehc.xtmodules.xtmodel.XtDepartinfo;
 
 /**
 * 部门信息表(departInfo) 
-* 2015-05-13 15:46:38  邓纯杰
+* 2015-05-13 15:46:38  
 */
 public interface XtDepartinfoService{
 	/**

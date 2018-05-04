@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.Queue;  
 /**
  * LimitQueue列队
- * @author 邓纯杰
+ * @author 
  *
  * @param <E>
  */

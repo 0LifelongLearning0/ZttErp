@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * 存储过程
- * @author 邓纯杰
+ * @author 
  *
  */
 public class XtDbProc  implements Serializable{

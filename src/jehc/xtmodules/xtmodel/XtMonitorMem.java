@@ -6,7 +6,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
 * xt_monitor_mem 服务器内存 
-* 2016-03-04 12:52:52  邓纯杰
+* 2016-03-04 12:52:52  
 */
 public class XtMonitorMem extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

@@ -5,7 +5,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
 * xt_sources 平台静态资源 
-* 2016-06-16 10:34:06  邓纯杰
+* 2016-06-16 10:34:06  
 */
 public class XtSources extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

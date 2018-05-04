@@ -27,7 +27,7 @@ import jehc.xtmodules.xtservice.XtMonitorMemService;
 
 /**
  * 监控任务
- * @author 邓纯杰
+ * @author 
  *
  */
 public class Xt_Monitor_Task extends Thread{

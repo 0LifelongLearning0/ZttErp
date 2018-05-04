@@ -9,7 +9,7 @@ import jehc.xtmodules.xtmodel.XtDataDictionary;
 
 /**
 * 数据字典 
-* 2015-05-24 08:09:31  邓纯杰
+* 2015-05-24 08:09:31  
 */
 @Repository("xtDataDictionaryDao")
 public class XtDataDictionaryDaoImpl  extends BaseDaoImpl implements XtDataDictionaryDao{

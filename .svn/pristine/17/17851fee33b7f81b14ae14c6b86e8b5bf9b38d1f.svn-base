@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * logback工具类
- * @author 邓纯杰
+ * @author 
  *
  */
 public class Logback4jUtil extends CommonUtils{

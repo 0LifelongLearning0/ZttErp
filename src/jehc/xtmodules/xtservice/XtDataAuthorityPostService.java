@@ -5,7 +5,7 @@ import jehc.xtmodules.xtmodel.XtDataAuthorityPost;
 
 /**
 * 数据权限按岗位设置 
-* 2017-06-20 14:37:16  邓纯杰
+* 2017-06-20 14:37:16  
 */
 public interface XtDataAuthorityPostService{
 	/**

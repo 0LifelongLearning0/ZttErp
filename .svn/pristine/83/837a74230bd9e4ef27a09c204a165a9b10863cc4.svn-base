@@ -24,7 +24,7 @@ import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
 
 /**
 * 基础会员余额账户 
-* 2016-03-24 20:30:14  邓纯杰
+* 2016-03-24 20:30:14  
 */
 @Controller
 @RequestMapping("/bMemberAccountController")

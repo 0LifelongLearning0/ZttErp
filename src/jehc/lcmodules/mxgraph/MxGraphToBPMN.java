@@ -16,7 +16,7 @@ import jehc.xtmodules.xtcore.util.ExceptionUtil;
 import jehc.xtmodules.xtcore.util.UUID;
 /**
  * 生成BPMN文件
- * @author邓纯杰
+ * @author
  *
  */
 public class MxGraphToBPMN{

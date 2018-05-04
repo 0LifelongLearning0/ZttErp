@@ -6,7 +6,7 @@ import jehc.bmodules.bmodel.BMemberAddress;
 
 /**
 * 基础会员常用地址 
-* 2016-02-22 16:44:23  邓纯杰
+* 2016-02-22 16:44:23  
 */
 public interface BMemberAddressService{
 	/**

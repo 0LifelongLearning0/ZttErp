@@ -29,7 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 /**
  * 加载首页
- * @author邓纯杰
+ * @author
  *
  */
 @Controller
@@ -56,7 +56,7 @@ public class XtIndexController extends BaseAction{
 		sortList.Sort(xtMenuinfoList, "xt_menuinfo_sort", "asc");
 		IndexTree tree = new IndexTree(xtMenuinfoList);  
         model.addAttribute("MenuList", tree.buildTree());
-		/*邓纯杰 注释 
+		/* 注释 
 		List<XtMenuinfo> xtMenuinfoList = xtMenuinfoService.getXtMenuinfoRootForRole(condition);
 		SortList<XtMenuinfo> sortList = new SortList<XtMenuinfo>();
 		sortList.Sort(xtMenuinfoList, "xt_menuinfo_sort", "asc");

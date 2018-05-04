@@ -9,7 +9,7 @@ import jehc.xtmodules.xtcore.base.impl.BaseDaoImpl;
 
 /**
 * solr排序 
-* 2016-07-08 23:49:58  邓纯杰
+* 2016-07-08 23:49:58  
 */
 @Repository("solrSortDao")
 public class SolrSortDaoImpl  extends BaseDaoImpl implements SolrSortDao{

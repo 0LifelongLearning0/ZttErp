@@ -3,7 +3,7 @@ package jehc.xtmodules.xtcore.util.quartz;
 
 /**
  * 定时任务实体
- * @author 邓纯杰
+ * @author 
  *
  */
 public class ScheduleJob {

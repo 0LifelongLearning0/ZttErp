@@ -28,7 +28,7 @@ import jehc.xtmodules.xtcore.util.UUID;
 
 /**
 * solr实体 
-* 2015-12-23 09:40:52  邓纯杰
+* 2015-12-23 09:40:52  
 */
 @Service("solrEntityService")
 public class SolrEntityServiceImpl extends BaseService implements SolrEntityService{

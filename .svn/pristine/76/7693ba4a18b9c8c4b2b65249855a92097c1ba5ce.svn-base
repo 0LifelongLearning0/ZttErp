@@ -21,7 +21,7 @@ import jehc.xtmodules.xtservice.XtKwordsService;
 
 /**
 * 关键词（敏感词） 
-* 2016-10-08 15:03:41  邓纯杰
+* 2016-10-08 15:03:41  
 */
 @Controller
 @RequestMapping("/xtKwordsController")

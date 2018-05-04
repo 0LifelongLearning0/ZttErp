@@ -13,7 +13,7 @@ import jehc.xtmodules.xtcore.util.ExceptionUtil;
 
 /**
 * solr排序 
-* 2016-07-08 23:49:58  邓纯杰
+* 2016-07-08 23:49:58  
 */
 @Service("solrSortService")
 public class SolrSortServiceImpl extends BaseService implements SolrSortService{

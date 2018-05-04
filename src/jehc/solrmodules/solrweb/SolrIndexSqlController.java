@@ -22,7 +22,7 @@ import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
 
 /**
 * 索引SQL查询 
-* 2015-12-23 09:42:26  邓纯杰
+* 2015-12-23 09:42:26  
 */
 @Controller
 @RequestMapping("/solrIndexSqlController")

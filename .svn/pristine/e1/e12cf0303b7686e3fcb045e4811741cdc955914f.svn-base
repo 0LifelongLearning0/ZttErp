@@ -17,7 +17,7 @@ import jehc.xtmodules.xtmodel.XtDbinfo;
 import net.sf.json.JSONArray;
 /**
  * 查询工具
- * @author 邓纯杰
+ * @author 
  *
  */
 public class XtFlexSearchDaoImpl implements XtFlexSearchDao {

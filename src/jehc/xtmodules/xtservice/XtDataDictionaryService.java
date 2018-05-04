@@ -6,7 +6,7 @@ import jehc.xtmodules.xtmodel.XtDataDictionary;
 
 /**
 * 数据字典 
-* 2015-05-24 08:09:31  邓纯杰
+* 2015-05-24 08:09:31  
 */
 public interface XtDataDictionaryService{
 	/**

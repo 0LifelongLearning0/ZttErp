@@ -13,7 +13,7 @@ import jehc.xtmodules.xtcore.util.ExceptionUtil;
 
 /**
 * 基础卖家账号 
-* 2016-02-18 17:07:37  邓纯杰
+* 2016-02-18 17:07:37  
 */
 @Service("bSellerAccountService")
 public class BSellerAccountServiceImpl extends BaseService implements BSellerAccountService{

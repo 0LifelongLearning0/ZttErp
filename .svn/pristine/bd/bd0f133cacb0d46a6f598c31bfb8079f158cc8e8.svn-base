@@ -6,7 +6,7 @@ import jehc.bmodules.bmodel.BRecommend;
 
 /**
 * 基础推荐 
-* 2016-01-10 11:24:05  邓纯杰
+* 2016-01-10 11:24:05  
 */
 public interface BRecommendService{
 	/**

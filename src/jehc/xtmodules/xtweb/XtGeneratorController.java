@@ -46,7 +46,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.github.pagehelper.PageInfo;
 /**
  * 代码生成器
- * @author邓纯杰
+ * @author
  *
  */
 @Controller

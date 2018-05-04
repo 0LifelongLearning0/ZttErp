@@ -6,7 +6,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
 * b_product 基础_商品 
-* 2016-01-08 21:21:26  邓纯杰
+* 2016-01-08 21:21:26  
 */
 public class BProduct extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

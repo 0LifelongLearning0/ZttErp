@@ -49,7 +49,7 @@ import jehc.xtmodules.xtmodel.XtDbTableSize;
 import jehc.xtmodules.xtservice.XtDbStructureService;
 /**
  * 数据库表
- * @author 邓纯杰
+ * @author 
  */
 @Controller
 @RequestMapping("/xtDbStructureController")

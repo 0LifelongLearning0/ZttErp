@@ -100,7 +100,7 @@ Ext.define("Ext.ux.grid.Printer", {
             //get Styles file relative location, if not supplied
             if (this.stylesheetPath === null) {
                 var scriptPath = Ext.Loader.getPath('Ext.ux.grid.Printer');
-                //邓纯杰注释
+                //注释
                 //this.stylesheetPath = scriptPath.substring(0, scriptPath.indexOf('Printer.js')) + 'gridPrinterCss/print.css';
                 this.stylesheetPath = '../deng/source/plugins/e5/ux/grid/' + 'gridPrinterCss/print.css';
             }

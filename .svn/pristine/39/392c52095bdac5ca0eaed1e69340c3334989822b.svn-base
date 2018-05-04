@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
 * zx_process 工序管理 
-* 2017-09-07 22:43:21  邓纯杰
+* 2017-09-07 22:43:21  
 */
 public class ZxProcess extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

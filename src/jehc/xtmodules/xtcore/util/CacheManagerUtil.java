@@ -15,7 +15,7 @@ import org.springframework.cache.ehcache.EhCacheCacheManager;
 
 /**
  * 缓存统一处理
- * @author 邓纯杰
+ * @author 
  *
  */
 public class CacheManagerUtil {

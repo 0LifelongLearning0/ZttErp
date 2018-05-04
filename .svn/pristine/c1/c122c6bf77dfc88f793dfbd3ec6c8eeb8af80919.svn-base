@@ -13,7 +13,7 @@ import jehc.xtmodules.xtcore.util.ExceptionUtil;
 
 /**
 * 基础专有账户 
-* 2016-03-24 20:33:38  邓纯杰
+* 2016-03-24 20:33:38  
 */
 @Service("bMemberAccountProprietaryService")
 public class BMemberAccountProprietaryServiceImpl extends BaseService implements BMemberAccountProprietaryService{

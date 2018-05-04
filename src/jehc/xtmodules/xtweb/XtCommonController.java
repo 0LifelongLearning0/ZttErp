@@ -41,7 +41,7 @@ import jehc.zxmodules.model.ZxCarApply;
 import net.sf.json.JSONArray;
 /**
  * 通用
- * @author邓纯杰
+ * @author
  *
  */
 @Controller

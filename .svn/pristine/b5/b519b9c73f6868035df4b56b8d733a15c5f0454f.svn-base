@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
 * zx_purchase_apply 采购申领表 
-* 2018-01-15 09:50:27  邓纯杰
+* 2018-01-15 09:50:27  
 */
 public class ZxPurchaseApply extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

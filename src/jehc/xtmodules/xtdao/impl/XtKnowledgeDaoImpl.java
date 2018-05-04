@@ -9,7 +9,7 @@ import jehc.xtmodules.xtmodel.XtKnowledge;
 
 /**
 * 平台知识内容 
-* 2015-06-07 20:09:38  邓纯杰
+* 2015-06-07 20:09:38  
 */
 @Repository("xtKnowledgeDao")
 public class XtKnowledgeDaoImpl  extends BaseDaoImpl implements XtKnowledgeDao{

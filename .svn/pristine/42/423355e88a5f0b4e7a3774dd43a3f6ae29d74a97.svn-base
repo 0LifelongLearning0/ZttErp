@@ -6,7 +6,7 @@ import jehc.xtmodules.xtmodel.XtConstant;
 
 /**
 * 台平常量 
-* 2015-05-24 08:47:31  邓纯杰
+* 2015-05-24 08:47:31  
 */
 public interface XtConstantDao{
 	/**

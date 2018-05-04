@@ -6,7 +6,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
 * lc_deployment_his 流程部署历史记录 
-* 2016-12-22 13:02:01  邓纯杰
+* 2016-12-22 13:02:01  
 */
 public class LcDeploymentHis extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

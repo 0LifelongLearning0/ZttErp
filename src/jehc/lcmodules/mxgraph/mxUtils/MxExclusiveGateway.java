@@ -9,7 +9,7 @@ import jehc.lcmodules.mxgraph.mxUtils.communal.MxUtils;
 
 /**
  * 排他网关
- * @author邓纯杰
+ * @author
  *
  */
 public class MxExclusiveGateway {

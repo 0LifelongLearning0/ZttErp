@@ -13,7 +13,7 @@ import jehc.xtmodules.xtcore.util.ExceptionUtil;
 
 /**
 * 基础_产品 
-* 2016-01-08 21:03:47  邓纯杰
+* 2016-01-08 21:03:47  
 */
 @Service("bProductService")
 public class BProductServiceImpl extends BaseService implements BProductService{

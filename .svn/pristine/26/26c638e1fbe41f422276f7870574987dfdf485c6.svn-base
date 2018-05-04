@@ -26,7 +26,7 @@ import jehc.xtmodules.xtservice.XtErrorLogsService;
 
 /**
  * 捕捉平台所有发生异常拦截
- * @author邓纯杰
+ * @author
  *
  */
 public class ExceptionHandler extends SimpleMappingExceptionResolver implements HandlerExceptionResolver{

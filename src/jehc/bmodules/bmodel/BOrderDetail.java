@@ -5,7 +5,7 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
 * b_order_detail 基础订单详细 
-* 2016-01-27 13:59:04  邓纯杰
+* 2016-01-27 13:59:04  
 */
 public class BOrderDetail extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

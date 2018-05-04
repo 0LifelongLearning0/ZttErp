@@ -13,7 +13,7 @@ import jehc.xtmodules.xtcore.util.ExceptionUtil;
 
 /**
 * 基础-品牌 
-* 2016-01-05 12:46:23  邓纯杰
+* 2016-01-05 12:46:23  
 */
 @Service("bBrandService")
 public class BBrandServiceImpl extends BaseService implements BBrandService{

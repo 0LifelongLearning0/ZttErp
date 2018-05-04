@@ -11,7 +11,7 @@ import jehc.xtmodules.xtmodel.XtPlatformFeedback;
 
 /**
 * 平台反馈意见 
-* 2017-11-13 15:15:38  邓纯杰
+* 2017-11-13 15:15:38  
 */
 @Service("xtPlatformFeedbackService")
 public class XtPlatformFeedbackServiceImpl extends BaseService implements XtPlatformFeedbackService{

@@ -6,7 +6,7 @@ import jehc.solrmodules.solrmodel.SolrFiledCopy;
 
 /**
 * Solr字段拷贝配置 
-* 2016-11-14 22:20:39  邓纯杰
+* 2016-11-14 22:20:39  
 */
 public interface SolrFiledCopyDao{
 	/**

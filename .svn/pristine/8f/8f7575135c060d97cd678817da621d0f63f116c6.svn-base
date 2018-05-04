@@ -27,7 +27,7 @@ import jehc.xtmodules.xtmodel.XtDataDictionary;
 
 /**
  * SOLR实体
- * @author邓纯杰
+ * @author
  *
  */
 @Controller

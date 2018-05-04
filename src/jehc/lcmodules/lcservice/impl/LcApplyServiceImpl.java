@@ -13,7 +13,7 @@ import jehc.xtmodules.xtcore.util.ExceptionUtil;
 
 /**
 * 流程申请 
-* 2017-01-08 14:55:11  邓纯杰
+* 2017-01-08 14:55:11  
 */
 @Service("lcApplyService")
 public class LcApplyServiceImpl extends BaseService implements LcApplyService{

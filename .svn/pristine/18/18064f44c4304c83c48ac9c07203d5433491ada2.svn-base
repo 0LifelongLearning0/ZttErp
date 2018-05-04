@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
 * zx_apply_phone_card 员工申请电话卡 
-* 2017-12-05 14:49:41  邓纯杰
+* 2017-12-05 14:49:41  
 */
 public class ZxApplyPhoneCard extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

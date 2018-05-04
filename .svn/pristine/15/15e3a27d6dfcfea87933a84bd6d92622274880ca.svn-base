@@ -25,7 +25,7 @@ import net.sf.json.JSONArray;
 
 /**
  * 
- * @author邓纯杰
+ * @author
  *
  */
 public class BaseAction extends CommonUtils{

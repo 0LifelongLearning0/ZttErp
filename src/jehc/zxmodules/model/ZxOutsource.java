@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
 * zx_outsource 外协加工进度表 
-* 2017-09-01 09:30:59  邓纯杰
+* 2017-09-01 09:30:59  
 */
 public class ZxOutsource extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

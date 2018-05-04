@@ -5,7 +5,7 @@ import java.util.Date;
 
 /**
 * ztt_codeversion 代码版本控制 
-* 2018-04-17 12:58:09  邓纯杰
+* 2018-04-17 12:58:09  
 */
 public class ZttCodeversion extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

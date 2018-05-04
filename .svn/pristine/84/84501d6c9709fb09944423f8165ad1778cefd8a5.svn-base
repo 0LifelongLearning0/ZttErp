@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
 /**
  * bootstrap风格方式生成明细页面生成
  * 
- * @author 邓纯杰
+ * @author 
  *
  */
 public class GeneratorBootPageDetail extends GeneratorUtil {

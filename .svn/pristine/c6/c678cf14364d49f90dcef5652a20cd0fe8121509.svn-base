@@ -5,7 +5,7 @@ import java.util.Map;
 
 /**
  * SOLR分页统一类
- * @author 邓纯杰
+ * @author 
  *
  */
 public class PageSolr {

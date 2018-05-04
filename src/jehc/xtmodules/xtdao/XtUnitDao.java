@@ -6,7 +6,7 @@ import jehc.xtmodules.xtmodel.XtUnit;
 
 /**
 * 商品(产品)单位 
-* 2015-05-24 08:43:08  邓纯杰
+* 2015-05-24 08:43:08  
 */
 public interface XtUnitDao{
 	/**

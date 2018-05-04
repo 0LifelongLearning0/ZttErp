@@ -26,7 +26,7 @@ import com.github.pagehelper.PageInfo;
 
 /**
 * 功能表 
-* 2015-06-01 20:41:56  邓纯杰
+* 2015-06-01 20:41:56  
 */
 @Controller
 @RequestMapping("/xtFunctioninfoController")

@@ -6,7 +6,7 @@ import jehc.bmodules.bmodel.BWarehouse;
 
 /**
 * 基础仓库 
-* 2016-01-27 14:21:55  邓纯杰
+* 2016-01-27 14:21:55  
 */
 public interface BWarehouseDao{
 	/**

@@ -9,7 +9,7 @@ import jehc.xtmodules.xtmodel.XtConcordat;
 
 /**
 * 合同管理 
-* 2015-05-24 08:39:49  邓纯杰
+* 2015-05-24 08:39:49  
 */
 @Repository("xtConcordatDao")
 public class XtConcordatDaoImpl  extends BaseDaoImpl implements XtConcordatDao{

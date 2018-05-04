@@ -15,7 +15,7 @@ import jehc.xtmodules.xtservice.XtPostService;
 
 /**
 * 部门信息表(departInfo) 
-* 2015-05-13 15:46:38  邓纯杰
+* 2015-05-13 15:46:38  
 */
 @Service("xtDepartinfoService")
 public class XtDepartinfoServiceImpl extends BaseService implements XtDepartinfoService{

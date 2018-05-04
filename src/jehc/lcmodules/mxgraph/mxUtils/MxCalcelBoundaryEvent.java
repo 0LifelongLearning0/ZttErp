@@ -9,7 +9,7 @@ import jehc.lcmodules.mxgraph.mxUtils.communal.MxUtils;
 
 /**
  * 取消边界
- * @author邓纯杰
+ * @author
  *
  */
 public class MxCalcelBoundaryEvent {

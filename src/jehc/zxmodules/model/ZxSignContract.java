@@ -5,7 +5,7 @@ import java.util.Date;
 
 /**
 * zx_sign_contract 签订合同 
-* 2018-01-11 13:56:25  邓纯杰
+* 2018-01-11 13:56:25  
 */
 public class ZxSignContract extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;

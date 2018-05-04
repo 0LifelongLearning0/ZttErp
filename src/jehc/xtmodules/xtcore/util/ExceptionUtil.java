@@ -1,7 +1,7 @@
 package jehc.xtmodules.xtcore.util;
 /**
  * 自定义异常类
- * @author 邓纯杰
+ * @author 
  *
  */
 public class ExceptionUtil extends RuntimeException {

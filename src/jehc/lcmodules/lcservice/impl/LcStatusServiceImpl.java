@@ -11,7 +11,7 @@ import jehc.xtmodules.xtcore.base.BaseService;
 
 /**
 * 流程状态 
-* 2016-05-04 14:13:34  邓纯杰
+* 2016-05-04 14:13:34  
 */
 @Service("lcStatusService")
 public class LcStatusServiceImpl extends BaseService implements LcStatusService{

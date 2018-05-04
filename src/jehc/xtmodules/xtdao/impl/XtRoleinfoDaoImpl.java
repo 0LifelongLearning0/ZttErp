@@ -9,7 +9,7 @@ import jehc.xtmodules.xtmodel.XtRoleinfo;
 
 /**
 * 用户角色表 
-* 2015-05-29 11:08:55  邓纯杰
+* 2015-05-29 11:08:55  
 */
 @Repository("xtRoleinfoDao")
 public class XtRoleinfoDaoImpl  extends BaseDaoImpl implements XtRoleinfoDao{

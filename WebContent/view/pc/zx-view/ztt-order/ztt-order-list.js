@@ -299,12 +299,28 @@ function toZttOrderUpdate() {
 		return;
 	}
 	var id = $(".checkchild:checked").val();
-	tlocation("../zttOrderController/toZttOrderUpdate?id=" + id);
+	layer.open({
+		title : '修改界面',
+		type : 2,
+		area : [ '1500px', '600px' ],
+		btn : [ '关闭' ],
+		content : "../zttOrderController/toZttOrderUpdate?id=" + id
+
+	})
+	/*var id = $(".checkchild:checked").val();
+	tlocation("../zttOrderController/toZttOrderUpdate?id=" + id);*/
 }
 // 详情
 function toZttOrderDetail(id, state) {
-	tlocation("../zttOrderController/toZttOrderDetail?id=" + id + "&state="
-			+ state);
+	layer.open({
+		title : '修改界面',
+		type : 2,
+		area : [ '1500px', '600px' ],
+		btn : [ '关闭' ],
+		content : "../zttOrderController/toZttOrderDetail?id=" + id+ "&state="+ state
+	})
+	/*tlocation("../zttOrderController/toZttOrderDetail?id=" + id + "&state="
+			+ state);*/
 }
 //批量修改
 function batchapply() {
@@ -502,7 +518,7 @@ function show(){
 			
 }
 function export1() {
-	var upid="order";
+	/*var upid="order";
 	layer.open({
 		title : '导出',
 		type : 2,
@@ -510,7 +526,15 @@ function export1() {
 		btn : [ '关闭'],
 		content : "../zttOrderController/uploadattachment?upid="+upid
 
-	});
+	});*/
+	$("#datatables").table2excel({
+        // 不被导出的表格行的CSS class类
+        exclude: ".noExl",
+        // 导出的Excel文档的名称，（没看到作用）
+        name: "Excel Document Name",
+        // Excel文件的名称
+        filename: "业务人员下单表"
+    });
 }
 function selectsupplyer(){
 	var upid="suppler";

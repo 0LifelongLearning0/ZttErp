@@ -14,7 +14,7 @@ import jehc.xtmodules.xtcore.util.constant.PathConstant;
 
 /**
  * 读取properties文件
- * @author邓纯杰
+ * @author
  *
  */
 public class ReadProperties {

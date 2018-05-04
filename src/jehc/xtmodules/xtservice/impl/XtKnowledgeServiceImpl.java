@@ -13,7 +13,7 @@ import jehc.xtmodules.xtservice.XtKnowledgeService;
 
 /**
 * 平台知识内容 
-* 2015-06-07 20:09:38  邓纯杰
+* 2015-06-07 20:09:38  
 */
 @Service("xtKnowledgeService")
 public class XtKnowledgeServiceImpl extends BaseService implements XtKnowledgeService{
