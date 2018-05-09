@@ -268,16 +268,23 @@ public class ZttOrderController extends BaseAction {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/delZttOrderf", method = { RequestMethod.POST, RequestMethod.GET })
-	public String delZttOrderf(String id, HttpServletRequest request) {
+	public String delZttOrderf(String id,String type, HttpServletRequest request) {
 		int i = 0;
 		if (null != id && !"".equals(id)) {
-			Map<String, Object> condition = new HashMap<String, Object>();
-			condition.put("id", id.split(",")[0]);
-			Map<String, Object> condition1 = new HashMap<String, Object>();
-			condition1.put("order_id", id.split(",")[0]);
-			i = zttOrderService.delZttOrder(condition);
-			zttOrderService.delZttOrderTask(id);
-			zttOrderService.delZttOrdnum(condition1);
+			if(type.equals("cancel")){
+				ZttOrder zttOrder=zttOrderService.getZttOrderById(id.split(",")[0]);
+				zttOrder.setState("80");
+				i = zttOrderService.updateZttOrderBySelective(zttOrder);
+			}else{
+				Map<String, Object> condition = new HashMap<String, Object>();
+				condition.put("id", id.split(",")[0]);
+				Map<String, Object> condition1 = new HashMap<String, Object>();
+				condition1.put("order_id", id.split(",")[0]);
+				i = zttOrderService.delZttOrder(condition);
+				zttOrderService.delZttOrderTask(id);
+				zttOrderService.delZttOrdnum(condition1);
+			}
+		
 		}
 		if (i > 0) {
 			return outAudStr(true);

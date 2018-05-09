@@ -107,7 +107,7 @@
     <url-pattern>/*</url-pattern>
   </filter-mapping>
   <session-config>
-    <session-timeout>30</session-timeout>
+    <session-timeout>720</session-timeout>
   </session-config>
   <welcome-file-list>
     <welcome-file>login.jsp</welcome-file>

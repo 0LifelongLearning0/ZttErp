@@ -57,7 +57,8 @@ $(document)
 											data : 'assignee'
 										},
 										{
-											data : 'description'
+											data : 'Product_order_number',
+											
 										},
 										{
 											data : 'createTime',

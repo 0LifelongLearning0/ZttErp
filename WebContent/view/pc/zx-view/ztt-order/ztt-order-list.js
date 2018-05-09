@@ -11,7 +11,7 @@ $(document)
 					var opt = {
 							searchformId : 'searchForm'
 						};
-					var columnDefs="[{'targets': [ 1 ],'visible': false, 'searchable': false}]";
+					 
 					var options = DataTablesPaging
 							.pagingOptions({
 								ajax : function(data, callback, settings) {
@@ -27,10 +27,20 @@ $(document)
 										iDisplayIndex) {
 									jQuery('td:eq(1)', nRow).html(
 											iDisplayIndex + 1);
+									if(aData.state=="80"){
+										 $(nRow).css('background-color', 'grey');
+									}
+									 
 									return nRow;
 								},
 								order : [],// 取消默认排序查询,否则复选框一列会出现小箭头
-								"columnDefs":columnDefs ,
+								"columnDefs":[{"targets": [ 1 ],
+									/*"visible": false, 
+									"searchable": false,*/
+									"createdCell": function (td, cellData, rowData, row, col) {
+										console.log("aa");
+							    }
+							}] ,
 								// 列表表头字段
 								
 								colums : [
@@ -359,9 +369,41 @@ function delZttOrder() {
 	
 	msgTishCallFnBoot("确定要删除所选择的数据？",
 			function() {
+		var type="delete";
 				var id = returncheckIds('checkId').join(",");
 				var params = {
-					id : id
+					id : id,
+					type:type
+				};
+				ajaxBReq('../zttOrderController/delZttOrderf', params,
+						[ 'datatables' ]);
+			})
+}
+
+function cancelZttOrder() {
+	var apply_id=document.getElementById("apply_id").value;
+	if (returncheckedLength('checkchild') <= 0) {
+		toastrBoot(4, "请选择要取消的数据");
+		return;
+	}
+	var str = $(".checkchild:checked").val();
+	var strs = str.split(",");
+	var id = strs[0];
+	var status = strs[1];
+	if(apply_id!="B75750C01CAB4D0A88BD95A964D3BA2C"){
+		if(status!=0){
+			toastrBoot(4,"只有待申请状态的数据可以取消");
+			return;
+		}
+	}
+	
+	msgTishCallFnBoot("确定要取消所选择的数据？",
+			function() {
+		var type="cancel";
+				var id = returncheckIds('checkId').join(",");
+				var params = {
+					id : id,
+					type:type
 				};
 				ajaxBReq('../zttOrderController/delZttOrderf', params,
 						[ 'datatables' ]);
@@ -518,15 +560,6 @@ function show(){
 			
 }
 function export1() {
-	/*var upid="order";
-	layer.open({
-		title : '导出',
-		type : 2,
-		area : [ '1500px', '700px' ],
-		btn : [ '关闭'],
-		content : "../zttOrderController/uploadattachment?upid="+upid
-
-	});*/
 	$("#datatables").table2excel({
         // 不被导出的表格行的CSS class类
         exclude: ".noExl",
@@ -535,6 +568,17 @@ function export1() {
         // Excel文件的名称
         filename: "业务人员下单表"
     });
+}
+function export1All() {
+	var upid="order";
+	layer.open({
+		title : '导出',
+		type : 2,
+		area : [ '1500px', '700px' ],
+		btn : [ '关闭'],
+		content : "../zttOrderController/uploadattachment?upid="+upid
+
+	});
 }
 function selectsupplyer(){
 	var upid="suppler";

@@ -271,7 +271,8 @@ var DataTablesPaging = {
     			bJQueryUI:true,//采用jQueryUI样式
                 order:settings.order,//[index,'asc|desc']
                 columns:settings.colums,
-                columnDefs:settings.columsdefs,
+                /*columnDefs:settings.columsdefs,*/
+                
     	        striped:true, //是否显示行间隔色
     	        showRefresh:true,//刷新按钮
     	        ajax:settings.ajax,
@@ -305,7 +306,7 @@ var DataTablesPagingAll = {
     			"bStateSave":true,//保存状态到cookie *************** 很重要 ， 当搜索的时候页面一刷新会导致搜索的消失。使用这个属性就可避免了
     			"oLanguage":callLang(),//多语言配置
     			"bPaginate":true,//是否显示分页
-    			"pageLength":300,//首次加载的数据条数
+    			"pageLength":2000,//首次加载的数据条数
     			"bLengthChange":false,//每页显示的记录数
     			"sPaginationType":"full_numbers",//分页，一共两种样式，full_numbers和two_button(默认)
     			"aLengthMenu":[[15, 30, 50, 100, 500 ],["15", "30","50", "100","500" ]],//设置每页显示记录的下拉菜单也可以设置为pageList

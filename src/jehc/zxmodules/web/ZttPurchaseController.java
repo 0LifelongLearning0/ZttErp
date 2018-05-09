@@ -257,7 +257,7 @@ public class ZttPurchaseController extends BaseAction {
 	 */
 	@RequestMapping(value = "/toZttPurchaseDetail", method = { RequestMethod.POST, RequestMethod.GET })
 	public ModelAndView toZttPurchaseDetail(String id, HttpServletRequest request, Model model) {
-		ZttPurchase zttPurchase = zttPurchaseService.getZttPurchaseById(id);
+		ZttPurchase zttPurchase = zttPurchaseService.getZttPurchaseById(id.split(",")[0]);
 		model.addAttribute("zttPurchase", zttPurchase);
 		return new ModelAndView("pc/zx-view/ztt-purchase/ztt-purchase-detail");
 	}

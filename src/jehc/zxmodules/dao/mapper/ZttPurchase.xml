@@ -34,6 +34,7 @@
 			a.end_data,
 			a.attachment,
 			a.send_amount,
+			a.project,
 			b.xt_userinfo_realName as personname
 		FROM 
 			ztt_purchase a,xt_userinfo b
@@ -47,6 +48,9 @@
 		</if>
 		<if test="null != erp_number">
 			AND instr(erp_number,#{erp_number})
+		</if>
+		<if test="null != project">
+			AND instr(project,#{project})
 		</if>
 		<if test="null != supply_name">
 			AND instr(supply_name,#{supply_name})
@@ -297,6 +301,7 @@
 			material,
 			unit,
 			amount,
+			apply_time,
 			hope_end_data,
 			apply_id,
 			Product_id,
@@ -305,7 +310,9 @@
 			qualified_id,
 			qualified_number,
 			qualified_date,
-			check_attachment
+			check_attachment,
+			attachment,
+			state
 			)
 			VALUES
 		<foreach collection="list" item="item" index="index" separator=",">
@@ -317,6 +324,7 @@
 			#{item.material},
 			#{item.unit},
 			#{item.amount},
+			#{item.apply_time},
 			#{item.hope_end_data},
 			#{item.apply_id},
 			#{item.Product_id},
@@ -325,7 +333,9 @@
 			#{item.qualified_id},
 			#{item.qualified_number},
 			#{item.qualified_date},
-			#{item.check_attachment}
+			#{item.check_attachment},
+			#{item.attachment},
+			#{item.state}
 			)
 		</foreach>
 	</insert>

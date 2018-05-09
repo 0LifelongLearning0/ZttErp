@@ -1,5 +1,6 @@
 package jehc.zxmodules.service.impl;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +8,9 @@ import java.util.Map;
 import jehc.xtmodules.xtcore.allutils.StringUtil;
 import jehc.xtmodules.xtcore.base.BaseService;
 import jehc.xtmodules.xtcore.util.ExceptionUtil;
+import jehc.xtmodules.xtcore.util.UUID;
+
+import org.apache.commons.lang.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import jehc.zxmodules.service.ZttPurchaseService;
@@ -62,19 +66,31 @@ public class ZttPurchaseServiceImpl extends BaseService implements ZttPurchaseSe
 	* @param ztt_purchase 
 	* @return
 	*/
-	public int addZttPurchase(ZttPurchase zttPurchase){
+	public int addZttPurchase(ZttPurchase zttPurchase1){
 		int i = 0;
 		try {
-			i = zttPurchaseDao.addZttPurchase(zttPurchase);
-			List<ZttPurchaseSon> zttPurchaseSonTempList = zttPurchase.getZttPurchaseSon();
-			List<ZttPurchaseSon> zttPurchaseSonList = new ArrayList<ZttPurchaseSon>();
+		/*	i = zttPurchaseDao.addZttPurchase(zttPurchase);*/
+			List<ZttPurchaseSon> zttPurchaseSonTempList = zttPurchase1.getZttPurchaseSon();
+			List<ZttPurchase> zttPurchaseList = new ArrayList<ZttPurchase>();
+			
 			for(int j = 0; j < zttPurchaseSonTempList.size(); j++){
-					zttPurchaseSonTempList.get(j).setParent_id(zttPurchase.getId());
-					zttPurchaseSonTempList.get(j).setId(toUUID());
-					zttPurchaseSonList.add(zttPurchaseSonTempList.get(j));
+				ZttPurchase ZttPurchase=new ZttPurchase();
+				ZttPurchase.setId(UUID.toUUID());
+				ZttPurchase.setProduct_order_number(zttPurchaseSonTempList.get(j).getProduct_order_number());
+				ZttPurchase.setAmount(zttPurchaseSonTempList.get(j).getAmount());
+				ZttPurchase.setApply_time(DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
+				ZttPurchase.setAttachment(zttPurchaseSonTempList.get(j).getAttachment());
+				ZttPurchase.setApply_id(zttPurchase1.getApply_id());
+				ZttPurchase.setPurchase_name(zttPurchaseSonTempList.get(j).getName());
+				ZttPurchase.setPurchase_stardard(zttPurchaseSonTempList.get(j).getPurchase_stardard());
+				ZttPurchase.setMaterial(zttPurchaseSonTempList.get(j).getMaterial());
+				ZttPurchase.setHope_end_data(zttPurchaseSonTempList.get(j).getHope_end_data());
+				ZttPurchase.setAttachment(zttPurchaseSonTempList.get(j).getAttachment());
+				ZttPurchase.setState("0");
+				zttPurchaseList.add(ZttPurchase);
 			}
-			if(!zttPurchaseSonList.isEmpty()&&zttPurchaseSonList.size()>0){
-				zttPurchaseSonService.addBatchZttPurchaseSon(zttPurchaseSonList);
+			if(!zttPurchaseList.isEmpty()&&zttPurchaseList.size()>0){
+				i=addBatchZttPurchase(zttPurchaseList);
 			}
 		} catch (Exception e) {
 			i = 0;
@@ -111,21 +127,6 @@ public class ZttPurchaseServiceImpl extends BaseService implements ZttPurchaseSe
 			double amount=zttPurchase.getAmount();
 			zttPurchase.setCost_sum_price(cost_single_price*amount);
 			i = zttPurchaseDao.updateZttPurchaseBySelective(zttPurchase);
-			
-			
-			
-			List<ZttPurchaseSon> zttPurchaseSonList = zttPurchase.getZttPurchaseSon();
-			List<ZttPurchaseSon> zttPurchaseSonAddList = new ArrayList<ZttPurchaseSon>();
-			List<ZttPurchaseSon> zttPurchaseSonUpdateList = new ArrayList<ZttPurchaseSon>();
-			zttPurchaseSonService.delZttPurchaseSonByForeignKey(zttPurchase.getId());
-			if(zttPurchaseSonList!=null){
-				for(int j = 0; j < zttPurchaseSonList.size(); j++){
-					zttPurchaseSonList.get(j).setParent_id(zttPurchase.getId());
-						zttPurchaseSonList.get(j).setId(toUUID());
-						zttPurchaseSonAddList.add(zttPurchaseSonList.get(j));
-				}
-			zttPurchaseSonService.addBatchZttPurchaseSon(zttPurchaseSonAddList);
-			}
 			
 		} catch (Exception e) {
 			/**捕捉异常并回滚**/

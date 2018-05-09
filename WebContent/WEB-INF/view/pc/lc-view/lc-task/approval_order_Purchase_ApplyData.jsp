@@ -44,17 +44,7 @@ text-align:center;
 								<tr>
 								<td class="text-center">起始erp号</td>
 									<td><input class="form-control" type="text" maxlength="255"  name="erpnumber" id="erpnumber"></td>
-									<td class="text-center">采购单详情</td>
-									<td>
-									<button class="btn btn-primary"
-											data-toggle="button"
-											onclick="checkdetail('${taskData.businessKey }')">查看详情</button>
 									
-									</td>
-										<td class="text-center"></td>
-									<td>
-									
-									</td>
 								</tr>
 							</tbody>
 						</table>

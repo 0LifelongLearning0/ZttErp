@@ -22,6 +22,7 @@ import jehc.lcmodules.lcservice.LcApplyService;
 import jehc.xtmodules.xtcore.allutils.StringUtil;
 import jehc.xtmodules.xtcore.base.BaseAction;
 import jehc.xtmodules.xtservice.XtUserinfoService;
+import jehc.zxmodules.service.ZttOrderService;
 /**
  * 代办事项
  * @author 
@@ -36,6 +37,8 @@ public class LcAgencyController extends BaseAction{
 	private LcApplyService lcApplyService;
 	@Autowired
 	private XtUserinfoService xtUserinfoService;
+	@Autowired
+	private ZttOrderService zttOrderService;
 	
 	/**
 	* 载入初始化页面
@@ -91,6 +94,12 @@ public class LcAgencyController extends BaseAction{
 			List<LcApply> applys = lcApplyService.getLcApplyListByCondition(applyMap);
 			if(null != applys && applys.size() > 0){
 				model.put("apply_user", xtUserinfoService.getXtUserinfoById(applys.get(0).getXt_userinfo_id()).getXt_userinfo_realName());
+			}
+			String xt_constantRemark=applys.get(0).getXt_constantRemark();
+			if(xt_constantRemark.equals("业务人员下单表")){
+				model.put("Product_order_number", zttOrderService.getZttOrderById(applys.get(0).getLc_apply_model_biz_id()).getProduct_order_number());
+			}else{
+				model.put("Product_order_number","");
 			}
 			model.put("taskDefinitionKey", task.getTaskDefinitionKey());
 			model.put("tenantId", task.getTenantId());

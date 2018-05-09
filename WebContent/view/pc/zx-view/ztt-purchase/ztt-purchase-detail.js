@@ -4,7 +4,7 @@ function goback(){
 }
 
 function downloadattachment(id){
-	var upid="zttPurchaseSon["+id+"].attachment";
+	var upid="attachment";
 	layer.open({
 		title: '下载附件',
 		type: 2, 

@@ -68,6 +68,9 @@
 		<if test="null != contract_number">
 			AND instr(contract_number,#{contract_number})
 		</if>
+		<if test="null != cost_share">
+			AND instr(cost_share,#{cost_share})
+		</if>
 		<if test="null != cato_type">
 			AND instr(cato_type,#{cato_type})
 		</if>
@@ -111,7 +114,8 @@
 			AND bill_date_open&lt;#{apply_time_et_bill_date_open}
 		</if>
 		<if test="null == orderby">
-			ORDER BY product_order_number desc
+			ORDER BY (left(product_order_number, 2)+0) DESC,(substring(product_order_number, 7)+0) DESC
+
 		</if>
 		
 
@@ -294,7 +298,7 @@
 		select
 		max(b.erp_number)
 		from
-(select a.erp_number from ztt_purchase_son a where  erp_number REGEXP '[0-9]') b
+(select a.erp_number from ztt_purchase a where  erp_number REGEXP '[0-9]') b
 	</select>
 	<!--添加 -->
 	<insert id="addZttOrdnum" parameterType="jehc.zxmodules.model.ZttOrdernumber_third">

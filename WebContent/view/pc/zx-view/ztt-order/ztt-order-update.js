@@ -58,10 +58,10 @@ $(function() {
 	if(apply_id=="3BEDDDB5F4A94C78AEFA53051FAD5468"||apply_id=="6424E51904264B94910A72D62454F5C4"||apply_id=="B89D3CEE77F4485ABFA14ACCEA1E9188"){
 		document.getElementById("linkman").readOnly = false;
 		document.getElementById("cost_single_price").readOnly = true;
+		document.getElementById("amount").readOnly = false; 
 		document.getElementById("erp_number").readOnly = true;
 		document.getElementById("supplier_bill_date").readOnly = true;
 		document.getElementById("supplier_bill_price").readOnly = true;
-		document.getElementById("send_amount").readOnly = true;
 		document.getElementById("bill_date_open").readOnly = true;
 		document.getElementById("bill_price").readOnly = true;
 		document.getElementById("cost_share").readOnly = true;

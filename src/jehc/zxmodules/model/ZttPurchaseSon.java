@@ -19,6 +19,50 @@ public class ZttPurchaseSon extends BaseEntity implements Serializable{
 	private String attachment;/**文件地址**/
 	private double single_price;/**数量**/
 	private String erp_number;
+	private String supplier_bill_date;
+	private String supplier_bill_price;
+	private String end_data;
+	private String send_amount;
+	private String Product_order_number;
+	private String hope_end_data;
+	
+	
+	public String getHope_end_data() {
+		return hope_end_data;
+	}
+	public void setHope_end_data(String hope_end_data) {
+		this.hope_end_data = hope_end_data;
+	}
+	public String getProduct_order_number() {
+		return Product_order_number;
+	}
+	public void setProduct_order_number(String product_order_number) {
+		Product_order_number = product_order_number;
+	}
+	public String getEnd_data() {
+		return end_data;
+	}
+	public void setEnd_data(String end_data) {
+		this.end_data = end_data;
+	}
+	public String getSend_amount() {
+		return send_amount;
+	}
+	public void setSend_amount(String send_amount) {
+		this.send_amount = send_amount;
+	}
+	public String getSupplier_bill_date() {
+		return supplier_bill_date;
+	}
+	public void setSupplier_bill_date(String supplier_bill_date) {
+		this.supplier_bill_date = supplier_bill_date;
+	}
+	public String getSupplier_bill_price() {
+		return supplier_bill_price;
+	}
+	public void setSupplier_bill_price(String supplier_bill_price) {
+		this.supplier_bill_price = supplier_bill_price;
+	}
 	public void setId(String id){
 		this.id=id;
 	}

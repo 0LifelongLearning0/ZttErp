@@ -33,6 +33,9 @@ function addZttPurchaseSonItems(){
 	'<input class="form-control" type="hidden" maxlength="32"  id="zttPurchaseSon_'+numbers+'_parent_id" name="zttPurchaseSon['+numbers+'].parent_id"  placeholder="请输入父id">'+
 		'<table>'+
 		'<tr>'+
+		'<td><label class="control-label">工令号</label></td>'+
+		'<td><input class="form-control" type="text" maxlength="255"  id="zttPurchaseSon_'+numbers+'_Product_order_number" name="zttPurchaseSon['+numbers+'].Product_order_number"  placeholder="请输入名称"></div></td>'+
+		
 		'<td><label class="control-label">名称</label></td>'+
 		'<td><input class="form-control" type="text" maxlength="255"  id="zttPurchaseSon_'+numbers+'_name" name="zttPurchaseSon['+numbers+'].name"  placeholder="请输入名称"></div></td>'+
 		'<td><label class="control-label">规格</label></td>'+
@@ -43,6 +46,8 @@ function addZttPurchaseSonItems(){
 		'<td><input class="form-control" type="text" maxlength="255"  id="zttPurchaseSon_'+numbers+'_unit" name="zttPurchaseSon['+numbers+'].unit"  placeholder="请输入名称"></td>'+
 		'<td><label class="control-label">数量</label></td>'+
 		'<td><input class="form-control" type="text" maxlength="255"  id="zttPurchaseSon_'+numbers+'_amount" name="zttPurchaseSon['+numbers+'].amount"  placeholder="请输入名称"></td>'+
+		'<td><label class="control-label" >交期</label></td>'+
+		'<td><input class="form_datetime form-control" type="text" maxlength="255"  id="zttPurchaseSon_'+numbers+'_hope_end_data" name="zttPurchaseSon['+numbers+'].hope_end_data"  placeholder="请输入交期"></td>'+
 		'<td><label class="control-label">上传附件</label></td>'+
 		'<td><button class="btn btn-primary" data-toggle="button" onclick="uploadattachment('+numbers+')">请上传附件</button>'+
 		'<input class="form-control" type="hidden" maxlength="255"  id="zttPurchaseSon_'+numbers+'_attachment" name="zttPurchaseSon['+numbers+'].attachment"  placeholder="请输入名称"></td>'+
@@ -52,8 +57,17 @@ function addZttPurchaseSonItems(){
 		'</div>'
 		
 	$(".form_zttPurchaseSon").append(form);
-
+	$(".form_datetime").datepicker({
+		format : "yyyy-mm-dd",
+		autoclose : true,
+		todayBtn : true,
+		todayHighlight : true,
+		showMeridian : true,
+		pickerPosition : "bottom-left",
+		language : 'zh-CN',// 中文，需要引用zh-CN.js包
+	});
 	reValidator('defaultForm');
+
 }
 function delZttPurchaseSonItems(thiz,numbers){
 	validatorDestroy('defaultForm');

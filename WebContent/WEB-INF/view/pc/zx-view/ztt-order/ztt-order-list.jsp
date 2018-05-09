@@ -126,7 +126,10 @@ background-color: yellow;
 					为空
 					<input type="checkbox" name="bill_date_open" id="bill_date_open"/>
 				</div>
-
+                <div class="form-group">
+					<label>成本分摊</label> <input type="text" class="form-control"
+						name="cost_share" id="cost_share" placeholder="成本分摊">
+				</div>
 				<div class="form-group" style="margin-left: 35px;">
 					<button class="btn btn-primary" type="button"
 						onclick="search('datatables')">
@@ -150,11 +153,17 @@ background-color: yellow;
 			<button class="btn btn-default" onclick="delZttOrder()">
 				<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
 			</button>
+			<button class="btn btn-default" onclick="cancelZttOrder()">
+				<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>取消
+			</button>
 			<button class="btn btn-default" onclick="search('datatables')">
 				<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
 			</button>
 			<button class="btn btn-default" onclick="export1()">
 				<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>导出
+			</button>
+			<button class="btn btn-default" onclick="export1All()">
+				<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>全部导出
 			</button>
 		</div>
 		<input class="form-control"

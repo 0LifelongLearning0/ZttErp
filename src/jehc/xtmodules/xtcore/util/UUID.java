@@ -21,4 +21,11 @@ public class UUID{
 			throw new ExceptionUtil("生成UUID失败-------错误原因："+e.getMessage());
 		}
 	}
+	public String toUUIDdy(){
+		try {
+			return java.util.UUID.randomUUID().toString().replace("-", "").toUpperCase();
+		} catch (Exception e) {
+			throw new ExceptionUtil("生成UUID失败-------错误原因："+e.getMessage());
+		}
+	}
 }

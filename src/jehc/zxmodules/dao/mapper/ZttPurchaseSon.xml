@@ -14,7 +14,11 @@
 			amount,
 			attachment,
 			single_price,
-			erp_number
+			erp_number,
+			supplier_bill_date,
+			supplier_bill_price,
+			end_data,
+			send_amount
 		FROM 
 			ztt_purchase_son
 		WHERE 1=1
@@ -35,7 +39,11 @@
 			amount,
 			attachment,
 			single_price,
-			erp_number
+			erp_number,
+			supplier_bill_date,
+			supplier_bill_price,
+			end_data,
+			send_amount
 		FROM 
 			ztt_purchase_son
 		WHERE id=#{id}
@@ -82,7 +90,11 @@
 			unit = #{unit},
 			amount = #{amount},
 			attachment = #{attachment},
-			erp_number = #{erp_number}
+			erp_number = #{erp_number},
+			supplier_bill_date = #{supplier_bill_date},
+			supplier_bill_price = #{supplier_bill_price},
+			end_data = #{end_data},
+			send_amount = #{send_amount}
 		WHERE id=#{id}
 	</update>
 
@@ -118,6 +130,18 @@
 			<if test="erp_number != null">
 				erp_number = #{erp_number},
 			</if>
+			<if test="supplier_bill_date != null">
+				supplier_bill_date = #{supplier_bill_date},
+			</if>
+			<if test="supplier_bill_price != null">
+				supplier_bill_price = #{supplier_bill_price},
+			</if>
+			<if test="end_data != null">
+				end_data = #{end_data},
+			</if>
+			<if test="send_amount != null">
+				send_amount = #{send_amount},
+			</if>
 		</set>
 		WHERE id=#{id}
 	</update>
@@ -144,7 +168,11 @@
 			amount,
 			attachment,
 			single_price,
-			erp_number
+			erp_number,
+			supplier_bill_date,
+			supplier_bill_price,
+			end_data,
+			send_amount
 			)
 			VALUES
 		<foreach collection="list" item="item" index="index" separator=",">
@@ -158,7 +186,11 @@
 			#{item.amount},
 			#{item.attachment},
 			#{item.single_price},
-			#{item.erp_number}
+			#{item.erp_number},
+			#{item.supplier_bill_date},
+			#{item.supplier_bill_price},
+			#{item.end_data},
+			#{item.send_amount}
 			)
 		</foreach>
 	</insert>
@@ -175,7 +207,11 @@
 				material = #{item.material},
 				unit = #{item.unit},
 				amount = #{item.amount},
-				attachment = #{item.attachment}
+				attachment = #{item.attachment},
+				supplier_bill_date = #{item.supplier_bill_date},
+				supplier_bill_price = #{item.supplier_bill_price},
+				end_data = #{item.end_data},
+				send_amount = #{item.send_amount}
 			WHERE id=#{item.id}
 		</foreach>
 	</update>
@@ -206,6 +242,18 @@
 				</if>
 				<if test="item.attachment != null">
 					attachment = #{item.attachment},
+				</if>
+				<if test="item.supplier_bill_date != null">
+					supplier_bill_date = #{item.supplier_bill_date},
+				</if>
+				<if test="item.supplier_bill_price != null">
+					supplier_bill_price = #{item.supplier_bill_price},
+				</if>
+				<if test="item.end_data != null">
+					end_data = #{item.end_data},
+				</if>
+				<if test="item.send_amount != null">
+					send_amount = #{item.send_amount},
 				</if>
 			</set>
 			WHERE id=#{item.id}

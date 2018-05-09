@@ -43,6 +43,9 @@ $(document).ready(function() {
 				data:'personname'
 			},
 			{
+				data:'project'
+			},
+			{
 				data:'purchase_name'
 			},
 			{
@@ -173,7 +176,15 @@ function toZttPurchaseUpdate(){
 }
 //详情
 function toZttPurchaseDetail(id){
-	tlocation("../zttPurchaseController/toZttPurchaseDetail?id="+id);
+	var id = $(".checkchild:checked").val();
+	layer.open({
+		title : '详情界面',
+		type : 2,
+		area : [ '1200px', '600px' ],
+		btn : [ '关闭' ],
+		content : "../zttPurchaseController/toZttPurchaseDetail?id="+id
+
+	})
 }
 function ZttPurchasedeptcheck(id){
 	var str = $(".checkchild:checked").val();

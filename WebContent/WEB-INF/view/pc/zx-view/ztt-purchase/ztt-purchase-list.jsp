@@ -24,6 +24,10 @@ background-color: yellow;
 					<label>名称</label>
 					<input type="text" class="form-control" name="purchase_name" id="purchase_name" placeholder="请输入标题">
 				</div>
+				<div class="form-group">
+					<label>项目</label>
+					<input type="text" class="form-control" name="project" id="project" placeholder="请输入项目">
+				</div>
 				<span style="background-color: #FFFFFF">    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				
 				</span>
@@ -107,6 +111,7 @@ background-color: yellow;
 					<th>erp号</th>
 					<th>工令号</th>
 					<th>申请人</th>
+					<th>项目</th>
 					<th>名称</th>
 					<th>规格</th>
 					<th>单位</th>

@@ -129,6 +129,7 @@
 										type="text" maxlength="255" name="cost_single_price"
 										id="cost_single_price" value='${zttOrder.cost_single_price }'>
 									</td>
+									
 									<td class="col-md-1 text-center">成本总价</td>
 									<td class="col-md-3">${zttOrder.cost_sum_price } <input
 										class="form-control" type="hidden" maxlength="255"
@@ -163,6 +164,12 @@
 								<td class="col-md-3" id="erp2"><input class="form-control"
 									type="text" maxlength="255" name="cost_share" id="cost_share"
 									value='${zttOrder.cost_share }'></td>
+								</tr>
+								<tr id="sales">
+								<td class="col-md-1 text-center">实际交货日期</td>
+								<td class="col-md-3"><input type="text"
+									class="form_datetime form-control" maxlength="32"
+									name="send_time" id="send_time" value='${zttOrder.send_time }'></td>
 								</tr>
 							</tbody>
 						</table>
