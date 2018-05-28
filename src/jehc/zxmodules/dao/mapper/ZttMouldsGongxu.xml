@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZttMouldsGongxu">
+	<!--初始化分页-->
+	<select id="getZttMouldsGongxuListByCondition" resultType="jehc.zxmodules.model.ZttMouldsGongxu" parameterType="map">
+		SELECT
+			id,
+			gongxu_name,
+			number
+		FROM 
+			ztt_moulds_gongxu
+		WHERE 1=1 order by CAST(number as SIGNED)
+	</select>
+
+	<!--查询对象-->
+	<select id="getZttMouldsGongxuById" resultType="jehc.zxmodules.model.ZttMouldsGongxu" parameterType="string">
+		SELECT
+			id,
+			gongxu_name,
+			number
+		FROM 
+			ztt_moulds_gongxu
+		WHERE id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addZttMouldsGongxu" parameterType="jehc.zxmodules.model.ZttMouldsGongxu">
+		INSERT INTO
+			ztt_moulds_gongxu
+			(
+			id,
+			gongxu_name,
+			number
+			)
+			VALUES
+			(
+			#{id},
+			#{gongxu_name},
+			#{number}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZttMouldsGongxu" parameterType="jehc.zxmodules.model.ZttMouldsGongxu">
+		UPDATE
+			ztt_moulds_gongxu
+		SET
+			gongxu_name = #{gongxu_name},
+			number = #{number}
+		WHERE id=#{id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZttMouldsGongxuBySelective" parameterType="jehc.zxmodules.model.ZttMouldsGongxu">
+		UPDATE
+			ztt_moulds_gongxu
+		<set>
+			<if test="gongxu_name != null">
+				gongxu_name = #{gongxu_name},
+			</if>
+			<if test="number != null">
+				number = #{number},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZttMouldsGongxu" parameterType="map">
+		DELETE FROM ztt_moulds_gongxu WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZttMouldsGongxu" parameterType="list">
+		INSERT INTO
+			ztt_moulds_gongxu
+			(
+			id,
+			gongxu_name,
+			number
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.gongxu_name},
+			#{item.number}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZttMouldsGongxu" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				ztt_moulds_gongxu
+			SET
+				gongxu_name = #{item.gongxu_name}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZttMouldsGongxuBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				ztt_moulds_gongxu
+			<set>
+				<if test="item.gongxu_name != null">
+					gongxu_name = #{item.gongxu_name},
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+</mapper>

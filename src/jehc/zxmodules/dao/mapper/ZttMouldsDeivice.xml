@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZttMouldsDeivice">
+	<!--初始化分页-->
+	<select id="getZttMouldsDeiviceListByCondition" resultType="jehc.zxmodules.model.ZttMouldsDeivice" parameterType="map">
+		SELECT
+			id,
+			gongxu_id,
+			device_name
+		FROM 
+			ztt_moulds_deivice
+		WHERE 1=1
+		<if test = "null != gongxu_id">
+			AND gongxu_id = #{gongxu_id}
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getZttMouldsDeiviceById" resultType="jehc.zxmodules.model.ZttMouldsDeivice" parameterType="string">
+		SELECT
+			id,
+			gongxu_id,
+			device_name
+		FROM 
+			ztt_moulds_deivice
+		WHERE id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addZttMouldsDeivice" parameterType="jehc.zxmodules.model.ZttMouldsDeivice">
+		INSERT INTO
+			ztt_moulds_deivice
+			(
+			id,
+			gongxu_id,
+			device_name
+			)
+			VALUES
+			(
+			#{id},
+			#{gongxu_id},
+			#{device_name}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZttMouldsDeivice" parameterType="jehc.zxmodules.model.ZttMouldsDeivice">
+		UPDATE
+			ztt_moulds_deivice
+		SET
+			gongxu_id = #{gongxu_id},
+			device_name = #{device_name}
+		WHERE id=#{id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZttMouldsDeiviceBySelective" parameterType="jehc.zxmodules.model.ZttMouldsDeivice">
+		UPDATE
+			ztt_moulds_deivice
+		<set>
+			<if test="gongxu_id != null">
+				gongxu_id = #{gongxu_id},
+			</if>
+			<if test="device_name != null">
+				device_name = #{device_name},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZttMouldsDeivice" parameterType="map">
+		DELETE FROM ztt_moulds_deivice WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZttMouldsDeivice" parameterType="list">
+		INSERT INTO
+			ztt_moulds_deivice
+			(
+			id,
+			gongxu_id,
+			device_name
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.gongxu_id},
+			#{item.device_name}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZttMouldsDeivice" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				ztt_moulds_deivice
+			SET
+				gongxu_id = #{item.gongxu_id},
+				device_name = #{item.device_name}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZttMouldsDeiviceBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				ztt_moulds_deivice
+			<set>
+				<if test="item.gongxu_id != null">
+					gongxu_id = #{item.gongxu_id},
+				</if>
+				<if test="item.device_name != null">
+					device_name = #{item.device_name},
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--根据外键删除-->
+	<delete id="delZttMouldsDeiviceByForeignKey" parameterType="string">
+		DELETE FROM ztt_moulds_deivice WHERE gongxu_id = #{gongxu_id}
+	</delete>
+</mapper>

@@ -13,6 +13,14 @@ public class ztt_processproduct {
 	private String product_date;
 	private String qualified_number;
 	private String qualified_date;
+	private String order_number;
+	
+	public String getOrder_number() {
+		return order_number;
+	}
+	public void setOrder_number(String order_number) {
+		this.order_number = order_number;
+	}
 	public String getId() {
 		return id;
 	}

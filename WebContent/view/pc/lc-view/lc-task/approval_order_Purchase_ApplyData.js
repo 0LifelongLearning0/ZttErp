@@ -7,7 +7,12 @@ $(document).ready(function(){
 	document.getElementById("Product_order_number").innerText=ajaxobj.product_order_number;
 	document.getElementById("purchase_stardard").innerText=ajaxobj.purchase_stardard;
 	document.getElementById("purchase_name").innerText=ajaxobj.purchase_name;
-	document.getElementById("erpnumber").value=ajaxobj.erp_number;unit
+	document.getElementById("erpnumber").value=ajaxobj.erp_number;
+	document.getElementById("material").innerText=ajaxobj.material;
+	document.getElementById("unit").innerText=ajaxobj.unit;
+	document.getElementById("amount").innerText=ajaxobj.amount;
+	document.getElementById("project").innerText=ajaxobj.project;
+	document.getElementById("material_add").innerText=ajaxobj.product_order_number+" "+ajaxobj.project+" "+ajaxobj.purchase_stardard;
                 
 	
 });

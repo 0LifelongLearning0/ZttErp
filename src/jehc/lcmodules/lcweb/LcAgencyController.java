@@ -23,6 +23,7 @@ import jehc.xtmodules.xtcore.allutils.StringUtil;
 import jehc.xtmodules.xtcore.base.BaseAction;
 import jehc.xtmodules.xtservice.XtUserinfoService;
 import jehc.zxmodules.service.ZttOrderService;
+import jehc.zxmodules.service.ZttPurchaseService;
 /**
  * 代办事项
  * @author 
@@ -39,6 +40,8 @@ public class LcAgencyController extends BaseAction{
 	private XtUserinfoService xtUserinfoService;
 	@Autowired
 	private ZttOrderService zttOrderService;
+	@Autowired
+	private ZttPurchaseService zttPurchaseService;
 	
 	/**
 	* 载入初始化页面
@@ -97,9 +100,22 @@ public class LcAgencyController extends BaseAction{
 			}
 			String xt_constantRemark=applys.get(0).getXt_constantRemark();
 			if(xt_constantRemark.equals("业务人员下单表")){
-				model.put("Product_order_number", zttOrderService.getZttOrderById(applys.get(0).getLc_apply_model_biz_id()).getProduct_order_number());
-			}else{
+				String des=zttOrderService.getZttOrderById(applys.get(0).getLc_apply_model_biz_id()).getProduct_order_number()+" ,"+
+						zttOrderService.getZttOrderById(applys.get(0).getLc_apply_model_biz_id()).getProduct_name();
+				model.put("describetion",des);
+				model.put("state", zttOrderService.getZttOrderById(applys.get(0).getLc_apply_model_biz_id()).getState());
+				model.put("applytime", zttOrderService.getZttOrderById(applys.get(0).getLc_apply_model_biz_id()).getZttordertime());
+			}
+			else if(xt_constantRemark.equals("采购流程")){
+				String des=zttPurchaseService.getZttPurchaseById(applys.get(0).getLc_apply_model_biz_id()).getProduct_order_number()+" ,"+zttPurchaseService.getZttPurchaseById(applys.get(0).getLc_apply_model_biz_id()).getProject()+" ,"+
+						zttPurchaseService.getZttPurchaseById(applys.get(0).getLc_apply_model_biz_id()).getPurchase_stardard();
+				model.put("describetion", des);
+				model.put("applytime", zttPurchaseService.getZttPurchaseById(applys.get(0).getLc_apply_model_biz_id()).getApply_time());
+			}
+			else{
 				model.put("Product_order_number","");
+				model.put("state","");
+				model.put("applytime","");
 			}
 			model.put("taskDefinitionKey", task.getTaskDefinitionKey());
 			model.put("tenantId", task.getTenantId());

@@ -5,6 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>机械加工工艺过程母表详情页面</title>
+<style type="text/css" media="print">
+.btn-success { display:none;}
+</style>
 </head>
 <body>
 	<div class="panel panel-default padding-10 no-margin">
@@ -61,6 +64,12 @@
 							<tfoot>
 							</tfoot>
 						</table>
+						<div class="text-center">
+							<button type="button" class="btn-success"
+								onclick="printpage()">
+								<span class="glyphicon glyphicon-saved" aria-hidden="true"></span>打印
+							</button>
+						</div>
 					</form>
 				</div>
 
@@ -116,7 +125,6 @@
 							<input class="form-control" type="text" maxlength="20"  id="ztt_processproduct[${ztt_processproductStatus.index}].sum_price" name="ztt_processproduct[${ztt_processproductStatus.index}].sum_price" placeholder="请输入申请数量" value="${zttProcessproduct.sum_price }">
 						</div>
 					</div>
-					
 				<!-- </fieldset>
 				</div> -->
 				</c:forEach>

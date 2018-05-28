@@ -95,6 +95,7 @@
 			Product_id,
 			single_price,
 			sum_price,
+			project,
 			qualified_id,
 			qualified_number,
 			qualified_date,
@@ -186,6 +187,7 @@
 			qualified_number = #{qualified_number},
 			qualified_date = #{qualified_date},
 			check_attachment = #{check_attachment},
+			project = #{project},
 			attachment = #{attachment},
 			send_amount = #{send_amount}
 		WHERE id=#{id}
@@ -214,11 +216,11 @@
 			<if test="amount != null">
 				amount = #{amount},
 			</if>
+			<if test="project != null">
+				project = #{project},
+			</if>
 			<if test="hope_end_data != null">
 				hope_end_data = #{hope_end_data},
-			</if>
-			<if test="apply_id != null">
-				apply_id = #{apply_id},
 			</if>
 			<if test="Product_id != null">
 				Product_id = #{Product_id},
@@ -311,6 +313,7 @@
 			qualified_number,
 			qualified_date,
 			check_attachment,
+			project,
 			attachment,
 			state
 			)
@@ -334,6 +337,7 @@
 			#{item.qualified_number},
 			#{item.qualified_date},
 			#{item.check_attachment},
+			#{item.project},
 			#{item.attachment},
 			#{item.state}
 			)

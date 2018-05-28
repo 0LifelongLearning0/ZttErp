@@ -34,18 +34,21 @@ function addZttPurchaseSonItems(){
 		'<table>'+
 		'<tr>'+
 		'<td><label class="control-label">工令号</label></td>'+
-		'<td><input class="form-control" type="text" maxlength="255"  id="zttPurchaseSon_'+numbers+'_Product_order_number" name="zttPurchaseSon['+numbers+'].Product_order_number"  placeholder="请输入名称"></div></td>'+
-		
+		'<td><input class="form-control" type="text" maxlength="255"  id="zttPurchaseSon_'+numbers+'_Product_order_number" name="zttPurchaseSon['+numbers+'].Product_order_number"  placeholder="请输入工令号"></div></td>'+
+		'<td><label class="control-label">项目</label></td>'+
+		'<td><input class="form-control" type="text" maxlength="255"  id="zttPurchaseSon_'+numbers+'_name" name="zttPurchaseSon['+numbers+'].project"  placeholder="请输入项目"></div></td>'+
 		'<td><label class="control-label">名称</label></td>'+
 		'<td><input class="form-control" type="text" maxlength="255"  id="zttPurchaseSon_'+numbers+'_name" name="zttPurchaseSon['+numbers+'].name"  placeholder="请输入名称"></div></td>'+
 		'<td><label class="control-label">规格</label></td>'+
 		'<td><input class="form-control" type="text" maxlength="255"  id="zttPurchaseSon_'+numbers+'_purchase_stardard" name="zttPurchaseSon['+numbers+'].purchase_stardard"  placeholder="请输入规格"></td>'+
 		'<td><label class="control-label">材质</label></td>'+
-		'<td><input class="form-control" type="text" maxlength="255"  id="zttPurchaseSon_'+numbers+'_material" name="zttPurchaseSon['+numbers+'].material"  placeholder="请输入名称"></td>'+
+		'<td><input class="form-control" type="text" maxlength="255"  id="zttPurchaseSon_'+numbers+'_material" name="zttPurchaseSon['+numbers+'].material"  placeholder="请输入材质"></td>'+
+		'</tr>'+
 		'<td><label class="control-label">单位</label></td>'+
-		'<td><input class="form-control" type="text" maxlength="255"  id="zttPurchaseSon_'+numbers+'_unit" name="zttPurchaseSon['+numbers+'].unit"  placeholder="请输入名称"></td>'+
+		'<td><input class="form-control" type="text" maxlength="255"  id="zttPurchaseSon_'+numbers+'_unit" name="zttPurchaseSon['+numbers+'].unit"  placeholder="请输入单位"></td>'+
+		
 		'<td><label class="control-label">数量</label></td>'+
-		'<td><input class="form-control" type="text" maxlength="255"  id="zttPurchaseSon_'+numbers+'_amount" name="zttPurchaseSon['+numbers+'].amount"  placeholder="请输入名称"></td>'+
+		'<td><input class="form-control" type="text" maxlength="255"  id="zttPurchaseSon_'+numbers+'_amount" name="zttPurchaseSon['+numbers+'].amount"  placeholder="请输入数量"></td>'+
 		'<td><label class="control-label" >交期</label></td>'+
 		'<td><input class="form_datetime form-control" type="text" maxlength="255"  id="zttPurchaseSon_'+numbers+'_hope_end_data" name="zttPurchaseSon['+numbers+'].hope_end_data"  placeholder="请输入交期"></td>'+
 		'<td><label class="control-label">上传附件</label></td>'+

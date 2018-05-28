@@ -4,6 +4,17 @@ function goback() {
 }
 // 保存
 function updateZttOrder() {
+	var attachmentbefore=document.getElementById("attachmentbefore").value;
+	var attachmentupload=document.getElementById("attachment").value;
+	var attachment=document.getElementById("attachmentafter").value;
+	if(attachmentupload==""){
+		var attachment=attachmentbefore;
+	}else{
+		var attachment=attachmentbefore+","+attachmentupload;
+	}
+	
+	document.getElementById("attachment").value=attachment;
+	document.getElementById("cato_type").value=$("#selector").val();
 	submitBForm('defaultForm', '../zttOrderController/updateZttOrder',
 			'../zttOrderController/loadZttOrder');
 	 
@@ -54,17 +65,29 @@ function submitBForm(formid, url, callUrl) {
 	})
 }
 $(function() {
-	var apply_id=document.getElementById("apply_id").value;
+	var apply_id=document.getElementById("login_id").value;
+	 if(document.getElementById( "cato_type").value=='outside'){
+		 $("#selector").val("outside");
+	 }
+	 if(document.getElementById( "cato_type").value=='madebyself'){
+		 $("#selector").val("madebyself");
+	 }
+	 if(document.getElementById( "cato_type").value==''){
+		 $("#selector").val("");
+	 }
 	if(apply_id=="3BEDDDB5F4A94C78AEFA53051FAD5468"||apply_id=="6424E51904264B94910A72D62454F5C4"||apply_id=="B89D3CEE77F4485ABFA14ACCEA1E9188"){
+	
+		document.getElementById("attachmenttd1").style.display="";
+		document.getElementById("attachmenttd2").style.display="";
 		document.getElementById("linkman").readOnly = false;
-		document.getElementById("cost_single_price").readOnly = true;
 		document.getElementById("amount").readOnly = false; 
 		document.getElementById("erp_number").readOnly = true;
 		document.getElementById("supplier_bill_date").readOnly = true;
 		document.getElementById("supplier_bill_price").readOnly = true;
-		document.getElementById("bill_date_open").readOnly = true;
-		document.getElementById("bill_price").readOnly = true;
+		document.getElementById("bill_date_open").readOnly = false;
+		document.getElementById("bill_price").readOnly = false;
 		document.getElementById("cost_share").readOnly = true;
+		$("#end_data").datepicker({minDate:-1,maxDate:-2}).attr('readonly','readonly');  
 	}
 	if(apply_id=="9A5DF246FB4E4B3E824792E575263969"){
 		document.getElementById("stardard").readOnly = true;
@@ -79,6 +102,8 @@ $(function() {
 	}
 	if(apply_id=="B75750C01CAB4D0A88BD95A964D3BA2C"){
 		document.getElementById("amount").readOnly = false;
+		 document.getElementById( "cato_typetd").style.display= "";
+		 document.getElementById( "cato_typetd1").style.display= "";
 		document.getElementById("product_name").readOnly = false;
 		document.getElementById("linkman").readOnly = false;
 		document.getElementById("end_data").disabled = false;
@@ -94,7 +119,33 @@ $(function() {
 	});
 
 });
-//保存
+function uploadattachment() {
+	var upid="attachment";
+	
+	layer.open({
+		title : '上传附件',
+		type : 2,
+		area : [ '800px', '500px' ],
+		btn : [ '确定', '取消' ],
+		content : "../zttOrderController/uploadattachment?upid="+upid
+		
+	});
+	
+	
+}
+function updtachment() {
+	var upid="update";
+	layer.open({
+		title : '修改附件',
+		type : 2,
+		area : [ '800px', '500px' ],
+		btn : [ '确定', '取消' ],
+		content : "../zttOrderController/uploadattachment?upid="+upid
+		
+	});
+	
+	
+}
 function downloadattachment(id){
 	var upid="attachment";
 	layer.open({

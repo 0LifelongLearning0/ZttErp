@@ -115,7 +115,15 @@ text-align:center;
 							</tbody>
 						</table>
 						<div class="col-lg-6" style="text-align:center">
-							<button type="button" class="btn btn-warning"
+						<button type="button" class="btn btn-danger"
+								onclick="waitarrival('${taskData.businessKey}')">
+								<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>等待到货
+							</button>
+						<button type="button" class="btn btn-warning"
+								onclick="finisharrament('${taskData.businessKey}')">
+								<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>已完成安排
+							</button>
+							<button type="button" class="btn btn-success"
 								onclick='approveZttOrderApply(${taskData.task.id },"",this)'>
 								<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>已完成生产
 							</button>

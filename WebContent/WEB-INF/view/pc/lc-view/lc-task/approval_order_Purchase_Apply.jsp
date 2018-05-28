@@ -25,7 +25,7 @@ text-align:center;
 						<table class="table table-bordered">
 							<caption class="text-center h3 no-margin bold">采购下单表</caption>
 							<tbody>
-								<tr>
+							<tr>
 									<td class="col-md-2 text-center">申&ensp;请&ensp;人</td>
 									<td class="col-md-2">${applyUser.xt_userinfo_realName }</td>
 									<td class="col-md-2 text-center">部&emsp;&emsp;门</td>
@@ -36,15 +36,16 @@ text-align:center;
 								<tr>
 								<td class="text-center">工令号</td>
 									<td><label id="Product_order_number" /></td>
+									<td class="text-center">名称</td>
+									<td><label id="purchase_name" /></td>
+									<td class="text-center">规格</td>
+									<td colspan="3"><label id="purchase_stardard" /></td>
+								</tr>
+								<tr>
+								<td class="text-center">数量</td>
+									<td><label id="amount" /></td>
 									<td class="text-center">交期</td>
 									<td><label id="hope_end_data" /></td>
-									<td class="text-center">采购单详情</td>
-									<td>
-									<button class="btn btn-primary"
-											data-toggle="button"
-											onclick="checkdetail('${taskData.businessKey }')">查看详情</button>
-									
-									</td>
 								</tr>
 							</tbody>
 						</table>

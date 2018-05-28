@@ -68,6 +68,54 @@ function getbyapplyid(id) {
 
 	return obj;
 }
+
+function finisharrament(id) {
+	var datatables = parent.$('#datatables').DataTable();
+	var obj = "";
+	var state='21';
+	var params = {
+		id : id,
+		state:state
+	};
+	var url = "../zttOrderController/updateZttOrderstate";
+	$.ajax({
+		url : url,
+		async : false,
+		type : 'POST',
+		data : params,
+		success : function(result) {
+			var index = parent.layer.getFrameIndex(window.name);
+			datatables.ajax.reload();
+			parent.layer.close(index);
+		}
+	});
+
+	return obj;
+}
+
+function waitarrival(id) {
+	var datatables = parent.$('#datatables').DataTable();
+	var obj = "";
+	var state='22';
+	var params = {
+		id : id,
+		state:state
+	};
+	var url = "../zttOrderController/updateZttOrderstate";
+	$.ajax({
+		url : url,
+		async : false,
+		type : 'POST',
+		data : params,
+		success : function(result) {
+			var index = parent.layer.getFrameIndex(window.name);
+			datatables.ajax.reload();
+			parent.layer.close(index);
+		}
+	});
+
+	return obj;
+}
 // 保存
 function approveZttOrderApply(taskid, status, obj) {
 	var datatables = parent.$('#datatables').DataTable();
@@ -119,7 +167,7 @@ function progressupload(id) {
 	parent.layer.open({
 		title : '机械加工工艺过程卡片',
 		type : 2,
-		area : [ '1500px', '700px' ],
+		area : [ '80%', '80%' ],
 		btn : [ '关闭' ],
 		content : "../zttProcessproductParentController/loadZttProcessproductParent?id=" + id
 				+ "&index=" + index+"&order_id=" + order_id,

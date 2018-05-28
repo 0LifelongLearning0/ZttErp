@@ -29,7 +29,7 @@
 	    a.supplier_name,
 	    a.supplier_price,
 	    a.not_satisfy_reason,
-	    a.cato_type,
+	   
 	    a.delivery_note,
 	    a.supplier_bill_date,
 	    a.supplier_bill_price,
@@ -39,6 +39,7 @@
 	    a.bill_date_open,
 	    a.bill_price,
 	    a.cost_share,
+	    a.sale_contract_number,
 		b.xt_userinfo_realName as personname
 		FROM
 		ztt_order a,xt_userinfo b
@@ -65,6 +66,9 @@
 		<if test="null != product_name">
 			AND instr(product_name,#{product_name})
 		</if>
+		<if test="null != linkman">
+			AND instr(linkman,#{linkman})
+		</if>
 		<if test="null != contract_number">
 			AND instr(contract_number,#{contract_number})
 		</if>
@@ -75,7 +79,7 @@
 			AND instr(cato_type,#{cato_type})
 		</if>
 		<if test="null != send_time">
-			AND send_time is null
+			AND send_time is null or send_time=''
 		</if>
 		<if test="null != bill_date_open">
 			AND bill_date_open is null
@@ -106,6 +110,12 @@
 		</if>
 		<if test="null != apply_time_et_send_time">
 			AND send_time&lt;#{apply_time_et_send_time}
+		</if>
+		<if test="null != product_order_number_st">
+			AND substring(a.product_order_number, 7)&gt;cast(#{product_order_number_st} as SIGNED INTEGER)
+		</if>
+		<if test="null != product_order_number_et">
+			AND substring(a.product_order_number, 7)&lt;cast(#{product_order_number_et} as SIGNED INTEGER)
 		</if>
 		<if test="null != apply_time_st_bill_date_open">
 			AND bill_date_open&gt;#{apply_time_st_bill_date_open}
@@ -181,6 +191,7 @@
 		id,
 		order_number,
 		contract_number,
+		sale_contract_number,
 		erp_number,
 		product_order_number,
 		client,
@@ -215,6 +226,7 @@
 		cato_type,
 		delivery_note,
 		send_time,
+		supplier_name,
 		supplier_bill_date,
 		supplier_bill_price,
 		cost_single_price,
@@ -326,7 +338,7 @@
 		(
 		id,
 		order_number,
-		contract_number,
+		sale_contract_number,
 		erp_number,
 		product_order_number,
 		client,
@@ -347,7 +359,7 @@
 		(
 		#{id},
 		#{order_number},
-		#{contract_number},
+		#{sale_contract_number},
 		#{erp_number},
 		#{product_order_number},
 		#{client},
@@ -492,6 +504,7 @@
 		End_data = #{End_data},
 		zttordertime = #{zttordertime},
 		apply_id = #{apply_id},
+		cato_type = #{cato_type},
 		state = #{state}
 		WHERE id=#{id}
 	</update>
@@ -535,8 +548,8 @@
 			<if test="order_number != null">
 				order_number = #{order_number},
 			</if>
-			<if test="contract_number != null">
-				contract_number = #{contract_number},
+			<if test="sale_contract_number != null">
+				sale_contract_number = #{sale_contract_number},
 			</if>
 			<if test="erp_number != null">
 				erp_number = #{erp_number},
@@ -552,6 +565,9 @@
 			</if>
 			<if test="product_name != null">
 				product_name = #{product_name},
+			</if>
+			<if test="cato_type != null">
+				cato_type = #{cato_type},
 			</if>
 			<if test="stardard != null">
 				stardard = #{stardard},

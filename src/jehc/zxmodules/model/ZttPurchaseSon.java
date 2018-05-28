@@ -23,10 +23,25 @@ public class ZttPurchaseSon extends BaseEntity implements Serializable{
 	private String supplier_bill_price;
 	private String end_data;
 	private String send_amount;
+	private String product;
 	private String Product_order_number;
 	private String hope_end_data;
+	private String project;
 	
 	
+	
+	public String getProject() {
+		return project;
+	}
+	public void setProject(String project) {
+		this.project = project;
+	}
+	public String getProduct() {
+		return product;
+	}
+	public void setProduct(String product) {
+		this.product = product;
+	}
 	public String getHope_end_data() {
 		return hope_end_data;
 	}

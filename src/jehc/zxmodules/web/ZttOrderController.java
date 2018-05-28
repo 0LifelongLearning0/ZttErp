@@ -252,8 +252,29 @@ public class ZttOrderController extends BaseAction {
 	public String updateZttOrder(ZttOrder zttOrder, HttpServletRequest request) {
 		int i = 0;
 		if (null != zttOrder && !"".equals(zttOrder)) {
+			ZttOrder before=zttOrderService.getZttOrderById(zttOrder.getId());
 			i = zttOrderService.updateZttOrderBySelective(zttOrder);
+			aRecord(before, zttOrder, "ztt_order",zttOrder.getId());
 		}
+		if (i > 0) {
+			return outAudStr(true);
+		} else {
+			return outAudStr(false);
+		}
+	}
+	/**
+	 * 修改状态
+	 * 
+	 * @param ztt_order
+	 * @param request
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/updateZttOrderstate", method = { RequestMethod.POST, RequestMethod.GET })
+	public String updateZttOrderstate(String id,String state, HttpServletRequest request) {
+		int i = 0;
+			ZttOrder before=zttOrderService.getZttOrderById(id);
+			before.setState(state);
+			i = zttOrderService.updateZttOrderBySelective(before);
 		if (i > 0) {
 			return outAudStr(true);
 		} else {
@@ -564,6 +585,12 @@ public class ZttOrderController extends BaseAction {
 		}
 		if(upid.equals("order")){
 			return new ModelAndView("pc/zx-view/ztt-order/newzttorderall");
+		}
+		if(upid.equals("update")){
+			ZttOrder zttOrder = zttOrderService.getZttOrderById(id);
+			model.addAttribute("upid", upid);
+			model.addAttribute("zttOrder", zttOrder);
+			return new ModelAndView("pc/zx-view/ztt-order/updateattachment");
 		}
 		else{
 			ZttOrder zttOrder = zttOrderService.getZttOrderById(id);

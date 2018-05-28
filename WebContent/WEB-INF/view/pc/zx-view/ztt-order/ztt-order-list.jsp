@@ -18,6 +18,7 @@ background-color: yellow;
 	<div class="panel panel-default padding-10 no-margin">
 		<fieldset>
 			<legend>查询区域</legend>
+			<button style="background-color: #7ED321;width:20px;height:20px;"></button>生产中
 			<form method="POST" id="searchForm" class="form-inline">
 
 				<div class="form-group">
@@ -130,6 +131,31 @@ background-color: yellow;
 					<label>成本分摊</label> <input type="text" class="form-control"
 						name="cost_share" id="cost_share" placeholder="成本分摊">
 				</div>
+				 <div class="form-group">
+					<label>联系人</label> <input type="text" class="form-control"
+						name="linkman" id="linkman" placeholder="联系人">
+				</div>
+				<div class="form-group">
+					<label>工令号批量筛选</label> 
+					<div class="input-group"><input type="text" class="form-control"
+							placeholder="起始" name="product_order_number_st" /> <span
+							class="input-group-addon">至</span> <input type="text"
+							class="form-control" placeholder="结束"
+							name="product_order_number_et" />
+							</div>
+				</div>
+				<div class="form-group">
+					<label>状态</label> 
+					<div class="input-group">
+					<input type="hidden" class="form-control"
+							id='cato_type' name="cato_type" /> 
+					<select id='cato_type_selct'>
+			<option value ="noselect">未选择</option>		
+  <option value ="madebyself">生产中</option>
+  <option value ="outside">质检中</option>
+                    </select>
+							</div>
+				</div>
 				<div class="form-group" style="margin-left: 35px;">
 					<button class="btn btn-primary" type="button"
 						onclick="search('datatables')">
@@ -179,6 +205,7 @@ background-color: yellow;
 					<th>申请日期</th>
 					<th>工令号</th>
 					<th>客户</th>
+					<th>联系人</th>
 					<th>产品名称</th>
 					<th>规格</th>
 					<th>数量</th>

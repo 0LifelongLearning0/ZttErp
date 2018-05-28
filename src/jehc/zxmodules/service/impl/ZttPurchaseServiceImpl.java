@@ -78,9 +78,11 @@ public class ZttPurchaseServiceImpl extends BaseService implements ZttPurchaseSe
 				ZttPurchase.setId(UUID.toUUID());
 				ZttPurchase.setProduct_order_number(zttPurchaseSonTempList.get(j).getProduct_order_number());
 				ZttPurchase.setAmount(zttPurchaseSonTempList.get(j).getAmount());
+				ZttPurchase.setProject(zttPurchaseSonTempList.get(j).getProject());
 				ZttPurchase.setApply_time(DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
 				ZttPurchase.setAttachment(zttPurchaseSonTempList.get(j).getAttachment());
 				ZttPurchase.setApply_id(zttPurchase1.getApply_id());
+				ZttPurchase.setUnit(zttPurchaseSonTempList.get(j).getUnit());
 				ZttPurchase.setPurchase_name(zttPurchaseSonTempList.get(j).getName());
 				ZttPurchase.setPurchase_stardard(zttPurchaseSonTempList.get(j).getPurchase_stardard());
 				ZttPurchase.setMaterial(zttPurchaseSonTempList.get(j).getMaterial());

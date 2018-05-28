@@ -58,15 +58,16 @@ $(document).ready(function() {
 //新增
 function toZttProcessproductParentAdd(){
 	var order_id=document.getElementById("order_id").value;
+	var product_order_number=document.getElementById("product_order_number").value;
 	parent.layer.open({
 		title : false,
 		type : 2,
 		area : [ '1500px', '650px' ],
 		btn : [ '关闭' ],
-		content : "../zttProcessproductParentController/toZttProcessproductParentAdd",
+		content : "../zttProcessproductParentController/toZttProcessproductParentAdd?order_id="+order_id,
 			   success: function (layero, index) {
-		           	 //巧妙的地方在这里哦
 						parent.layer.getChildFrame('body',index).contents().find("#order_id").val(order_id)
+						parent.layer.getChildFrame('body',index).contents().find("#product_order_number").val(product_order_number)
 		           	
 
 		           }
@@ -86,7 +87,7 @@ function toZttProcessproductParentDetail(id){
 	parent.layer.open({
 		title : false,
 		type : 2,
-		area : [ '1500px', '650px' ],
+		area : [ '80%', '80%' ],
 		btn : [ '关闭' ],
 		content : "../zttProcessproductParentController/toZttProcessproductParentDetail?id="+id
 	})

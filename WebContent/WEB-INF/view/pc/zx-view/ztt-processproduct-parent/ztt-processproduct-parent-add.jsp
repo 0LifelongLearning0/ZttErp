@@ -1,34 +1,21 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@ include file="/deng/include/include.jsp"%>
 <%@ include file="/deng/include/includeboot.jsp"%>
-
-
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
 <meta charset="UTF-8">
 <title></title>
-<link rel="stylesheet"
-	href="${syspath}/deng/source/plugins/other/bztree/css/bootstrapStyle/bootstrapStyle.css"
-	type="text/css">
-<script type="text/javascript"
-	src="${syspath}/deng/source/plugins/other/bztree/js/jquery.ztree.core.js"></script>
-<script type="text/javascript"
-	src="${syspath}/deng/source/plugins/other/bztree/js/jquery.ztree.excheck.js"></script>
-<script type="text/javascript"
-	src="${syspath}/deng/source/plugins/other/bztree/js/jquery.ztree.exedit.js"></script>
 </head>
 
 <body>
 <div class="panel panel-default padding-10 no-margin">
 		<fieldset>
-
 			<div class="container-fluid">
 				<div class="row col-md-8 col-md-offset-2">
 					<div class="text-center h3 pbp">机械加工工艺过程卡片</div>
 					<form class="form-horizontal" id="defaultForm" method="post">
 					<input class="form-control" type="hidden" maxlength="255"  name="order_id" id="order_id">
+					<input class="form-control" type="hidden" maxlength="255"  name="product_order_number" id="product_order_number">
 					<table id="head" class="table table-bordered">
 							<tbody>
 							<tr class="text-bold">

@@ -41,7 +41,19 @@
 			<div class="form-group">
 				<label class="col-lg-3 control-label">规格</label>
 				<div class="col-lg-6">
-					<input class="form-control" type="text" maxlength="20"  name="purchase_stardard" id="purchase_stardard" placeholder="请输入数量" value="${zttPurchase.purchase_stardard }">
+					<input class="form-control" type="text" maxlength="50"  name="purchase_stardard" id="purchase_stardard" placeholder="请输入数量" value="${zttPurchase.purchase_stardard }">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-3 control-label">单位</label>
+				<div class="col-lg-6">
+					<input class="form-control" type="text" maxlength="20"  name="unit" id="unit" placeholder="请输入单位" value="${zttPurchase.unit }">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-3 control-label">项目</label>
+				<div class="col-lg-6">
+					<input class="form-control" type="text" maxlength="20"  name="project" id="project" placeholder="请输入项目" value="${zttPurchase.project }">
 				</div>
 			</div>
 			<div class="form-group">
@@ -50,6 +62,7 @@
 					<input class="form-control" type="text" maxlength="20"  name="purchase_name" id="purchase_name" placeholder="请输入数量" value="${zttPurchase.purchase_name }">
 				</div>
 			</div>
+			
 			<div class="form-group" id="supply">
 				<label class="col-lg-3 control-label">供应商</label>
 				<div class="col-lg-6">

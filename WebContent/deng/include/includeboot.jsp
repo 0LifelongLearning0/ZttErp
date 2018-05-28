@@ -67,9 +67,14 @@
         <!-- 基础插件结束 -->
         <!-- DataTables插件开始 -->
         <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
+        <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/datatables/fixedColumns.dataTables.min.css" rel="stylesheet" type="text/css" />
+         <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/datatables/fixedColumns.bootstrap.css" rel="stylesheet" type="text/css" />
+          <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/datatables/fixedColumns.jqueryui.css" rel="stylesheet" type="text/css" />
         <script src="${syspath}/deng/source/plugins/admin/index/global/scripts/datatable.js" type="text/javascript"></script>
         <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
         <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
+         <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/datatables/dataTables.fixedColumns.min.js" type="text/javascript"></script>
+          <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/datatables/dataTables.fixedColumns.js" type="text/javascript"></script>
         <!-- DataTables插件结束 -->
         <!-- treegrid插件开始 -->
 	    <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-treegrid/css/jquery.treegrid.css" rel="stylesheet" />

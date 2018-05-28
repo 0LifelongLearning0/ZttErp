@@ -42,6 +42,8 @@
 											<option value="6">钳工</option>
 											<option value="7">线切割</option>
 											<option value="8">外协加工</option>
+											<option value="9">检验</option>
+											<option value="10">打标</option>
 									</select></td>
 									<td class="text-center">工艺内容</td>
 									<td class="text-center">

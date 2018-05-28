@@ -20,12 +20,26 @@ $(document)
 											opt);
 								},// 渲染数据
 								// 在第一位置追加序列号
+								
 								fnRowCallback : function(nRow, aData,
 										iDisplayIndex) {
 									jQuery('td:eq(1)', nRow).html(
 											iDisplayIndex + 1);
+									if(aData.state=="21"){
+										 $(nRow).css('background-color', 'grey');
+									}
+									if(aData.state=="22"){
+										 $(nRow).css('background-color', 'red');
+									}
+									 
 									return nRow;
 								},
+								/*fnRowCallback : function(nRow, aData,
+										iDisplayIndex) {
+									jQuery('td:eq(1)', nRow).html(
+											iDisplayIndex + 1);
+									return nRow;
+								},*/
 								order : [],// 取消默认排序查询,否则复选框一列会出现小箭头
 								// 列表表头字段
 								colums : [
@@ -51,13 +65,16 @@ $(document)
 											data : 'name'
 										},
 										{
+											data : 'applytime'
+										},
+										{
 											data : 'apply_user'
 										},
 										{
 											data : 'assignee'
 										},
 										{
-											data : 'Product_order_number',
+											data : 'describetion',
 											
 										},
 										{

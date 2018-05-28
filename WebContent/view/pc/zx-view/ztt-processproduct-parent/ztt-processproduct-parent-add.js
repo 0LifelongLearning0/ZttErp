@@ -26,8 +26,6 @@ $(document).ready(function(){
 			}
 
 		});*/
-		
-		
 		layer.open({
             title: false,
             type: 2,
@@ -63,10 +61,14 @@ $(document).ready(function(){
     		select="火花机";
     	}else if(index==6){
     		select="钳工";
-    	}else if(index==6){
+    	}else if(index==7){
     		select="线切割";
-    	}else if(index==6){
+    	}else if(index==8){
     		select="外协加工";
+    	}else if(index==9){
+    		select="检验";
+    	}else if(index==10){
+    		select="打标";
     	}
     	var single_price=body.contents().find('#time').val();
     	if (!/^(?:[1-9]\d*|0)(?:\.\d+)?$/.test(single_price)) {
@@ -84,7 +86,7 @@ $(document).ready(function(){
         var tooling=body.contents().find('#tooling').val();
         if(flag==0){
         	 t.row.add([
-                        counter+1,
+                        '<input type="hidden" name="zttProcessproduct['+counter+'].order_number"  value="'+(counter+1)+'"/>'+(counter+1),
                         '<input type="hidden" name="zttProcessproduct['+counter+'].Processname"  value="'+Processname+'"/>'+ select,
                         '<input type="hidden" name="zttProcessproduct['+counter+'].Processcontent" value="'+Processcontent+'"/>'+ Processcontent,
                          '<input type="hidden" name="zttProcessproduct['+counter+'].equipment" value="'+equipment+'"/>'+equipment,
@@ -198,16 +200,6 @@ function delZxGoodsApplyDetailItems(thiz,numbers){
 		$('#zxGoodsApplyDetail_removed_flag').val(zxGoodsApplyDetail_removed_flag+numbers+',')
 	}
 	reValidator('defaultForm');
-}
-//新一行
-function showmodal(){
-	document.getElementById("Processname")[0].selected=true;
-	document.getElementById("Processcontent").value="";
-     document.getElementById("equipment").value="";
-     document.getElementById("tooling").value="";
-     document.getElementById("time").value="";
-	
-	$('#addModal').modal();
 }
 
 function delrow(obj){

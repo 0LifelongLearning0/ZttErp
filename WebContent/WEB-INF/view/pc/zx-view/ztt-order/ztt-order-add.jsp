@@ -68,7 +68,7 @@
 									<td class="text-center">合同号</td>
 									<td class="text-gray" colspan="3"><input
 										class="form-control" type="text" maxlength="255"
-										name="contract_number" id="contract_number"
+										name="sale_contract_number" id="sale_contract_number"
 										placeholder="请输入合同号"></td>
 								</tr>
 								<tr>

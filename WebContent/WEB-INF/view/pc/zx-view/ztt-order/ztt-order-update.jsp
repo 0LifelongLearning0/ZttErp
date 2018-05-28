@@ -28,9 +28,16 @@
 							<tbody>
 								<tr>
 								<input class="form-control"
-									type="hidden" maxlength="255"  id="apply_id" value='${applyUser.xt_userinfo_id }'>
+									type="hidden" maxlength="255"  id="apply_id" name='apply_id' value='${zttOrder.apply_id }'>
+									<input class="form-control"
+									type="hidden" maxlength="255"  id="login_id"  value='${applyUser.xt_userinfo_id }'>
+								
+								<input class="form-control" type="hidden" name="zttordertime"  value="${zttOrder.zttordertime }"/>
+								<input class="form-control" type="hidden" name="state"  value="${zttOrder.state }"/>
+							<input class="form-control" type="hidden" name="product_order_number"  value="${zttOrder.product_order_number }"/>
+								<input class="form-control" type="hidden" name="unit"  value="${zttOrder.unit }"/>
 									<td class="col-md-1 text-center">申&ensp;请&ensp;人</td>
-									<td class="col-md-3">${applyUser.xt_userinfo_realName }</td>
+									<td class="col-md-3"></td>
 									<td class="col-md-1 text-center">部&emsp;&emsp;门</td>
 									<td class="col-md-2">${applyUser.xt_departinfo_name }</td>
 									<td class="col-md-1 text-center">申请日期</td>
@@ -44,8 +51,8 @@
 									</td>
 									<td class="col-md-1 text-center">合同号</td>
 									<td class="col-md-2"><input class="form-control" type="text"
-										maxlength="255" name="contract_number" id="contract_number"
-										value="${zttOrder.contract_number}"></td>
+										maxlength="255" name="sale_contract_number" id="sale_contract_number"
+										value="${zttOrder.sale_contract_number}"></td>
 										<td lass="col-md-1 text-center">工令号</td>
 									<td colspan="3">${zttOrder.product_order_number}</td>
 								</tr>
@@ -67,7 +74,7 @@
 									<td class="text-center">供应商</td>
 									<td colspan="3">
 									<input type="text" class="form-control"
-						name="supplier_name" id="supplyer_name" placeholder="请选择供应商">
+						name="supplier_name" id="supplyer_name" placeholder="请选择供应商" value='${zttOrder.supplier_name }'> 
 									<button type="button" class="btn btn-success"
 						onclick="selectsupplyer()" id="buttonsave">
 						<span class="glyphicon glyphicon-saved" aria-hidden="true"></span>选择
@@ -108,14 +115,25 @@
 									<td class="col-md-1 text-center">交货日期</td>
 									<td class="col-md-2">
 									<input class="form_datetime form-control"
-									type="text" maxlength="255" name="end_data" id="end_data" value='${zttOrder.end_data }' disabled="true">
+									type="text" maxlength="255" name="End_data" id="end_data" value='${zttOrder.end_data }'>
 									</td>
-									<td class="col-md-1 text-center">附件</td>
-									<td class="col-md-3"><input class="form-control"
-										type="hidden" maxlength="255" name="attachment"
-										id="attachment" value='${zttOrder.attachment }'>
-										<button class="btn btn-primary" data-toggle="button"
-											onclick="downloadattachment('${zttOrder.id}')">查看附件</button>
+									<td class="col-md-1 text-center" style="display:none" id="attachmenttd1">附件</td>
+									<td class="col-md-3"  style="display:none" id="attachmenttd2"><button class="btn btn-primary"
+											data-toggle="button" onclick="uploadattachment()" >请上传附件</button>
+										
+										<input class="form-control" type="hidden" maxlength="255"
+										name="attachmentbefore" id="attachmentbefore" value='${zttOrder.attachment }'>
+										<input class="form-control" type="hidden" maxlength="255"
+										 id="attachment" name="attachment">
+										 <input class="form-control" type="hidden" maxlength="255"
+										 id="attachmentupdate">
+										 <input class="form-control" type="hidden" maxlength="255"
+										 id="attachmentafter">
+										<button class="btn btn-primary"
+											data-toggle="button" onclick="updtachment()" >修改附件</button>
+											<input class="form-control" type="hidden" maxlength="255"
+										 id="update" value='${zttOrder.attachment }'>
+										</td>
 								</tr>
 								<tr>
 									<td class="col-md-1 text-center">erp号</td>
@@ -170,6 +188,19 @@
 								<td class="col-md-3"><input type="text"
 									class="form_datetime form-control" maxlength="32"
 									name="send_time" id="send_time" value='${zttOrder.send_time }'></td>
+								<td class="col-md-1 text-center" id="cato_typetd" style="display:none">类型</td>
+								<td class="col-md-3" id="cato_typetd1" style="display:none"><input type="hidden"
+									class="form-control" maxlength="32"
+									name="cato_type" id="cato_type" value='${zttOrder.cato_type }'>
+									<select id="selector">
+                                              <option value ="madebyself">自制</option>
+                                              <option value ="outside">外协</option>
+                                                <option value ="">未选择</option>
+
+                                    </select>
+									
+									</td>
+									
 								</tr>
 							</tbody>
 						</table>

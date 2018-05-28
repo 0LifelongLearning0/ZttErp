@@ -2,7 +2,16 @@
 function goback(){
 	tlocation("../zttProcessproductParentController/loadZttProcessproductParent");
 }
-
+function printpage(){
+	 window.print();
+}
+$(window).resize(function (){
+	 initpage();
+}
+	)
+	function intipage(){
+	
+}
 $(document).ready(function(){
 	var size=document.getElementById("size").value;
 	var index = parent.layer.getFrameIndex(window.name); 
@@ -30,7 +39,15 @@ $(document).ready(function(){
              		select="线切割";
              	}else if(index==6){
              		select="外协加工";
-             	}
+             	}else if(index==7){
+            		select="线切割";
+            	}else if(index==8){
+            		select="外协加工";
+            	}else if(index==9){
+            		select="检验";
+            	}else if(index==10){
+            		select="打标";
+            	}
                      var counter = 0;
                           t.row.add([
                               i+1,

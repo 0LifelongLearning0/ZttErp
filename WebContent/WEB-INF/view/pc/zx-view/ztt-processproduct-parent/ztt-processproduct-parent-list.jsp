@@ -12,6 +12,7 @@
 			<legend>查询区域</legend>
 			<form method="POST" id="searchForm" class="form-inline">
 			<input type="hidden" id="order_id" name="order_id" value="${order_id }"/>
+			<input type="hidden" id="product_order_number" name="product_order_number" value="${product_order_number }"/>
 			<div class="form-group" style="margin-left: 35px;">
 					
 				<button class="btn btn-primary" type="button" onclick="search('datatables')">

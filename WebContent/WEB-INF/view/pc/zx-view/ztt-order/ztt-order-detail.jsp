@@ -42,7 +42,7 @@
 		                        <td class="text-center">订单号/申请号</td>
 		                        <td>${zttOrder.order_number }</td>
 		                        <td class="text-center">合同号</td>
-		                        <td  colspan="3">${zttOrder.contract_number }</td>
+		                        <td  colspan="3">${zttOrder.sale_contract_number }</td>
 		                    </tr>
 		                    <tr>
 		                        <td class="text-center">客户</td>

@@ -30,7 +30,9 @@ $(document)
 									if(aData.state=="80"){
 										 $(nRow).css('background-color', 'grey');
 									}
-									 
+									if(aData.state=="21"){
+										 $(nRow).css('background-color', '#7ED321');
+									}
 									return nRow;
 								},
 								order : [],// 取消默认排序查询,否则复选框一列会出现小箭头
@@ -41,6 +43,9 @@ $(document)
 										console.log("aa");
 							    }
 							}] ,
+							 fixedColumns:   {
+						            leftColumns: 2
+						        },
 								// 列表表头字段
 								
 								colums : [
@@ -81,7 +86,9 @@ $(document)
 										{
 											data : 'client'
 										},
-
+										{
+											data : 'linkman'
+										},
 										{
 											data : 'product_name'
 										},
@@ -103,7 +110,7 @@ $(document)
 											data : 'order_number'
 										},
 										{
-											data : 'contract_number'
+											data : 'sale_contract_number'
 										},
 										{
 											data : 'cato_type',
@@ -253,6 +260,7 @@ $(document)
 										]
 							});
 					grid = $('#datatables').DataTable(options);
+					
 					// 实现全选反选
 					docheckboxall('checkall', 'checkchild');
 					// 实现单击行选中
@@ -270,14 +278,16 @@ $(document)
 					pickerPosition : "bottom-left",
 					language : 'zh-CN',// 中文，需要引用zh-CN.js包
 				});
-				if(apply_id=="3FDCD32960F147BFA6DCD0EC38EF9317"||apply_id=="89FE89C29E1E4E50A3BE44C4D330E0E4"||apply_id=="E10DCC044F40463F99FD663A8B2337EF"||apply_id=="7DA3010BC6F649F880C6838F27AF3B10"||apply_id=="D459A283DF5F4BE889304E985C668518"){
+				if(apply_id=="3FDCD32960F147BFA6DCD0EC38EF9317"||apply_id=="89FE89C29E1E4E50A3BE44C4D330E0E4"||apply_id=="E10DCC044F40463F99FD663A8B2337EF"||apply_id=="7DA3010BC6F649F880C6838F27AF3B10"||apply_id=="D459A283DF5F4BE889304E985C668518"||apply_id=="43E3703F12E74A988FFB5F94AC6C839B"){
 					/*var column = grid.column( $(this).attr('data-column') );*/
 					var column = grid.column(14);
 					var column1 = grid.column(15);
 					var column2 = grid.column(16);
 					var column3 = grid.column(17);
+					var column18 = grid.column(18);
 					var column4 = grid.column(19);
 					var column5 = grid.column(20);
+					var column21 = grid.column(21);
 					var column6 = grid.column(25);
 					
 					column.visible( false);
@@ -287,6 +297,8 @@ $(document)
 					column4.visible( false);
 					column5.visible( false);
 					column6.visible( false);
+					column18.visible( false);
+					column21.visible( false);
 				}
 				if(apply_id=="B161C7E4F6E84D7B81D88BD3E9ED234F"){
 					var column4 = grid.column(19);
@@ -601,3 +613,13 @@ function selectclient(){
 	 
 	}); 
 }
+
+/*function search(datatablesid){
+if($("#cato_type_selct").find("option:selected").text()=='madebyself'){
+	document.getElementById("cato_type").value="madebyself";
+}else if($("#cato_type_selct").find("option:selected").text()=='outside'){
+	document.getElementById("cato_type").value="outside";
+}
+	var datatables = $('#'+datatablesid).DataTable();
+	datatables.ajax.reload();
+}*/

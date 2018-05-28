@@ -26,9 +26,9 @@ $(document).ready(function(){
             		select="火花机";
             	}else if(index==6){
             		select="钳工";
-            	}else if(index==6){
+            	}else if(index==7){
             		select="线切割";
-            	}else if(index==6){
+            	}else if(index==8){
             		select="外协加工";
             	}
             	var single_price=document.getElementById("time").value;

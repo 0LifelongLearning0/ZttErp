@@ -6,7 +6,16 @@ $(document)
 					// ///////////jehc扩展属性目的可方便使用（boot.js文件datatablesCallBack方法使用）
 					// 如弹窗分页查找根据条件
 					// 可能此时的form发生变化 此时 可以解决该类问题
-					show();
+					/*show();*/
+					$(".form_datetime").datepicker({
+						format : "yyyy-mm-dd",
+						autoclose : true,
+						todayBtn : true,
+						todayHighlight : true,
+						showMeridian : true,
+						pickerPosition : "bottom-left",
+						language : 'zh-CN',// 中文，需要引用zh-CN.js包
+					});
 				});
 // 新增
 function toZttOrderAdd() {
@@ -300,15 +309,7 @@ function show(){
 			clickrowselected('datatables');
 			InitBDataCombo("ZttOrder", "state");
 			InitBDataCombo("cato_type", "cato_type");
-		$(".form_datetime").datepicker({
-			format : "yyyy-mm-dd",
-			autoclose : true,
-			todayBtn : true,
-			todayHighlight : true,
-			showMeridian : true,
-			pickerPosition : "bottom-left",
-			language : 'zh-CN',// 中文，需要引用zh-CN.js包
-		});
+		
 }
 function export1() {
 	$("#datatables").table2excel({
@@ -322,8 +323,9 @@ function export1() {
 }
 //筛选数据信息（重新加载查询使用，默认采用grid作为datatables）
 function search(datatablesid){
-	var datatables = $('#'+datatablesid).DataTable();
-	datatables.ajax.reload();
+	show();
+	/*var datatables = $('#'+datatablesid).DataTable();
+	datatables.ajax.reload();*/
 }
 function selectsupplyer(){
 	var upid="suppler";

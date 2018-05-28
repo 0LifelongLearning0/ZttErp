@@ -120,7 +120,7 @@ function progressupload(id) {
 	parent.layer.open({
 		title : '机械加工工艺过程卡片',
 		type : 2,
-		area : [ '1500px', '700px' ],
+		area : [ '1100px', '600px' ],
 		btn : [ '关闭' ],
 		content : "../zttProcessproductParentController/loadZttProcessproductParent?id=" + id
 				+ "&index=" + index+"&order_id=" + order_id,

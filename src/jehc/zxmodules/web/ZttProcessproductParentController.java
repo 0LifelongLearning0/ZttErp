@@ -3,6 +3,8 @@ import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.ui.Model;
+
+import jehc.zxmodules.model.ZttOrder;
 import jehc.zxmodules.model.ZttProcessproduct;
 import jehc.zxmodules.service.ZttProcessproductService;
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +21,7 @@ import jehc.xtmodules.xtcore.base.BaseSearch;
 import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.zxmodules.model.ZttProcessproductParent;
+import jehc.zxmodules.service.ZttOrderService;
 import jehc.zxmodules.service.ZttProcessproductParentService;
 
 /**
@@ -32,6 +35,8 @@ public class ZttProcessproductParentController extends BaseAction{
 	private ZttProcessproductParentService zttProcessproductParentService;
 	@Autowired
 	private ZttProcessproductService zttProcessproductService;
+	@Autowired
+	private ZttOrderService zttOrderService;
 	/**
 	* 载入初始化页面
 	* @param ztt_processproduct_parent 
@@ -42,7 +47,11 @@ public class ZttProcessproductParentController extends BaseAction{
 	public ModelAndView loadZttProcessproductParent(ZttProcessproductParent zttProcessproductParent,HttpServletRequest request,Model model){
 		String flag=request.getParameter("flag");
 		String order_id=request.getParameter("order_id");
+		ZttOrder zttOrder = zttOrderService.getZttOrderById(order_id);
 		model.addAttribute("order_id", order_id);
+		model.addAttribute("product_order_number", zttOrder.getProduct_order_number());
+		model.addAttribute("product_name", zttOrder.getProduct_name());
+		model.addAttribute("stardard", zttOrder.getStardard());
 			return new ModelAndView("pc/zx-view/ztt-processproduct-parent/ztt-processproduct-parent-list");
 		
 	}
@@ -146,7 +155,11 @@ public class ZttProcessproductParentController extends BaseAction{
 	* @param request 
 	*/
 	@RequestMapping(value="/toZttProcessproductParentAdd",method={RequestMethod.POST,RequestMethod.GET})
-	public ModelAndView toZttProcessproductParentAdd(ZttProcessproductParent zttProcessproductParent,HttpServletRequest request){
+	public ModelAndView toZttProcessproductParentAdd(ZttProcessproductParent zttProcessproductParent,String order_id,HttpServletRequest request,Model model){
+		ZttOrder zttOrder = zttOrderService.getZttOrderById(order_id);
+		model.addAttribute("order_id", order_id);
+		model.addAttribute("zttOrder", zttOrder);
+	
 		return new ModelAndView("pc/zx-view/ztt-processproduct-parent/ztt-processproduct-parent-add");
 	}
 	/**
@@ -176,6 +189,8 @@ public class ZttProcessproductParentController extends BaseAction{
 	public ModelAndView toZttProcessproductParentDetail(String id,HttpServletRequest request, Model model){
 		ZttProcessproductParent zttProcessproductParent = zttProcessproductParentService.getZttProcessproductParentById(id);
 		model.addAttribute("zttProcessproductParent", zttProcessproductParent);
+		ZttOrder zttOrder = zttOrderService.getZttOrderById(zttProcessproductParent.getOrder_id());
+		model.addAttribute("zttOrder", zttOrder);
 		model.addAttribute("size", zttProcessproductParent.getZttProcessproduct().size());
 		model.addAttribute("zttProcessproductParentJSON", outItemsStr(zttProcessproductParent));
 		return new ModelAndView("pc/zx-view/ztt-processproduct-parent/ztt-processproduct-parent-detail");

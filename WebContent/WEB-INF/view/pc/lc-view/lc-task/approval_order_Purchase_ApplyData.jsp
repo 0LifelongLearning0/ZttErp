@@ -42,6 +42,21 @@ text-align:center;
 									<td colspan="3"><label id="purchase_stardard" /></td>
 								</tr>
 								<tr>
+								<td class="text-center">材质</td>
+									<td><label id="material" /></td>
+									<td class="text-center">单位</td>
+									<td><label id="unit" /></td>
+									<td class="text-center">数量</td>
+									<td colspan="3"><label id="amount" /></td>
+								</tr>
+								<tr>
+								<td class="text-center">项目</td>
+									<td><label id="project" /></td>
+								<td class="text-center">工令号-项目-规格</td>
+									<td colspan='3'><label id="material_add" /></td>
+									
+								</tr>
+								<tr>
 								<td class="text-center">起始erp号</td>
 									<td><input class="form-control" type="text" maxlength="255"  name="erpnumber" id="erpnumber"></td>
 									

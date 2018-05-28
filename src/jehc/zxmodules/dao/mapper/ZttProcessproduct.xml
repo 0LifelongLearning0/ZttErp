@@ -17,12 +17,16 @@
 			product_person_id,
 			product_date,
 			qualified_number,
-			qualified_date
+			qualified_date,
+			cast(order_number as SIGNED INTEGER) as orderbynumber
 		FROM 
 			ztt_processproduct
-		WHERE 1=1
+		WHERE 1=1 
 		<if test = "null != parentId">
 			AND parentId = #{parentId}
+		</if>
+		<if test="null == orderby">
+			ORDER BY orderbynumber
 		</if>
 	</select>
 
@@ -174,7 +178,8 @@
 			product_person_id,
 			product_date,
 			qualified_number,
-			qualified_date
+			qualified_date,
+			order_number
 			)
 			VALUES
 		<foreach collection="list" item="item" index="index" separator=",">
@@ -191,7 +196,8 @@
 			#{item.product_person_id},
 			#{item.product_date},
 			#{item.qualified_number},
-			#{item.qualified_date}
+			#{item.qualified_date},
+			#{item.order_number}
 			)
 		</foreach>
 	</insert>

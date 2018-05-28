@@ -15,6 +15,7 @@ public class ZttOrder extends BaseEntity implements Serializable {
 	private String order_number;
 	/** 订单号/申请号 **/
 	private String contract_number;
+	private String sale_contract_number;
 	/** 合同号 **/
 	private String erp_number;
 	/** erp号 **/
@@ -96,6 +97,14 @@ public class ZttOrder extends BaseEntity implements Serializable {
 
 	public String getDept_check_id() {
 		return dept_check_id;
+	}
+
+	public String getSale_contract_number() {
+		return sale_contract_number;
+	}
+
+	public void setSale_contract_number(String sale_contract_number) {
+		this.sale_contract_number = sale_contract_number;
 	}
 
 	public String getBill_date_open() {
