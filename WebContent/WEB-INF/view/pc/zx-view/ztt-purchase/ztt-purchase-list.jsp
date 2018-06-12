@@ -99,7 +99,7 @@ background-color: yellow;
 				<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
 			</button>
 			<button class="btn btn-default" onclick="export1()">
-				<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>导出
+				<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>全部导出
 			</button>
 		</div>
 		<table id="datatables" class="table table-bordered table-striped table-hover">

@@ -43,6 +43,9 @@ $(document).ready(function(){
          
         });
 	}
+	function reselect(index){
+		InitBDataCombogongxu
+	}
 	function addRow(layero){
 		var flag=0;
         var body = layer.getChildFrame('body', layero); 
@@ -82,8 +85,10 @@ $(document).ready(function(){
     		layer.alert("请选择工序名称");
     	}
         var Processcontent=body.contents().find('#Processcontent').val();
-        var equipment=body.contents().find('#equipment').val();
-        var tooling=body.contents().find('#tooling').val();
+      /*  var equipment=body.contents().find('#equipment').val();
+        var tooling=body.contents().find('#tooling').val();*/
+        var equipment="";
+        var tooling="";
         if(flag==0){
         	 t.row.add([
                         '<input type="hidden" name="zttProcessproduct['+counter+'].order_number"  value="'+(counter+1)+'"/>'+(counter+1),

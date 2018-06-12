@@ -47,6 +47,7 @@
 								<th class="col-md-1 text-center">状态</th>
 								<th class="col-md-2 text-center">时间</th>
 								<th class="col-md-1 text-center">报告简要</th>
+								<th class="col-md-1 text-center">审批人</th>
 								<th class="col-md-1 text-center">操作</th>
 							</tr>
 						</thead>

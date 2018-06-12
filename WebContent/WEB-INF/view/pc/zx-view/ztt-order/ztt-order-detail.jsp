@@ -86,6 +86,15 @@
 		                        <td class="col-md-1 text-center" id="erp1">加工工艺过程</td>
 		                        <td class="col-md-3" id="erp2"><button class="btn btn-primary" data-toggle="button" onclick="progressupload()">查看</button></td>
 		                    </tr>
+		                    <tr>
+											
+												<td class="col-md-1 text-center" id="cato_typetd" >备注</td>
+									<td class="col-md-3" id="cato_typetd1" colspan="4">
+									<textarea style="width:600px;height:100px;" id="comment" name="comment">${zttOrder.comment }</textarea>
+									
+									</td>
+									
+								</tr>
 		                </tbody>
 		            </table>
                 </div>

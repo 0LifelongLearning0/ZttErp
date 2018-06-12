@@ -33,38 +33,20 @@
 								<tr>
 									<td class="text-center">工序名称</td>
 									<td class="text-gray"><select id="Processname">
-									        <option value="0">请选择</option>
-											<option value="1">下料</option>
-											<option value="2">普车加工</option>
-											<option value="3">数车加工</option>
-											<option value="4">加工中心</option>
-											<option value="5">火花机</option>
-											<option value="6">钳工</option>
-											<option value="7">线切割</option>
-											<option value="8">外协加工</option>
-											<option value="9">检验</option>
-											<option value="10">打标</option>
 									</select></td>
-									<td class="text-center">工艺内容</td>
-									<td class="text-center">
-									<input class="form-control" type="text" maxlength="32" id="Processcontent" name="Processcontent">
-									</td>
-								</tr>
-								<tr>
-									<td class="text-center">设备</td>
-									<td class="text-gray">
-									<input class="form-control" type="text" maxlength="32" id="equipment" name="equipment"></td>
-									<td class="text-center">工艺装备</td>
-									<td class="text-center">
-									<input class="form-control" type="text" maxlength="32" id="tooling" name="tooling">
-									</td>
-								</tr>
-								<tr>
 									<td class="text-center">单价</td>
 									<td class="text-gray"><input class="form-control" type="text" maxlength="32" id="time" name="single_price"></td>
-									<td class="text-center"></td>
-									<td class="text-center">
+								</tr>
+								<tr>
+									<td class="text-center">工艺内容</td>
+									<td class="text-center" colspan="3">
+									<!-- <input class="form-control" type="text" maxlength="32" id="Processcontent" name="Processcontent"> -->
+									
+									<textarea rows="10" cols="20" id="Processcontent" name="Processcontent"></textarea>
 									</td>
+								</tr>
+								<tr>
+									
 								</tr>
 							</tbody>
 						</table>

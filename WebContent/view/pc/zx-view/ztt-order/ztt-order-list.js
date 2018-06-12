@@ -13,7 +13,8 @@ $(document)
 						};
 					 
 					var options = DataTablesPaging
-							.pagingOptions({
+							.pagingOptions(
+									{
 								ajax : function(data, callback, settings) {
 									datatablesCallBack(
 											data,
@@ -32,6 +33,12 @@ $(document)
 									}
 									if(aData.state=="21"){
 										 $(nRow).css('background-color', '#7ED321');
+									}
+									if(aData.change_state=="1"){
+										 $(nRow).css('background-color', '#ea9999');
+									}
+									if(aData.change_state=="2"){
+										 $(nRow).css('background-color', '#b5eaf2');
 									}
 									return nRow;
 								},
@@ -309,10 +316,33 @@ $(document)
 					column5.visible( false);
 					column6.visible( false);
 				}
+				$(this).keydown(function (e){
+					if(e.which == "13"){
+						search('datatables');//触发该事件
+					} 
+					})
 				});
 // 新增
 function toZttOrderAdd() {
 	tlocation('../zttOrderController/toZttOrderAdd');
+}
+
+function toZttOrderUpdatebybatch() {
+	if ($(".checkchild:checked").length != 1) {
+		toastrBoot(4, "选择数据非法");
+		return;
+	}
+	var id = $(".checkchild:checked").val();
+	layer.open({
+		title : '修改界面',
+		type : 2,
+		area : [ '1500px', '600px' ],
+		btn : [ '关闭' ],
+		content : "../zttOrderController/toZttOrderUpdate?id=" + id
+
+	})
+	/*var id = $(".checkchild:checked").val();
+	tlocation("../zttOrderController/toZttOrderUpdate?id=" + id);*/
 }
 // 修改
 function toZttOrderUpdate() {
@@ -335,9 +365,9 @@ function toZttOrderUpdate() {
 // 详情
 function toZttOrderDetail(id, state) {
 	layer.open({
-		title : '修改界面',
+		title : '明细界面',
 		type : 2,
-		area : [ '1500px', '600px' ],
+		area : [ '80%', '80%' ],
 		btn : [ '关闭' ],
 		content : "../zttOrderController/toZttOrderDetail?id=" + id+ "&state="+ state
 	})
@@ -435,7 +465,7 @@ function toApply(id,product_order_number) {
 	}
 	msgTishCallFnBoot("确定要申请审批吗？", function() {
 		var params = {
-			apply_id : id,
+			id : id,
 			product_order_number:product_order_number
 		};
 		ajaxBReq('../zttOrderController/toApply', params, [ 'datatables' ]);

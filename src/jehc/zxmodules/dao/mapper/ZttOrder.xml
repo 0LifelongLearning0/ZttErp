@@ -5,7 +5,7 @@
 	<!--初始化分页 -->
 	<select id="getZttOrderListByCondition" resultType="jehc.zxmodules.model.ZttOrder"
 		parameterType="map">
-		SELECT
+	select c.*,d.id as parent_product_id from (SELECT
 		a.id,
 		a.order_number,
 		a.contract_number,
@@ -40,11 +40,14 @@
 	    a.bill_price,
 	    a.cost_share,
 	    a.sale_contract_number,
+	    a.change_state,
+	    a.comment,
 		b.xt_userinfo_realName as personname
 		FROM
 		ztt_order a,xt_userinfo b
 		WHERE 1=1 and
-		a.apply_id=b.xt_userinfo_id and a.state!='20'
+		a.apply_id=b.xt_userinfo_id and a.state!='20')c LEFT JOIN ztt_processproduct_parent d on c.id=d.order_id where 1=1
+
 		<if test="null != state">
 			AND instr(state,#{state})
 		</if>
@@ -234,7 +237,9 @@
 		send_amount,
 		bill_date_open,
 		bill_price,
-		cost_share
+		cost_share,
+		change_state,
+		comment
 		FROM
 		ztt_order
 		WHERE
@@ -353,7 +358,9 @@
 		End_data,
 		zttordertime,
 		apply_id,
-		state
+		state,
+		change_state,
+		comment
 		)
 		VALUES
 		(
@@ -374,7 +381,9 @@
 		#{End_data},
 		#{zttordertime},
 		#{apply_id},
-		#{state}
+		#{state},
+		#{change_state},
+		#{comment}
 		)
 	</insert>
 	<!--添加历史记录表 -->
@@ -505,8 +514,10 @@
 		zttordertime = #{zttordertime},
 		apply_id = #{apply_id},
 		cato_type = #{cato_type},
-		state = #{state}
-		WHERE id=#{id}
+		state = #{state},
+		change_state=#{change_state},
+		WHERE id=#{id},
+		comment=#{comment}
 	</update>
 
 
@@ -689,6 +700,12 @@
 			</if>
 			<if test="cost_share != null">
 				cost_share = #{cost_share},
+			</if>
+			<if test="change_state != null">
+				change_state = #{change_state},
+			</if>
+			<if test="comment != null">
+				comment = #{comment},
 			</if>
 		</set>
 		WHERE id=#{id}

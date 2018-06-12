@@ -5,13 +5,6 @@ function goback(){
 function printpage(){
 	 window.print();
 }
-$(window).resize(function (){
-	 initpage();
-}
-	)
-	function intipage(){
-	
-}
 $(document).ready(function(){
 	var size=document.getElementById("size").value;
 	var index = parent.layer.getFrameIndex(window.name); 
@@ -22,8 +15,8 @@ $(document).ready(function(){
             });
              for(var i=0;i<size;i++){
                  var index= document.getElementById("ztt_processproduct["+i+"].processname").value;
-                 var select;
-                 if(index==1){
+                 var select=InitBDataCombogongxu1(index);
+                /* if(index==1){
              		select="下料";
              	}else if(index==2){
              		select="普车加工";
@@ -47,14 +40,14 @@ $(document).ready(function(){
             		select="检验";
             	}else if(index==10){
             		select="打标";
-            	}
+            	}*/
                      var counter = 0;
                           t.row.add([
                               i+1,
                               '<input type="hidden"/>'+select,
                               document.getElementById("ztt_processproduct["+i+"].processcontent").value,
-                               document.getElementById("ztt_processproduct["+i+"].equipment").value,
-                              document.getElementById("ztt_processproduct["+i+"].tooling").value,
+                               document.getElementById("ztt_processproduct["+i+"].device_name").value,
+                              document.getElementById("ztt_processproduct["+i+"].xt_userinfo_name").value,
                               document.getElementById("ztt_processproduct["+i+"].single_price").value,
                               document.getElementById("ztt_processproduct["+i+"].sum_price").value
                           ]).draw();

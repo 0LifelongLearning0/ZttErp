@@ -57,7 +57,7 @@
 									<th class="col-md-2 text-center">工序名称</th>
 									<th class="col-md-2 text-center">工艺内容</th>
 									<th class="col-md-2 text-center">设备</th>
-									<th class="col-md-2 text-center">工艺装备</th>
+									<th class="col-md-2 text-center">负责人</th>
 									<th class="col-md-2 text-center">单价</th>
 									<th class="col-md-2 text-center">总价</th>
 									<th class="col-md-1 text-center">合格件数</th>

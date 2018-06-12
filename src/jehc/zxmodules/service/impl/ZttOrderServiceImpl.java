@@ -306,12 +306,14 @@ public class ZttOrderServiceImpl extends BaseService implements ZttOrderService{
 	}
 	public int toApply(String apply_id,String id,String product_order_number){
 		int i = 0;
-		if (null != apply_id && !"".equals(apply_id)) {
+		if (null != id && !"".equals(id)) {
+			
 			String dep_user_id = null;
 			Map<String, Object> conditionr = new HashMap<String, Object>();
 			conditionr.put("flag", 1);
 			List<XtUserinfo> xtUserinfoList = xtURService.getXtURListByCondition(conditionr);
 			ZttOrder zttOrder =getZttOrderById(id);
+			apply_id=zttOrder.getApply_id();
 			String order_number=null;
 			XtConstant Xt_Constant = getXtConstantCache("ZttOrderApply");
 			Map<String, Object> condition = new HashMap<String, Object>();
@@ -319,6 +321,7 @@ public class ZttOrderServiceImpl extends BaseService implements ZttOrderService{
 			String lc_his_id = lc_Deployment_HisService.getLcDeploymentHisNewUnique(condition).getId();
 			LcApply lc_Apply = new LcApply();
 			Map<String, Object> variables = new HashMap<String, Object>();
+			
 			variables.put("taskType", "业务人员下单流程");
 			variables.put("owner", apply_id);
 			variables.put("taskkind", "ztt_sales");
@@ -394,9 +397,11 @@ public class ZttOrderServiceImpl extends BaseService implements ZttOrderService{
 	*/
 	public int delZttOrderTask(String bussiness_id){
 		int i = 0;
-		LcApply LcApply=lcApplyDao.getLcApplyByBussinessId(bussiness_id.split(",")[0]);
-		lcApplyDao.update_act_ru_task(LcApply);
-		System.out.println(LcApply.getProcessInstance_id());
+		List<LcApply> LcApply=lcApplyDao.getLcApplyByBussinessId(bussiness_id.split(",")[0]);
+		for(int j=0;j<LcApply.size();j++){
+			lcApplyDao.update_act_ru_task(LcApply.get(j));
+		}
+		
 		try {
 		} catch (Exception e) {
 			i = 0;

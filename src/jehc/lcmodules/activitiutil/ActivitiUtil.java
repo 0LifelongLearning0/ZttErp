@@ -973,6 +973,11 @@ public class ActivitiUtil extends BaseService{
 			LcDeploymentHis lc_Deployment_His = lc_Deployment_HisDao.getLcDeploymentHisById(id);
 			XtConstant xtConstant = xt_ConstantDao.getXtConstantById(lc_Deployment_His.getXt_constant_id());
 			LcApplyDao lc_ApplyService = (LcApplyDao)SpringUtil.getBean("lcApplyDao");
+			List<LcApply> LcApply1=lc_ApplyService.getLcApplyByBussinessId(businessKey);
+			for(int i=0;i<LcApply1.size();i++){
+				lc_ApplyService.update_act_ru_task(LcApply1.get(i));
+			}
+			
 			ProcessDefinition processDefinition = getProcessDefinition(lc_Deployment_His.getLc_deployment_his_id());
 			ProcessInstance procesInstance = startProcessInstanceByKey(processDefinition.getKey(), businessKey, variables);
 			/**Activiti发起实例模块(即提交发起申请)开始**/

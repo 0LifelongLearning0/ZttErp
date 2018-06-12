@@ -27,9 +27,16 @@ public class ZttPurchaseSon extends BaseEntity implements Serializable{
 	private String Product_order_number;
 	private String hope_end_data;
 	private String project;
+	private String comment;
 	
 	
 	
+	public String getComment() {
+		return comment;
+	}
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
 	public String getProject() {
 		return project;
 	}

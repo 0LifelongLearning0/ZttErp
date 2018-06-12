@@ -110,7 +110,8 @@
 			supplier_bill_price,
 			attachment,
 			end_data,
-			send_amount
+			send_amount,
+			comment
 		FROM 
 			ztt_purchase
 		WHERE id=#{id}
@@ -140,7 +141,8 @@
 			check_attachment,
 			state,
 			attachment,
-			send_amount
+			send_amount,
+			comment
 			)
 			VALUES
 			(
@@ -163,7 +165,8 @@
 			#{check_attachment},
 			#{state},
 			#{attachment},
-			#{send_amount}
+			#{send_amount},
+			#{comment}
 			)
 	</insert>
 
@@ -189,7 +192,8 @@
 			check_attachment = #{check_attachment},
 			project = #{project},
 			attachment = #{attachment},
-			send_amount = #{send_amount}
+			send_amount = #{send_amount},
+			comment = #{comment}
 		WHERE id=#{id}
 	</update>
 
@@ -279,6 +283,9 @@
 			<if test="send_amount != null">
 				send_amount = #{send_amount},
 			</if>
+			<if test="comment != null">
+				comment = #{comment},
+			</if>
 		</set>
 		WHERE id=#{id}
 	</update>
@@ -315,7 +322,8 @@
 			check_attachment,
 			project,
 			attachment,
-			state
+			state,
+			comment
 			)
 			VALUES
 		<foreach collection="list" item="item" index="index" separator=",">
@@ -339,7 +347,8 @@
 			#{item.check_attachment},
 			#{item.project},
 			#{item.attachment},
-			#{item.state}
+			#{item.state},
+			#{item.comment}
 			)
 		</foreach>
 	</insert>

@@ -50,10 +50,14 @@ public class ZttPurchaseServiceImpl extends BaseService implements ZttPurchaseSe
 	public ZttPurchase getZttPurchaseById(String id){
 		try{
 			ZttPurchase zttPurchase = zttPurchaseDao.getZttPurchaseById(id);
-			Map<String, Object> condition = new HashMap<String, Object>();
-			condition.put("parent_id", id);
-			List<ZttPurchaseSon> zttPurchaseSon = zttPurchaseSonService.getZttPurchaseSonListByCondition(condition);
-			zttPurchase.setZttPurchaseSon(zttPurchaseSon);
+			if(zttPurchase==null){
+				System.out.println();
+			}else{
+				Map<String, Object> condition = new HashMap<String, Object>();
+				condition.put("parent_id", id);
+				List<ZttPurchaseSon> zttPurchaseSon = zttPurchaseSonService.getZttPurchaseSonListByCondition(condition);
+				zttPurchase.setZttPurchaseSon(zttPurchaseSon);
+			}
 			return zttPurchase;
 		} catch (Exception e) {
 			
@@ -88,6 +92,7 @@ public class ZttPurchaseServiceImpl extends BaseService implements ZttPurchaseSe
 				ZttPurchase.setMaterial(zttPurchaseSonTempList.get(j).getMaterial());
 				ZttPurchase.setHope_end_data(zttPurchaseSonTempList.get(j).getHope_end_data());
 				ZttPurchase.setAttachment(zttPurchaseSonTempList.get(j).getAttachment());
+				ZttPurchase.setComment(zttPurchaseSonTempList.get(j).getComment());
 				ZttPurchase.setState("0");
 				zttPurchaseList.add(ZttPurchase);
 			}

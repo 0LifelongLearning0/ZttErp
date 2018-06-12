@@ -7,21 +7,37 @@ function updateZttOrder() {
 	var attachmentbefore=document.getElementById("attachmentbefore").value;
 	var attachmentupload=document.getElementById("attachment").value;
 	var attachment=document.getElementById("attachmentafter").value;
-	if(attachmentupload==""){
-		var attachment=attachmentbefore;
-	}else{
-		var attachment=attachmentbefore+","+attachmentupload;
+	if(attachmentbefore==""){
+		attachment=attachmentupload;
+	}
+	else if(attachmentupload==""){
+		attachment=attachmentbefore;
+	}
+	else{
+		attachment=attachmentbefore+","+attachmentupload;
+	}
+	var cato_type_before=document.getElementById("cato_type_before").value;
+	
+	document.getElementById("cato_type").value=$("#selector").val();
+	document.getElementById("attachment").value=attachment;
+	var cato_type=document.getElementById("cato_type").value;
+	if(cato_type_before=="madebyself"&&cato_type=='outside'){
+		layer.alert("请确认已填写自制改外协时间和原因,原自制单生产状态");
+		document.getElementById("change_state").value='1';
+		document.getElementById("state").value='0';
+	}
+	if(cato_type_before=="outside"&&cato_type=='madebyself'){
+		layer.alert("请确认已填写外协改自制时间和原因,原外协单状态,并电话通知相应采购员");
+		document.getElementById("change_state").value='2';
+		document.getElementById("state").value='0';
 	}
 	
-	document.getElementById("attachment").value=attachment;
-	document.getElementById("cato_type").value=$("#selector").val();
 	submitBForm('defaultForm', '../zttOrderController/updateZttOrder',
 			'../zttOrderController/loadZttOrder');
 	 
 }
 // 发起提交表单
 function submitBForm(formid, url, callUrl) {
-	var bill=document.getElementById("bill_date_open").value;
 
 	if (null == formid || '' == formid) {
 		window.parent.toastrBoot(4, "未能获取到formid!");
@@ -101,6 +117,8 @@ $(function() {
 		document.getElementById("single_price").readOnly = true;
 	}
 	if(apply_id=="B75750C01CAB4D0A88BD95A964D3BA2C"){
+		document.getElementById("attachmenttd1").style.display="";
+		document.getElementById("attachmenttd2").style.display="";
 		document.getElementById("amount").readOnly = false;
 		 document.getElementById( "cato_typetd").style.display= "";
 		 document.getElementById( "cato_typetd1").style.display= "";

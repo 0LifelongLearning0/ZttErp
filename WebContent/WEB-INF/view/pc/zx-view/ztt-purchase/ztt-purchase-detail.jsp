@@ -86,6 +86,12 @@
 				</div>
 			</div>
 			<div class="form-group">
+				<label class="col-lg-3 control-label">备注</label>
+				<div class="col-lg-6">
+					<input class="form-control" type="text" maxlength="255"  name="comment" id="comment" value='${zttPurchase.comment }'>
+				</div>
+			</div>
+			<div class="form-group">
 				<label class="col-lg-3 control-label"></label>
 				<div class="col-lg-6">
 					<button type="button" class="btn default" onclick="goback()">返回</button>

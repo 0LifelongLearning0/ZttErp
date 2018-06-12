@@ -49,10 +49,14 @@ $(document)
 											data : 'status_name'
 										},
 										{
-											data : 'approval_time'
+											data : 'lc_approval_time_tos'
 										},
 										{
 											data : 'product_check_comment',
+											
+										},
+										{
+											data : 'xt_userinfo_realName',
 											
 										},
 										/*{

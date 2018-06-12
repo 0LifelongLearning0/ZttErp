@@ -9,6 +9,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -93,6 +94,8 @@ public class ZttOrderController extends BaseAction {
 	private ZttOrderbyselfService zttOrderbyselfService;
 	@Autowired
 	private HttpServletRequest request;
+	@Autowired
+	private LcApprovalService lcApprovalService;
 
 	/**
 	 * 载入初始化页面
@@ -171,8 +174,24 @@ public class ZttOrderController extends BaseAction {
 	public String getZttOrderfilehistory(String id, BaseSearch baseSearch, HttpServletRequest request) {
 		Map<String, Object> condition = baseSearch.convert();
 		commonHPager(condition, request);
-		List<ztt_filerecord> ztt_filerecord = zttOrderService.getfilerecordById(condition);
-		PageInfo<ztt_filerecord> page = new PageInfo<ztt_filerecord>(ztt_filerecord);
+		Map<String, Object> condition1 =new HashMap<String, Object>();
+		Map<String, Object> condition2 =new HashMap<String, Object>();
+		condition2.put("lc_apply_model_biz_id", condition.get("order_id"));
+		List<LcApply> list = lcApplyService.getLcApplyListByCondition(condition2);
+		
+		String lc_apply_id="";
+		if(!list.isEmpty()){
+			lc_apply_id=list.get(0).getLc_apply_id();
+		}
+	
+		condition1.put("lc_apply_id", lc_apply_id);
+		List<LcApproval> lc_ApprovalList= lcApprovalService.getLcApprovalListByCondition(condition1);
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		for(int i=0;i<lc_ApprovalList.size();i++){
+			lc_ApprovalList.get(i).setLc_approval_time_tos(sdf.format(lc_ApprovalList.get(i).getLc_approval_time()));
+		}
+		PageInfo<LcApproval> page = new PageInfo<LcApproval>(lc_ApprovalList);
 		return outPageBootStr(page, request);
 	}
 
@@ -432,7 +451,9 @@ public class ZttOrderController extends BaseAction {
 			zttOrder.setId(a);
 			j=j+1;
 			if (null != zttOrder && !"".equals(zttOrder)) {
-				i = zttOrderService.updateZttOrderBySelective(zttOrder);
+				ZttOrder zttOrderafter=zttOrderService.getZttOrderById(zttOrder.getId());
+				zttOrderafter.setCost_share(zttOrder.getCost_share());
+				i = zttOrderService.updateZttOrderBySelective(zttOrderafter);
 			}
 		}
 		
@@ -610,7 +631,11 @@ public class ZttOrderController extends BaseAction {
 		model.addAttribute("zttOrder", zttOrder);
 		if(upid.equals("client")){
 			return new ModelAndView("pc/zx-view/ztt-order/selectclient");
-		}else{
+		}else if(upid.equals("device")){
+			return new ModelAndView("pc/zx-view/ztt-moulds-gongxu/ztt-moulds-gongxu-device-list");
+		}
+		
+		else{
 			return new ModelAndView("pc/zx-view/ztt-order/selectsupplyer");
 		}
 		

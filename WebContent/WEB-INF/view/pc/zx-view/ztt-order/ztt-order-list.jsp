@@ -19,6 +19,8 @@ background-color: yellow;
 		<fieldset>
 			<legend>查询区域</legend>
 			<button style="background-color: #7ED321;width:20px;height:20px;"></button>生产中
+			<button style="background-color: #ea9999;width:20px;height:20px;"></button>自制改外协
+			<button style="background-color: #b5eaf2;width:20px;height:20px;"></button>外协改自制
 			<form method="POST" id="searchForm" class="form-inline">
 
 				<div class="form-group">
@@ -170,6 +172,9 @@ background-color: yellow;
 	</div>
 	<div class="panel-body">
 		<div class="btn-group pull-right" style="margin-right: 20px;">
+		<button class="btn btn-default" onclick="batchapply()">
+				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>批量修改
+			</button>
 			<button class="btn btn-default" onclick="toZttOrderAdd()">
 				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
 			</button>

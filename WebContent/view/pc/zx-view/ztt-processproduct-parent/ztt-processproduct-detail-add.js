@@ -2,7 +2,7 @@ var numbers=-1;
 var t;
 var counter;
 $(document).ready(function(){
-             
+	InitBDataCombogongxu("Processname");
             });
             
 	function showaddpage(){

@@ -4,30 +4,18 @@
 <mapper namespace="jehc.zxmodules.model.ZttProcessproduct">
 	<!--初始化分页-->
 	<select id="getZttProcessproductListByCondition" resultType="jehc.zxmodules.model.ZttProcessproduct" parameterType="map">
-		SELECT
-			id,
-			order_id,
-			parentId,
-			Processname,
-			Processcontent,
-			equipment,
-			tooling,
-			single_price,
-			sum_price,
-			product_person_id,
-			product_date,
-			qualified_number,
-			qualified_date,
-			cast(order_number as SIGNED INTEGER) as orderbynumber
-		FROM 
-			ztt_processproduct
+		select a1.*,c.device_name,d.xt_userinfo_name from (
+select a.id as id,a.order_id as order_id,a.parentId as parentId,a.Processname as Processname,a.Processcontent as Processcontent,a.equipment
+ as equipment, a.tooling as tooling,a.order_number as order_number,
+	a.single_price as single_price,
+			a.sum_price as sum_price,
+		b.id as gongxu_id  from ztt_processproduct a,ztt_moulds_gongxu b
 		WHERE 1=1 
 		<if test = "null != parentId">
 			AND parentId = #{parentId}
 		</if>
-		<if test="null == orderby">
-			ORDER BY orderbynumber
-		</if>
+		and a.order_number=b.number) 
+a1 LEFT JOIN ztt_moulds_deivice c on a1.equipment=c.id left join ztt_moju_userinfo d on a1.tooling=d.xt_userinfo_id ORDER BY cast(a1.order_number as SIGNED INTEGER)
 	</select>
 
 	<!--查询对象-->

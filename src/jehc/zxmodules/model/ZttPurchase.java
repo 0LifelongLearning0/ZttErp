@@ -41,6 +41,7 @@ public class ZttPurchase extends BaseEntity implements Serializable{
 	private String attachment;
 	private String send_amount;
 	private String project;
+	private String comment;
 	private List<ZttPurchaseSon> zttPurchaseSon;/**采购子台账**/
 	private String zttPurchaseSon_removed_flag;/**采购子台账移除标识**/
 	public String getNot_satisfy_reason() {
@@ -50,6 +51,12 @@ public class ZttPurchase extends BaseEntity implements Serializable{
 		this.not_satisfy_reason = not_satisfy_reason;
 	}
 	
+	public String getComment() {
+		return comment;
+	}
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
 	public String getProject() {
 		return project;
 	}

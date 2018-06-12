@@ -58,5 +58,5 @@ public interface LcApplyDao{
 	 * @return
 	 */
 	public List<LcApply> getLcApplyList(Map<String,Object> condition);
-	public LcApply getLcApplyByBussinessId(String lc_apply_model_id);
+	public List<LcApply> getLcApplyByBussinessId(String lc_apply_model_id);
 }

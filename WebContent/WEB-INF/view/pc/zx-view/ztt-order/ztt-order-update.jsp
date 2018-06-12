@@ -33,7 +33,7 @@
 									type="hidden" maxlength="255"  id="login_id"  value='${applyUser.xt_userinfo_id }'>
 								
 								<input class="form-control" type="hidden" name="zttordertime"  value="${zttOrder.zttordertime }"/>
-								<input class="form-control" type="hidden" name="state"  value="${zttOrder.state }"/>
+								<input class="form-control" type="hidden" name="state" id='state' value="${zttOrder.state }"/>
 							<input class="form-control" type="hidden" name="product_order_number"  value="${zttOrder.product_order_number }"/>
 								<input class="form-control" type="hidden" name="unit"  value="${zttOrder.unit }"/>
 									<td class="col-md-1 text-center">申&ensp;请&ensp;人</td>
@@ -192,12 +192,27 @@
 								<td class="col-md-3" id="cato_typetd1" style="display:none"><input type="hidden"
 									class="form-control" maxlength="32"
 									name="cato_type" id="cato_type" value='${zttOrder.cato_type }'>
+									<input type="hidden"
+									class="form-control" maxlength="32"
+									 id="cato_type_before" value='${zttOrder.cato_type }'>
+									 <input type="hidden"
+									class="form-control" maxlength="32"
+								 name="change_state" id="change_state" value='${zttOrder.change_state }'>
 									<select id="selector">
                                               <option value ="madebyself">自制</option>
                                               <option value ="outside">外协</option>
                                                 <option value ="">未选择</option>
 
                                     </select>
+									
+									</td>
+										</tr>
+										
+											<tr>
+											
+												<td class="col-md-1 text-center" id="cato_typetd" >备注</td>
+									<td class="col-md-3" id="cato_typetd1" colspan="4">
+									<textarea style="width:600px;height:100px;" id="comment" name="comment">${zttOrder.comment }</textarea>
 									
 									</td>
 									

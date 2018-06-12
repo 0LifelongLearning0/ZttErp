@@ -16,6 +16,7 @@ public class LcApproval extends BaseEntity implements Serializable{
 	private String lc_approval_remark;/**作流工审批内容**/
 	private String taskId;/**activiti任务id**/
 	private Date lc_approval_time;/**审批时间**/
+	private String lc_approval_time_tos;
 	private String xt_userinfo_id;/**批审人**/
 	private String lc_status_name;
 	public void setLc_approval_id(String lc_approval_id){
@@ -23,6 +24,13 @@ public class LcApproval extends BaseEntity implements Serializable{
 	}
 	public String getLc_approval_id(){
 		return lc_approval_id;
+	}
+	
+	public String getLc_approval_time_tos() {
+		return lc_approval_time_tos;
+	}
+	public void setLc_approval_time_tos(String lc_approval_time_tos) {
+		this.lc_approval_time_tos = lc_approval_time_tos;
 	}
 	public void setLc_status_id(String lc_status_id){
 		this.lc_status_id=lc_status_id;

@@ -74,7 +74,7 @@
 
 	<!--根据busnisee_id号查找集合 -->
 	<select id="getLcApplyByBussinessId" resultType="jehc.lcmodules.lcmodel.LcApply"
-		parameterType="string">
+		parameterType="map">
 		SELECT
 		lc_apply.lc_apply_id,
 		lc_apply.lc_apply_title,

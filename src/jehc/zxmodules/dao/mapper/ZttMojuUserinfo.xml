@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.zxmodules.model.ZttMojuUserinfo">
+	<!--初始化分页-->
+	<select id="getZttMojuUserinfoListByCondition" resultType="jehc.zxmodules.model.ZttMojuUserinfo" parameterType="map">
+		SELECT
+				a.xt_userinfo_id,
+			a.xt_device_id,
+			a.xt_userinfo_name,
+			
+			a.xt_userinfo_realName,
+b.device_name,
+c.gongxu_name
+		FROM 
+			ztt_moju_userinfo a,ztt_moulds_deivice b,ztt_moulds_gongxu c
+		WHERE 1=1 and a.xt_device_id=b.id and b.gongxu_id=c.id
+	</select>
+
+	<!--查询对象-->
+	<select id="getZttMojuUserinfoById" resultType="jehc.zxmodules.model.ZttMojuUserinfo" parameterType="string">
+		SELECT
+			a.xt_userinfo_id,
+			a.xt_device_id,
+			a.xt_userinfo_name,
+			a.xt_userinfo_passWord,
+			a.xt_userinfo_isDelete,
+			a.xt_userinfo_realName,
+			a.xt_userinfo_sex,
+			a.xt_userinfo_mobile,
+			a.xt_userinfo_ortherTel,
+			a.isonjob,
+			a.xt_userinfo_intime,
+			a.xt_userinfo_outTime,
+			a.xt_userinfo_qq,
+			b.device_name
+		FROM 
+			ztt_moju_userinfo a,ztt_moulds_deivice b
+		WHERE a.xt_userinfo_id=#{xt_userinfo_id} and a.xt_device_id=b.id
+	</select>
+
+	<!--添加-->
+	<insert id="addZttMojuUserinfo" parameterType="jehc.zxmodules.model.ZttMojuUserinfo">
+		INSERT INTO
+			ztt_moju_userinfo
+			(
+			xt_userinfo_id,
+			xt_device_id,
+			xt_userinfo_name,
+			xt_userinfo_passWord,
+			xt_userinfo_isDelete,
+			xt_userinfo_realName,
+			xt_userinfo_sex,
+			xt_userinfo_mobile,
+			xt_userinfo_ortherTel,
+			isonjob,
+			xt_userinfo_intime,
+			xt_userinfo_outTime,
+			xt_userinfo_qq
+			)
+			VALUES
+			(
+			#{xt_userinfo_id},
+			#{xt_device_id},
+			#{xt_userinfo_name},
+			#{xt_userinfo_passWord},
+			#{xt_userinfo_isDelete},
+			#{xt_userinfo_realName},
+			#{xt_userinfo_sex},
+			#{xt_userinfo_mobile},
+			#{xt_userinfo_ortherTel},
+			#{isonjob},
+			#{xt_userinfo_intime},
+			#{xt_userinfo_outTime},
+			#{xt_userinfo_qq}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateZttMojuUserinfo" parameterType="jehc.zxmodules.model.ZttMojuUserinfo">
+		UPDATE
+			ztt_moju_userinfo
+		SET
+			xt_device_id = #{xt_device_id},
+			xt_userinfo_name = #{xt_userinfo_name},
+			xt_userinfo_passWord = #{xt_userinfo_passWord},
+			xt_userinfo_isDelete = #{xt_userinfo_isDelete},
+			xt_userinfo_realName = #{xt_userinfo_realName},
+			xt_userinfo_sex = #{xt_userinfo_sex},
+			xt_userinfo_mobile = #{xt_userinfo_mobile},
+			xt_userinfo_ortherTel = #{xt_userinfo_ortherTel},
+			isonjob = #{isonjob},
+			xt_userinfo_intime = #{xt_userinfo_intime},
+			xt_userinfo_outTime = #{xt_userinfo_outTime},
+			xt_userinfo_qq = #{xt_userinfo_qq}
+		WHERE xt_userinfo_id=#{xt_userinfo_id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateZttMojuUserinfoBySelective" parameterType="jehc.zxmodules.model.ZttMojuUserinfo">
+		UPDATE
+			ztt_moju_userinfo
+		<set>
+			<if test="xt_device_id != null">
+				xt_device_id = #{xt_device_id},
+			</if>
+			<if test="xt_userinfo_name != null">
+				xt_userinfo_name = #{xt_userinfo_name},
+			</if>
+			<if test="xt_userinfo_passWord != null">
+				xt_userinfo_passWord = #{xt_userinfo_passWord},
+			</if>
+			<if test="xt_userinfo_isDelete != null">
+				xt_userinfo_isDelete = #{xt_userinfo_isDelete},
+			</if>
+			<if test="xt_userinfo_realName != null">
+				xt_userinfo_realName = #{xt_userinfo_realName},
+			</if>
+			<if test="xt_userinfo_sex != null">
+				xt_userinfo_sex = #{xt_userinfo_sex},
+			</if>
+			<if test="xt_userinfo_mobile != null">
+				xt_userinfo_mobile = #{xt_userinfo_mobile},
+			</if>
+			<if test="xt_userinfo_ortherTel != null">
+				xt_userinfo_ortherTel = #{xt_userinfo_ortherTel},
+			</if>
+			<if test="isonjob != null">
+				isonjob = #{isonjob},
+			</if>
+			<if test="xt_userinfo_intime != null">
+				xt_userinfo_intime = #{xt_userinfo_intime},
+			</if>
+			<if test="xt_userinfo_outTime != null">
+				xt_userinfo_outTime = #{xt_userinfo_outTime},
+			</if>
+			<if test="xt_userinfo_qq != null">
+				xt_userinfo_qq = #{xt_userinfo_qq},
+			</if>
+		</set>
+		WHERE xt_userinfo_id=#{xt_userinfo_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delZttMojuUserinfo" parameterType="map">
+		DELETE FROM ztt_moju_userinfo WHERE xt_userinfo_id IN
+		<foreach item="item" index="index" collection="xt_userinfo_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchZttMojuUserinfo" parameterType="list">
+		INSERT INTO
+			ztt_moju_userinfo
+			(
+			xt_userinfo_id,
+			xt_device_id,
+			xt_userinfo_name,
+			xt_userinfo_passWord,
+			xt_userinfo_isDelete,
+			xt_userinfo_realName,
+			xt_userinfo_sex,
+			xt_userinfo_mobile,
+			xt_userinfo_ortherTel,
+			isonjob,
+			xt_userinfo_intime,
+			xt_userinfo_outTime,
+			xt_userinfo_qq
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.xt_userinfo_id},
+			#{item.xt_device_id},
+			#{item.xt_userinfo_name},
+			#{item.xt_userinfo_passWord},
+			#{item.xt_userinfo_isDelete},
+			#{item.xt_userinfo_realName},
+			#{item.xt_userinfo_sex},
+			#{item.xt_userinfo_mobile},
+			#{item.xt_userinfo_ortherTel},
+			#{item.isonjob},
+			#{item.xt_userinfo_intime},
+			#{item.xt_userinfo_outTime},
+			#{item.xt_userinfo_qq}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchZttMojuUserinfo" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				ztt_moju_userinfo
+			SET
+				xt_device_id = #{item.xt_device_id},
+				xt_userinfo_name = #{item.xt_userinfo_name},
+				xt_userinfo_passWord = #{item.xt_userinfo_passWord},
+				xt_userinfo_isDelete = #{item.xt_userinfo_isDelete},
+				xt_userinfo_realName = #{item.xt_userinfo_realName},
+				xt_userinfo_sex = #{item.xt_userinfo_sex},
+				xt_userinfo_mobile = #{item.xt_userinfo_mobile},
+				xt_userinfo_ortherTel = #{item.xt_userinfo_ortherTel},
+				isonjob = #{item.isonjob},
+				xt_userinfo_intime = #{item.xt_userinfo_intime},
+				xt_userinfo_outTime = #{item.xt_userinfo_outTime},
+				xt_userinfo_qq = #{item.xt_userinfo_qq}
+			WHERE xt_userinfo_id=#{item.xt_userinfo_id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchZttMojuUserinfoBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				ztt_moju_userinfo
+			<set>
+				<if test="item.xt_device_id != null">
+					xt_device_id = #{item.xt_device_id},
+				</if>
+				<if test="item.xt_userinfo_name != null">
+					xt_userinfo_name = #{item.xt_userinfo_name},
+				</if>
+				<if test="item.xt_userinfo_passWord != null">
+					xt_userinfo_passWord = #{item.xt_userinfo_passWord},
+				</if>
+				<if test="item.xt_userinfo_isDelete != null">
+					xt_userinfo_isDelete = #{item.xt_userinfo_isDelete},
+				</if>
+				<if test="item.xt_userinfo_realName != null">
+					xt_userinfo_realName = #{item.xt_userinfo_realName},
+				</if>
+				<if test="item.xt_userinfo_sex != null">
+					xt_userinfo_sex = #{item.xt_userinfo_sex},
+				</if>
+				<if test="item.xt_userinfo_mobile != null">
+					xt_userinfo_mobile = #{item.xt_userinfo_mobile},
+				</if>
+				<if test="item.xt_userinfo_ortherTel != null">
+					xt_userinfo_ortherTel = #{item.xt_userinfo_ortherTel},
+				</if>
+				<if test="item.isonjob != null">
+					isonjob = #{item.isonjob},
+				</if>
+				<if test="item.xt_userinfo_intime != null">
+					xt_userinfo_intime = #{item.xt_userinfo_intime},
+				</if>
+				<if test="item.xt_userinfo_outTime != null">
+					xt_userinfo_outTime = #{item.xt_userinfo_outTime},
+				</if>
+				<if test="item.xt_userinfo_qq != null">
+					xt_userinfo_qq = #{item.xt_userinfo_qq},
+				</if>
+			</set>
+			WHERE xt_userinfo_id=#{item.xt_userinfo_id}
+		</foreach>
+	</update>
+</mapper>

@@ -56,7 +56,7 @@
 									<th class="col-md-2 text-center">工序名称</th>
 									<th class="col-md-2 text-center">工艺内容</th>
 									<th class="col-md-2 text-center">设备</th>
-									<th class="col-md-2 text-center">工艺装备</th>
+									<th class="col-md-2 text-center">负责人</th>
 									<th class="col-md-2 text-center">单价</th>
 									<th class="col-md-2 text-center">总价</th>
 								</tr>
@@ -111,6 +111,18 @@
 						<label class="col-lg-3 control-label">规格型号</label>
 						<div class="col-lg-6">
 							<input class="form-control" type="text" maxlength="32"  id="ztt_processproduct[${ztt_processproductStatus.index}].tooling" name="ztt_processproduct[${ztt_processproductStatus.index}].tooling" placeholder="请输入用品id" value="${zttProcessproduct.tooling }">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-3 control-label">用品</label>
+						<div class="col-lg-6">
+							<input class="form-control" type="text" maxlength="32"  id="ztt_processproduct[${ztt_processproductStatus.index}].xt_userinfo_name" name="ztt_processproduct[${ztt_processproductStatus.index}].xt_userinfo_name" placeholder="请输入用品id" value="${zttProcessproduct.xt_userinfo_name }">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-3 control-label">规格型号</label>
+						<div class="col-lg-6">
+							<input class="form-control" type="text" maxlength="32"  id="ztt_processproduct[${ztt_processproductStatus.index}].device_name" name="ztt_processproduct[${ztt_processproductStatus.index}].device_name" placeholder="请输入用品id" value="${zttProcessproduct.device_name }">
 						</div>
 					</div>
 					<div class="form-group">

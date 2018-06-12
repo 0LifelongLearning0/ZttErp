@@ -327,6 +327,44 @@ var DataTablesPagingAll = {
     }
 };
 
+
+function InitBDataCombogongxu(id){
+	var str = "<option value=''>请选择</option>";
+	var params = {};
+	$.ajax({
+	   type:"GET",
+	   url:"../zttMouldsGongxuController/getZttMouldsGongxuListByCondition",
+	   data:params,
+	   success: function(data){
+		   var datastr=eval("(" + data + ")").data;
+         $.each(datastr, function(i, item){
+         	 str += "<option value=" + item.number + ">" + item.gongxu_name + "</option>";
+         })
+         $("#"+id).append(str);
+	   }
+	});
+}
+function InitBDataCombogongxu1(id){
+	var str = "<option value=''>请选择</option>";
+	var params = {};
+	var value="";
+	$.ajax({
+	   type:"GET",
+	   url:"../zttMouldsGongxuController/getZttMouldsGongxuListByCondition",
+	   data:params,
+	   async : false,
+	   success: function(result){
+		   var datastr=eval("(" + result + ")").data;
+         $.each(datastr, function(i, item){
+         	 if(item.number==id){
+         		 value=item.gongxu_name;
+         	 }
+         })
+       
+	   }
+	});
+	  return value;
+}
 function datatablesCallBack(data, callback, settings,url,opt){
 	 var formdata;
 	 //缺省采用searchForm

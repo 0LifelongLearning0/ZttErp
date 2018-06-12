@@ -89,7 +89,7 @@ public class LcApplyDaoImpl  extends BaseDaoImpl implements LcApplyDao{
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public LcApply getLcApplyByBussinessId(String lc_apply_model_id){
-		return (LcApply) this.get("getLcApplyByBussinessId", lc_apply_model_id);
+	public List<LcApply> getLcApplyByBussinessId(String lc_apply_model_id){
+		return (List<LcApply>) this.getList("getLcApplyByBussinessId", lc_apply_model_id);
 	}
 }

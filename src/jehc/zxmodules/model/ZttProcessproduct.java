@@ -23,7 +23,21 @@ public class ZttProcessproduct extends BaseEntity implements Serializable{
 	private String qualified_number;/**合格件数**/
 	private String qualified_date;/**检验员日期**/
 	private String order_number;
+	private String device_name;
+	private String xt_userinfo_name;
 	
+	public String getDevice_name() {
+		return device_name;
+	}
+	public void setDevice_name(String device_name) {
+		this.device_name = device_name;
+	}
+	public String getXt_userinfo_name() {
+		return xt_userinfo_name;
+	}
+	public void setXt_userinfo_name(String xt_userinfo_name) {
+		this.xt_userinfo_name = xt_userinfo_name;
+	}
 	public String getOrder_number() {
 		return order_number;
 	}

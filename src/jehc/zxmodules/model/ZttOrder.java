@@ -88,6 +88,25 @@ public class ZttOrder extends BaseEntity implements Serializable {
 	private String bill_price;
 	private String cost_share;
 	private List<ztt_processproduct> ztt_processproduct;
+	private String change_state;
+	private String comment;
+	
+
+	public String getChange_state() {
+		return change_state;
+	}
+
+	public void setChange_state(String change_state) {
+		this.change_state = change_state;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
 
 	/** 用品申领详细表 **/
 

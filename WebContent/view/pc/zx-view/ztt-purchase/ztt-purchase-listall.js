@@ -1,9 +1,30 @@
 var grid;
 $(document).ready(function() {
 	/////////////jehc扩展属性目的可方便使用（boot.js文件datatablesCallBack方法使用） 如弹窗分页查找根据条件 可能此时的form发生变化 此时 可以解决该类问题
+	
+	
+	//实现单击行选中
+	
+	$(".form_datetime").datepicker({
+		format : "yyyy-mm-dd",
+		autoclose : true,
+		todayBtn : true,
+		todayHighlight : true,
+		showMeridian : true,
+		pickerPosition : "bottom-left",
+		language : 'zh-CN',// 中文，需要引用zh-CN.js包
+	});
+});
+function search(datatablesid){
+	show();
+	/*var datatables = $('#'+datatablesid).DataTable();
+	datatables.ajax.reload();*/
+}
+
+function show(){
 	var opt = {
-		searchformId:'searchForm'
-	};
+			searchformId:'searchForm'
+		};
 	var options = DataTablesPagingAll.pagingOptions({
 		ajax:function (data, callback, settings){datatablesCallBack(data, callback, settings,'../zttPurchaseController/getZttPurchaseListByCondition',opt);},//渲染数据
 			//在第一位置追加序列号
@@ -86,18 +107,7 @@ $(document).ready(function() {
 	grid=$('#datatables').dataTable(options);
 	//实现全选反选
 	docheckboxall('checkall','checkchild');
-	//实现单击行选中
-	clickrowselected('datatables');
-	$(".form_datetime").datepicker({
-		format : "yyyy-mm-dd",
-		autoclose : true,
-		todayBtn : true,
-		todayHighlight : true,
-		showMeridian : true,
-		pickerPosition : "bottom-left",
-		language : 'zh-CN',// 中文，需要引用zh-CN.js包
-	});
-});
+}
 //新增
 function toZttPurchaseAdd(){
 	tlocation('../zttPurchaseController/toZttPurchaseAdd');

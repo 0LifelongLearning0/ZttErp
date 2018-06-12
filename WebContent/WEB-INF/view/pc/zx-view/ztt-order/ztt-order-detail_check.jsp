@@ -20,6 +20,9 @@
 		<fieldset id="printAll${zxCarApply.id }">
 			<div class="container-fluid  col-md-8 col-md-offset-2">
 				<div class="row">
+				 <input class="form-control" type="hidden" maxlength="255"  name="erp_number" id="erp_number" value='${zttOrder.erp_number }'>
+                 <input class="form-control" type="hidden" maxlength="255"  name="id" id="id" value='${zttOrder.id }'>
+                 <input class="form-control" type="hidden" maxlength="255"  name="order_id" id="order_id">
 					<table class="table table-bordered">
 						<caption class="text-center h3 no-margin bold">业务人员下单表</caption>
 						<input class="form-control" type="hidden" maxlength="255"
